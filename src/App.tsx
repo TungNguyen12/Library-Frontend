@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from "react";
+import AllProducts from "./pages/AllProducts";
 
 const App = () => {
-  return (
-    <div>App</div>
-  )
-}
+    return (
+        <div>
+            <AllProducts />
+        </div>
+    );
+};
 
-export default App
+export default App;

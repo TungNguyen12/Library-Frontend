@@ -22,7 +22,7 @@ const usersSlice = createSlice({
     },
 });
 
-const userReducer = usersSlice.reducer;
+const usersReducer = usersSlice.reducer;
 export const { addUser, removeUser, registerUser, loginUser } =
     usersSlice.actions;
-export default userReducer;
+export default usersReducer;
