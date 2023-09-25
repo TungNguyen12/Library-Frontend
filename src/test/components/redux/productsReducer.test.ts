@@ -1,40 +1,46 @@
-import { useAppSelector } from "../../../hooks/useAppSelector";
 import { fetchAllProductsAsync } from "../../../redux/services/ProductServices";
 import store from "../../../redux/store";
 import Product from "../../../types/Product";
 
 describe("product reducer", () => {
-    let initialProductState: Product[];
-    let stateAfter;
-    let mockProducts: Product = [
+    let initialProductState: {
+        products: [];
+        isLoading: false;
+    };
+    let stateAfter: {
+        products: Product[];
+        isLoading: boolean;
+        error?: string;
+    };
+    let mockProducts: Product[] = [
         {
-            title: "C product 1",
-            id: 2,
-            price: 10,
-        },
-        {
-            title: "B product 2",
-            id: 3,
-            price: 10,
-        },
-        {
-            title: "A product 3",
-            id: 4,
-            price: 10,
+            id: 1,
+            title: "A product",
+            price: 97,
+            description: "This is description",
+            category: {
+                id: 5,
+                name: "Furniture",
+                image: "string",
+            },
+            images: ["dsada"],
         },
     ];
 
     beforeEach(async () => {
-        await store.dispatch(fetchAllProductsAsync());
-        initialProductState = useAppSelector(
-            (state) => state.productsReducer.products
+        await store.dispatch(
+            fetchAllProductsAsync.fulfilled(mockProducts, "fulfilled")
         );
+        initialProductState = store.getState().persistedReducer;
         console.log(initialProductState);
     });
 
-    test("should have the initial state", () => {});
+    test("should have the initial state", () => {
+        //act
+        stateAfter = store.getState().persistedReducer;
 
-    it("should be true", () => {
-        expect("hello").toBeTruthy();
+        //assert
+        expect(initialProductState).toBe(stateAfter);
+        expect(initialProductState.products.length).toBeGreaterThan(2);
     });
 });

@@ -11,4 +11,4 @@ interface Product {
     images: string[];
 }
 
-export default Product
+export default Product;
