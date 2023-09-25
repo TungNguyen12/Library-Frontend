@@ -1,8 +1,8 @@
 import { AppState } from "../store";
 
-const getProductsByCategory = (state: AppState, category: number) => {
+const getProductsByCategory = (state: AppState, categoryId: number) => {
     return state.productsReducer.products.filter(
-        (p) => p.category.id === category
+        (p) => p.category.id === categoryId
     );
 };
 

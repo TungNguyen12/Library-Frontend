@@ -13,11 +13,11 @@ This project requires implementation of TypeScript and SASS.
 2. Create at lease 4 pages (can be more if you want): Page for all products, product page,
    profile page (only available if user logins), and cart page (cart page could be a page or a modal)
 3. Create Redux store for following features:
-   - product reducer: get all products, find a single products, filter products by
-     categories, sort products by price. Create, update and delete a product (enable update & delete features only for admin of the webapp)
-   - user reducer: register and login
-   - cart reducer: add product to cart, remove products, update products's quantity in cart
-4. When adding routers to your application, programatically set certain routes to be private. For example, route to user profile page should not be accessible if user has not logged in.
+    - product reducer: get all products, find a single products, filter products by
+      categories, sort products by price. Create, update and delete a product (enable update & delete features only for admin of the webapp)
+    - user reducer: register and login
+    - cart reducer: add product to cart, remove products, update products's quantity in cart
+4. When adding routers to your application, programmatically set certain routes to be private. For example, route to user profile page should not be accessible if user has not logged in.
 5. Implement unit testing for the reducers
 6. Deploy the application and rewrite README file.
 
