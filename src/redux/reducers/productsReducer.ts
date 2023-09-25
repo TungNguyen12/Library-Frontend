@@ -1,7 +1,12 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import Product from "../../types/Product";
-import axios, { AxiosError } from "axios";
-import CreateProductDto from "../../types/CreateProductRequest";
+
+import {
+    createProductAsync,
+    deleteProductAsync,
+    fetchAllProductsAsync,
+    updateProductAsync,
+} from "../services/ProductServices";
 
 const initialState: {
     products: Product[];
@@ -28,56 +33,6 @@ const initialState: {
     ],
     isLoading: false,
 };
-
-export const deleteProductAsync = createAsyncThunk(
-    "deleteProduct",
-    async (productId: number) => {
-        try {
-            const response = await axios.delete(
-                `https://api.escuelajs.co/api/v1/products/${productId}`
-            );
-            console.log("Delete successfully", response);
-            return productId;
-        } catch (e) {
-            const error = e as Error;
-            return error;
-        }
-    }
-);
-
-export const createProductAsync = createAsyncThunk(
-    "createProduct",
-    async (input: CreateProductDto) => {
-        try {
-            const response = await axios.post(
-                `https://api.escuelajs.co/api/v1/products/`,
-                input
-            );
-            const createdProduct: Product = response.data;
-            console.log(createdProduct);
-            return createdProduct;
-        } catch (e) {
-            const error = e as Error;
-            return error;
-        }
-    }
-);
-
-export const fetchAllProductsAsync = createAsyncThunk(
-    "fetchAllProductsAsync",
-    async () => {
-        try {
-            const response = await axios.get(
-                `https://api.escuelajs.co/api/v1/products`
-            );
-            const data: Product[] = response.data;
-            return data;
-        } catch (e) {
-            const error = e as AxiosError;
-            return error;
-        }
-    }
-);
 
 const productsSlice = createSlice({
     name: "products",
@@ -149,12 +104,46 @@ const productsSlice = createSlice({
                 const foundIndex = state.products.findIndex(
                     (p) => p.id === action.payload
                 );
-
                 if (foundIndex !== -1) {
                     const newProductList = state.products.splice(foundIndex, 1);
                     return {
                         ...state,
                         products: newProductList,
+                        isLoading: false,
+                    };
+                }
+            })
+            .addCase(deleteProductAsync.pending, (state, action) => {
+                return {
+                    ...state,
+                    isLoading: true,
+                };
+            })
+            .addCase(deleteProductAsync.rejected, (state, action) => {
+                if (action.payload instanceof Error) {
+                    return {
+                        ...state,
+                        isLoading: false,
+                        error: action.payload.message,
+                    };
+                }
+            })
+            //updateProductAsync
+            .addCase(updateProductAsync.fulfilled, (state, action) => {
+                if (!(action.payload instanceof Error)) {
+                    const updatedProduct = action.payload;
+                    const updatedProductsList = state.products.map(
+                        (product) => {
+                            if (product.id === updatedProduct.id) {
+                                return updatedProduct;
+                            } else {
+                                return product;
+                            }
+                        }
+                    );
+                    return {
+                        ...state,
+                        products: updatedProductsList,
                         isLoading: false,
                     };
                 }

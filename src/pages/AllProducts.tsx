@@ -5,7 +5,7 @@ import {
     createProductAsync,
     deleteProductAsync,
     fetchAllProductsAsync,
-} from "../redux/reducers/productsReducer";
+} from "../redux/services/ProductServices";
 import getProductsByTitle from "../redux/selectors/getProductsByTitle";
 import Product from "../types/Product";
 
@@ -45,7 +45,7 @@ const AllProducts = () => {
     //     dispatch(deleteProductAsync(2260));
     // }, []);
 
-    console.log("all products are: ", products);
+    // console.log("all products are: ", products);
 
     return (
         <div>
@@ -64,7 +64,7 @@ const AllProducts = () => {
                     <p>
                         {p.title}'s price is {p.price}
                     </p>
-                    <button></button>
+                    <button onClick={() => {}}>Delete Item</button>
                 </div>
             ))}
             {/* <select
