@@ -8,44 +8,24 @@ import {
 } from "../redux/services/ProductServices";
 import getProductsByTitle from "../redux/selectors/getProductsByTitle";
 import Product from "../types/Product";
+import { initialState } from "../redux/reducers/productsReducer";
+import store from "../redux/store";
+import { $CombinedState } from "@reduxjs/toolkit";
 
 const AllProducts = () => {
     const [search, setSearch] = useState<string>("");
     const [select, setSelect] = useState<number>(1);
-    const { products, isLoading, error } = useAppSelector(
-        (state) => state.productsReducer
-    );
+    const { products, isLoading, error } = store.getState().productsReducer;
+    console.log(products);
 
-    const filteredProductsByTitle = useAppSelector((state) =>
-        getProductsByTitle(state, search)
-    );
+    const state = useAppSelector((state) => state);
+
+    console.log(state.productsReducer);
 
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(fetchAllProductsAsync());
     }, []);
-
-    // useEffect(() => {
-    //     dispatch(
-    //         createProductAsync({
-    //             title: "Pete Pete Pete",
-    //             price: 687,
-    //             description: "Andy shoes are designed to keeping PETE in...",
-    //             categoryId: 3,
-    //             images: [
-    //                 "https://placeimg.com/640/480/any?r=0.9178516507833767",
-    //                 "https://placeimg.com/640/480/any?r=0.9300320592588625",
-    //                 "https://placeimg.com/640/480/any?r=0.8807778235430017",
-    //             ],
-    //         })
-    //     );
-    // }, []);
-
-    // useEffect(() => {
-    //     dispatch(deleteProductAsync(2260));
-    // }, []);
-
-    // console.log("all products are: ", products);
 
     return (
         <div>

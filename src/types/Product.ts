@@ -1,3 +1,8 @@
+export interface Category {
+    id: number;
+    name: string;
+    image: string;
+}
 interface Product {
     id: number;
     title: string;

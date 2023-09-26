@@ -7,12 +7,9 @@ import {
     fetchAllProductsAsync,
     updateProductAsync,
 } from "../services/ProductServices";
+import ProductReducerState from "../../types/ProductReducerState";
 
-const initialState: {
-    products: Product[];
-    isLoading: boolean;
-    error?: string;
-} = {
+export const initialState: ProductReducerState = {
     products: [
         {
             id: 4,
@@ -47,109 +44,107 @@ const productsSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder
-            // fetchAllProductsAsync
-            .addCase(fetchAllProductsAsync.fulfilled, (state, action) => {
-                if (!(action.payload instanceof Error)) {
-                    return {
-                        ...state,
-                        products: action.payload,
-                        isLoading: false,
-                    };
-                }
-            })
-            .addCase(fetchAllProductsAsync.pending, (state, action) => {
+        // fetchAllProductsAsync
+        builder.addCase(fetchAllProductsAsync.fulfilled, (state, action) => {
+            if (!(action.payload instanceof Error)) {
                 return {
                     ...state,
-                    isLoading: true,
+                    products: action.payload,
+                    isLoading: false,
                 };
-            })
-            .addCase(fetchAllProductsAsync.rejected, (state, action) => {
-                if (action.payload instanceof Error) {
-                    return {
-                        ...state,
-                        isLoading: false,
-                        error: action.payload.message,
-                    };
-                }
-            })
-            //createProductAsync
-            .addCase(createProductAsync.fulfilled, (state, action) => {
-                if (!(action.payload instanceof Error)) {
-                    const newProducts = [...state.products, action.payload];
-                    return {
-                        ...state,
-                        products: newProducts,
-                        isLoading: false,
-                    };
-                }
-            })
-            .addCase(createProductAsync.pending, (state, action) => {
+            }
+        });
+        builder.addCase(fetchAllProductsAsync.pending, (state, action) => {
+            return {
+                ...state,
+                isLoading: true,
+            };
+        });
+        builder.addCase(fetchAllProductsAsync.rejected, (state, action) => {
+            if (action.payload instanceof Error) {
                 return {
                     ...state,
-                    isLoading: true,
+                    isLoading: false,
+                    error: action.payload.message,
                 };
-            })
-            .addCase(createProductAsync.rejected, (state, action) => {
-                if (action.payload instanceof Error) {
-                    return {
-                        ...state,
-                        isLoading: false,
-                        error: action.payload.message,
-                    };
-                }
-            })
-            //deleteProductAsync
-            .addCase(deleteProductAsync.fulfilled, (state, action) => {
-                const foundIndex = state.products.findIndex(
-                    (p) => p.id === action.payload
-                );
-                if (foundIndex !== -1) {
-                    const newProductList = state.products.splice(foundIndex, 1);
-                    return {
-                        ...state,
-                        products: newProductList,
-                        isLoading: false,
-                    };
-                }
-            })
-            .addCase(deleteProductAsync.pending, (state, action) => {
+            }
+        });
+        //createProductAsync
+        builder.addCase(createProductAsync.fulfilled, (state, action) => {
+            if (!(action.payload instanceof Error)) {
+                const newProducts = [...state.products, action.payload];
                 return {
                     ...state,
-                    isLoading: true,
+                    products: newProducts,
+                    isLoading: false,
                 };
-            })
-            .addCase(deleteProductAsync.rejected, (state, action) => {
-                if (action.payload instanceof Error) {
-                    return {
-                        ...state,
-                        isLoading: false,
-                        error: action.payload.message,
-                    };
-                }
-            })
-            //updateProductAsync
-            .addCase(updateProductAsync.fulfilled, (state, action) => {
-                if (!(action.payload instanceof Error)) {
-                    const updatedProduct = action.payload;
-                    const updatedProductsList = state.products.map(
-                        (product) => {
-                            if (product.id === updatedProduct.id) {
-                                return updatedProduct;
-                            } else {
-                                return product;
-                            }
-                        }
-                    );
-                    return {
-                        ...state,
-                        products: updatedProductsList,
-                        isLoading: false,
-                    };
-                }
-            });
+            }
+        });
+        builder.addCase(createProductAsync.pending, (state, action) => {
+            return {
+                ...state,
+                isLoading: true,
+            };
+        });
+        builder.addCase(createProductAsync.rejected, (state, action) => {
+            if (action.payload instanceof Error) {
+                return {
+                    ...state,
+                    isLoading: false,
+                    error: action.payload.message,
+                };
+            }
+        });
+        //deleteProductAsync
+        builder.addCase(deleteProductAsync.fulfilled, (state, action) => {
+            const foundIndex = state.products.findIndex(
+                (p) => p.id === action.payload
+            );
+            if (foundIndex !== -1) {
+                const newProductList = state.products.splice(foundIndex, 1);
+                return {
+                    ...state,
+                    products: newProductList,
+                    isLoading: false,
+                };
+            }
+        });
+        builder.addCase(deleteProductAsync.pending, (state, action) => {
+            return {
+                ...state,
+                isLoading: true,
+            };
+        });
+        builder.addCase(deleteProductAsync.rejected, (state, action) => {
+            if (action.payload instanceof Error) {
+                return {
+                    ...state,
+                    isLoading: false,
+                    error: action.payload.message,
+                };
+            }
+        });
+        //updateProductAsync
+        builder.addCase(updateProductAsync.fulfilled, (state, action) => {
+            if (!(action.payload instanceof Error)) {
+                const updatedProduct = action.payload;
+                const updatedProductsList = state.products.map((product) => {
+                    if (product.id === updatedProduct.id) {
+                        return updatedProduct;
+                    } else {
+                        return product;
+                    }
+                });
+                return {
+                    ...state,
+                    products: updatedProductsList,
+                    isLoading: false,
+                };
+            }
+        });
     },
 });
 
 const productsReducer = productsSlice.reducer;
+export const { sortProductByPrice } = productsSlice.actions;
 export default productsReducer;

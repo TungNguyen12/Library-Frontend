@@ -4,6 +4,7 @@ import axios, { AxiosError } from "axios";
 import Product from "../../types/Product";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+// UPDATE
 export const updateProductAsync = createAsyncThunk(
     "updateProduct",
     async ({ id, update }: UpdateProductRequest): Promise<Product | Error> => {
@@ -22,6 +23,7 @@ export const updateProductAsync = createAsyncThunk(
     }
 );
 
+//DELETE
 export const deleteProductAsync = createAsyncThunk(
     "deleteProduct",
     async (productId: number) => {
@@ -29,7 +31,11 @@ export const deleteProductAsync = createAsyncThunk(
             const response = await axios.delete(
                 `https://api.escuelajs.co/api/v1/products/${productId}`
             );
-            console.log("Delete successfully", response);
+
+            // CHECK AGAIN HERE (for author)
+            if (response.data) {
+                throw new Error("Cannot delete this product1");
+            }
             return productId;
         } catch (e) {
             const error = e as Error;
@@ -38,6 +44,7 @@ export const deleteProductAsync = createAsyncThunk(
     }
 );
 
+// CREATE
 export const createProductAsync = createAsyncThunk(
     "createProduct",
     async (input: CreateProductDto) => {
@@ -55,6 +62,7 @@ export const createProductAsync = createAsyncThunk(
     }
 );
 
+// GET ALL
 export const fetchAllProductsAsync = createAsyncThunk(
     "fetchAllProductsAsync",
     async () => {
