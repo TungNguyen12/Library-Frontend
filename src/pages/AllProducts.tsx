@@ -4,27 +4,33 @@ import { useAppDispatch } from "../hooks/useAppDispatch";
 import { fetchAllProductsAsync } from "../redux/services/ProductServices";
 
 import store from "../redux/store";
-import { addToCart } from "../redux/reducers/cardReducer";
+import { addToCart, removeFromCart } from "../redux/reducers/cardReducer";
+import CartItem from "../types/cart/CartItem";
+import Product from "../types/Product";
 
 const AllProducts = () => {
     const [search, setSearch] = useState<string>("");
-    const [select, setSelect] = useState<number>(1);
     const { products, isLoading, error } = store.getState().productsReducer;
 
-    const cart = useAppSelector((state) => state.cartReducer);
+    const cart: CartItem[] = useAppSelector((state) => state.cartReducer);
 
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(fetchAllProductsAsync());
+        console.log(products);
     }, []);
 
-    const handleAddToCart = () => {
-        dispatch(addToCart);
+    const handleAddToCart = (payload: Product) => {
+        dispatch(addToCart(payload));
+        console.log(cart);
+    };
+    const handleRemove = (payload: number) => {
+        dispatch(removeFromCart(payload));
         console.log(cart);
     };
 
     return (
-        <div>
+        <>
             AllProducts ProductsPage
             <button onClick={() => {}}>add new product</button>
             <input
@@ -33,18 +39,27 @@ const AllProducts = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />
-            {/* {cart.map(item => {
-                <div key={item.id}>
-                    <p>{item.title} with price is {item.price}</p>
-                </div>
-            })} */}
+            {cart &&
+                cart.map((item) => (
+                    <div key={item.id}>
+                        <p>
+                            {item.title} with price is {item.price} ---
+                            quantity: {item.quantity}
+                        </p>
+                        <button onClick={() => handleRemove(item.id)}>
+                            Remove item
+                        </button>
+                    </div>
+                ))}
             {products.map((p) => (
                 <div key={p.id}>
                     <p>
                         {p.title}'s price is {p.price}
                     </p>
                     <button onClick={() => {}}>Delete Item</button>
-                    <button onClick={handleAddToCart}>Add to cart</button>
+                    <button onClick={() => handleAddToCart(p)}>
+                        Add to cart
+                    </button>
                 </div>
             ))}
             {/* <select
@@ -77,7 +92,7 @@ const AllProducts = () => {
                     </p>
                 </div>
             ))} */}
-        </div>
+        </>
     );
 };
 
