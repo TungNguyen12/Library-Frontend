@@ -18,8 +18,13 @@ import {
     persistReducer,
     persistStore,
 } from "redux-persist";
+import cartReducer from "./reducers/cardReducer";
 
-const rootReducer = combineReducers({ productsReducer, usersReducer });
+const rootReducer = combineReducers({
+    productsReducer,
+    usersReducer,
+    cartReducer,
+});
 
 const persistConfig: PersistConfig<any> = {
     key: "root",
@@ -50,23 +55,6 @@ export const createStore = () => {
             }),
     });
 };
-
-// const store = configureStore({
-//     reducer: persistedReducer,
-//     middleware: (getDefaultMiddleware) =>
-//         getDefaultMiddleware({
-//             serializableCheck: {
-//                 ignoredActions: [
-//                     FLUSH,
-//                     REHYDRATE,
-//                     PAUSE,
-//                     PERSIST,
-//                     PURGE,
-//                     REGISTER,
-//                 ],
-//             },
-//         }),
-// });
 
 const store = createStore();
 

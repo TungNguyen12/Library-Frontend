@@ -13,12 +13,9 @@ const productsData: Product[] = [
             "https://picsum.photos/640/640?r=8843",
         ],
 
-        category: {
-            id: 2,
-            name: "Electronics",
-            image: "https://picsum.photos/640/640?r=2586",
-        },
+        categoryId: 2,
     },
+
     {
         id: 12,
         title: "Refined Frozen Salad",
@@ -31,12 +28,9 @@ const productsData: Product[] = [
             "https://picsum.photos/640/640?r=3475",
         ],
 
-        category: {
-            id: 1,
-            name: "Clothes",
-            image: "https://picsum.photos/640/640?r=9423",
-        },
+        categoryId: 1,
     },
+
     {
         id: 13,
         title: "Rustic Rubber Chips",
@@ -48,11 +42,7 @@ const productsData: Product[] = [
             "https://picsum.photos/640/640?r=4817",
             "https://picsum.photos/640/640?r=2297",
         ],
-        category: {
-            id: 3,
-            name: "Furniture",
-            image: "https://picsum.photos/640/640?r=3852",
-        },
+        categoryId: 3,
     },
 ];
 

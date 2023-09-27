@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import Product from "../../types/Product";
 
 import {
     createProductAsync,
@@ -16,11 +15,7 @@ export const initialState: ProductReducerState = {
             title: "Handmade Fresh Table",
             price: 687,
             description: "Andy shoes are designed to keeping in...",
-            category: {
-                id: 5,
-                name: "Others",
-                image: "https://placeimg.com/640/480/any?r=0.591926261873231",
-            },
+            categoryId: 5,
             images: [
                 "https://placeimg.com/640/480/any?r=0.9178516507833767",
                 "https://placeimg.com/640/480/any?r=0.9300320592588625",
@@ -69,7 +64,7 @@ const productsSlice = createSlice({
                 };
             }
         });
-        //createProductAsync
+        //createProductAsync ADMIN
         builder.addCase(createProductAsync.fulfilled, (state, action) => {
             if (!(action.payload instanceof Error)) {
                 const newProducts = [...state.products, action.payload];
@@ -95,7 +90,7 @@ const productsSlice = createSlice({
                 };
             }
         });
-        //deleteProductAsync
+        //deleteProductAsync ADMIN
         builder.addCase(deleteProductAsync.fulfilled, (state, action) => {
             const foundIndex = state.products.findIndex(
                 (p) => p.id === action.payload
@@ -124,7 +119,7 @@ const productsSlice = createSlice({
                 };
             }
         });
-        //updateProductAsync
+        //updateProductAsync ADMIN
         builder.addCase(updateProductAsync.fulfilled, (state, action) => {
             if (!(action.payload instanceof Error)) {
                 const updatedProduct = action.payload;

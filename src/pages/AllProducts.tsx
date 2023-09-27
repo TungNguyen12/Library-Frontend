@@ -1,50 +1,50 @@
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useAppDispatch } from "../hooks/useAppDispatch";
-import {
-    createProductAsync,
-    deleteProductAsync,
-    fetchAllProductsAsync,
-} from "../redux/services/ProductServices";
-import getProductsByTitle from "../redux/selectors/getProductsByTitle";
-import Product from "../types/Product";
-import { initialState } from "../redux/reducers/productsReducer";
+import { fetchAllProductsAsync } from "../redux/services/ProductServices";
+
 import store from "../redux/store";
-import { $CombinedState } from "@reduxjs/toolkit";
+import { addToCart } from "../redux/reducers/cardReducer";
 
 const AllProducts = () => {
     const [search, setSearch] = useState<string>("");
     const [select, setSelect] = useState<number>(1);
     const { products, isLoading, error } = store.getState().productsReducer;
-    console.log(products);
 
-    const state = useAppSelector((state) => state);
-
-    console.log(state.productsReducer);
+    const cart = useAppSelector((state) => state.cartReducer);
 
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(fetchAllProductsAsync());
     }, []);
 
+    const handleAddToCart = () => {
+        dispatch(addToCart);
+        console.log(cart);
+    };
+
     return (
         <div>
             AllProducts ProductsPage
             <button onClick={() => {}}>add new product</button>
-            {/* <button onClick={ascSorted}>Sort by ascending</button>
-            <button onClick={descSorted}>Sort by descending</button> */}
             <input
                 type="text"
                 placeholder="Search for product by title..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />
+            {/* {cart.map(item => {
+                <div key={item.id}>
+                    <p>{item.title} with price is {item.price}</p>
+                </div>
+            })} */}
             {products.map((p) => (
                 <div key={p.id}>
                     <p>
                         {p.title}'s price is {p.price}
                     </p>
                     <button onClick={() => {}}>Delete Item</button>
+                    <button onClick={handleAddToCart}>Add to cart</button>
                 </div>
             ))}
             {/* <select
