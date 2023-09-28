@@ -31,8 +31,11 @@ const cartSlice = createSlice({
                     state.splice(foundIndex, 1);
                 }
             } else {
-                alert("You dont have this in your cart");
+                alert("You do not have this in your cart");
             }
+        },
+        clearCart: (state, action: PayloadAction<void>) => {
+            return initialState;
         },
     },
 });

@@ -64,6 +64,7 @@ const productsSlice = createSlice({
                 };
             }
         });
+
         //createProductAsync ADMIN
         builder.addCase(createProductAsync.fulfilled, (state, action) => {
             if (!(action.payload instanceof Error)) {

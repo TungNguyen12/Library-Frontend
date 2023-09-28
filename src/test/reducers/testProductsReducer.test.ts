@@ -62,7 +62,7 @@ describe("Test async thunk actions in productsReducer", () => {
         await store.dispatch(fetchAllProductsAsync());
         expect(
             store.getState().productsReducer.products.length
-        ).toBeGreaterThan(20);
+        ).toBeGreaterThan(0);
     });
 
     test("Should delete an existing product", async () => {

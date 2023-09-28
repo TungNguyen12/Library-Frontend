@@ -3,21 +3,23 @@ import { useAppSelector } from "../hooks/useAppSelector";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { fetchAllProductsAsync } from "../redux/services/ProductServices";
 
-import store from "../redux/store";
 import { addToCart, removeFromCart } from "../redux/reducers/cardReducer";
 import CartItem from "../types/cart/CartItem";
 import Product from "../types/Product";
+import ResponsiveAppBar from "../components/NavBar";
+import { Link } from "react-router-dom";
 
 const AllProducts = () => {
     const [search, setSearch] = useState<string>("");
-    const { products, isLoading, error } = store.getState().productsReducer;
+    const { products, isLoading, error } = useAppSelector(
+        (state) => state.productsReducer
+    );
 
     const cart: CartItem[] = useAppSelector((state) => state.cartReducer);
 
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(fetchAllProductsAsync());
-        console.log(products);
     }, []);
 
     const handleAddToCart = (payload: Product) => {
@@ -60,38 +62,11 @@ const AllProducts = () => {
                     <button onClick={() => handleAddToCart(p)}>
                         Add to cart
                     </button>
+                    <button onClick={() => {}}>
+                        <Link to={`${p.id}`}>Product detail</Link>
+                    </button>
                 </div>
             ))}
-            {/* <select
-                value={select}
-                onChange={(e) => setSelect(Number(e.target.value))}
-            >
-                {" "}
-                Categories
-                <option value="1" key="1">
-                    1
-                </option>
-                <option value="2" key="2">
-                    2
-                </option>
-                <option value="3" key="3">
-                    3
-                </option>
-                <option value="4" key="4">
-                    4
-                </option>
-                <option value="5" key="5">
-                    5
-                </option>
-            </select> */}
-            {/* {filterProducts.map((p) => (
-                <div key={p.id}>
-                    <p>
-                        {p.title}'s price is {p.price} and Categories is{" "}
-                        {p.category.id} and {p.category.name}
-                    </p>
-                </div>
-            ))} */}
         </>
     );
 };
