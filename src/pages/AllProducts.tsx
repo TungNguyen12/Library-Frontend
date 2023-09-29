@@ -8,6 +8,7 @@ import { addToCart, removeFromCart } from "../redux/reducers/cardReducer";
 import { Link } from "react-router-dom";
 import Product from "../types/product/Product";
 import getTotalQuantity from "../redux/selectors/cart/getTotalQuantity";
+import ProductCard from "../components/ProductCard";
 
 const AllProducts = () => {
     const [search, setSearch] = useState<string>("");
@@ -57,7 +58,7 @@ const AllProducts = () => {
                         </button>
                     </div>
                 ))}
-            {products.map((p) => (
+            {/* {products.map((p) => (
                 <div key={p.id}>
                     <p>
                         {p.title}'s price is {p.price}
@@ -69,6 +70,11 @@ const AllProducts = () => {
                     <button onClick={() => {}}>
                         <Link to={`${p.id}`}>Product detail</Link>
                     </button>
+                </div>
+            ))} */}
+            {products.map((product) => (
+                <div key={product.id}>
+                    <ProductCard product={product} />
                 </div>
             ))}
         </>
