@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Product from "../types/Product";
+
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { Link, useParams } from "react-router-dom";
 
@@ -11,6 +11,7 @@ import {
     CardContent,
     Typography,
 } from "@mui/material";
+import Product from "../types/product/Product";
 
 const SingleProduct = () => {
     const [product, setProduct] = useState<Product>();

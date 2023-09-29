@@ -11,10 +11,10 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
+import ShoppingCart from "@mui/icons-material/ShoppingCart";
 const pages = [
-    { params: "/", page: "Products" },
+    { params: "", page: "Products" },
     { params: "categories", page: "categories" },
     { params: "cart", page: "My cart" },
     { params: "profile", page: "My profile" },
@@ -66,7 +66,7 @@ function ResponsiveAppBar() {
                             textDecoration: "none",
                         }}
                     >
-                        LOGO
+                        IKEA
                     </Typography>
 
                     <Box
@@ -143,7 +143,7 @@ function ResponsiveAppBar() {
                             textDecoration: "none",
                         }}
                     >
-                        LOGO
+                        IKEA
                     </Typography>
                     <Box
                         sx={{
@@ -172,6 +172,10 @@ function ResponsiveAppBar() {
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
+                        <IconButton>
+                            <ShoppingCart />
+                        </IconButton>
+
                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                             <Avatar
                                 alt="Remy Sharp"

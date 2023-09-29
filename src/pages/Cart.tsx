@@ -2,10 +2,14 @@ import React from "react";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { removeFromCart } from "../redux/reducers/cardReducer";
+import getTotalQuantity from "../redux/selectors/cart/getTotalQuantity";
 
 const Cart = () => {
     const cart = useAppSelector((state) => state.cartReducer);
     const dispatch = useAppDispatch();
+
+    const totalQuantity = useAppSelector((state) => getTotalQuantity(state));
+    console.log(totalQuantity);
 
     const handleRemove = (payload: number) => {
         dispatch(removeFromCart(payload));

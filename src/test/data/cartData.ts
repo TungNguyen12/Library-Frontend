@@ -1,6 +1,7 @@
 import CartItem from "../../types/cart/CartItem";
+import CartReducerState from "../../types/cart/CartReducerState";
 
-const cartData: CartItem[] = [
+const cartData = [
     {
         id: 11,
         title: "Tasty Bronze Mouse",
@@ -15,7 +16,6 @@ const cartData: CartItem[] = [
         categoryId: 2,
         quantity: 1,
     },
-
     {
         id: 12,
         title: "Refined Frozen Salad",

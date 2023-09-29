@@ -4,10 +4,10 @@ import { useAppDispatch } from "../hooks/useAppDispatch";
 import { fetchAllProductsAsync } from "../redux/services/ProductServices";
 
 import { addToCart, removeFromCart } from "../redux/reducers/cardReducer";
-import CartItem from "../types/cart/CartItem";
-import Product from "../types/Product";
-import ResponsiveAppBar from "../components/NavBar";
+
 import { Link } from "react-router-dom";
+import Product from "../types/product/Product";
+import getTotalQuantity from "../redux/selectors/cart/getTotalQuantity";
 
 const AllProducts = () => {
     const [search, setSearch] = useState<string>("");
@@ -15,7 +15,8 @@ const AllProducts = () => {
         (state) => state.productsReducer
     );
 
-    const cart: CartItem[] = useAppSelector((state) => state.cartReducer);
+    const cartItems = useAppSelector((state) => state.cartReducer);
+    const totalQuantity = useAppSelector((state) => getTotalQuantity(state));
 
     const dispatch = useAppDispatch();
     useEffect(() => {
@@ -24,11 +25,14 @@ const AllProducts = () => {
 
     const handleAddToCart = (payload: Product) => {
         dispatch(addToCart(payload));
-        console.log(cart);
+        console.log(cartItems);
+        console.log(totalQuantity);
     };
+
     const handleRemove = (payload: number) => {
         dispatch(removeFromCart(payload));
-        console.log(cart);
+        console.log(cartItems);
+        console.log(totalQuantity);
     };
 
     return (
@@ -41,8 +45,8 @@ const AllProducts = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />
-            {cart &&
-                cart.map((item) => (
+            {cartItems &&
+                cartItems.map((item) => (
                     <div key={item.id}>
                         <p>
                             {item.title} with price is {item.price} ---

@@ -6,7 +6,7 @@ import {
     fetchAllProductsAsync,
     updateProductAsync,
 } from "../services/ProductServices";
-import ProductReducerState from "../../types/ProductReducerState";
+import ProductReducerState from "../../types/product/ProductReducerState";
 
 export const initialState: ProductReducerState = {
     products: [

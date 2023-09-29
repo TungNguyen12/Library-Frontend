@@ -1,8 +1,9 @@
-import UpdateProductRequest from "../../types/UpdateProductRequest";
-import CreateProductDto from "../../types/CreateProductRequest";
+import UpdateProductRequest from "../../types/product/UpdateProductRequest";
+import CreateProductDto from "../../types/product/CreateProductRequest";
 import axios, { AxiosError } from "axios";
-import Product from "../../types/Product";
+
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import Product from "../../types/product/Product";
 
 // UPDATE
 export const updateProductAsync = createAsyncThunk(
