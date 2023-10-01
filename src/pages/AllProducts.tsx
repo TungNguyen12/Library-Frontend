@@ -20,6 +20,7 @@ const AllProducts = () => {
     const totalQuantity = useAppSelector((state) => getTotalQuantity(state));
 
     const dispatch = useAppDispatch();
+
     useEffect(() => {
         dispatch(fetchAllProductsAsync());
     }, []);
@@ -58,23 +59,12 @@ const AllProducts = () => {
                         </button>
                     </div>
                 ))}
-            {/* {products.map((p) => (
-                <div key={p.id}>
-                    <p>
-                        {p.title}'s price is {p.price}
-                    </p>
-                    <button onClick={() => {}}>Delete Item</button>
-                    <button onClick={() => handleAddToCart(p)}>
-                        Add to cart
-                    </button>
-                    <button onClick={() => {}}>
-                        <Link to={`${p.id}`}>Product detail</Link>
-                    </button>
-                </div>
-            ))} */}
             {products.map((product) => (
                 <div key={product.id}>
-                    <ProductCard product={product} />
+                    <ProductCard
+                        product={product}
+                        handleAddToCart={handleAddToCart}
+                    />
                 </div>
             ))}
         </>

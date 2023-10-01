@@ -9,13 +9,18 @@ import {
     Card,
     CardActions,
     CardContent,
+    CardMedia,
     Typography,
 } from "@mui/material";
 import Product from "../types/product/Product";
+import { useAppDispatch } from "../hooks/useAppDispatch";
+import { addToCart } from "../redux/reducers/cardReducer";
 
 const SingleProduct = () => {
     const [product, setProduct] = useState<Product>();
     const { productId } = useParams();
+
+    const dispatch = useAppDispatch();
 
     const fetchSingleProduct = async () => {
         try {
@@ -34,25 +39,52 @@ const SingleProduct = () => {
         fetchSingleProduct();
     }, [productId]);
 
+    const handleAddToCart = (payload: Product) => {
+        dispatch(addToCart(payload));
+    };
+
     return (
-        <Box>
-            <div style={{ margin: "5%" }}>
-                <Card sx={{ maxWidth: 200 }}>
-                    <CardContent>
-                        <Typography variant="h5" gutterBottom>
-                            {product?.title}
-                        </Typography>
-                        <Typography variant="h6" component="div">
-                            {product?.price}
-                        </Typography>
-                    </CardContent>
-                    <CardActions>
-                        <Button size="small">
-                            <Link to={`/`}>Back to Home</Link>
-                        </Button>
-                    </CardActions>
-                </Card>
-            </div>
+        <Box
+            sx={{
+                marginTop: "50px",
+                display: "flex",
+                justifyContent: "center",
+            }}
+        >
+            <Card>
+                <CardMedia
+                    component="img"
+                    height="350"
+                    image={product?.images[0]}
+                    alt={product?.title}
+                />
+            </Card>
+            <Card sx={{ maxWidth: 300 }}>
+                <CardContent>
+                    <Typography variant="h5" gutterBottom>
+                        {product?.title}
+                    </Typography>
+                    <Typography variant="h6" component="div">
+                        {product?.price}€
+                    </Typography>
+                </CardContent>
+
+                <CardActions sx={{ display: "flex" }}>
+                    <Button
+                        onClick={() => {}}
+                        sx={{ backgroundColor: "black" }}
+                    >
+                        Add to cart
+                    </Button>
+                </CardActions>
+                <CardActions>
+                    <Button size="small">
+                        <Link to={`/`} style={{ textDecoration: "none" }}>
+                            Back to Home
+                        </Link>
+                    </Button>
+                </CardActions>
+            </Card>
         </Box>
     );
 };

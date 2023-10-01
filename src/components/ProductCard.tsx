@@ -1,5 +1,6 @@
 import React from "react";
 import {
+    Button,
     Card,
     CardActions,
     CardContent,
@@ -13,7 +14,7 @@ interface ProductCardProps {
     product: Product;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<any> = ({ product, handleAddToCart }) => {
     const { id, title, price, description, images, categoryId } = product;
 
     return (
@@ -30,13 +31,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </CardActions>
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    {description}
+                    {title}
                 </Typography>
             </CardContent>
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
                     {price}€
                 </Typography>
+
+                <Button onClick={() => handleAddToCart(product)}>
+                    Add to cart
+                </Button>
             </CardContent>
         </Card>
     );
