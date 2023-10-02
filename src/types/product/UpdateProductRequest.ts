@@ -1,9 +1,9 @@
 interface UpdateProductDto {
-    title: string;
-    price: number;
-    description: string;
-    categoryId: number;
-    images: string;
+    title?: string;
+    price?: number;
+    description?: string;
+    categoryId?: number;
+    images?: string[];
 }
 
 interface UpdateProductRequest {

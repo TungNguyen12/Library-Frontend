@@ -1,8 +1,9 @@
 import Product from "../../types/product/Product";
+import categoriesData from "./categoriesData";
 
 const productsData: Product[] = [
     {
-        id: 11,
+        id: 1,
         title: "Tasty Bronze Mouse",
         price: 480,
         description:
@@ -13,11 +14,11 @@ const productsData: Product[] = [
             "https://picsum.photos/640/640?r=8843",
         ],
 
-        categoryId: 2,
+        category: categoriesData[0],
     },
 
     {
-        id: 12,
+        id: 2,
         title: "Refined Frozen Salad",
         price: 946,
         description:
@@ -28,11 +29,11 @@ const productsData: Product[] = [
             "https://picsum.photos/640/640?r=3475",
         ],
 
-        categoryId: 1,
+        category: categoriesData[1],
     },
 
     {
-        id: 13,
+        id: 3,
         title: "Rustic Rubber Chips",
         price: 158,
         description:
@@ -42,7 +43,7 @@ const productsData: Product[] = [
             "https://picsum.photos/640/640?r=4817",
             "https://picsum.photos/640/640?r=2297",
         ],
-        categoryId: 3,
+        category: categoriesData[2],
     },
 ];
 

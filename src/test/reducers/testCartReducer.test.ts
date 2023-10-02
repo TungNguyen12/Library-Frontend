@@ -1,8 +1,11 @@
 import cartReducer, {
     addToCart,
+    decrementQuantity,
+    incrementQuantity,
     removeFromCart,
 } from "../../redux/reducers/cardReducer";
 import cartData from "../data/cartData";
+import categoriesData from "../data/categoriesData";
 
 describe("Test sync actions in cartReducer", () => {
     test("Should add an item to card", () => {
@@ -11,7 +14,7 @@ describe("Test sync actions in cartReducer", () => {
         const cartProducts = cartReducer(
             testState,
             addToCart({
-                id: 12,
+                id: 2,
                 title: "Refined Frozen Salad",
                 price: 946,
                 description:
@@ -21,16 +24,33 @@ describe("Test sync actions in cartReducer", () => {
                     "https://picsum.photos/640/640?r=8943",
                     "https://picsum.photos/640/640?r=3475",
                 ],
-                categoryId: 1,
+                category: categoriesData[0],
             })
         );
         expect(cartProducts[1].quantity).toBe(2);
     });
 
     test("Should remove an item from card", () => {
-        const testState = cartData; //3 items, remove first item (id: 11) out of cart => length = 2
+        const testState = cartData; //3 items, remove first item (id: 1) out of cart => length = 2
 
-        const cartProducts = cartReducer(testState, removeFromCart(11));
+        const cartProducts = cartReducer(testState, removeFromCart(1));
+        expect(cartProducts.length).toBe(2);
+    });
+
+    test("Should increase quantity of an item in cart", () => {
+        const testState = cartData;
+
+        const cartProducts = cartReducer(testState, incrementQuantity(1));
+        console.log(cartProducts[0]);
+
+        expect(cartProducts[0].quantity).toBe(2);
+    });
+
+    test("Should decrease quantity of an item in cart", () => {
+        const testState = cartData;
+
+        const cartProducts = cartReducer(testState, decrementQuantity(1));
+        console.log(cartProducts[0]);
         expect(cartProducts.length).toBe(2);
     });
 });

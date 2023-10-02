@@ -8,18 +8,16 @@ import Product from "../../types/product/Product";
 // UPDATE
 export const updateProductAsync = createAsyncThunk(
     "updateProduct",
-    async ({ id, update }: UpdateProductRequest): Promise<Product | Error> => {
+    async ({ id, update }: UpdateProductRequest, { rejectWithValue }) => {
         try {
-            const response = await axios.put(
+            const response = await axios.put<Product>(
                 `https://api.escuelajs.co/api/v1/products/${id}`,
                 update
             );
-            const updatedProduct: Product = response.data;
-            console.log(updatedProduct);
-            return updatedProduct;
+            return response.data;
         } catch (e) {
-            const error = e as Error;
-            return error;
+            const error = e as AxiosError;
+            return rejectWithValue(error.message);
         }
     }
 );
@@ -39,7 +37,7 @@ export const deleteProductAsync = createAsyncThunk(
             }
             return productId;
         } catch (e) {
-            const error = e as Error;
+            const error = e as AxiosError;
             return error;
         }
     }
@@ -48,17 +46,17 @@ export const deleteProductAsync = createAsyncThunk(
 // CREATE
 export const createProductAsync = createAsyncThunk(
     "createProduct",
-    async (input: CreateProductDto) => {
+    async (input: CreateProductDto, { rejectWithValue }) => {
         try {
-            const response = await axios.post(
+            const response = await axios.post<Product>(
                 `https://api.escuelajs.co/api/v1/products/`,
                 input
             );
             const createdProduct: Product = response.data;
             return createdProduct;
         } catch (e) {
-            const error = e as Error;
-            return error;
+            const error = e as AxiosError;
+            return rejectWithValue(error.message);
         }
     }
 );

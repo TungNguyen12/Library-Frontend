@@ -6,7 +6,6 @@ import {
     incrementQuantity,
     removeFromCart,
 } from "../redux/reducers/cardReducer";
-import getTotalQuantity from "../redux/selectors/cart/getTotalQuantity";
 import {
     Box,
     Button,
@@ -22,9 +21,7 @@ import { Link } from "react-router-dom";
 const Cart = () => {
     const cart = useAppSelector((state) => state.cartReducer);
     const dispatch = useAppDispatch();
-
-    const totalQuantity = useAppSelector((state) => getTotalQuantity(state));
-    console.log(totalQuantity);
+    console.log(cart);
 
     const handleRemove = (payload: number) => {
         dispatch(removeFromCart(payload));

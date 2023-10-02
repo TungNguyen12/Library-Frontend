@@ -16,26 +16,11 @@ const AllProducts = () => {
         (state) => state.productsReducer
     );
 
-    const cartItems = useAppSelector((state) => state.cartReducer);
-    const totalQuantity = useAppSelector((state) => getTotalQuantity(state));
-
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(fetchAllProductsAsync());
     }, []);
-
-    const handleAddToCart = (payload: Product) => {
-        dispatch(addToCart(payload));
-        console.log(cartItems);
-        console.log(totalQuantity);
-    };
-
-    const handleRemove = (payload: number) => {
-        dispatch(removeFromCart(payload));
-        console.log(cartItems);
-        console.log(totalQuantity);
-    };
 
     return (
         <>
@@ -47,24 +32,9 @@ const AllProducts = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />
-            {cartItems &&
-                cartItems.map((item) => (
-                    <div key={item.id}>
-                        <p>
-                            {item.title} with price is {item.price} ---
-                            quantity: {item.quantity}
-                        </p>
-                        <button onClick={() => handleRemove(item.id)}>
-                            Remove item
-                        </button>
-                    </div>
-                ))}
             {products.map((product) => (
                 <div key={product.id}>
-                    <ProductCard
-                        product={product}
-                        handleAddToCart={handleAddToCart}
-                    />
+                    <ProductCard product={product} />
                 </div>
             ))}
         </>

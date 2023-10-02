@@ -9,13 +9,17 @@ import {
 } from "@mui/material";
 import Product from "../types/product/Product";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../hooks/useAppDispatch";
+import { addToCart } from "../redux/reducers/cardReducer";
 
-interface ProductCardProps {
-    product: Product;
-}
-
-const ProductCard: React.FC<any> = ({ product, handleAddToCart }) => {
+const ProductCard: React.FC<any> = ({ product }) => {
     const { id, title, price, description, images, categoryId } = product;
+
+    const dispatch = useAppDispatch();
+
+    const handleAddToCart = (payload: Product) => {
+        dispatch(addToCart(payload));
+    };
 
     return (
         <Card sx={{ maxWidth: 194 }}>

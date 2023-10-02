@@ -15,7 +15,11 @@ export const initialState: ProductReducerState = {
             title: "Handmade Fresh Table",
             price: 687,
             description: "Andy shoes are designed to keeping in...",
-            categoryId: 5,
+            category: {
+                id: 5,
+                name: "Clothes",
+                image: "image",
+            },
             images: [
                 "https://placeimg.com/640/480/any?r=0.9178516507833767",
                 "https://placeimg.com/640/480/any?r=0.9300320592588625",
@@ -67,14 +71,7 @@ const productsSlice = createSlice({
 
         //createProductAsync ADMIN
         builder.addCase(createProductAsync.fulfilled, (state, action) => {
-            if (!(action.payload instanceof Error)) {
-                const newProducts = [...state.products, action.payload];
-                return {
-                    ...state,
-                    products: newProducts,
-                    isLoading: false,
-                };
-            }
+            state.products.push(action.payload);
         });
         builder.addCase(createProductAsync.pending, (state, action) => {
             return {
@@ -83,14 +80,9 @@ const productsSlice = createSlice({
             };
         });
         builder.addCase(createProductAsync.rejected, (state, action) => {
-            if (action.payload instanceof Error) {
-                return {
-                    ...state,
-                    isLoading: false,
-                    error: action.payload.message,
-                };
-            }
+            state.error = action.payload as string;
         });
+
         //deleteProductAsync ADMIN
         builder.addCase(deleteProductAsync.fulfilled, (state, action) => {
             const foundIndex = state.products.findIndex(
@@ -122,21 +114,19 @@ const productsSlice = createSlice({
         });
         //updateProductAsync ADMIN
         builder.addCase(updateProductAsync.fulfilled, (state, action) => {
-            if (!(action.payload instanceof Error)) {
-                const updatedProduct = action.payload;
-                const updatedProductsList = state.products.map((product) => {
-                    if (product.id === updatedProduct.id) {
-                        return updatedProduct;
-                    } else {
-                        return product;
-                    }
-                });
-                return {
-                    ...state,
-                    products: updatedProductsList,
-                    isLoading: false,
-                };
-            }
+            const updatedProduct = action.payload;
+            const updatedProductsList = state.products.map((product) => {
+                if (product.id === updatedProduct.id) {
+                    return updatedProduct;
+                } else {
+                    return product;
+                }
+            });
+            return {
+                ...state,
+                products: updatedProductsList,
+                isLoading: false,
+            };
         });
     },
 });

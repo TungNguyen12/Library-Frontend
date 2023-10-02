@@ -6,6 +6,8 @@ import {
 } from "@reduxjs/toolkit";
 import productsReducer from "./reducers/productsReducer";
 import usersReducer from "./reducers/userReducer";
+import cartReducer from "./reducers/cardReducer";
+import authReducer from "./reducers/authReducer";
 import { PersistConfig } from "redux-persist/lib/types";
 import storage from "redux-persist/lib/storage";
 import {
@@ -18,12 +20,12 @@ import {
     persistReducer,
     persistStore,
 } from "redux-persist";
-import cartReducer from "./reducers/cardReducer";
 
 const rootReducer = combineReducers({
     productsReducer,
     usersReducer,
     cartReducer,
+    authReducer,
 });
 
 const persistConfig: PersistConfig<any> = {

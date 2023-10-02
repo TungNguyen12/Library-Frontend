@@ -17,7 +17,7 @@ import { useAppDispatch } from "../hooks/useAppDispatch";
 import { addToCart } from "../redux/reducers/cardReducer";
 
 const SingleProduct = () => {
-    const [product, setProduct] = useState<Product>();
+    const [product, setProduct] = useState<any>();
     const { productId } = useParams();
 
     const dispatch = useAppDispatch();
@@ -71,7 +71,9 @@ const SingleProduct = () => {
 
                 <CardActions sx={{ display: "flex" }}>
                     <Button
-                        onClick={() => {}}
+                        onClick={() => {
+                            handleAddToCart(product);
+                        }}
                         sx={{ backgroundColor: "black" }}
                     >
                         Add to cart

@@ -1,28 +1,57 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import User from "../../types/user/User";
+import axios from "axios";
+import CreateUserDto from "../../types/user/RegisterUserRequest";
 
-const initialState: User[] = [];
+const initialState: User[] = [
+    {
+        id: 1,
+        email: "pete@gmail.com",
+        password: "1234",
+        name: "Pete",
+        role: "admin",
+        avatar: "https://api.lorem.space/image/face?w=640&h=480&r=867",
+    },
+];
+
+export const registerUserAsync = createAsyncThunk(
+    "registerUser",
+    async (user: CreateUserDto) => {
+        try {
+            const response = await axios.post(
+                `https://api.escuelajs.co/api/v1/users/`,
+                user
+            );
+            const newUser: User = response.data;
+            return newUser;
+        } catch (e) {
+            const error = e as Error;
+            return error;
+        }
+    }
+);
 
 const usersSlice = createSlice({
     name: "users",
     initialState,
-    reducers: {
-        addUser: (state, action: PayloadAction<User>) => {
-            state.push(action.payload);
-        },
-        removeUser: (state, action: PayloadAction<number>) => {
-            const foundIndex = state.findIndex(
-                (user) => user.id === action.payload
-            );
-            state.splice(foundIndex, 1);
-        },
-        //NEED TO CREATE A USER REGISTER AND LOGIN
-        registerUser: () => {},
-        loginUser: () => {},
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(registerUserAsync.fulfilled, (state, action) => {
+            if (!(action.payload instanceof Error)) {
+                const newUser = action.payload;
+                if (
+                    state.find((user) => user.email === newUser.email) ===
+                    undefined
+                ) {
+                    return {
+                        ...state,
+                        newUser,
+                    };
+                }
+            }
+        });
     },
 });
 
 const usersReducer = usersSlice.reducer;
-export const { addUser, removeUser, registerUser, loginUser } =
-    usersSlice.actions;
 export default usersReducer;
