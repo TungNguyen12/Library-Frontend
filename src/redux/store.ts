@@ -31,7 +31,7 @@ const rootReducer = combineReducers({
 const persistConfig: PersistConfig<any> = {
     key: "root",
     storage,
-    blacklist: ["productsReducer", "usersReducer"],
+    blacklist: ["productsReducer"],
 };
 
 const persistedReducer: Reducer<AppState, AnyAction> = persistReducer(

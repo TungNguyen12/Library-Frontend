@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import Product from "../types/product/Product";
 import getTotalQuantity from "../redux/selectors/cart/getTotalQuantity";
 import ProductCard from "../components/ProductCard";
+import { Box, Grid } from "@mui/material";
 
 const AllProducts = () => {
     const [search, setSearch] = useState<string>("");
@@ -32,11 +33,26 @@ const AllProducts = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />
-            {products.map((product) => (
-                <div key={product.id}>
-                    <ProductCard product={product} />
-                </div>
-            ))}
+            <Box sx={{ flexGrow: 1, marginTop: "50px" }}>
+                <Grid
+                    container
+                    spacing={{ xs: 2, md: 3 }}
+                    columns={{ xs: 4, sm: 8, md: 12 }}
+                >
+                    {products.map((product) => (
+                        <Grid
+                            key={product.id}
+                            item
+                            xs={2}
+                            sm={4}
+                            md={4}
+                            sx={{ alignItems: "center" }}
+                        >
+                            <ProductCard product={product} />
+                        </Grid>
+                    ))}
+                </Grid>
+            </Box>
         </>
     );
 };

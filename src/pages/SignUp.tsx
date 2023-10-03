@@ -1,4 +1,4 @@
-import * as React from "react";
+
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -15,6 +15,11 @@ import Container from "@mui/material/Container";
 import * as yup from "yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useAppSelector } from "../hooks/useAppSelector";
+
+import { useAppDispatch } from "../hooks/useAppDispatch";
+import CreateUserDto from "../types/user/RegisterUserRequest";
+import  { registerUserAsync } from "../redux/reducers/userReducer";
 
 interface FormInput {
     name: string;
@@ -36,6 +41,9 @@ const signUp = yup
     .required();
 
 export const SignUp = () => {
+    const users = useAppSelector((state) => state.usersReducer);
+    const dispatch = useAppDispatch();
+
     const {
         register,
         reset,
@@ -46,9 +54,26 @@ export const SignUp = () => {
     });
 
     const onSubmit: SubmitHandler<FormInput> = (data) => {
-        console.log("321321", data);
-        reset();
+        const isAvailable = users.findIndex(
+            (user) => user.email === data.email
+        );
+
+        const { confirmedPassword, ...newData } = Object.assign({}, data);
+
+        if (isAvailable === -1) {
+            const newUser: CreateUserDto = {
+                ...newData,
+                // role: data.email.includes("admin") ? "admin" : "customer",
+
+                avatar: "https://api.lorem.space/image/face?w=640&h=480&r=867",
+            };
+            console.log(newUser);
+            console.log(data);
+            console.log(users);
+            dispatch(registerUserAsync(newUser));
+        }
     };
+    console.log(users);
 
     return (
         <Container component="main" maxWidth="xs">

@@ -7,7 +7,7 @@ export interface IFormInput {
 }
 
 interface User extends IFormInput {
-    _id: number;
+    id: number;
 }
 
 export default User;

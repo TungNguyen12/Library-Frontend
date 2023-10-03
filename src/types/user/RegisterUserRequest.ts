@@ -2,7 +2,7 @@ interface CreateUserDto {
     email: string;
     name: string;
     password: string;
-    role: string;
+    // role: string;
     avatar: string;
 }
 

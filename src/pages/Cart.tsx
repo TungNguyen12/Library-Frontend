@@ -22,7 +22,6 @@ import { Link } from "react-router-dom";
 const Cart = () => {
     const cart = useAppSelector((state) => state.cartReducer);
     const dispatch = useAppDispatch();
-    console.log(cart);
 
     const handleRemove = (payload: number) => {
         dispatch(removeFromCart(payload));
@@ -41,7 +40,7 @@ const Cart = () => {
             {cart.length > 0 && (
                 <Stack alignItems={"center"} sx={{ marginTop: "35px" }}>
                     <Box borderBottom={"solid black 1px"}>
-                        Minun ostoskorini
+                        <Typography variant="h4"> Minun ostokorini</Typography>
                     </Box>
 
                     <Stack spacing={2} sx={{ marginTop: "15px" }}>

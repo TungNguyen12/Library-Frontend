@@ -22,6 +22,7 @@ const pages = [
     { params: "cart", page: "My cart" },
     { params: "profile", page: "My profile" },
     { params: "signup", page: "Sign up" },
+    { params: "login", page: "Login" },
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 

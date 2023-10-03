@@ -1,11 +1,11 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import User from "../../types/user/User";
 import axios from "axios";
 import CreateUserDto from "../../types/user/RegisterUserRequest";
 
 const initialState: User[] = [
     {
-        _id: 1,
+        id: 1,
         email: "pete@gmail.com",
         password: "1234",
         name: "Pete",

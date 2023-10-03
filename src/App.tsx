@@ -8,8 +8,8 @@ import SingleProduct from "./pages/SingleProduct";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import theme from "./styles/theme";
 import Categories from "./pages/Categories";
-import Register from "./pages/Register";
 import { SignUp } from "./pages/SignUp";
+import Login from "./pages/Login";
 
 const App = () => {
     const router = createBrowserRouter([
@@ -41,6 +41,10 @@ const App = () => {
                 {
                     path: "signup",
                     element: <SignUp />,
+                },
+                {
+                    path: "login",
+                    element: <Login />,
                 },
             ],
         },
