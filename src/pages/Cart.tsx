@@ -7,6 +7,7 @@ import {
     removeFromCart,
 } from "../redux/reducers/cardReducer";
 import {
+    Badge,
     Box,
     Button,
     Card,
@@ -125,14 +126,26 @@ const Cart = () => {
                         spacing={1}
                         sx={{ justifyContent: "center", alignItems: "center" }}
                     >
-                        <ShoppingCart />
-                        <Typography>Ostoskorisi on tyhjä</Typography>
+                        <Badge badgeContent={"0"}>
+                            <ShoppingCart
+                                style={{ width: "2em", height: "2em" }}
+                            />
+                        </Badge>
+                        <Typography variant="h4">
+                            Ostoskorisi on tyhjä
+                        </Typography>
                         <Typography>
                             Ostoskorissasi ei ole mitään. Aloita selaaminen
                             muuttaaksesi sitä!
                         </Typography>
                         <Link to="/">
-                            <Button variant="contained" color="success">
+                            <Button
+                                variant="contained"
+                                sx={{
+                                    width: "230px",
+                                    backgroundColor: "black",
+                                }}
+                            >
                                 Osta Muotia
                             </Button>
                         </Link>

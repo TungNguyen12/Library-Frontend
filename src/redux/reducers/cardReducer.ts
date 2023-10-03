@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import CartItem from "../../types/cart/CartItem";
 import Product from "../../types/product/Product";
-import CartReducerState from "../../types/cart/CartReducerState";
+// import CartReducerState from "../../types/cart/CartReducerState";
 
 const initialState: CartItem[] = [];
 

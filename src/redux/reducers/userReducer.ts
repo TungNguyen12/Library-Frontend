@@ -5,7 +5,7 @@ import CreateUserDto from "../../types/user/RegisterUserRequest";
 
 const initialState: User[] = [
     {
-        id: 1,
+        _id: 1,
         email: "pete@gmail.com",
         password: "1234",
         name: "Pete",

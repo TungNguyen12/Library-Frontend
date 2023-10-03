@@ -5,6 +5,7 @@
     "dependencies": {
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",
+        "@hookform/resolvers": "^3.3.1",
         "@mui/icons-material": "^5.14.11",
         "@mui/material": "^5.14.11",
         "@reduxjs/toolkit": "^1.9.5",
@@ -18,19 +19,22 @@
         "axios": "^1.5.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
+        "react-hook-form": "^7.47.0",
         "react-redux": "^8.1.2",
         "react-router-dom": "^6.16.0",
         "react-scripts": "5.0.1",
         "redux-persist": "github:rt2zz/redux-persist",
         "sass": "^1.61.0",
         "typescript": "^4.9.5",
-        "web-vitals": "^2.1.4"
+        "web-vitals": "^2.1.4",
+        "yup": "^1.3.2"
     },
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "sass": "sass --watch ./src/styles/index.scss:./src/styles/index.css"
     },
     "eslintConfig": {
         "extends": [
