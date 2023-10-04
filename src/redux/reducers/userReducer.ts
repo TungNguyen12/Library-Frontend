@@ -42,6 +42,7 @@ export const registerUserAsync = createAsyncThunk<
     }
 });
 
+
 // Should be for ADMIN
 const usersSlice = createSlice({
     name: "users",

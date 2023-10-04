@@ -10,8 +10,13 @@ import theme from "./styles/theme";
 import Categories from "./pages/Categories";
 import { SignUp } from "./pages/SignUp";
 import Login from "./pages/Login";
+import { useAppSelector } from "./hooks/useAppSelector";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const App = () => {
+    const isAdmin = useAppSelector(
+        (state) => state.authReducer.currentUser?.role
+    );
     const router = createBrowserRouter([
         {
             path: "/",
@@ -45,6 +50,10 @@ const App = () => {
                 {
                     path: "login",
                     element: <Login />,
+                },
+                {
+                    path: "admin",
+                    element: <AdminDashboard />,
                 },
             ],
         },
