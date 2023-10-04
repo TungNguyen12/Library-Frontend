@@ -5,77 +5,101 @@ import { LoginInterface } from "../../types/user/Login";
 import axios from "axios";
 
 export type AuthState = {
-    user: User | null;
-    jwt: AuthJwt | null;
+    currentUser: User | null;
+    error?: string;
+    // jwt: AuthJwt | null;
 };
 
 export const initialState: AuthState = {
-    user: null,
-    jwt: null,
+    currentUser: null,
+    // jwt: null,
 };
 
-export const loginAsync = createAsyncThunk(
-    "login",
-    async ({ email, password }: LoginInterface) => {
-        try {
-            const response = await axios.post(
-                `https://api.escuelajs.co/api/v1/auth/login`,
-                { email, password }
-            );
-            const jwtToken = response.data;
-            return jwtToken;
-        } catch (e) {
-            const error = e as Error;
-            return error;
-        }
-    }
-);
+export const loginAsync = createAsyncThunk<
+    User,
+    LoginInterface,
+    { rejectValue: string }
+>("login", async ({ email, password }, { rejectWithValue, dispatch }) => {
+    try {
+        const response = await axios.post(
+            `https://api.escuelajs.co/api/v1/auth/login`,
+            { email, password }
+        );
+        const jwtToken = response.data;
 
-export const getUserProfileAsync = createAsyncThunk(
-    "getUserProfile",
-    async (jwtToken: AuthJwt) => {
-        try {
-            const response = await axios.get(
-                `https://api.escuelajs.co/api/v1/auth/profile`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${jwtToken.access_token}`,
-                    },
-                }
-            );
-            const userProfile = response.data;
-            return userProfile;
-        } catch (e) {
-            const error = e as Error;
-            return error;
+        const authenticatedUserProfile = await dispatch(
+            getUserProfileAsync(jwtToken)
+        );
+
+        if (
+            //dispatch another action can return a error so needed to catch the error
+            typeof authenticatedUserProfile.payload === "string" ||
+            !authenticatedUserProfile.payload
+        ) {
+            throw Error(authenticatedUserProfile.payload || "Cannot login");
         }
+        return authenticatedUserProfile.payload;
+    } catch (e) {
+        const error = e as Error;
+        return rejectWithValue(error.message);
     }
-);
+});
+
+export const getUserProfileAsync = createAsyncThunk<
+    User,
+    AuthJwt,
+    { rejectValue: string }
+>("getUserProfile", async (jwtToken, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(
+            `https://api.escuelajs.co/api/v1/auth/profile`,
+            {
+                headers: {
+                    Authorization: `Bearer ${jwtToken.access_token}`,
+                },
+            }
+        );
+        const userProfile = response.data;
+        return userProfile;
+    } catch (e) {
+        const error = e as Error;
+        return rejectWithValue(error.message);
+    }
+});
 
 const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
         logOut: (state: AuthState) => {
-            state.user = null;
-            state.jwt = null;
+            state.currentUser = null;
+            // state.jwt = null;
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(loginAsync.fulfilled, (state, action) => {
-            const jwtToken = action.payload;
-            state.jwt = jwtToken;
-        });
-        builder.addCase(getUserProfileAsync.fulfilled, (state, { payload }) => {
-            state.user = payload;
-        });
+        //LOGIN
+        builder
+            .addCase(loginAsync.fulfilled, (state, action) => {
+                state.currentUser = action.payload;
+            })
+            .addCase(loginAsync.rejected, (state, action) => {
+                state.error = action.payload;
+            });
+
+        //GET USER PROFILE
+        builder
+            .addCase(getUserProfileAsync.fulfilled, (state, { payload }) => {
+                state.currentUser = payload;
+            })
+            .addCase(getUserProfileAsync.rejected, (state, action) => {
+                state.error = action.payload;
+            });
     },
 });
 
 export const { logOut } = authSlice.actions;
 
-export const getJwt = (state: AuthState) => state.jwt;
-export const getUserProfile = (state: AuthState) => state.user;
+export const getUserProfile = (state: AuthState) => state.currentUser;
 
 const authReducer = authSlice.reducer;
 export default authReducer;

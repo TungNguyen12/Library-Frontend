@@ -3,11 +3,6 @@ import { useAppSelector } from "../hooks/useAppSelector";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { fetchAllProductsAsync } from "../redux/services/ProductServices";
 
-import { addToCart, removeFromCart } from "../redux/reducers/cardReducer";
-
-import { Link } from "react-router-dom";
-import Product from "../types/product/Product";
-import getTotalQuantity from "../redux/selectors/cart/getTotalQuantity";
 import ProductCard from "../components/ProductCard";
 import { Box, Grid } from "@mui/material";
 

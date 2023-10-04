@@ -15,10 +15,17 @@ import {
 import Product from "../types/product/Product";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { addToCart } from "../redux/reducers/cardReducer";
+import { useAppSelector } from "../hooks/useAppSelector";
+import ModifyProductForm from "../components/ModifyProductForm";
 
 const SingleProduct = () => {
     const [product, setProduct] = useState<any>();
     const { productId } = useParams();
+
+    const [openForm, setOpenForm] = useState(false);
+
+    const admin = useAppSelector((state) => state.authReducer.currentUser);
+    const isAdmin = admin?.role === "admin" ? true : false;
 
     const dispatch = useAppDispatch();
 
@@ -48,45 +55,63 @@ const SingleProduct = () => {
             sx={{
                 marginTop: "50px",
                 display: "flex",
+                flexDirection: "column",
                 justifyContent: "center",
             }}
         >
-            <Card>
-                <CardMedia
-                    component="img"
-                    height="350"
-                    image={product?.images[0]}
-                    alt={product?.title}
-                />
-            </Card>
-            <Card sx={{ maxWidth: 300 }}>
-                <CardContent>
-                    <Typography variant="h5" gutterBottom>
-                        {product?.title}
-                    </Typography>
-                    <Typography variant="h6" component="div">
-                        {product?.price}€
-                    </Typography>
-                </CardContent>
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                }}
+            >
+                <Card>
+                    <CardMedia
+                        component="img"
+                        height="350"
+                        image={product?.images[0]}
+                        alt={product?.title}
+                    />
+                </Card>
+                <Card sx={{ maxWidth: 300 }}>
+                    <CardContent>
+                        <Typography variant="h5" gutterBottom>
+                            {product?.title}
+                        </Typography>
+                        <Typography variant="h6" component="div">
+                            {product?.price}€
+                        </Typography>
+                    </CardContent>
 
-                <CardActions sx={{ display: "flex" }}>
-                    <Button
-                        onClick={() => {
-                            handleAddToCart(product);
-                        }}
-                        sx={{ backgroundColor: "black" }}
-                    >
-                        Add to cart
-                    </Button>
-                </CardActions>
-                <CardActions>
-                    <Button size="small">
-                        <Link to={`/`} style={{ textDecoration: "none" }}>
-                            Back to Home
-                        </Link>
-                    </Button>
-                </CardActions>
-            </Card>
+                    <CardActions sx={{ display: "flex" }}>
+                        {isAdmin ? (
+                            <Button
+                                onClick={() => setOpenForm(!openForm)}
+                                sx={{ backgroundColor: "black" }}
+                            >
+                                Modify the product
+                            </Button>
+                        ) : (
+                            <Button
+                                onClick={() => {
+                                    handleAddToCart(product);
+                                }}
+                                sx={{ backgroundColor: "black" }}
+                            >
+                                Add to cart
+                            </Button>
+                        )}
+                    </CardActions>
+                    <CardActions>
+                        <Button size="small">
+                            <Link to={`/`} style={{ textDecoration: "none" }}>
+                                Back to Home
+                            </Link>
+                        </Button>
+                    </CardActions>
+                </Card>
+            </Box>
+            {openForm && <ModifyProductForm product={product} />}
         </Box>
     );
 };

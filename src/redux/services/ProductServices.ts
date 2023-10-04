@@ -25,7 +25,7 @@ export const updateProductAsync = createAsyncThunk(
 //DELETE
 export const deleteProductAsync = createAsyncThunk(
     "deleteProduct",
-    async (productId: number) => {
+    async (productId: number, { rejectWithValue }) => {
         try {
             const response = await axios.delete(
                 `https://api.escuelajs.co/api/v1/products/${productId}`
@@ -38,7 +38,7 @@ export const deleteProductAsync = createAsyncThunk(
             return productId;
         } catch (e) {
             const error = e as AxiosError;
-            return error;
+            return rejectWithValue(error.message);
         }
     }
 );
@@ -64,7 +64,7 @@ export const createProductAsync = createAsyncThunk(
 // GET ALL
 export const fetchAllProductsAsync = createAsyncThunk(
     "fetchAllProductsAsync",
-    async () => {
+    async (_, { rejectWithValue }) => {
         try {
             const response = await axios.get(
                 `https://api.escuelajs.co/api/v1/products`
@@ -73,7 +73,7 @@ export const fetchAllProductsAsync = createAsyncThunk(
             return data;
         } catch (e) {
             const error = e as AxiosError;
-            return error;
+            return rejectWithValue(error.message);
         }
     }
 );

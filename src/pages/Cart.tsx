@@ -18,10 +18,13 @@ import {
 } from "@mui/material";
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
+import getTotalCost from "../redux/selectors/cart/getTotalCost";
 
 const Cart = () => {
     const cart = useAppSelector((state) => state.cartReducer);
     const dispatch = useAppDispatch();
+
+    const totalCost = useAppSelector((state) => getTotalCost(state));
 
     const handleRemove = (payload: number) => {
         dispatch(removeFromCart(payload));
@@ -43,73 +46,91 @@ const Cart = () => {
                         <Typography variant="h4"> Minun ostokorini</Typography>
                     </Box>
 
-                    <Stack spacing={2} sx={{ marginTop: "15px" }}>
-                        {cart.map((item) => (
-                            <Card key={item.id} sx={{ display: "flex" }}>
-                                <CardMedia
-                                    component="img"
-                                    height="240"
-                                    image={item.images[0]}
-                                    alt={item.title}
-                                />
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "flex-start",
-                                        justifyContent: "space-between",
-                                    }}
-                                >
-                                    <CardContent>
-                                        <Stack>
-                                            <Typography
-                                                gutterBottom
-                                                variant="h5"
-                                                component="div"
-                                            >
-                                                {item.title}
-                                            </Typography>
-
-                                            <Stack
-                                                sx={{
-                                                    display: "flex",
-                                                    flexDirection: "row",
-                                                    marginTop: "20px",
-                                                }}
-                                            >
-                                                <Button
-                                                    onClick={() =>
-                                                        handleDecrement(item.id)
-                                                    }
+                    <Stack
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "center",
+                            alignItems: "flex-start",
+                        }}
+                    >
+                        <Stack spacing={2} sx={{ marginTop: "15px" }}>
+                            {cart.map((item) => (
+                                <Card key={item.id} sx={{ display: "flex" }}>
+                                    <CardMedia
+                                        component="img"
+                                        height="240"
+                                        image={item.images[0]}
+                                        alt={item.title}
+                                    />
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            alignItems: "flex-start",
+                                            justifyContent: "space-between",
+                                        }}
+                                    >
+                                        <CardContent>
+                                            <Stack>
+                                                <Typography
+                                                    gutterBottom
+                                                    variant="h5"
+                                                    component="div"
                                                 >
-                                                    -
-                                                </Button>
+                                                    {item.title}
+                                                </Typography>
+
+                                                <Stack
+                                                    sx={{
+                                                        display: "flex",
+                                                        flexDirection: "row",
+                                                        marginTop: "20px",
+                                                    }}
+                                                >
+                                                    <Button
+                                                        onClick={() =>
+                                                            handleDecrement(
+                                                                item.id
+                                                            )
+                                                        }
+                                                    >
+                                                        -
+                                                    </Button>
+                                                    <Typography>
+                                                        {item.quantity}
+                                                    </Typography>
+                                                    <Button
+                                                        onClick={() =>
+                                                            handleIncrement(
+                                                                item.id
+                                                            )
+                                                        }
+                                                    >
+                                                        +
+                                                    </Button>
+                                                </Stack>
                                                 <Typography>
-                                                    {item.quantity}
+                                                    {item.price}€
                                                 </Typography>
                                                 <Button
                                                     onClick={() =>
-                                                        handleIncrement(item.id)
+                                                        handleRemove(item.id)
                                                     }
                                                 >
-                                                    +
+                                                    Remove item
                                                 </Button>
                                             </Stack>
-                                            <Typography>
-                                                {item.price}€
-                                            </Typography>
-                                            <Button
-                                                onClick={() =>
-                                                    handleRemove(item.id)
-                                                }
-                                            >
-                                                Remove item
-                                            </Button>
-                                        </Stack>
-                                    </CardContent>
-                                </Box>
-                            </Card>
-                        ))}
+                                        </CardContent>
+                                    </Box>
+                                </Card>
+                            ))}
+                        </Stack>
+                        <Stack>
+                            <CardContent>
+                                <Typography>Total: {totalCost}€</Typography>
+                            </CardContent>
+                        </Stack>
                     </Stack>
                 </Stack>
             )}

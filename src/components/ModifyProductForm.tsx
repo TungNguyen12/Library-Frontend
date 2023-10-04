@@ -1,4 +1,3 @@
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -13,19 +12,19 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useAppDispatch } from "../hooks/useAppDispatch";
-import { LoginInterface } from "../types/user/Login";
-import { getUserProfileAsync, loginAsync } from "../redux/reducers/authReducer";
-import { AuthJwt } from "../types/user/AuthJWT";
 import { useAppSelector } from "../hooks/useAppSelector";
+import { updateProductAsync } from "../redux/services/ProductServices";
+import Product from "../types/product/Product";
+import UpdateProductRequest from "../types/product/UpdateProductRequest";
 
-const signUp = yup
+const modify = yup
     .object({
-        email: yup.string().required(),
-        password: yup.string().min(8).max(20).required(),
+        title: yup.string().required(),
+        price: yup.number().required(),
     })
     .required();
 
-export const Login = () => {
+export const ModifyProductForm: React.FC<any> = ({ product }) => {
     const dispatch = useAppDispatch();
 
     const {
@@ -33,13 +32,12 @@ export const Login = () => {
         handleSubmit,
         formState: { errors },
     } = useForm({
-        resolver: yupResolver(signUp),
+        resolver: yupResolver(modify),
     });
 
-    const user = useAppSelector((state) => state.authReducer.currentUser);
-
-    const onSubmit: SubmitHandler<LoginInterface> = (data) => {
-        dispatch(loginAsync(data));
+    const onSubmit: SubmitHandler<any> = (data) => {
+        const updated: Product = { ...product, ...data };
+        dispatch(updateProductAsync({ id: updated.id, update: updated }));
     };
 
     return (
@@ -53,12 +51,6 @@ export const Login = () => {
                     alignItems: "center",
                 }}
             >
-                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Login
-                </Typography>
                 <Box
                     component="form"
                     onSubmit={handleSubmit(onSubmit)}
@@ -68,23 +60,21 @@ export const Login = () => {
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                id="email"
-                                label="Email Address"
-                                error={Boolean(errors.email?.message)}
-                                helperText={errors.email?.message}
-                                {...register("email")}
+                                id="title"
+                                label="Product title"
+                                error={Boolean(errors.title?.message)}
+                                helperText={errors.title?.message}
+                                {...register("title")}
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                label="Password"
-                                type="password"
-                                id="password"
-                                error={Boolean(errors.password?.message)}
-                                helperText={errors.password?.message}
-                                autoComplete="new-password"
-                                {...register("password")}
+                                label="Price"
+                                id="price"
+                                error={Boolean(errors.price?.message)}
+                                helperText={errors.price?.message}
+                                {...register("price")}
                             />
                         </Grid>
                     </Grid>
@@ -94,7 +84,7 @@ export const Login = () => {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Login
+                        Update product
                     </Button>
                 </Box>
             </Box>
@@ -102,4 +92,4 @@ export const Login = () => {
     );
 };
 
-export default Login;
+export default ModifyProductForm;
