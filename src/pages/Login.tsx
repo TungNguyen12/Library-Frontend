@@ -17,6 +17,9 @@ import { LoginInterface } from "../types/user/Login";
 import { getUserProfileAsync, loginAsync } from "../redux/reducers/authReducer";
 import { AuthJwt } from "../types/user/AuthJWT";
 import { useAppSelector } from "../hooks/useAppSelector";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { current } from "@reduxjs/toolkit";
 
 const signUp = yup
     .object({
@@ -30,16 +33,20 @@ export const Login = () => {
 
     const {
         register,
+        reset,
         handleSubmit,
         formState: { errors },
     } = useForm({
         resolver: yupResolver(signUp),
     });
 
-    const user = useAppSelector((state) => state.authReducer.currentUser);
-
+    const { currentUser, error } = useAppSelector((state) => state.authReducer);
+    const [success, setSuccess] = useState(false);
     const onSubmit: SubmitHandler<LoginInterface> = (data) => {
         dispatch(loginAsync(data));
+        reset();
+        setSuccess(true);
+        setTimeout(() => setSuccess(false), 4000);
     };
 
     return (
@@ -59,6 +66,11 @@ export const Login = () => {
                 <Typography component="h1" variant="h5">
                     Login
                 </Typography>
+                {success && currentUser && (
+                    <Typography>
+                        Log in successfully, redirecting to Product page
+                    </Typography>
+                )}
                 <Box
                     component="form"
                     onSubmit={handleSubmit(onSubmit)}
@@ -98,6 +110,11 @@ export const Login = () => {
                     </Button>
                 </Box>
             </Box>
+            {error && (
+                <Box>
+                    <Typography>{error}: Incorrect input</Typography>
+                </Box>
+            )}
         </Container>
     );
 };

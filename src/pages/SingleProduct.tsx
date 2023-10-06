@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import {
     Box,
     Button,
+    ButtonGroup,
     Card,
     CardActions,
     CardContent,
@@ -17,12 +18,13 @@ import { useAppDispatch } from "../hooks/useAppDispatch";
 import { addToCart } from "../redux/reducers/cardReducer";
 import { useAppSelector } from "../hooks/useAppSelector";
 import ModifyProductForm from "../components/ModifyProductForm";
+import { deleteProductAsync } from "../redux/services/ProductServices";
 
 const SingleProduct = () => {
     const [product, setProduct] = useState<any>();
     const { productId } = useParams();
-
     const [openForm, setOpenForm] = useState(false);
+    const navigate = useNavigate();
 
     const admin = useAppSelector((state) => state.authReducer.currentUser);
     const isAdmin = admin?.role === "admin" ? true : false;
@@ -48,6 +50,10 @@ const SingleProduct = () => {
 
     const handleAddToCart = (payload: Product) => {
         dispatch(addToCart(payload));
+    };
+    const handleDeleteProduct = (payload: Product) => {
+        dispatch(deleteProductAsync(payload.id));
+        navigate("/");
     };
 
     return (
@@ -85,17 +91,39 @@ const SingleProduct = () => {
 
                     <CardActions sx={{ display: "flex" }}>
                         {isAdmin ? (
-                            <Button
-                                onClick={() => setOpenForm(!openForm)}
-                                sx={{ backgroundColor: "black" }}
+                            <ButtonGroup
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: "10px",
+                                }}
                             >
-                                Modify the product
-                            </Button>
+                                <Button
+                                    onClick={() => setOpenForm(!openForm)}
+                                    size="small"
+                                    sx={{ backgroundColor: "black" }}
+                                >
+                                    Modify the product
+                                </Button>
+                                <Button
+                                    onClick={() => {
+                                        if (window.confirm("Delete this item?"))
+                                            handleDeleteProduct(product);
+                                    }}
+                                    size="small"
+                                    sx={{
+                                        backgroundColor: "red",
+                                    }}
+                                >
+                                    Delete Product
+                                </Button>
+                            </ButtonGroup>
                         ) : (
                             <Button
                                 onClick={() => {
                                     handleAddToCart(product);
                                 }}
+                                size="small"
                                 sx={{ backgroundColor: "black" }}
                             >
                                 Add to cart
@@ -103,7 +131,10 @@ const SingleProduct = () => {
                         )}
                     </CardActions>
                     <CardActions>
-                        <Button size="small">
+                        <Button
+                            size="small"
+                            sx={{ backgroundColor: "lightgreen" }}
+                        >
                             <Link to={`/`} style={{ textDecoration: "none" }}>
                                 Back to Home
                             </Link>

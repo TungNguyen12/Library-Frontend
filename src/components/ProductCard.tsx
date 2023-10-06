@@ -8,13 +8,13 @@ import {
     Typography,
 } from "@mui/material";
 import Product from "../types/product/Product";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { addToCart } from "../redux/reducers/cardReducer";
 
 const ProductCard: React.FC<any> = ({ product }) => {
     const { id, title, price, description, images, categoryId } = product;
-
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
     const handleAddToCart = (payload: Product) => {
@@ -23,15 +23,17 @@ const ProductCard: React.FC<any> = ({ product }) => {
 
     return (
         <Card sx={{ maxWidth: 194 }}>
-            <CardActions>
-                <Link to={`${id}`}>
-                    <CardMedia
-                        component="img"
-                        height="194"
-                        image={images[0]}
-                        alt={title}
-                    />
-                </Link>
+            <CardActions
+                onClick={() => {
+                    navigate(`/${id}`);
+                }}
+            >
+                <CardMedia
+                    component="img"
+                    height="194"
+                    image={images[0]}
+                    alt={title}
+                />
             </CardActions>
             <CardContent>
                 <Typography variant="body2" color="text.secondary">

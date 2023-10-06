@@ -5,6 +5,7 @@ import { fetchAllProductsAsync } from "../redux/services/ProductServices";
 
 import ProductCard from "../components/ProductCard";
 import { Box, Grid } from "@mui/material";
+import { sortProductByPrice } from "../redux/reducers/productsReducer";
 
 const AllProducts = () => {
     const [search, setSearch] = useState<string>("");
@@ -18,10 +19,28 @@ const AllProducts = () => {
         dispatch(fetchAllProductsAsync());
     }, []);
 
+    const handleSortByLowerPrice = () => {
+        dispatch(sortProductByPrice("asc"));
+    };
+    const handleSortByHigherPrice = () => {
+        dispatch(sortProductByPrice("desc"));
+    };
+
     return (
         <>
-            AllProducts ProductsPage
-            <button onClick={() => {}}>add new product</button>
+            <button onClick={handleSortByLowerPrice}>
+                Sort product by lower price{" "}
+            </button>
+            <button onClick={handleSortByHigherPrice}>
+                Sort product by higher price{" "}
+            </button>
+
+            <select>
+                Sort product
+                <option>All product</option>
+                <option onChange={handleSortByLowerPrice}>Low to high</option>
+                <option onChange={handleSortByHigherPrice}>High to low</option>
+            </select>
             <input
                 type="text"
                 placeholder="Search for product by title..."

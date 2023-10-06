@@ -11,22 +11,30 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
 import { useAppSelector } from "../hooks/useAppSelector";
 import getTotalQuantity from "../redux/selectors/cart/getTotalQuantity";
+import { useAppDispatch } from "../hooks/useAppDispatch";
+import { logOut } from "../redux/reducers/authReducer";
 const pages = [
     { params: "", page: "Products" },
     { params: "categories", page: "Categories" },
     { params: "cart", page: "My cart" },
     { params: "profile", page: "My profile" },
-    { params: "signup", page: "Sign up" },
-    { params: "login", page: "Login" },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const user = useAppSelector((state) => state.authReducer.currentUser);
+
+    const handleLogout = () => {
+        dispatch(logOut());
+    };
+    const totalQuantity = useAppSelector((state) => getTotalQuantity(state));
+
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
         null
     );
@@ -48,8 +56,6 @@ function ResponsiveAppBar() {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
-
-    const totalQuantity = useAppSelector((state) => getTotalQuantity(state));
 
     return (
         <AppBar position="static">
@@ -182,6 +188,41 @@ function ResponsiveAppBar() {
                                 </Button>
                             </Link>
                         ))}
+                        {user ? (
+                            <Link
+                                to="signup"
+                                key={"signup"}
+                                style={{ textDecoration: "none" }}
+                            >
+                                <Button
+                                    onClick={handleCloseNavMenu}
+                                    sx={{
+                                        my: 2,
+                                        color: "white",
+                                        display: "block",
+                                    }}
+                                >
+                                    Sign up
+                                </Button>
+                            </Link>
+                        ) : (
+                            <Link
+                                to="login"
+                                key={"login"}
+                                style={{ textDecoration: "none" }}
+                            >
+                                <Button
+                                    onClick={handleCloseNavMenu}
+                                    sx={{
+                                        my: 2,
+                                        color: "white",
+                                        display: "block",
+                                    }}
+                                >
+                                    Login
+                                </Button>
+                            </Link>
+                        )}
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
@@ -221,16 +262,26 @@ function ResponsiveAppBar() {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
+                            <MenuItem
+                                onClick={() => {
+                                    navigate("/profile");
+                                }}
+                            >
+                                <Typography>Profile</Typography>
+                            </MenuItem>
+                            {!user ? (
                                 <MenuItem
-                                    key={setting}
-                                    onClick={handleCloseUserMenu}
+                                    onClick={() => {
+                                        navigate("/login");
+                                    }}
                                 >
-                                    <Typography textAlign="center">
-                                        {setting}
-                                    </Typography>
+                                    <Typography>Login</Typography>
                                 </MenuItem>
-                            ))}
+                            ) : (
+                                <MenuItem onClick={handleLogout}>
+                                    <Typography>Logout</Typography>
+                                </MenuItem>
+                            )}
                         </Menu>
                     </Box>
                 </Toolbar>

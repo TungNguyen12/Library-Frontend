@@ -6,7 +6,7 @@ import axios from "axios";
 
 export type AuthState = {
     currentUser: User | null;
-    error?: string;
+    error?: string | null;
     // jwt: AuthJwt | null;
 };
 
@@ -81,6 +81,7 @@ const authSlice = createSlice({
         builder
             .addCase(loginAsync.fulfilled, (state, action) => {
                 state.currentUser = action.payload;
+                state.error = null;
             })
             .addCase(loginAsync.rejected, (state, action) => {
                 state.error = action.payload;

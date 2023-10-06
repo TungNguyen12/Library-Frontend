@@ -2,7 +2,7 @@ import UpdateProductRequest from "../../types/product/UpdateProductRequest";
 import CreateProductDto from "../../types/product/CreateProductRequest";
 import axios, { AxiosError } from "axios";
 
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit";
 import Product from "../../types/product/Product";
 
 // UPDATE
@@ -60,6 +60,24 @@ export const createProductAsync = createAsyncThunk(
         }
     }
 );
+
+// GET A SINGLE PRODUCT
+export const fetchSingleProduct = createAsyncThunk<
+    Product,
+    number,
+    { rejectValue: string }
+>("fetchProductByCategories", async (id, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(
+            `https://api.escuelajs.co/api/v1/categories/${id}`
+        );
+        const category = response.data;
+        return category;
+    } catch (e) {
+        const error = e as AxiosError;
+        return rejectWithValue(error.message);
+    }
+});
 
 // GET ALL
 export const fetchAllProductsAsync = createAsyncThunk(
