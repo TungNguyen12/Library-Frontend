@@ -223,6 +223,24 @@ function ResponsiveAppBar() {
                                 </Button>
                             </Link>
                         )}
+                        {user?.role === "admin" && (
+                            <Link
+                                to="admin"
+                                key={"login"}
+                                style={{ textDecoration: "none" }}
+                            >
+                                <Button
+                                    onClick={handleCloseNavMenu}
+                                    sx={{
+                                        my: 2,
+                                        color: "white",
+                                        display: "block",
+                                    }}
+                                >
+                                    Admin Dashboard
+                                </Button>
+                            </Link>
+                        )}
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>

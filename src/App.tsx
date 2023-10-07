@@ -12,6 +12,7 @@ import { SignUp } from "./pages/SignUp";
 import Login from "./pages/Login";
 import { useAppSelector } from "./hooks/useAppSelector";
 import AdminDashboard from "./pages/AdminDashboard";
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
     const isAdmin = useAppSelector(
@@ -53,7 +54,7 @@ const App = () => {
                 },
                 {
                     path: "admin",
-                    element: <AdminDashboard />,
+                    element: <PrivateRoute />,
                 },
             ],
         },

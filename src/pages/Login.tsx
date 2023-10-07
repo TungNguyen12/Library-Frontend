@@ -14,12 +14,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { LoginInterface } from "../types/user/Login";
-import { getUserProfileAsync, loginAsync } from "../redux/reducers/authReducer";
-import { AuthJwt } from "../types/user/AuthJWT";
+import { loginAsync } from "../redux/reducers/authReducer";
 import { useAppSelector } from "../hooks/useAppSelector";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { current } from "@reduxjs/toolkit";
+import { useState } from "react";
 
 const signUp = yup
     .object({
@@ -40,6 +38,8 @@ export const Login = () => {
         resolver: yupResolver(signUp),
     });
 
+    const navigate = useNavigate();
+
     const { currentUser, error } = useAppSelector((state) => state.authReducer);
     const [success, setSuccess] = useState(false);
     const onSubmit: SubmitHandler<LoginInterface> = (data) => {
@@ -48,6 +48,10 @@ export const Login = () => {
         setSuccess(true);
         setTimeout(() => setSuccess(false), 4000);
     };
+
+    if (currentUser) {
+        navigate("/");
+    }
 
     return (
         <Container component="main" maxWidth="xs">
