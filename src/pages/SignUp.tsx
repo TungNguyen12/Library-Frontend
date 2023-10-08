@@ -54,20 +54,15 @@ export const SignUp = () => {
     });
 
     const onSubmit: SubmitHandler<FormInput> = (data) => {
-        const isAvailable = users?.findIndex(
-            (user) => user.email === data.email
-        );
-
         const { confirmedPassword, ...newData } = Object.assign({}, data);
 
-        if (isAvailable === -1) {
-            const newUser: CreateUserDto = {
-                ...newData,
-                // role: data.email.includes("admin") ? "admin" : "customer",
-                avatar: "https://api.lorem.space/image/face?w=640&h=480&r=867",
-            };
-            dispatch(registerUserAsync(newUser));
-        }
+        const newUser: CreateUserDto = {
+            ...newData,
+            // role: data.email.includes("admin") ? "admin" : "customer",
+            avatar: "https://api.lorem.space/image/face?w=640&h=480&r=867",
+        };
+        dispatch(registerUserAsync(newUser));
+        reset();
     };
 
     return (

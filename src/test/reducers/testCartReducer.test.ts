@@ -39,18 +39,13 @@ describe("Test sync actions in cartReducer", () => {
 
     test("Should increase quantity of an item in cart", () => {
         const testState = cartData;
-
         const cartProducts = cartReducer(testState, incrementQuantity(1));
-        console.log(cartProducts[0]);
-
         expect(cartProducts[0].quantity).toBe(2);
     });
 
     test("Should decrease quantity of an item in cart", () => {
         const testState = cartData;
-
         const cartProducts = cartReducer(testState, decrementQuantity(1));
-        console.log(cartProducts[0]);
         expect(cartProducts.length).toBe(2);
     });
 });

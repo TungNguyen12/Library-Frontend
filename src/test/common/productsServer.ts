@@ -1,5 +1,6 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node";
+
 import productsData from "../data/productsData";
 import CreateProductDto from "../../types/product/CreateProductRequest";
 import categoriesData from "../data/categoriesData";
@@ -23,6 +24,7 @@ export const handlers = [
         `https://api.escuelajs.co/api/v1/products/:id`,
         async (req, res, ctx) => {
             console.log("update request");
+
             const update: UpdateProductRequest = await req.json();
             const { id } = req.params;
 
@@ -58,7 +60,7 @@ export const handlers = [
     rest.post(
         `https://api.escuelajs.co/api/v1/products/`,
         async (req, res, ctx) => {
-            console.log("catch the create request");
+            // console.log("catch the create request");
             const input: CreateProductDto = await req.json();
 
             const category = categoriesData.find(

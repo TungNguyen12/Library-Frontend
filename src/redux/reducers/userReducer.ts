@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import User from "../../types/user/User";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import CreateUserDto from "../../types/user/RegisterUserRequest";
 import UsersReducerState from "../../types/user/UsersReducerState";
 
@@ -24,30 +24,72 @@ export const getAllUsersAsync = createAsyncThunk<
     }
 });
 
-export const registerUserAsync = createAsyncThunk<
-    User,
-    CreateUserDto,
+export type EmailAvailability = {
+    isAvailable: boolean;
+};
+
+export const checkEmailIsAvailable = createAsyncThunk<
+    EmailAvailability,
+    string,
     { rejectValue: string }
->("registerUser", async (user: CreateUserDto, { rejectWithValue }) => {
+>("checkEmail", async (mail: string, { rejectWithValue }) => {
     try {
         const response = await axios.post(
-            `https://api.escuelajs.co/api/v1/users/`,
-            user
+            `https://api.escuelajs.co/api/v1/users/is-available`,
+            {
+                email: mail,
+            }
         );
-        const newUser: User = response.data;
-        return newUser;
+        console.log(response.data);
+        return response.data;
     } catch (e) {
-        const error = e as Error;
+        const error = e as AxiosError;
         return rejectWithValue(error.message);
     }
 });
 
+export const registerUserAsync = createAsyncThunk<
+    User,
+    CreateUserDto,
+    { rejectValue: string }
+>(
+    "registerUser",
+    async (user: CreateUserDto, { rejectWithValue, dispatch }) => {
+        try {
+            const isAvailable = await dispatch(
+                checkEmailIsAvailable(user.email)
+                //in the check email, we dont have error but either true or false
+            );
+
+            console.log(isAvailable);
+            if (Object.values(isAvailable)) {
+                throw Error("Email is already registered: This is error");
+            } else {
+                console.log("email is available");
+                const response = await axios.post(
+                    `https://api.escuelajs.co/api/v1/users/`,
+                    user
+                );
+                const newUser: User = response.data;
+                return newUser;
+            }
+        } catch (e) {
+            const error = e as Error;
+            console.log(error.message);
+            return rejectWithValue(error.message);
+        }
+    }
+);
 
 // Should be for ADMIN
 const usersSlice = createSlice({
     name: "users",
     initialState,
-    reducers: {},
+    reducers: {
+        clearStateLogout: (state) => {
+            state.users = [];
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(registerUserAsync.fulfilled, (state, action) => {
@@ -61,6 +103,7 @@ const usersSlice = createSlice({
             .addCase(registerUserAsync.rejected, (state, action) => {
                 state.error = action.payload;
             })
+
             .addCase(getAllUsersAsync.fulfilled, (state, action) => {
                 state.users = action.payload;
             })
@@ -71,4 +114,5 @@ const usersSlice = createSlice({
 });
 
 const usersReducer = usersSlice.reducer;
+export const { clearStateLogout } = usersSlice.actions;
 export default usersReducer;

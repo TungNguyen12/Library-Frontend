@@ -18,6 +18,7 @@ import { useAppSelector } from "../hooks/useAppSelector";
 import getTotalQuantity from "../redux/selectors/cart/getTotalQuantity";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { logOut } from "../redux/reducers/authReducer";
+import { clearStateLogout } from "../redux/reducers/userReducer";
 const pages = [
     { params: "", page: "Products" },
     { params: "categories", page: "Categories" },
@@ -32,6 +33,7 @@ function ResponsiveAppBar() {
 
     const handleLogout = () => {
         dispatch(logOut());
+        dispatch(clearStateLogout());
     };
     const totalQuantity = useAppSelector((state) => getTotalQuantity(state));
 

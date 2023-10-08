@@ -19,7 +19,7 @@ export const loginAsync = createAsyncThunk<
     User,
     LoginInterface,
     { rejectValue: string }
->("login", async ({ email, password }, { rejectWithValue, dispatch }) => {
+>("loginAsync", async ({ email, password }, { rejectWithValue, dispatch }) => {
     try {
         const response = await axios.post(
             `https://api.escuelajs.co/api/v1/auth/login`,
@@ -49,7 +49,7 @@ export const getUserProfileAsync = createAsyncThunk<
     User,
     AuthJwt,
     { rejectValue: string }
->("getUserProfile", async (jwtToken, { rejectWithValue }) => {
+>("getUserProfileAsync", async (jwtToken, { rejectWithValue }) => {
     try {
         const response = await axios.get(
             `https://api.escuelajs.co/api/v1/auth/profile`,

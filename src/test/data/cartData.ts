@@ -1,5 +1,4 @@
-import CartItem from "../../types/cart/CartItem";
-import CartReducerState from "../../types/cart/CartReducerState";
+
 import productsData from "./productsData";
 
 const cartData = [

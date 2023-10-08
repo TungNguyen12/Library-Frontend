@@ -9,7 +9,7 @@ import {
 } from "../../redux/services/ProductServices";
 import { createStore } from "../../redux/store";
 import CreateProductDto from "../../types/product/CreateProductRequest";
-import server from "../common/server";
+import server from "../common/productsServer";
 import categoriesData from "../data/categoriesData";
 import productsData from "../data/productsData";
 

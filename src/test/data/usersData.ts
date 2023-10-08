@@ -23,7 +23,7 @@ const usersData: User[] = [
         password: "admin123",
         name: "Admin",
         role: "admin",
-        avatar: "https://i.imgur.com/5mPmJYO.jpeg",
+        avatar: "https://i.imgur.com/s8WRA2O.jpeg",
     },
 ];
 
