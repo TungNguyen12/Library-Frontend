@@ -15,6 +15,7 @@ import Product from "../types/product/Product";
 import axios, { AxiosError } from "axios";
 import { fetchAllCategories } from "../redux/reducers/categoriesReducer";
 import { useAppDispatch } from "../hooks/useAppDispatch";
+import Carousel from "react-material-ui-carousel";
 
 const Categories = () => {
     const categories = useAppSelector(
@@ -43,7 +44,6 @@ const Categories = () => {
 
     useEffect(() => {
         getProductByCategory();
-        console.log(categoryId);
     }, [categoryId]);
 
     return (
@@ -51,22 +51,23 @@ const Categories = () => {
             <Box sx={{ flexGrow: 1, marginTop: "50px" }}>
                 <Grid container spacing={2} sx={{ justifyContent: "center" }}>
                     {categories.map((category) => (
-                        <Grid item xs={3}>
-                            <Card key={category.id}>
+                        <Grid item xs={3} key={category.id}>
+                            <Card>
                                 <CardActionArea
                                     onClick={() => {
                                         setCategoryId(category.id);
                                     }}
                                 >
-                                    <CardContent>
-                                        {/* <CardMedia
-                                    component="img"
-                                    height="194"
-                                    image={category.image}
-                                    alt={category.name}
-                                /> */}
-                                        <Typography>{category.name}</Typography>
-                                    </CardContent>
+                                    {/* <CardContent>
+                                        <CardMedia
+                                            component="img"
+                                            height="194"
+                                            width="238"
+                                            image={category.image}
+                                            alt={category.name}
+                                        /> */}
+                                    <Typography>{category.name}</Typography>
+                                    {/* </CardContent> */}
                                 </CardActionArea>
                             </Card>
                         </Grid>

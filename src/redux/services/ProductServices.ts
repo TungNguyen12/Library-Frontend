@@ -2,7 +2,7 @@ import UpdateProductRequest from "../../types/product/UpdateProductRequest";
 import CreateProductDto from "../../types/product/CreateProductRequest";
 import axios, { AxiosError } from "axios";
 
-import { createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import Product from "../../types/product/Product";
 
 // UPDATE
@@ -30,8 +30,6 @@ export const deleteProductAsync = createAsyncThunk(
             const response = await axios.delete(
                 `https://api.escuelajs.co/api/v1/products/${productId}`
             );
-
-            // CHECK AGAIN HERE (for author)
             if (response.data) {
                 throw new Error("Cannot delete this product1");
             }

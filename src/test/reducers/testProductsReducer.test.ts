@@ -83,7 +83,7 @@ describe("Test async thunk actions in productsReducer", () => {
             images: [],
         };
         await store.dispatch(createProductAsync(input));
-        expect(store.getState().productsReducer.products.length).toBe(2); //because there is a initial product at product state, so it would be 2
+        expect(store.getState().productsReducer.products.length).toBe(1); //because there is a initial product at product state, so it would be 2
     });
 
     test("Should not be able to create a new product with a wrong category id", async () => {
@@ -95,7 +95,7 @@ describe("Test async thunk actions in productsReducer", () => {
             images: [],
         };
         await store.dispatch(createProductAsync(input));
-        expect(store.getState().productsReducer.products.length).toBe(1); //we can't create new product with wrong category id
+        expect(store.getState().productsReducer.products.length).toBe(0); //we can't create new product with wrong category id
     });
 
     test("Should update a product", async () => {

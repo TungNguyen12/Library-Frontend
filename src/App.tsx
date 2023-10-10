@@ -12,7 +12,7 @@ import { SignUp } from "./pages/SignUp";
 import Login from "./pages/Login";
 import { useAppSelector } from "./hooks/useAppSelector";
 import AdminDashboard from "./pages/AdminDashboard";
-import PrivateRoute from "./components/PrivateRoute";
+import CheckRole from "./components/PrivateUserRoute";
 
 const App = () => {
     const isAdmin = useAppSelector(
@@ -30,11 +30,19 @@ const App = () => {
                 },
                 {
                     path: "cart",
-                    element: <Cart />,
+                    element: (
+                        <CheckRole role="customer">
+                            <Cart />
+                        </CheckRole>
+                    ),
                 },
                 {
                     path: "profile",
-                    element: <UserProfile />,
+                    element: (
+                        <CheckRole role="customer">
+                            <UserProfile />
+                        </CheckRole>
+                    ),
                 },
                 {
                     path: ":productId",
@@ -54,7 +62,11 @@ const App = () => {
                 },
                 {
                     path: "admin",
-                    element: <PrivateRoute />,
+                    element: (
+                        <CheckRole role="admin">
+                            <AdminDashboard />,
+                        </CheckRole>
+                    ),
                 },
             ],
         },

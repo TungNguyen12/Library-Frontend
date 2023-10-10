@@ -11,6 +11,8 @@ import Product from "../types/product/Product";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { addToCart } from "../redux/reducers/cardReducer";
+import Carousel from "react-material-ui-carousel";
+import toast from "react-hot-toast";
 
 const ProductCard: React.FC<any> = ({ product }) => {
     const { id, title, price, description, images, categoryId } = product;
@@ -19,6 +21,9 @@ const ProductCard: React.FC<any> = ({ product }) => {
 
     const handleAddToCart = (payload: Product) => {
         dispatch(addToCart(payload));
+        toast(`Add 1 ${payload.title} to cart`, {
+            icon: "✅",
+        });
     };
 
     return (
@@ -28,12 +33,22 @@ const ProductCard: React.FC<any> = ({ product }) => {
                     navigate(`/${id}`);
                 }}
             >
+                {/* <Carousel>
+                    {images.map((image: string) => ( */}
                 <CardMedia
                     component="img"
-                    height="194"
+                    height="250"
                     image={images[0]}
                     alt={title}
+                    style={{
+                        objectFit: "cover",
+                        width: "100%",
+                        borderRadius: "0.5rem",
+                    }}
+                    // key={image[0]}
                 />
+                {/* ))} */}
+                {/* </Carousel> */}
             </CardActions>
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
@@ -42,7 +57,7 @@ const ProductCard: React.FC<any> = ({ product }) => {
             </CardContent>
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    {price}€
+                    Price: {price}€
                 </Typography>
 
                 <Button onClick={() => handleAddToCart(product)}>

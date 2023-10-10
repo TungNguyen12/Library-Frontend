@@ -18,7 +18,6 @@ import { loginAsync } from "../redux/reducers/authReducer";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { checkEmailIsAvailable } from "../redux/reducers/userReducer";
 
 const signUp = yup
     .object({
@@ -45,7 +44,6 @@ export const Login = () => {
     const [success, setSuccess] = useState(false);
     const onSubmit: SubmitHandler<LoginInterface> = (data) => {
         dispatch(loginAsync(data));
-        // dispatch(checkEmailIsAvailable(data.email));
         reset();
         setSuccess(true);
         setTimeout(() => setSuccess(false), 4000);
@@ -88,6 +86,7 @@ export const Login = () => {
                                 fullWidth
                                 id="email"
                                 label="Email Address"
+                                autoComplete="email"
                                 error={Boolean(errors.email?.message)}
                                 helperText={errors.email?.message}
                                 {...register("email")}
@@ -99,6 +98,7 @@ export const Login = () => {
                                 label="Password"
                                 type="password"
                                 id="password"
+                                autoCorrect="password"
                                 error={Boolean(errors.password?.message)}
                                 helperText={errors.password?.message}
                                 autoComplete="new-password"

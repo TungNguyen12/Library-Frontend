@@ -8,6 +8,10 @@ import Product from "../../types/product/Product";
 import UpdateProductRequest from "../../types/product/UpdateProductRequest";
 
 export const handlers = [
+    rest.get(`https://api.escuelajs.co/api/v1/products`, (req, res, ctx) => {
+        return res(ctx.json(productsData));
+    }),
+
     rest.delete(
         "https://api.escuelajs.co/api/v1/products/:productId",
 

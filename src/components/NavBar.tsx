@@ -67,28 +67,26 @@ function ResponsiveAppBar() {
                         sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
                     />
 
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        href=""
-                        sx={{
-                            mr: 2,
-                            display: { xs: "none", md: "flex" },
-                            fontFamily: "monospace",
-                            fontWeight: 700,
-                            letterSpacing: ".3rem",
-
-                            textDecoration: "none",
-                        }}
+                    <Link
+                        to={""}
+                        style={{ textDecoration: "none", color: "white" }}
                     >
-                        <Link
-                            to={""}
-                            style={{ textDecoration: "none", color: "white" }}
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="span"
+                            sx={{
+                                mr: 2,
+                                display: { xs: "none", md: "flex" },
+                                fontFamily: "monospace",
+                                fontWeight: 700,
+                                letterSpacing: ".3rem",
+                                textDecoration: "none",
+                            }}
                         >
                             IKEA
-                        </Link>
-                    </Typography>
+                        </Typography>
+                    </Link>
 
                     <Box
                         sx={{

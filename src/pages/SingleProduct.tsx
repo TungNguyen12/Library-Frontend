@@ -11,6 +11,7 @@ import {
     CardActions,
     CardContent,
     CardMedia,
+    ImageList,
     Typography,
 } from "@mui/material";
 import Product from "../types/product/Product";
@@ -19,6 +20,8 @@ import { addToCart } from "../redux/reducers/cardReducer";
 import { useAppSelector } from "../hooks/useAppSelector";
 import ModifyProductForm from "../components/ModifyProductForm";
 import { deleteProductAsync } from "../redux/services/ProductServices";
+import Carousel from "react-material-ui-carousel";
+import toast, { Toaster } from "react-hot-toast";
 
 const SingleProduct = () => {
     const [product, setProduct] = useState<any>();
@@ -50,10 +53,12 @@ const SingleProduct = () => {
 
     const handleAddToCart = (payload: Product) => {
         dispatch(addToCart(payload));
+        toast.success(`Add 1 ${payload.title} to cart`);
     };
     const handleDeleteProduct = (payload: Product) => {
         dispatch(deleteProductAsync(payload.id));
         navigate("/");
+        toast.error(`${payload.title} deleted!`);
     };
 
     return (
@@ -65,12 +70,26 @@ const SingleProduct = () => {
                 justifyContent: "center",
             }}
         >
+            <Toaster />
             <Box
                 sx={{
                     display: "flex",
                     justifyContent: "center",
                 }}
             >
+                {/* {product.images.length > 1 ? (
+                    <Carousel>
+                        {product.images.map((image: string) => (
+                            <CardMedia
+                                component="img"
+                                height="194"
+                                image={image}
+                                alt={product?.title}
+                                key={image}
+                            />
+                        ))}
+                    </Carousel>
+                ) : ( */}
                 <Card>
                     <CardMedia
                         component="img"
@@ -79,6 +98,8 @@ const SingleProduct = () => {
                         alt={product?.title}
                     />
                 </Card>
+                {/* )} */}
+
                 <Card sx={{ maxWidth: 300 }}>
                     <CardContent>
                         <Typography variant="h5" gutterBottom>
