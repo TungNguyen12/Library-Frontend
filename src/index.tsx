@@ -3,8 +3,6 @@ import { createRoot } from "react-dom/client";
 
 import App from "./App";
 
-import "./styles/index.css";
-
 import { Provider } from "react-redux";
 import store, { peteThePersistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
