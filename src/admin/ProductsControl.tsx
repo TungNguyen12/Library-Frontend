@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useAppDispatch } from "../hooks/useAppDispatch";
-import { getAllUsersAsync } from "../redux/reducers/userReducer";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import SearchInput from "../components/SearchInput";
 import { ProductPaginationActionsTable } from "../components/ProductPagination";
