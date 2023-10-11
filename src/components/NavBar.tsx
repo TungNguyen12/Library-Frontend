@@ -63,10 +63,6 @@ function ResponsiveAppBar() {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters style={{ display: "flex" }}>
-                    <AdbIcon
-                        sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-                    />
-
                     <Link
                         to={""}
                         style={{ textDecoration: "none", color: "white" }}
@@ -143,9 +139,7 @@ function ResponsiveAppBar() {
                             ))}
                         </Menu>
                     </Box>
-                    <AdbIcon
-                        sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
-                    />
+
                     <Typography
                         variant="h5"
                         noWrap
@@ -258,10 +252,7 @@ function ResponsiveAppBar() {
                         </IconButton>
 
                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                            <Avatar
-                                alt="Remy Sharp"
-                                src="/static/images/avatar/2.jpg"
-                            />
+                            <Avatar alt={user?.name} src={user?.avatar} />
                         </IconButton>
 
                         <Menu

@@ -8,7 +8,7 @@ import {
     Typography,
 } from "@mui/material";
 import Product from "../types/product/Product";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { addToCart } from "../redux/reducers/cardReducer";
 import Carousel from "react-material-ui-carousel";

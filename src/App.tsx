@@ -5,19 +5,13 @@ import ErrorPage from "./pages/ErrorPage";
 import Cart from "./pages/Cart";
 import UserProfile from "./pages/UserProfile";
 import SingleProduct from "./pages/SingleProduct";
-import { StyledEngineProvider, ThemeProvider } from "@mui/material";
-import theme from "./styles/theme";
 import Categories from "./pages/Categories";
 import { SignUp } from "./pages/SignUp";
 import Login from "./pages/Login";
-import { useAppSelector } from "./hooks/useAppSelector";
 import AdminDashboard from "./pages/AdminDashboard";
 import CheckRole from "./components/PrivateUserRoute";
 
 const App = () => {
-    const isAdmin = useAppSelector(
-        (state) => state.authReducer.currentUser?.role
-    );
     const router = createBrowserRouter([
         {
             path: "/",

@@ -2,7 +2,6 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { InputBase, alpha, styled } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -37,7 +36,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const SearchInput: React.FC<{
-    handleSearchProduct: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleSearchProduct: (e: React.ChangeEvent<any>) => void;
 }> = ({ handleSearchProduct }) => {
     return (
         <Box
@@ -50,9 +49,7 @@ const SearchInput: React.FC<{
                 fullWidth
                 label="Search products"
                 id="fullWidth"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleSearchProduct(e)
-                }
+                onChange={(e: React.ChangeEvent<any>) => handleSearchProduct(e)}
             />
         </Box>
     );

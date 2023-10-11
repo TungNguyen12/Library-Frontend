@@ -6,10 +6,6 @@ import { fetchAllProductsAsync } from "../redux/services/ProductServices";
 import ProductCard from "../components/ProductCard";
 import { Box, Grid } from "@mui/material";
 import { sortProductByPrice } from "../redux/reducers/productsReducer";
-import Product from "../types/product/Product";
-import getProductsByTitle from "../redux/selectors/getProductsByTitle";
-import store from "../redux/store";
-import axios, { AxiosError } from "axios";
 import SearchInput from "../components/SearchInput";
 import { Toaster } from "react-hot-toast";
 
@@ -18,8 +14,6 @@ const AllProducts = () => {
     const { products, isLoading, error } = useAppSelector(
         (state) => state.productsReducer
     );
-
-    const [productList, setProductList] = useState<Product[]>(products);
 
     const dispatch = useAppDispatch();
 
@@ -30,13 +24,6 @@ const AllProducts = () => {
     const handleSearchProduct = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value.toLocaleLowerCase());
     };
-
-    useEffect(() => {
-        const searchedProducts = products?.filter((p) =>
-            p.title.toLowerCase().includes(search)
-        );
-        setProductList(searchedProducts);
-    }, [search, products]);
 
     const handleSortByLowerPrice = () => {
         dispatch(sortProductByPrice("asc"));
@@ -67,22 +54,23 @@ const AllProducts = () => {
                 }}
             >
                 <Grid container spacing={{ xs: 2, md: 3 }} columns={12}>
-                    {productList.map((product) => (
-                        <Grid
-                            key={product.id}
-                            item
-                            xs={12}
-                            sm={6}
-                            md={3}
-                            sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                            }}
-                        >
-                            <ProductCard product={product} />
-                        </Grid>
-                    ))}
+                    {products &&
+                        products.map((product) => (
+                            <Grid
+                                key={product.id}
+                                item
+                                xs={12}
+                                sm={6}
+                                md={3}
+                                sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                }}
+                            >
+                                <ProductCard product={product} />
+                            </Grid>
+                        ))}
                 </Grid>
             </Box>
         </>
