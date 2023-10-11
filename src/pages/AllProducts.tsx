@@ -20,11 +20,15 @@ const AllProducts = () => {
         dispatch(fetchAllProductsAsync());
     }, []);
 
-    console.log(search);
-
     const handleSearchProduct = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value.toLocaleLowerCase());
     };
+
+    const productsToShow = search
+        ? products.filter((product) =>
+              product.title.toLowerCase().includes(search.toLowerCase())
+          )
+        : products;
 
     const handleSortByLowerPrice = () => {
         dispatch(sortProductByPrice("asc"));
@@ -56,7 +60,7 @@ const AllProducts = () => {
             >
                 <Grid container spacing={{ xs: 2, md: 3 }} columns={12}>
                     {products &&
-                        products.map((product) => (
+                        productsToShow.map((product) => (
                             <Grid
                                 key={product.id}
                                 item

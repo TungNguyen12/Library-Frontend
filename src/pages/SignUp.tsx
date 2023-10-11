@@ -18,7 +18,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import CreateUserDto from "../types/user/RegisterUserRequest";
 import { registerUserAsync } from "../redux/reducers/userReducer";
-
 interface FormInput {
     name: string;
     email: string;

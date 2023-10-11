@@ -14,7 +14,7 @@ const SearchInput: React.FC<{
         >
             <TextField
                 fullWidth
-                label="Search products"
+                label="Search..."
                 id="fullWidth"
                 onChange={(e: React.ChangeEvent<any>) => handleSearchProduct(e)}
             />
