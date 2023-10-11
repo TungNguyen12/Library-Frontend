@@ -11,11 +11,10 @@ import Product from "../types/product/Product";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { addToCart } from "../redux/reducers/cardReducer";
-import Carousel from "react-material-ui-carousel";
 import toast from "react-hot-toast";
 
 const ProductCard: React.FC<any> = ({ product }) => {
-    const { id, title, price, description, images, categoryId } = product;
+    const { id, title, price, images } = product;
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 

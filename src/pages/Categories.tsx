@@ -1,10 +1,10 @@
 import {
     Box,
-    Button,
-    CardMedia,
+    // Button,
+    // CardMedia,
     Card,
     CardActionArea,
-    CardContent,
+    // CardContent,
     Grid,
     Typography,
 } from "@mui/material";
@@ -15,7 +15,7 @@ import Product from "../types/product/Product";
 import axios, { AxiosError } from "axios";
 import { fetchAllCategories } from "../redux/reducers/categoriesReducer";
 import { useAppDispatch } from "../hooks/useAppDispatch";
-import Carousel from "react-material-ui-carousel";
+// import Carousel from "react-material-ui-carousel";
 
 const Categories = () => {
     const categories = useAppSelector(

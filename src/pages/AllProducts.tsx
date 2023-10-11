@@ -11,9 +11,7 @@ import { Toaster } from "react-hot-toast";
 
 const AllProducts = () => {
     const [search, setSearch] = useState<string>("");
-    const { products, isLoading, error } = useAppSelector(
-        (state) => state.productsReducer
-    );
+    const { products } = useAppSelector((state) => state.productsReducer);
 
     const dispatch = useAppDispatch();
 

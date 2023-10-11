@@ -11,7 +11,6 @@ import {
     CardActions,
     CardContent,
     CardMedia,
-    ImageList,
     Typography,
 } from "@mui/material";
 import Product from "../types/product/Product";
@@ -20,7 +19,7 @@ import { addToCart } from "../redux/reducers/cardReducer";
 import { useAppSelector } from "../hooks/useAppSelector";
 import ModifyProductForm from "../components/ModifyProductForm";
 import { deleteProductAsync } from "../redux/services/ProductServices";
-import Carousel from "react-material-ui-carousel";
+// import Carousel from "react-material-ui-carousel";
 import toast, { Toaster } from "react-hot-toast";
 
 const SingleProduct = () => {

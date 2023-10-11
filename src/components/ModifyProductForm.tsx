@@ -3,8 +3,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
 import * as yup from "yup";
@@ -12,10 +10,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useAppDispatch } from "../hooks/useAppDispatch";
-import { useAppSelector } from "../hooks/useAppSelector";
 import { updateProductAsync } from "../redux/services/ProductServices";
 import Product from "../types/product/Product";
-import UpdateProductRequest from "../types/product/UpdateProductRequest";
 
 const modify = yup
     .object({
