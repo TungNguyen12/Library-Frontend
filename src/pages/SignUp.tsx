@@ -14,7 +14,6 @@ import Container from "@mui/material/Container";
 import * as yup from "yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useAppSelector } from "../hooks/useAppSelector";
 
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import CreateUserDto from "../types/user/RegisterUserRequest";
