@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useAppDispatch } from "../hooks/useAppDispatch";
@@ -18,6 +19,8 @@ const AllProducts = () => {
     useEffect(() => {
         dispatch(fetchAllProductsAsync());
     }, []);
+
+    console.log(search);
 
     const handleSearchProduct = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value.toLocaleLowerCase());

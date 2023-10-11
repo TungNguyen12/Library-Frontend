@@ -40,9 +40,7 @@ const signUp = yup
     .required();
 
 export const SignUp = () => {
-    const users = useAppSelector((state) => state.usersReducer.users);
     const dispatch = useAppDispatch();
-    const validUser = useAppSelector((state) => state.authReducer.currentUser);
 
     const {
         register,

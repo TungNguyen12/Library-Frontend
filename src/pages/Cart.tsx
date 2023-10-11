@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import {
@@ -18,16 +18,14 @@ import {
     Typography,
 } from "@mui/material";
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import getTotalCost from "../redux/selectors/cart/getTotalCost";
 import toast, { Toaster } from "react-hot-toast";
-import Login from "./Login";
 
 const Cart = () => {
     const cart = useAppSelector((state) => state.cartReducer);
     const dispatch = useAppDispatch();
     const validUser = useAppSelector((state) => state.authReducer.currentUser);
-    const navigate = useNavigate();
 
     const totalCost = useAppSelector((state) => getTotalCost(state));
 
