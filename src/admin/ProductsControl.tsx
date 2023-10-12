@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useAppDispatch } from "../hooks/useAppDispatch";
-import { Box, Button, ListItem, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import SearchInput from "../components/SearchInput";
 import { ProductPaginationActionsTable } from "./components/ProductPagination";
 import { CreateProductForm } from "./components/CreateProductForm";
