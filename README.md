@@ -1,53 +1,113 @@
-# Front-end Project
+# Front-end E-Commerce Website Project
 
 ![React](https://img.shields.io/badge/React-v.18-blue)
 ![Redux toolkit](https://img.shields.io/badge/RTK-v.1-purple)
 ![TypeScript](https://img.shields.io/badge/TypeScript-v.4-green)
-![SASS](https://img.shields.io/badge/SASS-v.1-hotpink)
+![Material UI](https://img.shields.io/badge/MUI-v.1-hotpink)
 
-This project requires implementation of TypeScript and SASS.
+This project was built in purpose of studying at Frontend Module of Integrify's Fullstack program. The duty was to create an e-commerce website using API endpoints from [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/).
 
-## Requirement
+## Deployment
 
-1. Use the API endpoint [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/) to create an e-commerce website. Read the documentation and learn how to use the different endpoints.
-2. Create at lease 4 pages (can be more if you want): Page for all products, product page,
-   profile page (only available if user logins), and cart page (cart page could be a page or a modal)
-3. Create Redux store for following features:
-    - product reducer: get all products, find a single products, filter products by
-      categories, sort products by price. Create, update and delete a product (enable update & delete features only for admin of the webapp)
-    - user reducer: register and login
-    - cart reducer: add product to cart, remove products, update products's quantity in cart
-4. When adding routers to your application, programmatically set certain routes to be private. For example, route to user profile page should not be accessible if user has not logged in.
-5. Implement unit testing for the reducers
-6. Deploy the application and rewrite README file.
+You can visit my e-commerce website [HERE](https://main--e-commerce-by-pete.netlify.app/)
 
-## Bonus
+## Table of content
 
-1. Use context API to switch theme
-2. Use pagination when fetching/displaying all the products
-3. Implement performance optimization where applicable
+-   [Technologies](#technologies)
+-   [Features](#features)
+-   [Project overview](#project-overview)
+-   [Project structure](#project-structure)
+-   [Run the project](#running-the-project)
+-   [Deployment](#deployment)
 
-## Instruction to start the project
+## Technologies
 
-In the project directory, you can run:
+1. Typescript
+2. Material UI
+3. React
+4. Redux Toolkit
+5. Jest
 
-### `npm install`
+## Features
 
-Install all the dependencies
+### Visitor (not login)
 
-### `npm start`
+-   Able to view all products, products by categories, find product, view product detail page
+-   Able to register/login
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Customer (login as customer)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+-   Able to access Profile page / Cart page
+-   Able to Logout
+-   Able to manage their products in cart with increase/decrease/remove the product or empty their cart
 
-### `npm test`
+### Admin (login as admin)
 
-Launches the test runner in the interactive watch mode
+-   Able to modify/delete product in Product detail page
+-   Able to access AdminDashboard page with all users information and all products information
 
-### `npm run build`
+## Project overview
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This project requires student to use mentioned [Technologies](#technologies)
+
+Here is a list of specific requirements divided into Basic requirements and Bonus Requirements
+
+**Basic requirements**
+
+-   [x] Fetch and display all and single products.
+-   [x] Create at least 4 pages (products, profile, user, cart)
+-   [x] Product reducer
+-   [x] User reducer
+-   [x] Cart reducer
+-   [x] Adding and removing from the cart
+-   [x] Login and authorization (admins can delete and update products)
+-   [x] Routing and private pages
+-   [x] Testing the reducers
+-   [x] Rewrite the README, deploy the project, add the deployment link here and to the README.md
+
+**Bonus requirements**
+
+-   [] Context API
+-   [x] Pagination when fetching and displaying.
+-   [x] Any performance optimization, remember to mention it ie useMemo, debounce, etc (in this project I use useMemo hook)
+
+## Project structure
+
+```
+.
+├───package.json
+├───README.md
+├───tsconfig.json
+└───src
+    ├───admin
+    │   └───components
+    ├───components
+    ├───hooks
+    ├───pages
+    ├───redux
+    │   ├───reducers
+    │   ├───selectors
+    │   │   └───cart
+    │   └───services
+    ├───test
+    │   ├───common
+    │   ├───data
+    │   └───reducers
+    └───types
+        ├───cart
+        ├───product
+        └───user
+```
+
+## Run the project
+
+**Runtime environment: NodeJS**
+
+1. Clone the project to your machine
+2. Run 'npm install'
+3. Run 'npm start' / 'npm run start' to deploy temporary web in your local host
+4. Run 'npm test' to see the test
+
+## Deployment
+
+Visit my work [HERE](https://main--e-commerce-by-pete.netlify.app/)
