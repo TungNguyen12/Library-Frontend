@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useAppDispatch } from "../hooks/useAppDispatch";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, ListItem, Stack, Typography } from "@mui/material";
 import SearchInput from "../components/SearchInput";
-import { ProductPaginationActionsTable } from "../components/ProductPagination";
-import { CreateProductForm } from "../components/CreateProductForm";
+import { ProductPaginationActionsTable } from "./components/ProductPagination";
+import { CreateProductForm } from "./components/CreateProductForm";
 import { fetchAllProductsAsync } from "../redux/services/ProductServices";
 
 const ProductControl = () => {
@@ -36,27 +36,26 @@ const ProductControl = () => {
 
     return (
         <Box>
-            <Box
-                sx={{
-                    alignContent: "center",
-                    alignItems: "center",
-                    display: " flex",
-                    flexDirection: "column",
-                    marginTop: "10px",
-                }}
-            >
-                <Stack>
-                    <Typography></Typography>
+            <Stack direction="row" justifyContent={"center"}>
+                <Box
+                    sx={{
+                        justifyContent: "space-between",
+                        display: " flex",
+                        marginTop: "10px",
+                        width: "80%",
+                    }}
+                >
                     <Button
                         variant="contained"
                         color="success"
                         onClick={handleOpenCreateForm}
-                        sx={{ width: "150px" }}
+                        sx={{ width: "200px" }}
                     >
-                        + Create product
+                        Create product
                     </Button>
-                </Stack>
-            </Box>
+                </Box>
+            </Stack>
+
             {isOpen && <CreateProductForm />}
             <Box
                 sx={{

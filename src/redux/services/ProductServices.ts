@@ -4,6 +4,7 @@ import axios, { AxiosError } from "axios";
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import Product from "../../types/product/Product";
+import toast from "react-hot-toast";
 
 // UPDATE
 export const updateProductAsync = createAsyncThunk(
@@ -51,9 +52,15 @@ export const createProductAsync = createAsyncThunk(
                 input
             );
             const createdProduct: Product = response.data;
+            console.log(createdProduct);
+            toast.success(
+                `Create new product successfully: ${createdProduct.title}`
+            );
             return createdProduct;
         } catch (e) {
             const error = e as AxiosError;
+            console.log(error.message);
+            toast.error("Failed to create new product, try again!");
             return rejectWithValue(error.message);
         }
     }

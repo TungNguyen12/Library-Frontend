@@ -21,8 +21,6 @@ import { clearStateLogout } from "../redux/reducers/userReducer";
 const pages = [
     { params: "", page: "Products" },
     { params: "categories", page: "Categories" },
-    { params: "cart", page: "My cart" },
-    { params: "profile", page: "My profile" },
 ];
 
 function ResponsiveAppBar() {

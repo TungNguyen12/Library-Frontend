@@ -10,9 +10,9 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { useAppDispatch } from "../hooks/useAppDispatch";
-import CreateProductDto from "../types/product/CreateProductRequest";
-import { createProductAsync } from "../redux/services/ProductServices";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import CreateProductDto from "../../types/product/CreateProductRequest";
+import { createProductAsync } from "../../redux/services/ProductServices";
 
 const signUp = yup
     .object({

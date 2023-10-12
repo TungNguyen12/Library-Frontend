@@ -16,7 +16,7 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import { Avatar, TableHead, Typography } from "@mui/material";
-import Product from "../types/product/Product";
+import User from "../../types/user/User";
 
 interface TablePaginationActionsProps {
     count: number;
@@ -106,9 +106,9 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
     );
 }
 
-export const ProductPaginationActionsTable: React.FC<any> = ({ rows }) => {
+export const UserPaginationActionsTable: React.FC<any> = ({ rows }) => {
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(7);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
@@ -137,16 +137,14 @@ export const ProductPaginationActionsTable: React.FC<any> = ({ rows }) => {
                 display: " flex",
                 flexDirection: "column",
                 marginTop: "10px",
-                width: "80%",
             }}
         >
             <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Product</TableCell>
-                        <TableCell>Price</TableCell>
-                        <TableCell>Description</TableCell>
-                        <TableCell>Category</TableCell>
+                        <TableCell>User name</TableCell>
+                        <TableCell>Email</TableCell>
+                        <TableCell>Role</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -156,9 +154,9 @@ export const ProductPaginationActionsTable: React.FC<any> = ({ rows }) => {
                               page * rowsPerPage + rowsPerPage
                           )
                         : rows
-                    ).map((row: Product): ReactElement<HTMLTableRowElement> => {
+                    ).map((row: User): ReactElement<HTMLTableRowElement> => {
                         return (
-                            <TableRow key={row.id} component="th" scope="row">
+                            <TableRow key={row.id}>
                                 <TableCell>
                                     <Box
                                         sx={{
@@ -166,23 +164,16 @@ export const ProductPaginationActionsTable: React.FC<any> = ({ rows }) => {
                                             justifyContent: "flex-start",
                                         }}
                                     >
-                                        <Avatar src={row.images[0]} />
+                                        <Avatar src={row.avatar} />
                                         <Typography sx={{ marginLeft: "20px" }}>
-                                            {row.title}
+                                            {row.name}
                                         </Typography>
                                     </Box>
                                 </TableCell>
                                 <TableCell>
-                                    <Typography>{row.price}€</Typography>
+                                    <Typography>{row.email}</Typography>
                                 </TableCell>
-                                <TableCell>{row.description}</TableCell>
-                                <TableCell>
-                                    <Avatar
-                                        src={row.category.image}
-                                        alt={row.category.name}
-                                    />
-                                    <Typography>{row.category.name}</Typography>
-                                </TableCell>
+                                <TableCell>{row.role}</TableCell>
                             </TableRow>
                         );
                     })}

@@ -9,9 +9,9 @@ import * as yup from "yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { useAppDispatch } from "../hooks/useAppDispatch";
-import { updateProductAsync } from "../redux/services/ProductServices";
-import Product from "../types/product/Product";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { updateProductAsync } from "../../redux/services/ProductServices";
+import Product from "../../types/product/Product";
 
 const modify = yup
     .object({

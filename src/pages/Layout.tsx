@@ -7,10 +7,7 @@ const Layout = () => {
             <header>
                 <NavBar />
             </header>
-
             <Outlet />
-
-            {/* <footer>This is footer</footer> */}
         </div>
     );
 };

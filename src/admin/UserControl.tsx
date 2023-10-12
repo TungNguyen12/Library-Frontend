@@ -5,7 +5,7 @@ import { useAppDispatch } from "../hooks/useAppDispatch";
 import { getAllUsersAsync } from "../redux/reducers/userReducer";
 import { Box } from "@mui/material";
 import SearchInput from "../components/SearchInput";
-import { UserPaginationActionsTable } from "../components/UserPagination";
+import { UserPaginationActionsTable } from "./components/UserPagination";
 
 const UserControl = () => {
     const allUsers = useAppSelector((state) => state.usersReducer.users);

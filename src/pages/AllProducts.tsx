@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { fetchAllProductsAsync } from "../redux/services/ProductServices";
@@ -24,11 +24,13 @@ const AllProducts = () => {
         setSearch(e.target.value.toLocaleLowerCase());
     };
 
-    const productsToShow = search
-        ? products.filter((product) =>
-              product.title.toLowerCase().includes(search.toLowerCase())
-          )
-        : products;
+    const productsToShow = useMemo(() => {
+        return search
+            ? products.filter((product) =>
+                  product.title.toLowerCase().includes(search.toLowerCase())
+              )
+            : products;
+    }, [search, products]);
 
     const handleSortByLowerPrice = () => {
         dispatch(sortProductByPrice("asc"));

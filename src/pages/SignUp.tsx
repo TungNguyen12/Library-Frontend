@@ -54,7 +54,6 @@ export const SignUp = () => {
 
         const newUser: CreateUserDto = {
             ...newData,
-            // role: data.email.includes("admin") ? "admin" : "customer",
             avatar: "https://api.lorem.space/image/face?w=640&h=480&r=867",
         };
         dispatch(registerUserAsync(newUser));
