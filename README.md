@@ -1,7 +1,7 @@
 # Front-end E-Commerce Website Project
 
 ![React](https://img.shields.io/badge/React-v.18-blue)
-![Redux toolkit](https://img.shields.io/badge/RTK-v.1-purple)
+![Redux toolkit](https://img.shields.io/badge/Redux-v.1-purple)
 ![TypeScript](https://img.shields.io/badge/TypeScript-v.4-green)
 ![Material UI](https://img.shields.io/badge/MUI-v.1-hotpink)
 
@@ -44,7 +44,7 @@ You can visit my e-commerce website [HERE](https://main--e-commerce-by-pete.netl
 ### Admin (login as admin)
 
 -   Able to modify/delete product in Product detail page
--   Able to access AdminDashboard page with all users information and all products information
+-   Able to access AdminDashboard page with all users information and all products information and create new product
 
 ## Project overview
 
