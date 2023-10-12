@@ -3,11 +3,12 @@ import { useEffect, useMemo, useState } from "react";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { fetchAllProductsAsync } from "../redux/services/ProductServices";
+import { sortProductByPrice } from "../redux/reducers/productsReducer";
 
 import ProductCard from "../components/ProductCard";
-import { Box, Grid } from "@mui/material";
-import { sortProductByPrice } from "../redux/reducers/productsReducer";
 import SearchInput from "../components/SearchInput";
+import { Box, Button, Grid } from "@mui/material";
+
 import { Toaster } from "react-hot-toast";
 
 const AllProducts = () => {
@@ -40,23 +41,40 @@ const AllProducts = () => {
     };
 
     return (
-        <>
+        <Box sx={{ width: "70%", margin: "auto" }}>
             <Toaster toastOptions={{ style: { fontFamily: "Roboto" } }} />
-            <button onClick={handleSortByLowerPrice}>
-                Sort product by lower price{" "}
-            </button>
-            <button onClick={handleSortByHigherPrice}>
-                Sort product by higher price{" "}
-            </button>
 
-            <SearchInput handleSearchProduct={handleSearchProduct} />
+            <Box
+                sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-around",
+                    margin: " 50px",
+                }}
+            >
+                <Button
+                    variant="contained"
+                    color="success"
+                    onClick={handleSortByLowerPrice}
+                >
+                    Sort by lower price{" "}
+                </Button>
+                <Button
+                    variant="contained"
+                    color="success"
+                    onClick={handleSortByHigherPrice}
+                >
+                    Sort by higher price{" "}
+                </Button>
+
+                <SearchInput handleSearchProduct={handleSearchProduct} />
+            </Box>
 
             <Box
                 sx={{
                     flexGrow: 1,
                     marginTop: "50px",
                     height: "412px",
-                    width: "65%",
                     margin: "auto",
                 }}
             >
@@ -80,7 +98,7 @@ const AllProducts = () => {
                         ))}
                 </Grid>
             </Box>
-        </>
+        </Box>
     );
 };
 

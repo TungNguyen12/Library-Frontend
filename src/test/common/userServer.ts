@@ -15,13 +15,11 @@ export const handlers = [
     rest.post(
         `https://api.escuelajs.co/api/v1/users/`,
         async (req, res, ctx) => {
-            console.log("catch the create user request = register new user");
             const input: RegisterUserRequest = await req.json();
 
             const user = usersData.find((user) => user.email === input.email);
             if (user) {
                 //if this user is not exist -> available
-                console.log("hereeeee", user);
                 const newUser: User = {
                     ...input,
                     id: usersData.length + 1,
@@ -29,7 +27,6 @@ export const handlers = [
                 };
                 return res(ctx.json(newUser));
             } else {
-                console.log("user email is not available");
                 ctx.status(400);
                 return res(
                     ctx.json({

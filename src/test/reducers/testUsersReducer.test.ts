@@ -32,7 +32,7 @@ describe("Test sync action in usersReducer", () => {
 describe("Test async actions in usersReducer", () => {
     test("Should fetch all users", async () => {
         await store.dispatch(getAllUsersAsync());
-        console.log(store.getState().usersReducer.users);
+
         expect(store.getState().usersReducer.users.length).toEqual(3);
     });
 
@@ -43,9 +43,13 @@ describe("Test async actions in usersReducer", () => {
             password: "12345678",
             avatar: "https://i.imgur.com/DumuKkD.jpeg",
         };
-        await store.dispatch(registerUserAsync(input));
-        console.log(store.getState().usersReducer.users);
-        expect(1).toBe(1);
+        const res = await store.dispatch(registerUserAsync(input));
+        expect(res.meta.arg).toMatchObject({
+            email: "redux_the_best@mail.com",
+            name: "Dogggg",
+            password: "12345678",
+            avatar: "https://i.imgur.com/DumuKkD.jpeg",
+        });
     });
 
     test("Should fail to register new user with existing email", async () => {

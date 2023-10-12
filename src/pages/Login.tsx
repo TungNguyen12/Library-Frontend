@@ -18,6 +18,7 @@ import { loginAsync } from "../redux/reducers/authReducer";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Link } from "@mui/material";
 
 const signUp = yup
     .object({
@@ -106,14 +107,23 @@ export const Login = () => {
                             />
                         </Grid>
                     </Grid>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                    >
-                        Login
-                    </Button>
+                    <Grid item xs={12}>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                        >
+                            Login
+                        </Button>
+                    </Grid>
+                    <Grid container justifyContent="flex-end">
+                        <Grid item>
+                            <Link href="signup" variant="body2">
+                                You don't have an account? Sign up
+                            </Link>
+                        </Grid>
+                    </Grid>
                 </Box>
             </Box>
             {error && (

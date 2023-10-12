@@ -40,7 +40,6 @@ export const checkEmailIsAvailable = createAsyncThunk<
                 email: mail,
             }
         );
-        console.log(response.data);
         return response.data;
     } catch (e) {
         const error = e as AxiosError;
@@ -60,8 +59,6 @@ export const registerUserAsync = createAsyncThunk<
                 checkEmailIsAvailable(user.email)
                 //in the check email, we dont have error but either true or false
             );
-
-            console.log(isAvailable);
             if (Object.values(isAvailable)) {
                 throw Error("Email is already registered: This is error");
             } else {
@@ -75,7 +72,6 @@ export const registerUserAsync = createAsyncThunk<
             }
         } catch (e) {
             const error = e as Error;
-            console.log(error.message);
             return rejectWithValue(error.message);
         }
     }

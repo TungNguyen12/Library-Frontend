@@ -32,8 +32,6 @@ const ProductCard: React.FC<any> = ({ product }) => {
                     navigate(`/${id}`);
                 }}
             >
-                {/* <Carousel>
-                    {images.map((image: string) => ( */}
                 <CardMedia
                     component="img"
                     height="250"
@@ -44,10 +42,7 @@ const ProductCard: React.FC<any> = ({ product }) => {
                         width: "100%",
                         borderRadius: "0.5rem",
                     }}
-                    // key={image[0]}
                 />
-                {/* ))} */}
-                {/* </Carousel> */}
             </CardActions>
             <CardContent>
                 <Typography variant="body2" color="text.secondary">

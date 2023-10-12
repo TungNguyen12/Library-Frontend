@@ -7,12 +7,10 @@ import axios from "axios";
 export type AuthState = {
     currentUser: User | null;
     error?: string | null;
-    // jwt: AuthJwt | null;
 };
 
 export const initialState: AuthState = {
     currentUser: null,
-    // jwt: null,
 };
 
 export const loginAsync = createAsyncThunk<
@@ -32,7 +30,6 @@ export const loginAsync = createAsyncThunk<
         );
 
         if (
-            //dispatch another action can return a error so needed to catch the error
             typeof authenticatedUserProfile.payload === "string" ||
             !authenticatedUserProfile.payload
         ) {
@@ -73,7 +70,6 @@ const authSlice = createSlice({
     reducers: {
         logOut: (state: AuthState) => {
             state.currentUser = null;
-            // state.jwt = null;
         },
     },
     extraReducers: (builder) => {

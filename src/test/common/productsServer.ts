@@ -27,8 +27,6 @@ export const handlers = [
     rest.put(
         `https://api.escuelajs.co/api/v1/products/:id`,
         async (req, res, ctx) => {
-            console.log("update request");
-
             const update: UpdateProductRequest = await req.json();
             const { id } = req.params;
 
@@ -64,7 +62,6 @@ export const handlers = [
     rest.post(
         `https://api.escuelajs.co/api/v1/products/`,
         async (req, res, ctx) => {
-            // console.log("catch the create request");
             const input: CreateProductDto = await req.json();
 
             const category = categoriesData.find(

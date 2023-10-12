@@ -179,24 +179,7 @@ function ResponsiveAppBar() {
                                 </Button>
                             </Link>
                         ))}
-                        {user ? (
-                            <Link
-                                to="signup"
-                                key={"signup"}
-                                style={{ textDecoration: "none" }}
-                            >
-                                <Button
-                                    onClick={handleCloseNavMenu}
-                                    sx={{
-                                        my: 2,
-                                        color: "white",
-                                        display: "block",
-                                    }}
-                                >
-                                    Sign up
-                                </Button>
-                            </Link>
-                        ) : (
+                        {!user && (
                             <Link
                                 to="login"
                                 key={"login"}
@@ -278,7 +261,7 @@ function ResponsiveAppBar() {
                             {!user ? (
                                 <MenuItem
                                     onClick={() => {
-                                        navigate("/login");
+                                        navigate("login");
                                     }}
                                 >
                                     <Typography>Login</Typography>
@@ -286,6 +269,15 @@ function ResponsiveAppBar() {
                             ) : (
                                 <MenuItem onClick={handleLogout}>
                                     <Typography>Logout</Typography>
+                                </MenuItem>
+                            )}
+                            {!user && (
+                                <MenuItem
+                                    onClick={() => {
+                                        navigate("signup");
+                                    }}
+                                >
+                                    <Typography>Signup</Typography>
                                 </MenuItem>
                             )}
                         </Menu>

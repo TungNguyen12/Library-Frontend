@@ -14,13 +14,13 @@ import {
     CardMedia,
     Typography,
 } from "@mui/material";
+
 import Product from "../types/product/Product";
 import { useAppDispatch } from "../hooks/useAppDispatch";
-import { addToCart } from "../redux/reducers/cardReducer";
 import { useAppSelector } from "../hooks/useAppSelector";
+import { addToCart } from "../redux/reducers/cardReducer";
 import ModifyProductForm from "../admin/components/ModifyProductForm";
 import { deleteProductAsync } from "../redux/services/ProductServices";
-// import Carousel from "react-material-ui-carousel";
 import toast, { Toaster } from "react-hot-toast";
 
 const SingleProduct = () => {
@@ -77,19 +77,6 @@ const SingleProduct = () => {
                     justifyContent: "center",
                 }}
             >
-                {/* {product.images.length > 1 ? (
-                    <Carousel>
-                        {product.images.map((image: string) => (
-                            <CardMedia
-                                component="img"
-                                height="194"
-                                image={image}
-                                alt={product?.title}
-                                key={image}
-                            />
-                        ))}
-                    </Carousel>
-                ) : ( */}
                 <Card>
                     <CardMedia
                         component="img"
@@ -98,7 +85,6 @@ const SingleProduct = () => {
                         alt={product?.title}
                     />
                 </Card>
-                {/* )} */}
 
                 <Card sx={{ maxWidth: 300 }}>
                     <CardContent>

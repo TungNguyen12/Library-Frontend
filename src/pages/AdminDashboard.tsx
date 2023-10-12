@@ -1,8 +1,11 @@
 import UserControl from "../admin/UserControl";
 import ProductControl from "../admin/ProductsControl";
-import { Toaster } from "react-hot-toast";
-import { Box } from "@mui/material";
 import SwitchPanel from "../admin/components/SwitchPanel";
+
+import { Toaster } from "react-hot-toast";
+
+import { Box } from "@mui/material";
+
 import { useState } from "react";
 
 const AdminDashboard = () => {
@@ -21,14 +24,20 @@ const AdminDashboard = () => {
     return (
         <>
             <Toaster />
-            <Box sx={{ width: "90%", display: "flex", margin: "auto" }}>
+            <Box sx={{ width: "90%", display: "flex", margin: "50px auto" }}>
                 <Box>
                     <SwitchPanel
                         handleOpenProduct={handleOpenProduct}
                         handleOpenUser={handleOpenUser}
                     />
                 </Box>
-                <Box>
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        width: "100%",
+                    }}
+                >
                     {isOpenProduct && <ProductControl />}
                     {isOpenUser && <UserControl />}
                 </Box>

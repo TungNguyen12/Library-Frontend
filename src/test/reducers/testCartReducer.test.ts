@@ -9,7 +9,7 @@ import categoriesData from "../data/categoriesData";
 
 describe("Test sync actions in cartReducer", () => {
     test("Should add an item to card", () => {
-        const testState = cartData; // 3 items, increase quantity of first item by 1 => 2
+        const testState = cartData;
 
         const cartProducts = cartReducer(
             testState,
@@ -31,7 +31,7 @@ describe("Test sync actions in cartReducer", () => {
     });
 
     test("Should remove an item from card", () => {
-        const testState = cartData; //3 items, remove first item (id: 1) out of cart => length = 2
+        const testState = cartData;
 
         const cartProducts = cartReducer(testState, removeFromCart(1));
         expect(cartProducts.length).toBe(2);

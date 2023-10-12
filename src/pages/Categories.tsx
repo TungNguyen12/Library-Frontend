@@ -1,11 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
     Box,
-    // Button,
-    // CardMedia,
     Card,
     CardActionArea,
-    // CardContent,
+    CardMedia,
     Grid,
     Typography,
 } from "@mui/material";
@@ -48,7 +46,7 @@ const Categories = () => {
     }, [categoryId]);
 
     return (
-        <>
+        <Box sx={{ width: "70%", margin: "auto" }}>
             <Box sx={{ flexGrow: 1, marginTop: "50px" }}>
                 <Grid container spacing={2} sx={{ justifyContent: "center" }}>
                     {categories.map((category) => (
@@ -59,16 +57,19 @@ const Categories = () => {
                                         setCategoryId(category.id);
                                     }}
                                 >
-                                    {/* <CardContent>
-                                        <CardMedia
-                                            component="img"
-                                            height="194"
-                                            width="238"
-                                            image={category.image}
-                                            alt={category.name}
-                                        /> */}
+                                    <CardMedia
+                                        component="img"
+                                        height="150px"
+                                        width="150px"
+                                        image={category.image}
+                                        alt={category.name}
+                                        style={{
+                                            objectFit: "cover",
+                                            width: "100%",
+                                            borderRadius: "0.5rem",
+                                        }}
+                                    />
                                     <Typography>{category.name}</Typography>
-                                    {/* </CardContent> */}
                                 </CardActionArea>
                             </Card>
                         </Grid>
@@ -76,20 +77,23 @@ const Categories = () => {
                 </Grid>
             </Box>
 
-            <Box sx={{ flexGrow: 1, marginTop: "50px" }}>
-                <Grid
-                    container
-                    spacing={{ xs: 2, md: 3 }}
-                    columns={{ xs: 4, sm: 8, md: 12 }}
-                >
+            <Box
+                sx={{
+                    flexGrow: 1,
+                    height: "412px",
+                    margin: "50px auto",
+                }}
+            >
+                <Grid container spacing={{ xs: 2, md: 3 }} columns={12}>
                     {products.map((product) => (
                         <Grid
                             key={product.id}
                             item
-                            xs={2}
-                            sm={4}
-                            md={4}
+                            xs={12}
+                            sm={6}
+                            md={3}
                             sx={{
+                                display: "flex",
                                 alignItems: "center",
                                 justifyItems: "center",
                             }}
@@ -99,7 +103,7 @@ const Categories = () => {
                     ))}
                 </Grid>
             </Box>
-        </>
+        </Box>
     );
 };
 
