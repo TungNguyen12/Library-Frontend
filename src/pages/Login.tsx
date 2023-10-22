@@ -42,7 +42,9 @@ export const Login = () => {
 
     const navigate = useNavigate();
 
-    const { currentUser, error } = useAppSelector((state) => state.authReducer);
+    const currentUser = useAppSelector(
+        (state) => state.authReducer.currentUser
+    );
     const [success, setSuccess] = useState(false);
     const onSubmit: SubmitHandler<LoginInterface> = (data) => {
         dispatch(loginAsync(data));
@@ -51,7 +53,7 @@ export const Login = () => {
         setTimeout(() => setSuccess(false), 4000);
     };
 
-    if (currentUser) {
+    if (currentUser !== null) {
         setTimeout(() => navigate("/"), 3000);
     }
 
