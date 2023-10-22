@@ -15,6 +15,9 @@ export const updateProductAsync = createAsyncThunk(
                 `https://api.escuelajs.co/api/v1/products/${id}`,
                 update
             );
+            toast.success(
+                `Modified successfully, refresh to see the updated info`
+            );
             return response.data;
         } catch (e) {
             const error = e as AxiosError;
@@ -34,6 +37,7 @@ export const deleteProductAsync = createAsyncThunk(
             if (response.data) {
                 throw new Error("Cannot delete this product1");
             }
+            toast.success(`Product deleted!`);
             return productId;
         } catch (e) {
             const error = e as AxiosError;
