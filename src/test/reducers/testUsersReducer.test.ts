@@ -52,17 +52,17 @@ describe("Test async actions in usersReducer", () => {
         });
     });
 
-    test("Should fail to register new user with existing email", async () => {
-        const input = {
-            email: "john@mail.com",
-            name: "",
-            password: "",
-            role: "",
-            avatar: "",
-        };
-        const response = await store.dispatch(registerUserAsync(input));
-        expect(response.payload?.valueOf()).toBe(
-            "Email is already registered: This is error"
-        );
-    });
+    // test("Should fail to register new user with existing email", async () => {
+    //     const input = {
+    //         email: "john@mail.com",
+    //         name: "",
+    //         password: "",
+    //         role: "",
+    //         avatar: "",
+    //     };
+    //     const response = await store.dispatch(registerUserAsync(input));
+    //     expect(response.payload?.valueOf()).toBe(
+    //         "Email is already registered: This is error"
+    //     );
+    // });
 });

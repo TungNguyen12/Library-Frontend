@@ -3,6 +3,7 @@ import User from "../../types/user/User";
 import axios, { AxiosError } from "axios";
 import CreateUserDto from "../../types/user/RegisterUserRequest";
 import UsersReducerState from "../../types/user/UsersReducerState";
+import toast from "react-hot-toast";
 
 const initialState: UsersReducerState = {
     users: [],
@@ -40,11 +41,9 @@ export const checkEmailIsAvailable = createAsyncThunk<
                 email: mail,
             }
         );
-        console.log(response.data, mail);
         return response.data;
     } catch (e) {
         const error = e as AxiosError;
-        console.log(error.message);
         return rejectWithValue(error.message);
     }
 });
@@ -53,32 +52,27 @@ export const registerUserAsync = createAsyncThunk<
     User,
     CreateUserDto,
     { rejectValue: string }
->(
-    "registerUser",
-    async (user: CreateUserDto, { rejectWithValue, dispatch }) => {
-        try {
-            const isAvailable = await dispatch(
-                checkEmailIsAvailable(user.email)
-                //in the check email, we dont have error but either true or false
-            );
-            if (Object.values(isAvailable)) {
-                throw Error("Email is already registered: This is error");
-            } else {
-                console.log("email is available");
-                const response = await axios.post(
-                    `https://api.escuelajs.co/api/v1/users/`,
-                    user
-                );
-                const newUser: User = response.data;
-                console.log(newUser);
-                return newUser;
-            }
-        } catch (e) {
-            const error = e as Error;
-            return rejectWithValue(error.message);
-        }
+>("registerUser", async (user: CreateUserDto, { rejectWithValue }) => {
+    try {
+        // const isAvailable = await dispatch(
+        //     checkEmailIsAvailable(user.email)
+        // );
+        // if (Object.values(isAvailable)) {
+        //     throw Error("Email is already registered: This is error");
+        // } else {
+        const response = await axios.post(
+            `https://api.escuelajs.co/api/v1/users/`,
+            user
+        );
+
+        const newUser: User = response.data;
+        toast.success(`Create new account successfully`);
+        return newUser;
+    } catch (e) {
+        const error = e as Error;
+        return rejectWithValue(error.message);
     }
-);
+});
 
 // Should be for ADMIN
 const usersSlice = createSlice({
