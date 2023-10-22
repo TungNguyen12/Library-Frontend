@@ -3,6 +3,7 @@ import { AuthJwt } from "../../types/user/AuthJWT";
 import User from "../../types/user/User";
 import { LoginInterface } from "../../types/user/Login";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 export type AuthState = {
     currentUser: User | null;
@@ -35,9 +36,11 @@ export const loginAsync = createAsyncThunk<
         ) {
             throw Error(authenticatedUserProfile.payload || "Cannot login");
         }
+        toast.success(`Login successfully`);
         return authenticatedUserProfile.payload;
     } catch (e) {
         const error = e as Error;
+        toast.error(`Input correct input, please try again`);
         return rejectWithValue(error.message);
     }
 });

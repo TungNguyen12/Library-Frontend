@@ -19,6 +19,7 @@ import { useAppSelector } from "../hooks/useAppSelector";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Link } from "@mui/material";
+import { Toaster } from "react-hot-toast";
 
 const signUp = yup
     .object({
@@ -51,87 +52,85 @@ export const Login = () => {
     };
 
     if (currentUser) {
-        navigate("/");
+        setTimeout(() => navigate("/"), 3000);
     }
 
     return (
-        <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <Box
-                sx={{
-                    marginTop: 8,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                }}
-            >
-                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Login
-                </Typography>
-                {success && currentUser && (
-                    <Typography>
-                        Log in successfully, redirecting to Product page
-                    </Typography>
-                )}
+        <>
+            <Toaster />
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
                 <Box
-                    component="form"
-                    onSubmit={handleSubmit(onSubmit)}
-                    sx={{ mt: 3 }}
+                    sx={{
+                        marginTop: 8,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                    }}
                 >
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <TextField
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                                autoComplete="email"
-                                error={Boolean(errors.email?.message)}
-                                helperText={errors.email?.message}
-                                {...register("email")}
-                            />
+                    <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Login
+                    </Typography>
+                    {success && currentUser && (
+                        <Typography>
+                            Log in successfully, redirecting to Product page
+                        </Typography>
+                    )}
+                    <Box
+                        component="form"
+                        onSubmit={handleSubmit(onSubmit)}
+                        sx={{ mt: 3 }}
+                    >
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <TextField
+                                    fullWidth
+                                    id="email"
+                                    label="Email Address"
+                                    autoComplete="email"
+                                    error={Boolean(errors.email?.message)}
+                                    helperText={errors.email?.message}
+                                    {...register("email")}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    fullWidth
+                                    label="Password"
+                                    type="password"
+                                    id="password"
+                                    autoCorrect="password"
+                                    error={Boolean(errors.password?.message)}
+                                    helperText={errors.password?.message}
+                                    autoComplete="new-password"
+                                    {...register("password")}
+                                />
+                            </Grid>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField
+                            <Button
+                                type="submit"
                                 fullWidth
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoCorrect="password"
-                                error={Boolean(errors.password?.message)}
-                                helperText={errors.password?.message}
-                                autoComplete="new-password"
-                                {...register("password")}
-                            />
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                            >
+                                Login
+                            </Button>
                         </Grid>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Login
-                        </Button>
-                    </Grid>
-                    <Grid container justifyContent="flex-end">
-                        <Grid item>
-                            <Link href="signup" variant="body2">
-                                You don't have an account? Sign up
-                            </Link>
+                        <Grid container justifyContent="flex-end">
+                            <Grid item>
+                                <Link href="signup" variant="body2">
+                                    You don't have an account? Sign up
+                                </Link>
+                            </Grid>
                         </Grid>
-                    </Grid>
+                    </Box>
                 </Box>
-            </Box>
-            {error && (
-                <Box>
-                    <Typography>{error}: Incorrect input</Typography>
-                </Box>
-            )}
-        </Container>
+            </Container>
+        </>
     );
 };
 

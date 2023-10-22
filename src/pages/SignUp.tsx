@@ -17,7 +17,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import CreateUserDto from "../types/user/RegisterUserRequest";
-import { registerUserAsync } from "../redux/reducers/userReducer";
+import {
+    checkEmailIsAvailable,
+    registerUserAsync,
+} from "../redux/reducers/userReducer";
 interface FormInput {
     name: string;
     email: string;
@@ -54,11 +57,14 @@ export const SignUp = () => {
 
         const newUser: CreateUserDto = {
             ...newData,
-            avatar: "https://api.lorem.space/image/face?w=640&h=480&r=867",
+            avatar: "https://i.imgur.com/OLKMwgP.jpeg",
         };
+        console.log(newUser);
         dispatch(registerUserAsync(newUser));
         reset();
     };
+
+    dispatch(checkEmailIsAvailable("thisisanavailable@mail.com"));
 
     return (
         <Container component="main" maxWidth="xs">

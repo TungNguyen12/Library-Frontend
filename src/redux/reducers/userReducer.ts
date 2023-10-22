@@ -40,9 +40,11 @@ export const checkEmailIsAvailable = createAsyncThunk<
                 email: mail,
             }
         );
+        console.log(response.data, mail);
         return response.data;
     } catch (e) {
         const error = e as AxiosError;
+        console.log(error.message);
         return rejectWithValue(error.message);
     }
 });
@@ -68,6 +70,7 @@ export const registerUserAsync = createAsyncThunk<
                     user
                 );
                 const newUser: User = response.data;
+                console.log(newUser);
                 return newUser;
             }
         } catch (e) {
