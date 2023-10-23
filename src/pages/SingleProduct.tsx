@@ -102,15 +102,20 @@ const SingleProduct = () => {
                                 sx={{
                                     display: "flex",
                                     flexDirection: "column",
-                                    gap: "10px",
+                                    alignItems: "flex-start",
+                                    gap: "15px",
+                                    width: "fit",
                                 }}
                             >
                                 <Button
                                     onClick={() => setOpenForm(!openForm)}
                                     size="small"
-                                    sx={{ backgroundColor: "black" }}
+                                    sx={{
+                                        backgroundColor: "lightyellow",
+                                        borderRightColor: "#8cbad9",
+                                    }}
                                 >
-                                    Modify the product
+                                    Modify product
                                 </Button>
                                 <Button
                                     onClick={() => {
@@ -119,7 +124,7 @@ const SingleProduct = () => {
                                     }}
                                     size="small"
                                     sx={{
-                                        backgroundColor: "red",
+                                        backgroundColor: "pink",
                                     }}
                                 >
                                     Delete Product

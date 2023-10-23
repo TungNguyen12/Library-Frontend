@@ -14,6 +14,7 @@ import Product from "../types/product/Product";
 import axios, { AxiosError } from "axios";
 import { fetchAllCategories } from "../redux/reducers/categoriesReducer";
 import { useAppDispatch } from "../hooks/useAppDispatch";
+import { Toaster } from "react-hot-toast";
 // import Carousel from "react-material-ui-carousel";
 
 const Categories = () => {
@@ -47,6 +48,7 @@ const Categories = () => {
 
     return (
         <Box sx={{ width: "70%", margin: "auto" }}>
+            <Toaster />
             <Box sx={{ flexGrow: 1, marginTop: "50px" }}>
                 <Grid container spacing={2} sx={{ justifyContent: "center" }}>
                     {categories.map((category) => (
