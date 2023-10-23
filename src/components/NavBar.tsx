@@ -77,7 +77,7 @@ function ResponsiveAppBar() {
                                 textDecoration: "none",
                             }}
                         >
-                            IKEA
+                            E-Commerce
                         </Typography>
                     </Link>
 
@@ -153,7 +153,7 @@ function ResponsiveAppBar() {
                             textDecoration: "none",
                         }}
                     >
-                        IKEA
+                        E-Commerce
                     </Typography>
                     <Box
                         sx={{
