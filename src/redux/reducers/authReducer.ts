@@ -40,7 +40,7 @@ export const loginAsync = createAsyncThunk<
         return authenticatedUserProfile.payload;
     } catch (e) {
         const error = e as Error;
-        toast.error(`Input correct input, please try again`);
+        toast.error(`Incorrect input, please try again`);
         return rejectWithValue(error.message);
     }
 });
