@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import Category from "../../types/product/Category";
+import Category from "../../types/book/Category";
 import axios, { AxiosError } from "axios";
 
 // GET CATEGORY

@@ -1,4 +1,4 @@
-import Category from "../../types/product/Category";
+import Category from "../../types/book/Category";
 
 const categoriesData: Category[] = [
     {
