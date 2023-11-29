@@ -72,7 +72,7 @@ function ResponsiveAppBar() {
                 textDecoration: 'none',
               }}
             >
-              Library of Lahti
+              Lahti Library
             </Typography>
           </Link>
 
@@ -148,7 +148,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            E-Commerce
+            Lahti Library
           </Typography>
           <Box
             sx={{

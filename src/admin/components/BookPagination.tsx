@@ -146,7 +146,7 @@ export const BookPaginationActionsTable: React.FC<any> = ({ rows }) => {
             : rows
           ).map((row: Book): ReactElement<HTMLTableRowElement> => {
             return (
-              <TableRow key={row.id}>
+              <TableRow key={row._id}>
                 <TableCell>
                   <Box
                     sx={{
@@ -169,7 +169,12 @@ export const BookPaginationActionsTable: React.FC<any> = ({ rows }) => {
                 </TableCell>
                 <TableCell>{row.description}</TableCell>
                 <TableCell>
-                  <Avatar src={'https://upload.wikimedia.org/wikipedia/commons/b/b6/Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg'} alt={row.title} />
+                  <Avatar
+                    src={
+                      'https://upload.wikimedia.org/wikipedia/commons/b/b6/Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg'
+                    }
+                    alt={row.title}
+                  />
                   <Typography>{row.title}</Typography>
                 </TableCell>
               </TableRow>

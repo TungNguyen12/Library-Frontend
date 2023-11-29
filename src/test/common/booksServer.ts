@@ -17,7 +17,7 @@ export const handlers = [
 
     (req, res, ctx) => {
       const { id } = req.params
-      if (booksData.find((p) => p.id === id)) {
+      if (booksData.find((p) => p._id === id)) {
         return res(ctx.json(true))
       } else {
         return res(ctx.json(false))
@@ -30,7 +30,7 @@ export const handlers = [
       const update: UpdateBookRequest = await req.json()
       const { id } = req.params
 
-      const index = booksData.findIndex((p) => p.id === id)
+      const index = booksData.findIndex((p) => p._id === id)
 
       if (index !== -1) {
         return res(

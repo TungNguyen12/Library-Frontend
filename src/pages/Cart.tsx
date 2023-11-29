@@ -74,7 +74,7 @@ const Cart = () => {
             >
               <Stack spacing={2} sx={{ marginTop: '15px' }}>
                 {cart.map((item) => (
-                  <Card key={item.id} sx={{ display: 'flex' }}>
+                  <Card key={item._id} sx={{ display: 'flex' }}>
                     <CardMedia
                       component="img"
                       height="240"
@@ -104,16 +104,16 @@ const Cart = () => {
                               marginTop: '20px',
                             }}
                           >
-                            {/* <Button onClick={() => handleDecrement(item.id)}>
+                            {/* <Button onClick={() => handleDecrement(item._id)}>
                               -
                             </Button> */}
                             <Typography>{item.quantity}</Typography>
-                            {/* <Button onClick={() => handleIncrement(item.id)}>
+                            {/* <Button onClick={() => handleIncrement(item._id)}>
                               +
                             </Button> */}
                           </Stack>
                           {/* <Typography>Price: {item.price}€</Typography> */}
-                          <Button onClick={() => handleRemove(item.id)}>
+                          <Button onClick={() => handleRemove(item._id)}>
                             Remove item
                           </Button>
                         </Stack>

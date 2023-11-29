@@ -3,7 +3,7 @@ import categoriesData from './categoriesData'
 
 const booksData: Book[] = [
   {
-    id: '655d13daf50dd1ceca878b43',
+    _id: '655d13daf50dd1ceca878b43',
     ISBN: '0756603390',
     title: 'something69',
     edition: '1',
@@ -14,7 +14,7 @@ const booksData: Book[] = [
   },
 
   {
-    id: '655ec8104202fd2aa0055472',
+    _id: '655ec8104202fd2aa0055472',
     ISBN: '099777035X',
     title: 'something420',
     edition: '1',
@@ -25,7 +25,7 @@ const booksData: Book[] = [
   },
 
   {
-    id: '655ec83e4202fd2aa0055474',
+    _id: '655ec83e4202fd2aa0055474',
     ISBN: '0517682397',
     title: 'something69420',
     edition: '1',

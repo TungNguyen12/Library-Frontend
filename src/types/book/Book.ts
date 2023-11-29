@@ -4,7 +4,7 @@ export type Category = {
   image: string
 }
 type Book = {
-  id: string
+  _id: string
   ISBN: string
   title: string
   edition: string

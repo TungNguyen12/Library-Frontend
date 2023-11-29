@@ -89,7 +89,7 @@ const Categories = () => {
         <Grid container spacing={{ xs: 2, md: 3 }} columns={12}>
           {products.map((product) => (
             <Grid
-              key={product.id}
+              key={product._id}
               item
               xs={12}
               sm={6}

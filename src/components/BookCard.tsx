@@ -14,8 +14,10 @@ import { addToCart } from '../redux/reducers/cardReducer'
 import toast from 'react-hot-toast'
 
 const BookCard: React.FC<any> = ({ book }) => {
-  const { id, title, price, images } = book
+  const { _id, title, author } = book as Book
+  // const id = book._id
   const navigate = useNavigate()
+
   const dispatch = useAppDispatch()
 
   const handleAddToCart = (payload: Book) => {
@@ -29,7 +31,7 @@ const BookCard: React.FC<any> = ({ book }) => {
     <Card sx={{ maxWidth: 194 }}>
       <CardActions
         onClick={() => {
-          navigate(`/${id}`)
+          navigate(`/${_id}`)
         }}
       >
         <CardMedia
@@ -53,7 +55,7 @@ const BookCard: React.FC<any> = ({ book }) => {
       </CardContent>
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          Price: {price}€
+          Author: {author}
         </Typography>
 
         <Button onClick={() => handleAddToCart(book)}>Add to cart</Button>

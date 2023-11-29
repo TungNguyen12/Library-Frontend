@@ -32,7 +32,7 @@ export const ModifyBookForm: React.FC<any> = ({ book }) => {
 
   const onSubmit: SubmitHandler<any> = (data) => {
     const updated: Book = { ...book, ...data }
-    dispatch(updateBookAsync({ id: updated.id, update: updated }))
+    dispatch(updateBookAsync({ id: updated._id, update: updated }))
   }
 
   return (

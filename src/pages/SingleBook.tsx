@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { Link, useNavigate, useParams } from 'react-router-dom'
@@ -37,7 +37,7 @@ const SingleBook = () => {
   const fetchSingleBook = async () => {
     try {
       const response = await axios.get<any, AxiosResponse<Book>>(
-        `https://api.escuelajs.co/api/v1/products/${bookId}`
+        `http://localhost:3000/api/v1/books/${bookId}`
       )
       const data: Book = response.data
       setBook(data)
@@ -56,7 +56,7 @@ const SingleBook = () => {
     toast.success(`Add 1 ${payload.title} to cart`)
   }
   const handleDeleteBook = (payload: Book) => {
-    dispatch(deleteBookAsync(payload.id))
+    dispatch(deleteBookAsync(payload._id))
     navigate('/')
     toast.error(`${payload.title} deleted!`)
   }
@@ -81,7 +81,9 @@ const SingleBook = () => {
           <CardMedia
             component="img"
             height="350"
-            image={book?.images[0]}
+            image={
+              'https://upload.wikimedia.org/wikipedia/en/c/c8/Doraemon_volume_1_cover.jpg'
+            }
             alt={book?.title}
           />
         </Card>
