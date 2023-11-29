@@ -10,17 +10,16 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { useAppDispatch } from '../../hooks/useAppDispatch'
-import { updateProductAsync } from '../../redux/services/BookServices'
-import Product from '../../types/book/Book'
+import { updateBookAsync } from '../../redux/services/BookServices'
+import Book from '../../types/book/Book'
 
 const modify = yup
   .object({
     title: yup.string().required(),
-    price: yup.number().required(),
   })
   .required()
 
-export const ModifyProductForm: React.FC<any> = ({ product }) => {
+export const ModifyBookForm: React.FC<any> = ({ book }) => {
   const dispatch = useAppDispatch()
 
   const {
@@ -32,8 +31,8 @@ export const ModifyProductForm: React.FC<any> = ({ product }) => {
   })
 
   const onSubmit: SubmitHandler<any> = (data) => {
-    const updated: Product = { ...product, ...data }
-    dispatch(updateProductAsync({ id: updated.id, update: updated }))
+    const updated: Book = { ...book, ...data }
+    dispatch(updateBookAsync({ id: updated.id, update: updated }))
   }
 
   return (
@@ -53,13 +52,13 @@ export const ModifyProductForm: React.FC<any> = ({ product }) => {
               <TextField
                 fullWidth
                 id="title"
-                label="Product title"
+                label="Book title"
                 error={Boolean(errors.title?.message)}
                 helperText={errors.title?.message}
                 {...register('title')}
               />
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <TextField
                 fullWidth
                 label="Price"
@@ -68,7 +67,7 @@ export const ModifyProductForm: React.FC<any> = ({ product }) => {
                 helperText={errors.price?.message}
                 {...register('price')}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
           <Button
             type="submit"
@@ -76,7 +75,7 @@ export const ModifyProductForm: React.FC<any> = ({ product }) => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Update product
+            Update Book
           </Button>
         </Box>
       </Box>
@@ -84,4 +83,4 @@ export const ModifyProductForm: React.FC<any> = ({ product }) => {
   )
 }
 
-export default ModifyProductForm
+export default ModifyBookForm

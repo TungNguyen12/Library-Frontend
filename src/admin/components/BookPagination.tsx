@@ -16,7 +16,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 import LastPageIcon from '@mui/icons-material/LastPage'
 import { Avatar, TableHead, Typography } from '@mui/material'
-import Product from '../../types/book/Book'
+import Book from '../../types/book/Book'
 
 interface TablePaginationActionsProps {
   count: number
@@ -98,7 +98,7 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   )
 }
 
-export const ProductPaginationActionsTable: React.FC<any> = ({ rows }) => {
+export const BookPaginationActionsTable: React.FC<any> = ({ rows }) => {
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(7)
 
@@ -134,7 +134,7 @@ export const ProductPaginationActionsTable: React.FC<any> = ({ rows }) => {
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableHead>
           <TableRow>
-            <TableCell>Product</TableCell>
+            <TableCell>Book title</TableCell>
             <TableCell>Price</TableCell>
             <TableCell>Description</TableCell>
             <TableCell>Category</TableCell>
@@ -144,7 +144,7 @@ export const ProductPaginationActionsTable: React.FC<any> = ({ rows }) => {
           {(rowsPerPage > 0
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
-          ).map((row: Product): ReactElement<HTMLTableRowElement> => {
+          ).map((row: Book): ReactElement<HTMLTableRowElement> => {
             return (
               <TableRow key={row.id}>
                 <TableCell>
@@ -154,19 +154,23 @@ export const ProductPaginationActionsTable: React.FC<any> = ({ rows }) => {
                       justifyContent: 'flex-start',
                     }}
                   >
-                    <Avatar src={row.images[0]} />
+                    <Avatar
+                      src={
+                        'https://upload.wikimedia.org/wikipedia/commons/b/b6/Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg'
+                      }
+                    />
                     <Typography sx={{ marginLeft: '20px' }}>
                       {row.title}
                     </Typography>
                   </Box>
                 </TableCell>
                 <TableCell>
-                  <Typography>{row.price}€</Typography>
+                  <Typography>{row.publisher}€</Typography>
                 </TableCell>
                 <TableCell>{row.description}</TableCell>
                 <TableCell>
-                  <Avatar src={row.category.image} alt={row.category.name} />
-                  <Typography>{row.category.name}</Typography>
+                  <Avatar src={'https://upload.wikimedia.org/wikipedia/commons/b/b6/Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg'} alt={row.title} />
+                  <Typography>{row.title}</Typography>
                 </TableCell>
               </TableRow>
             )

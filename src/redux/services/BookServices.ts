@@ -27,7 +27,7 @@ export const updateBookAsync = createAsyncThunk(
 //DELETE
 export const deleteBookAsync = createAsyncThunk(
   'deleteBook',
-  async (BookId: number, { rejectWithValue }) => {
+  async (BookId: string, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
         `https://api.escuelajs.co/api/v1/books/${BookId}`
@@ -89,7 +89,7 @@ export const fetchAllBooksAsync = createAsyncThunk(
   'fetchAllBooksAsync',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/v1/users`)
+      const response = await axios.get(`http://localhost:3000/api/v1/books`)
       const data: Book[] = response.data
       return data
     } catch (e) {

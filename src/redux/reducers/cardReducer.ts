@@ -17,14 +17,14 @@ const cartSlice = createSlice({
       }
     },
 
-    incrementQuantity: (state, action: PayloadAction<number>) => {
+    incrementQuantity: (state, action: PayloadAction<string>) => {
       const item = state.find((item) => item.id === action.payload)
       if (item) {
         item.quantity++
       }
     },
 
-    decrementQuantity: (state, action: PayloadAction<number>) => {
+    decrementQuantity: (state, action: PayloadAction<string>) => {
       const item = state.find((item) => item.id === action.payload)
 
       const foundIndex = state.findIndex((item) => item.id === action.payload)
@@ -38,7 +38,7 @@ const cartSlice = createSlice({
       }
     },
 
-    removeFromCart: (state, action: PayloadAction<number>) => {
+    removeFromCart: (state, action: PayloadAction<string>) => {
       const foundIndex = state.findIndex((item) => item.id === action.payload)
       if (foundIndex !== -1) {
         state.splice(foundIndex, 1)

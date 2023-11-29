@@ -4,21 +4,21 @@ import { useAppSelector } from '../hooks/useAppSelector'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { Box, Button, Stack } from '@mui/material'
 import SearchInput from '../components/SearchInput'
-import { ProductPaginationActionsTable } from './components/ProductPagination'
-import { CreateProductForm } from './components/CreateProductForm'
-import { fetchAllProductsAsync } from '../redux/services/BookServices'
+import { BookPaginationActionsTable } from './components/BookPagination'
+import { CreateBookForm } from './components/CreateBookForm'
+import { fetchAllBooksAsync } from '../redux/services/BookServices'
 
-const ProductControl = () => {
+const BookControl = () => {
   const [search, setSearch] = useState<string>('')
   const [isOpen, setIsOpen] = useState(false)
-  const allProducts = useAppSelector((state) => state.productsReducer.products)
+  const allBooks = useAppSelector((state) => state.booksReducer.books)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(fetchAllProductsAsync())
+    dispatch(fetchAllBooksAsync())
   }, [])
 
-  const handleSearchProduct = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchBook = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value.toLocaleLowerCase())
   }
 
@@ -26,11 +26,11 @@ const ProductControl = () => {
     setIsOpen(!isOpen)
   }
 
-  const productsToShow = search
-    ? allProducts.filter((product) =>
-        product.title.toLowerCase().includes(search.toLowerCase())
+  const booksToShow = search
+    ? allBooks.filter((book) =>
+        book.title.toLowerCase().includes(search.toLowerCase())
       )
-    : allProducts
+    : allBooks
 
   return (
     <Box>
@@ -49,12 +49,12 @@ const ProductControl = () => {
             onClick={handleOpenCreateForm}
             sx={{ width: '200px' }}
           >
-            Create product
+            Create book
           </Button>
         </Box>
       </Stack>
 
-      {isOpen && <CreateProductForm />}
+      {isOpen && <CreateBookForm />}
       <Box
         sx={{
           alignContent: 'center',
@@ -64,11 +64,11 @@ const ProductControl = () => {
           marginTop: '10px',
         }}
       >
-        <SearchInput handleSearchProduct={handleSearchProduct} />
-        <ProductPaginationActionsTable rows={productsToShow} />
+        <SearchInput handleSearchBook={handleSearchBook} />
+        <BookPaginationActionsTable rows={booksToShow} />
       </Box>
     </Box>
   )
 }
 
-export default ProductControl
+export default BookControl

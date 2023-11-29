@@ -9,7 +9,7 @@ import {
 } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useAppSelector } from '../hooks/useAppSelector'
-import ProductCard from '../components/ProductCard'
+import ProductCard from '../components/BookCard'
 import Product from '../types/book/Book'
 import axios, { AxiosError } from 'axios'
 import { fetchAllCategories } from '../redux/reducers/categoriesReducer'

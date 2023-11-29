@@ -2,42 +2,42 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useAppSelector } from '../hooks/useAppSelector'
 import { useAppDispatch } from '../hooks/useAppDispatch'
-import { fetchAllProductsAsync } from '../redux/services/BookServices'
-import { sortProductByPrice } from '../redux/reducers/booksReducer'
+import { fetchAllBooksAsync } from '../redux/services/BookServices'
+import { sortBookByTitle } from '../redux/reducers/booksReducer'
 
-import ProductCard from '../components/ProductCard'
+import BookCard from '../components/BookCard'
 import SearchInput from '../components/SearchInput'
 import { Box, Button, Grid } from '@mui/material'
 
 import { Toaster } from 'react-hot-toast'
 
-const AllProducts = () => {
+const AllBooks = () => {
   const [search, setSearch] = useState<string>('')
-  const { products } = useAppSelector((state) => state.productsReducer)
+  const { books } = useAppSelector((state) => state.booksReducer)
 
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(fetchAllProductsAsync())
+    dispatch(fetchAllBooksAsync())
   }, [])
 
-  const handleSearchProduct = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchBook = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value.toLocaleLowerCase())
   }
 
-  const productsToShow = useMemo(() => {
+  const booksToShow = useMemo(() => {
     return search
-      ? products.filter((product) =>
-          product.title.toLowerCase().includes(search.toLowerCase())
+      ? books.filter((book) =>
+          book.title.toLowerCase().includes(search.toLowerCase())
         )
-      : products
-  }, [search, products])
+      : books
+  }, [search, books])
 
-  const handleSortByLowerPrice = () => {
-    dispatch(sortProductByPrice('asc'))
+  const handleSortByAZ = () => {
+    dispatch(sortBookByTitle('asc'))
   }
-  const handleSortByHigherPrice = () => {
-    dispatch(sortProductByPrice('desc'))
+  const handleSortByZA = () => {
+    dispatch(sortBookByTitle('desc'))
   }
 
   return (
@@ -52,22 +52,14 @@ const AllProducts = () => {
           margin: ' 50px',
         }}
       >
-        <Button
-          variant="contained"
-          color="success"
-          onClick={handleSortByLowerPrice}
-        >
-          Sort by lower price{' '}
+        <Button variant="contained" color="success" onClick={handleSortByAZ}>
+          Sort by A-Z{' '}
         </Button>
-        <Button
-          variant="contained"
-          color="success"
-          onClick={handleSortByHigherPrice}
-        >
-          Sort by higher price{' '}
+        <Button variant="contained" color="success" onClick={handleSortByZA}>
+          Sort by Z-A{' '}
         </Button>
 
-        <SearchInput handleSearchProduct={handleSearchProduct} />
+        <SearchInput handleSearchBook={handleSearchBook} />
       </Box>
 
       <Box
@@ -79,10 +71,10 @@ const AllProducts = () => {
         }}
       >
         <Grid container spacing={{ xs: 2, md: 3 }} columns={12}>
-          {products &&
-            productsToShow.map((product) => (
+          {books &&
+            booksToShow.map((book) => (
               <Grid
-                key={product.id}
+                key={book.id}
                 item
                 xs={12}
                 sm={6}
@@ -93,7 +85,7 @@ const AllProducts = () => {
                   justifyContent: 'center',
                 }}
               >
-                <ProductCard product={product} />
+                <BookCard book={book} />
               </Grid>
             ))}
         </Grid>
@@ -102,4 +94,4 @@ const AllProducts = () => {
   )
 }
 
-export default AllProducts
+export default AllBooks

@@ -7,18 +7,18 @@ import {
   CardMedia,
   Typography,
 } from '@mui/material'
-import Product from '../types/book/Book'
+import Book from '../types/book/Book'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { addToCart } from '../redux/reducers/cardReducer'
 import toast from 'react-hot-toast'
 
-const ProductCard: React.FC<any> = ({ product }) => {
-  const { id, title, price, images } = product
+const BookCard: React.FC<any> = ({ book }) => {
+  const { id, title, price, images } = book
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
-  const handleAddToCart = (payload: Product) => {
+  const handleAddToCart = (payload: Book) => {
     dispatch(addToCart(payload))
     toast(`Add 1 ${payload.title} to cart`, {
       icon: '✅',
@@ -35,7 +35,9 @@ const ProductCard: React.FC<any> = ({ product }) => {
         <CardMedia
           component="img"
           height="250"
-          image={images[0]}
+          image={
+            'https://upload.wikimedia.org/wikipedia/en/c/c8/Doraemon_volume_1_cover.jpg'
+          }
           alt={title}
           style={{
             objectFit: 'cover',
@@ -54,10 +56,10 @@ const ProductCard: React.FC<any> = ({ product }) => {
           Price: {price}€
         </Typography>
 
-        <Button onClick={() => handleAddToCart(product)}>Add to cart</Button>
+        <Button onClick={() => handleAddToCart(book)}>Add to cart</Button>
       </CardContent>
     </Card>
   )
 }
 
-export default ProductCard
+export default BookCard

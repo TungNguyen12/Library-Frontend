@@ -15,17 +15,17 @@ import {
   Typography,
 } from '@mui/material'
 
-import Product from '../types/book/Book'
+import Book from '../types/book/Book'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { useAppSelector } from '../hooks/useAppSelector'
 import { addToCart } from '../redux/reducers/cardReducer'
-import ModifyProductForm from '../admin/components/ModifyProductForm'
-import { deleteProductAsync } from '../redux/services/BookServices'
+import ModifyBookForm from '../admin/components/ModifyBookForm'
+import { deleteBookAsync } from '../redux/services/BookServices'
 import toast, { Toaster } from 'react-hot-toast'
 
-const SingleProduct = () => {
-  const [product, setProduct] = useState<any>()
-  const { productId } = useParams()
+const SingleBook = () => {
+  const [book, setBook] = useState<any>()
+  const { bookId } = useParams()
   const [openForm, setOpenForm] = useState(false)
   const navigate = useNavigate()
 
@@ -34,13 +34,13 @@ const SingleProduct = () => {
 
   const dispatch = useAppDispatch()
 
-  const fetchSingleProduct = async () => {
+  const fetchSingleBook = async () => {
     try {
-      const response = await axios.get<any, AxiosResponse<Product>>(
-        `https://api.escuelajs.co/api/v1/products/${productId}`
+      const response = await axios.get<any, AxiosResponse<Book>>(
+        `https://api.escuelajs.co/api/v1/products/${bookId}`
       )
-      const data: Product = response.data
-      setProduct(data)
+      const data: Book = response.data
+      setBook(data)
     } catch (e) {
       const error = e as AxiosError
       return error
@@ -48,15 +48,15 @@ const SingleProduct = () => {
   }
 
   useEffect(() => {
-    fetchSingleProduct()
-  }, [productId])
+    fetchSingleBook()
+  }, [bookId])
 
-  const handleAddToCart = (payload: Product) => {
+  const handleAddToCart = (payload: Book) => {
     dispatch(addToCart(payload))
     toast.success(`Add 1 ${payload.title} to cart`)
   }
-  const handleDeleteProduct = (payload: Product) => {
-    dispatch(deleteProductAsync(payload.id))
+  const handleDeleteBook = (payload: Book) => {
+    dispatch(deleteBookAsync(payload.id))
     navigate('/')
     toast.error(`${payload.title} deleted!`)
   }
@@ -81,18 +81,18 @@ const SingleProduct = () => {
           <CardMedia
             component="img"
             height="350"
-            image={product?.images[0]}
-            alt={product?.title}
+            image={book?.images[0]}
+            alt={book?.title}
           />
         </Card>
 
         <Card sx={{ maxWidth: 300 }}>
           <CardContent>
             <Typography variant="h5" gutterBottom>
-              {product?.title}
+              {book?.title}
             </Typography>
             <Typography variant="h6" component="div">
-              {product?.price}€
+              {book?.price}€
             </Typography>
           </CardContent>
 
@@ -115,25 +115,25 @@ const SingleProduct = () => {
                     borderRightColor: '#8cbad9',
                   }}
                 >
-                  Modify product
+                  Modify book
                 </Button>
                 <Button
                   onClick={() => {
                     if (window.confirm('Delete this item?'))
-                      handleDeleteProduct(product)
+                      handleDeleteBook(book)
                   }}
                   size="small"
                   sx={{
                     backgroundColor: 'pink',
                   }}
                 >
-                  Delete Product
+                  Delete book
                 </Button>
               </ButtonGroup>
             ) : (
               <Button
                 onClick={() => {
-                  handleAddToCart(product)
+                  handleAddToCart(book)
                 }}
                 size="small"
                 sx={{ backgroundColor: 'black' }}
@@ -151,9 +151,9 @@ const SingleProduct = () => {
           </CardActions>
         </Card>
       </Box>
-      {openForm && <ModifyProductForm product={product} />}
+      {openForm && <ModifyBookForm book={book} />}
     </Box>
   )
 }
 
-export default SingleProduct
+export default SingleBook

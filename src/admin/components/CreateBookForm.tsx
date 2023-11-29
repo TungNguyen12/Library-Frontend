@@ -11,28 +11,22 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { useAppDispatch } from '../../hooks/useAppDispatch'
-import CreateProductDto from '../../types/book/CreateBookRequest'
-import { createProductAsync } from '../../redux/services/BookServices'
+import CreateBookDto from '../../types/book/CreateBookRequest'
+import { createBookAsync } from '../../redux/services/BookServices'
 
 const signUp = yup
   .object({
     title: yup.string().required(),
-    price: yup.number().required(),
     description: yup.string().required(),
-    categoryId: yup.number().required(),
-    images: yup.string().required(),
+    ISBN: yup.string().required(),
+    edition: yup.string().required(),
+    category: yup.string().required(),
+    publisher: yup.string().required(),
+    author: yup.array().of(yup.string().required()).required(),
   })
   .required()
 
-export interface CreateProductInput {
-  title: string
-  price: number
-  description: string
-  categoryId: number
-  images: string
-}
-
-export const CreateProductForm = () => {
+export const CreateBookForm = () => {
   const dispatch = useAppDispatch()
 
   const {
@@ -44,12 +38,9 @@ export const CreateProductForm = () => {
     resolver: yupResolver(signUp),
   })
 
-  const onSubmit = async (data: CreateProductInput) => {
-    const newProduct: CreateProductDto = {
-      ...data,
-      images: [data.images],
-    }
-    await dispatch(createProductAsync(newProduct))
+  const onSubmit = async (data: CreateBookDto) => {
+    const newBook: CreateBookDto = data
+    await dispatch(createBookAsync(newBook))
     reset()
   }
 
@@ -83,18 +74,8 @@ export const CreateProductForm = () => {
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                id="price"
-                label="Product Price "
-                error={Boolean(errors.price?.message)}
-                helperText={errors.price?.message}
-                {...register('price')}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Product description"
                 id="description"
+                label="Book description "
                 error={Boolean(errors.description?.message)}
                 helperText={errors.description?.message}
                 {...register('description')}
@@ -103,19 +84,47 @@ export const CreateProductForm = () => {
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label="Category ID"
-                error={Boolean(errors.categoryId?.message)}
-                helperText={errors.categoryId?.message}
-                {...register('categoryId')}
+                label="Book ISBN"
+                id="isbn"
+                error={Boolean(errors.ISBN?.message)}
+                helperText={errors.ISBN?.message}
+                {...register('ISBN')}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label="Product images"
-                error={Boolean(errors.images?.message)}
-                helperText={errors.images?.message}
-                {...register('images')}
+                label="Category"
+                error={Boolean(errors.category?.message)}
+                helperText={errors.category?.message}
+                {...register('category')}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label="Book edition"
+                error={Boolean(errors.edition?.message)}
+                helperText={errors.edition?.message}
+                {...register('edition')}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label="Book Publisher"
+                error={Boolean(errors.publisher?.message)}
+                helperText={errors.publisher?.message}
+                {...register('publisher')}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label="Book Author(s)"
+                error={Boolean(errors.author?.message)}
+                helperText={errors.author?.message}
+                {...register('author')}
               />
             </Grid>
           </Grid>
