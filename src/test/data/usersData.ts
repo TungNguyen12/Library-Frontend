@@ -16,7 +16,6 @@ const usersData: User[] = [
 
   {
     id: '655d1091fba90fb470aa806f',
-
     firstName: 'potato',
     lastName: 'rotten',
     email: 'potato@vodka.uk',
@@ -30,7 +29,6 @@ const usersData: User[] = [
 
   {
     id: '655e4ea5ad90a281f06aa8c3',
-
     firstName: 'Tung',
     lastName: 'Nguyen',
     email: 'tung.nguyen1@integrify.io',

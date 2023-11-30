@@ -14,7 +14,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { LoginInterface } from '../types/user/Login'
-import { loginAsync } from '../redux/reducers/authReducer'
+import { signinAsync } from '../redux/reducers/authReducer'
 import { useAppSelector } from '../hooks/useAppSelector'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
@@ -24,7 +24,7 @@ import { Toaster } from 'react-hot-toast'
 const signUp = yup
   .object({
     email: yup.string().required(),
-    password: yup.string().min(8).max(20).required(),
+    password: yup.string().min(1).max(20).required(),
   })
   .required()
 
@@ -45,7 +45,7 @@ export const Login = () => {
   const currentUser = useAppSelector((state) => state.authReducer.currentUser)
   const [success, setSuccess] = useState(false)
   const onSubmit: SubmitHandler<LoginInterface> = (data) => {
-    dispatch(loginAsync(data))
+    dispatch(signinAsync(data))
     reset()
     setSuccess(true)
     setTimeout(() => setSuccess(false), 4000)
