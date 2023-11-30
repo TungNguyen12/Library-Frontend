@@ -1,14 +1,19 @@
+import { EnumType } from 'typescript'
+
 export enum Roles {}
-export interface IFormInput {
-    email: string;
-    password: string;
-    name: string;
-    role: "customer" | "admin";
-    avatar: string;
+export type IFormInput = {
+  firstName: string
+  lastName: string
+  email: string
+  address: string
+  phoneNumber: string
+  password: string
+  avatar: string
+  role: 'admin' | 'customer'
 }
 
-interface User extends IFormInput {
-    id: number;
+type User = IFormInput & {
+  id: string
 }
 
-export default User;
+export default User

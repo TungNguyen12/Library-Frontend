@@ -219,7 +219,12 @@ function ResponsiveAppBar() {
             </IconButton>
 
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt={user?.name} src={user?.avatar} />
+              <Avatar
+                alt={user?.firstName}
+                src={
+                  'https://doraemon.fandom.com/wiki/Doraemon?file=Doraemon+%282017+Remake%29.png'
+                }
+              />
             </IconButton>
 
             <Menu

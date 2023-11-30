@@ -1,30 +1,46 @@
-import User from "../../types/user/User";
+import User from '../../types/user/User'
 
 const usersData: User[] = [
-    {
-        id: 1,
-        email: "john@mail.com",
-        password: "changeme",
-        name: "Jhon",
-        role: "customer",
-        avatar: "https://i.imgur.com/DumuKkD.jpeg",
-    },
-    {
-        id: 2,
-        email: "maria@mail.com",
-        password: "12345",
-        name: "Maria",
-        role: "customer",
-        avatar: "https://i.imgur.com/00qWleT.jpeg",
-    },
-    {
-        id: 3,
-        email: "admin@mail.com",
-        password: "admin123",
-        name: "Admin",
-        role: "admin",
-        avatar: "https://i.imgur.com/s8WRA2O.jpeg",
-    },
-];
+  {
+    id: '655c81c6155012574e0bd4af',
+    firstName: 'Phuoc',
+    lastName: 'Nguyen',
+    email: 'phuoc5@mail.com',
+    avatar:
+      'https://doraemon.fandom.com/wiki/Doraemon?file=Doraemon+%282017+Remake%29.png',
+    address: 'UK',
+    phoneNumber: '69696969',
+    password: '$2b$10$mXmjpRM2cN6IfOMC2m1PDOOvRfiMqpueHmh3bD2aAHrNtZPVJbPlm',
+    role: 'admin',
+  },
 
-export default usersData;
+  {
+    id: '655d1091fba90fb470aa806f',
+
+    firstName: 'potato',
+    lastName: 'rotten',
+    email: 'potato@vodka.uk',
+    avatar:
+      'https://doraemon.fandom.com/wiki/Doraemon?file=Doraemon+%282017+Remake%29.png',
+    address: 'UK',
+    phoneNumber: '69696969',
+    password: '$2b$10$vylzaSE8WlgCISWK6hGKWeK11adb/Y7VMzBobhuu.77xCaNT4gOUq',
+    role: 'admin',
+  },
+
+  {
+    id: '655e4ea5ad90a281f06aa8c3',
+
+    firstName: 'Tung',
+    lastName: 'Nguyen',
+    email: 'tung.nguyen1@integrify.io',
+    avatar:
+      'https://doraemon.fandom.com/wiki/Doraemon?file=Doraemon+%282017+Remake%29.png',
+    address: 'DEFAULT',
+    phoneNumber: 'DEFAULT',
+    password: 'DEFAULT',
+    role: 'admin',
+  },
+]
+
+export default usersData

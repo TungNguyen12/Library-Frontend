@@ -26,7 +26,7 @@ const UserControl = () => {
 
   const usersToShow = search
     ? allUsers.filter((user) =>
-        user.name.toLowerCase().includes(search.toLowerCase())
+        user.firstName.toLowerCase().includes(search.toLowerCase())
       )
     : allUsers
 
