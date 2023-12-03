@@ -1,8 +1,5 @@
-interface CreateUserDto {
-    email: string;
-    name: string;
-    password: string;
-    avatar: string;
-}
+import User from './User'
 
-export default CreateUserDto;
+type CreateUserDto = Omit<User, 'role' | 'id'> & { confirmPassword: string }
+
+export default CreateUserDto
