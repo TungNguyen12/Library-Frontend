@@ -28,7 +28,7 @@ const signUp = yup
   })
   .required()
 
-export const Login = () => {
+export const Signin = () => {
   const dispatch = useAppDispatch()
 
   const {
@@ -86,7 +86,7 @@ export const Login = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Login
+            Sign in
           </Typography>
           {success && currentUser && (
             <Typography>
@@ -131,7 +131,7 @@ export const Login = () => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Login
+                Sign in
               </Button>
             </Grid>
             <Grid container justifyContent="flex-end">
@@ -148,4 +148,4 @@ export const Login = () => {
   )
 }
 
-export default Login
+export default Signin

@@ -175,7 +175,7 @@ function ResponsiveAppBar() {
               </Link>
             ))}
             {!user && (
-              <Link to="login" key={'login'} style={{ textDecoration: 'none' }}>
+              <Link to="signin" key={'signin'} style={{ textDecoration: 'none' }}>
                 <Button
                   onClick={handleCloseNavMenu}
                   sx={{
@@ -184,12 +184,12 @@ function ResponsiveAppBar() {
                     display: 'block',
                   }}
                 >
-                  Login
+                  Sign in
                 </Button>
               </Link>
             )}
             {user?.role === 'admin' && (
-              <Link to="admin" key={'login'} style={{ textDecoration: 'none' }}>
+              <Link to="admin" key={'signin'} style={{ textDecoration: 'none' }}>
                 <Button
                   onClick={handleCloseNavMenu}
                   sx={{
@@ -253,10 +253,10 @@ function ResponsiveAppBar() {
               {!user ? (
                 <MenuItem
                   onClick={() => {
-                    navigate('login')
+                    navigate('signin')
                   }}
                 >
-                  <Typography>Login</Typography>
+                  <Typography>Sign in</Typography>
                 </MenuItem>
               ) : (
                 <MenuItem onClick={handleLogout}>

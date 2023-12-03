@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Login from './Login'
+import Signin from './Signin'
 import { useAppSelector } from '../hooks/useAppSelector'
 import {
   Box,
@@ -73,7 +73,7 @@ const UserProfile = () => {
           </Stack>
         </Stack>
       ) : (
-        <Login />
+        <Signin />
       )}
     </div>
   )

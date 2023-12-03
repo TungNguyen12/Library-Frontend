@@ -7,7 +7,7 @@ import UserProfile from './pages/UserProfile'
 import SingleBook from './pages/SingleBook'
 import Categories from './pages/Categories'
 import { SignUp } from './pages/SignUp'
-import Login from './pages/Login'
+import { Signin } from './pages/Signin'
 import AdminDashboard from './pages/AdminDashboard'
 import CheckRole from './components/PrivateUserRoute'
 
@@ -51,8 +51,8 @@ const App = () => {
           element: <SignUp />,
         },
         {
-          path: 'login',
-          element: <Login />,
+          path: 'signin',
+          element: <Signin />,
         },
         {
           path: 'admin',
