@@ -14,10 +14,25 @@ import { updateBookAsync } from '../../redux/services/BookServices'
 import Book from '../../types/book/Book'
 
 const modify = yup
-  .object({
-    title: yup.string().required(),
+  .object()
+  .shape({
+    title: yup.string(),
+    publisher: yup.string(),
   })
-  .required()
+  .test(
+    'at-least-one-required',
+    'At least one of title or publisher is required',
+    function (values) {
+      const { title, publisher } = values
+      if (!title && !publisher) {
+        return this.createError({
+          path: 'modify',
+          message: 'At least one of title or publisher is required',
+        })
+      }
+      return true
+    }
+  )
 
 export const ModifyBookForm: React.FC<any> = ({ book }) => {
   const dispatch = useAppDispatch()
@@ -30,9 +45,14 @@ export const ModifyBookForm: React.FC<any> = ({ book }) => {
     resolver: yupResolver(modify),
   })
 
-  const onSubmit: SubmitHandler<any> = (data) => {
-    const updated: Book = { ...book, ...data }
-    dispatch(updateBookAsync({ id: updated._id, update: updated }))
+  const onSubmit: SubmitHandler<any> = ({ title, publisher }) => {
+    console.log('new publisher here 🤔', publisher)
+
+    const { _id, __v, ...original } = book
+
+    const updated = { ...original, title, publisher }
+    console.log(updated, '🤔🤔🤔')
+    dispatch(updateBookAsync({ id: book._id, update: updated }))
   }
 
   return (
@@ -58,16 +78,16 @@ export const ModifyBookForm: React.FC<any> = ({ book }) => {
                 {...register('title')}
               />
             </Grid>
-            {/* <Grid item xs={12}>
+            <Grid item xs={12}>
               <TextField
                 fullWidth
-                label="Price"
-                id="price"
-                error={Boolean(errors.price?.message)}
-                helperText={errors.price?.message}
-                {...register('price')}
+                label="Publisher"
+                id="publisher"
+                error={Boolean(errors.publisher?.message)}
+                helperText={errors.publisher?.message}
+                {...register('publisher')}
               />
-            </Grid> */}
+            </Grid>
           </Grid>
           <Button
             type="submit"

@@ -73,7 +73,8 @@ export const handlers = [
         category: 'something',
         description: 'something',
         publisher: 'something',
-        author: ['Someone'],
+        img: 'https://upload.wikimedia.org/wikipedia/en/c/c8/Doraemon_volume_1_cover.jpg',
+        author: 'Someone',
       }
       // booksData.push(newBook) => we don't even need to modify data, it's not in the front
       return res(ctx.json(newBook))

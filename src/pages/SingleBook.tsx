@@ -53,7 +53,7 @@ const SingleBook = () => {
 
   const handleAddToCart = (payload: Book) => {
     dispatch(addToCart(payload))
-    toast.success(`Add 1 ${payload.title} to cart`)
+    toast.success(`Add ${payload.title} to cart`)
   }
   const handleDeleteBook = (payload: Book) => {
     dispatch(deleteBookAsync(payload._id))

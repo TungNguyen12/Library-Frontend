@@ -22,7 +22,8 @@ const signUp = yup
     edition: yup.string().required(),
     category: yup.string().required(),
     publisher: yup.string().required(),
-    author: yup.array().of(yup.string().required()).required(),
+    img: yup.string().required(),
+    author: yup.string().required(),
   })
   .required()
 
@@ -116,6 +117,15 @@ export const CreateBookForm = () => {
                 error={Boolean(errors.publisher?.message)}
                 helperText={errors.publisher?.message}
                 {...register('publisher')}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label="Book image"
+                error={Boolean(errors.img?.message)}
+                helperText={errors.img?.message}
+                {...register('img')}
               />
             </Grid>
             <Grid item xs={12}>

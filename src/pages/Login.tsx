@@ -46,13 +46,21 @@ export const Login = () => {
   const [success, setSuccess] = useState(false)
   const onSubmit: SubmitHandler<LoginInterface> = (data) => {
     dispatch(signinAsync(data))
+
+    // console.log(currentUser)
+    // if (currentUser !== null) {
+    //   navigate('/')
+    // }
     reset()
     setSuccess(true)
     setTimeout(() => setSuccess(false), 4000)
   }
+
   useEffect(() => {
     if (currentUser !== null) {
+      console.log('currentUser changed 🤔:', currentUser)
       const timeoutId = setTimeout(() => {
+        console.log("Redirecting to '/'")
         navigate('/')
       }, 3000)
 

@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom'
 
 const UserProfile = () => {
   const validUser = useAppSelector((state) => state.authReducer.currentUser)
+  console.log('user profile 😶‍🌫️✅', validUser)
   const navigate = useNavigate()
   return (
     <div>

@@ -13,7 +13,7 @@ import { Toaster } from 'react-hot-toast'
 
 const AllBooks = () => {
   const [search, setSearch] = useState<string>('')
-  const { books } = useAppSelector((state) => state.booksReducer)
+  const { books, isLoading } = useAppSelector((state) => state.booksReducer)
 
   const dispatch = useAppDispatch()
 
@@ -26,6 +26,7 @@ const AllBooks = () => {
   }
 
   const booksToShow = useMemo(() => {
+    console.log(books, '🥲🥲🥲🥲')
     return search
       ? books.filter((book) =>
           book.title.toLowerCase().includes(search.toLowerCase())

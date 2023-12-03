@@ -7,11 +7,13 @@ import toast from 'react-hot-toast'
 
 export type AuthState = {
   currentUser: User | null
+  // accessToken: string | null
   error?: string | null
 }
 
 export const initialState: AuthState = {
   currentUser: null,
+  // accessToken: null,
 }
 
 export const signinAsync = createAsyncThunk<
@@ -25,10 +27,10 @@ export const signinAsync = createAsyncThunk<
       { email, password }
     )
     const jwtToken = response.data.accessToken
-    console.log(jwtToken)
+    console.log('🪙: token here:', jwtToken)
 
     const authenticatedUserProfile = await dispatch(
-      getUserProfileAsync(jwtToken)
+      getUserProfileAsync({ jwtToken, email })
     )
 
     if (
@@ -48,19 +50,21 @@ export const signinAsync = createAsyncThunk<
 
 export const getUserProfileAsync = createAsyncThunk<
   User,
-  AuthJwt,
+  any,
   { rejectValue: string }
->('getUserProfileAsync', async (jwtToken, { rejectWithValue }) => {
+>('getUserProfileAsync', async ({ jwtToken, email }, { rejectWithValue }) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/api/v1/users/6568811c3d839e400b6b9b97`,
+      `http://localhost:3000/api/v1/users/profile/${email}`,
       {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },
       }
     )
+
     const userProfile = response.data
+    console.log(userProfile)
     return userProfile
   } catch (e) {
     const error = e as Error
@@ -80,17 +84,28 @@ const authSlice = createSlice({
     //LOGIN
     builder
       .addCase(signinAsync.fulfilled, (state, action) => {
-        state.currentUser = action.payload
+        if (action.payload.email.includes('admin')) {
+          state.currentUser = { ...action.payload, role: 'admin' }
+          // state.accessToken = action.payload.jwtToken
+        } else {
+          state.currentUser = { ...action.payload, role: 'customer' }
+          // state.accessToken = action.payload.jwtToken
+        }
+        console.log('auth reducer 😶‍🌫️😶‍🌫️😶‍🌫️', action.payload)
         state.error = null
       })
       .addCase(signinAsync.rejected, (state, action) => {
-        state.error = action.payload
+        state.error = action.payload as string
       })
 
     //GET USER PROFILE
     builder
       .addCase(getUserProfileAsync.fulfilled, (state, { payload }) => {
-        state.currentUser = payload
+        if (payload.email.includes('admin')) {
+          state.currentUser = { ...payload, role: 'admin' }
+        } else {
+          state.currentUser = { ...payload, role: 'customer' }
+        }
       })
       .addCase(getUserProfileAsync.rejected, (state, action) => {
         state.error = action.payload

@@ -3,6 +3,12 @@ export type Category = {
   name: string
   image: string
 }
+
+type Author = {
+  _id: string
+  firstName: string
+  lastName: string
+}
 type Book = {
   _id: string
   ISBN: string
@@ -11,7 +17,8 @@ type Book = {
   category: string
   description: string
   publisher: string
-  author: string[]
+  img: string
+  author: Author[]
 }
 
 export default Book

@@ -10,7 +10,14 @@ const booksData: Book[] = [
     category: 'something',
     description: 'something',
     publisher: 'something',
-    author: ['Someone'],
+    img: 'https://upload.wikimedia.org/wikipedia/en/c/c8/Doraemon_volume_1_cover.jpg',
+    author: [
+      {
+        _id: '6546a7febac08f6bd30c0505',
+        firstName: 'Leo',
+        lastName: 'Tolstoy',
+      },
+    ],
   },
 
   {
@@ -21,7 +28,14 @@ const booksData: Book[] = [
     category: 'something',
     description: 'something',
     publisher: 'something',
-    author: ['Someone'],
+    img: 'https://upload.wikimedia.org/wikipedia/en/c/c8/Doraemon_volume_1_cover.jpg',
+    author: [
+      {
+        _id: '6546a7febac08f6bd30c0505',
+        firstName: 'Leo',
+        lastName: 'Tolstoy',
+      },
+    ],
   },
 
   {
@@ -32,7 +46,14 @@ const booksData: Book[] = [
     category: 'something',
     description: 'something',
     publisher: 'something',
-    author: ['Someone'],
+    img: 'https://upload.wikimedia.org/wikipedia/en/c/c8/Doraemon_volume_1_cover.jpg',
+    author: [
+      {
+        _id: '6546a7febac08f6bd30c0505',
+        firstName: 'Leo',
+        lastName: 'Tolstoy',
+      },
+    ],
   },
 ]
 
