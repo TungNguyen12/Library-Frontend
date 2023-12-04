@@ -59,12 +59,12 @@ export const createBookAsync = createAsyncThunk(
     try {
       const response = await axios.post<Book>(
         `http://localhost:3000/api/v1/books`,
-        input,
-        {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5ZTFhOWZlYzZlNTg4NjRhZTg3ZjUiLCJlbWFpbCI6ImFkbWluMkBtYWlsLmNvbSIsImlhdCI6MTcwMTYxMzE2MCwiZXhwIjoxNzAxNjE2NzYwfQ.xewfZbpHN7pPVzLQzTDnFnYbYIt6Fv6PgB1P4Q7VVuM`,
-          },
-        }
+        input
+        // {
+        //   headers: {
+        //     Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5ZTFhOWZlYzZlNTg4NjRhZTg3ZjUiLCJlbWFpbCI6ImFkbWluMkBtYWlsLmNvbSIsImlhdCI6MTcwMTYxMzE2MCwiZXhwIjoxNzAxNjE2NzYwfQ.xewfZbpHN7pPVzLQzTDnFnYbYIt6Fv6PgB1P4Q7VVuM`,
+        //   },
+        // }
       )
       const createdBook: Book = response.data
       console.log(createdBook)

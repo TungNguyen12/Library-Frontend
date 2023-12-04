@@ -62,6 +62,8 @@ export const SignUp = () => {
   })
 
   const onSubmit: SubmitHandler<FormInput> = (data) => {
+    console.log('Form Submitted:', data)
+    console.log(errors)
     const { ...newData } = Object.assign({}, data)
 
     const newUser: CreateUserDto = {
@@ -76,7 +78,6 @@ export const SignUp = () => {
 
   return (
     <>
-      {' '}
       <Toaster />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -103,7 +104,7 @@ export const SignUp = () => {
               <Grid item xs={12}>
                 <TextField
                   fullWidth
-                  id="firstName"
+                  id="first-name"
                   label="First name"
                   autoComplete="first-name"
                   error={Boolean(errors.firstName?.message)}
@@ -114,7 +115,7 @@ export const SignUp = () => {
               <Grid item xs={12}>
                 <TextField
                   fullWidth
-                  id="lastName"
+                  id="last-name"
                   label="Last name"
                   autoComplete="last-name"
                   error={Boolean(errors.lastName?.message)}
@@ -127,7 +128,7 @@ export const SignUp = () => {
                   fullWidth
                   id="email"
                   label="Email Address"
-                  autoComplete="username"
+                  autoComplete="email"
                   error={Boolean(errors.email?.message)}
                   helperText={errors.email?.message}
                   {...register('email')}
@@ -185,14 +186,16 @@ export const SignUp = () => {
                 />
               </Grid>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
-            </Button>
+            <Grid item xs={12}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign Up
+              </Button>
+            </Grid>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="signin" variant="body2">

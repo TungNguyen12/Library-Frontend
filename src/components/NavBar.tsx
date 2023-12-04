@@ -175,7 +175,11 @@ function ResponsiveAppBar() {
               </Link>
             ))}
             {!user && (
-              <Link to="signin" key={'signin'} style={{ textDecoration: 'none' }}>
+              <Link
+                to="signin"
+                key={'signin'}
+                style={{ textDecoration: 'none' }}
+              >
                 <Button
                   onClick={handleCloseNavMenu}
                   sx={{
@@ -189,7 +193,11 @@ function ResponsiveAppBar() {
               </Link>
             )}
             {user?.role === 'admin' && (
-              <Link to="admin" key={'signin'} style={{ textDecoration: 'none' }}>
+              <Link
+                to="admin"
+                key={'signin'}
+                style={{ textDecoration: 'none' }}
+              >
                 <Button
                   onClick={handleCloseNavMenu}
                   sx={{
@@ -219,12 +227,7 @@ function ResponsiveAppBar() {
             </IconButton>
 
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar
-                alt={user?.firstName}
-                src={
-                  'https://doraemon.fandom.com/wiki/Doraemon?file=Doraemon+%282017+Remake%29.png'
-                }
-              />
+              <Avatar alt={user?.firstName} src={user?.avatar} />
             </IconButton>
 
             <Menu
@@ -243,13 +246,16 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem
-                onClick={() => {
-                  navigate('/profile')
-                }}
-              >
-                <Typography>Profile</Typography>
-              </MenuItem>
+              {user?.role === 'customer' && (
+                <MenuItem
+                  onClick={() => {
+                    navigate('/profile')
+                  }}
+                >
+                  <Typography>Profile</Typography>
+                </MenuItem>
+              )}
+
               {!user ? (
                 <MenuItem
                   onClick={() => {

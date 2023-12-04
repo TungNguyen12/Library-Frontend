@@ -14,7 +14,7 @@ import { addToCart } from '../redux/reducers/cardReducer'
 import toast from 'react-hot-toast'
 
 const BookCard: React.FC<any> = ({ book }) => {
-  const { _id, title, author } = book as Book
+  const { _id, title, author, img } = book as Book
   // const id = book._id
   const navigate = useNavigate()
 
@@ -37,9 +37,7 @@ const BookCard: React.FC<any> = ({ book }) => {
         <CardMedia
           component="img"
           height="250"
-          image={
-            'https://upload.wikimedia.org/wikipedia/en/c/c8/Doraemon_volume_1_cover.jpg'
-          }
+          image={img}
           alt={title}
           style={{
             objectFit: 'cover',

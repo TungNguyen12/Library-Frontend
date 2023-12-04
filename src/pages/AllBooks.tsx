@@ -7,7 +7,7 @@ import { sortBookByTitle } from '../redux/reducers/booksReducer'
 
 import BookCard from '../components/BookCard'
 import SearchInput from '../components/SearchInput'
-import { Box, Button, Grid } from '@mui/material'
+import { Box, Button, Grid, Typography } from '@mui/material'
 
 import { Toaster } from 'react-hot-toast'
 
@@ -42,56 +42,62 @@ const AllBooks = () => {
   }
 
   return (
-    <Box sx={{ width: '70%', margin: 'auto' }}>
-      <Toaster toastOptions={{ style: { fontFamily: 'Roboto' } }} />
+    <>
+      <Box sx={{ width: '70%', margin: 'auto' }}>
+        <Toaster toastOptions={{ style: { fontFamily: 'Roboto' } }} />
 
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-around',
-          margin: ' 50px',
-        }}
-      >
-        <Button variant="contained" color="success" onClick={handleSortByAZ}>
-          Sort by A-Z{' '}
-        </Button>
-        <Button variant="contained" color="success" onClick={handleSortByZA}>
-          Sort by Z-A{' '}
-        </Button>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-around',
+            margin: ' 50px',
+          }}
+        >
+          <Button variant="contained" color="success" onClick={handleSortByAZ}>
+            Sort by A-Z{' '}
+          </Button>
+          <Button variant="contained" color="success" onClick={handleSortByZA}>
+            Sort by Z-A{' '}
+          </Button>
 
-        <SearchInput handleSearchBook={handleSearchBook} />
+          <SearchInput handleSearchBook={handleSearchBook} />
+        </Box>
+
+        <Box
+          sx={{
+            flexGrow: 1,
+            marginTop: '50px',
+            height: '412px',
+            margin: 'auto',
+          }}
+        >
+          {isLoading && <Typography>LOADINGGGGGGGGGGGGG</Typography>}
+
+          {books && !isLoading && (
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={12}>
+              {books &&
+                booksToShow.map((book) => (
+                  <Grid
+                    key={book._id}
+                    item
+                    xs={12}
+                    sm={6}
+                    md={3}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <BookCard book={book} />
+                  </Grid>
+                ))}
+            </Grid>
+          )}
+        </Box>
       </Box>
-
-      <Box
-        sx={{
-          flexGrow: 1,
-          marginTop: '50px',
-          height: '412px',
-          margin: 'auto',
-        }}
-      >
-        <Grid container spacing={{ xs: 2, md: 3 }} columns={12}>
-          {books &&
-            booksToShow.map((book) => (
-              <Grid
-                key={book._id}
-                item
-                xs={12}
-                sm={6}
-                md={3}
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <BookCard book={book} />
-              </Grid>
-            ))}
-        </Grid>
-      </Box>
-    </Box>
+    </>
   )
 }
 

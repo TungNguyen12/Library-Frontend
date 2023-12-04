@@ -36,9 +36,7 @@ const UserProfile = () => {
                 <CardMedia
                   component="img"
                   height="240"
-                  image={
-                    'https://doraemon.fandom.com/wiki/Doraemon?file=Doraemon+%282017+Remake%29.png'
-                  }
+                  image={validUser.avatar}
                   alt={validUser.firstName}
                 />
                 <Box
