@@ -16,7 +16,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 import LastPageIcon from '@mui/icons-material/LastPage'
 import { Avatar, TableHead, Typography } from '@mui/material'
-import Book from '../../types/book/Book'
+import Book from '../../../types/book/Book'
 
 interface TablePaginationActionsProps {
   count: number
@@ -154,18 +154,14 @@ export const BookPaginationActionsTable: React.FC<any> = ({ rows }) => {
                       justifyContent: 'flex-start',
                     }}
                   >
-                    <Avatar
-                      src={
-                        'https://upload.wikimedia.org/wikipedia/commons/b/b6/Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg'
-                      }
-                    />
+                    <Avatar src={row.img} />
                     <Typography sx={{ marginLeft: '20px' }}>
                       {row.title}
                     </Typography>
                   </Box>
                 </TableCell>
                 <TableCell>
-                  <Typography>{row.publisher}€</Typography>
+                  <Typography>{row.publisher}</Typography>
                 </TableCell>
                 <TableCell>{row.description}</TableCell>
                 <TableCell>

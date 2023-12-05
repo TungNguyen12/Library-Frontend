@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import { useAppSelector } from '../hooks/useAppSelector'
-import { useAppDispatch } from '../hooks/useAppDispatch'
+import { useAppSelector } from '../../hooks/useAppSelector'
+import { useAppDispatch } from '../../hooks/useAppDispatch'
 import { Box, Button, Stack } from '@mui/material'
-import SearchInput from '../components/SearchInput'
+import SearchInput from '../SearchInput'
 import { BookPaginationActionsTable } from './components/BookPagination'
 import { CreateBookForm } from './components/CreateBookForm'
-import { fetchAllBooksAsync } from '../redux/services/BookServices'
+import { fetchAllBooksAsync } from '../../redux/services/BookServices'
 
 const BookControl = () => {
   const [search, setSearch] = useState<string>('')

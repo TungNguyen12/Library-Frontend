@@ -16,7 +16,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 import LastPageIcon from '@mui/icons-material/LastPage'
 import { Avatar, TableHead, Typography } from '@mui/material'
-import User from '../../types/user/User'
+import User from '../../../types/user/User'
 
 interface TablePaginationActionsProps {
   count: number

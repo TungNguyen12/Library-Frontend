@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import { useAppSelector } from '../hooks/useAppSelector'
-import { useAppDispatch } from '../hooks/useAppDispatch'
-import { getAllUsersAsync } from '../redux/reducers/userReducer'
+import { useAppSelector } from '../../hooks/useAppSelector'
+import { useAppDispatch } from '../../hooks/useAppDispatch'
+import { getAllUsersAsync } from '../../redux/reducers/userReducer'
 import { Box } from '@mui/material'
-import SearchInput from '../components/SearchInput'
+import SearchInput from '../SearchInput'
 import { UserPaginationActionsTable } from './components/UserPagination'
 
 const UserControl = () => {

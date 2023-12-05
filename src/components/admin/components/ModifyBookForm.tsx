@@ -9,9 +9,9 @@ import * as yup from 'yup'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { useAppDispatch } from '../../hooks/useAppDispatch'
-import { updateBookAsync } from '../../redux/services/BookServices'
-import Book from '../../types/book/Book'
+import { useAppDispatch } from '../../../hooks/useAppDispatch'
+import { updateBookAsync } from '../../../redux/services/BookServices'
+import Book from '../../../types/book/Book'
 
 const modify = yup
   .object()
