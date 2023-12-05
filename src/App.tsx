@@ -6,10 +6,11 @@ import Cart from './pages/Cart'
 import UserProfile from './pages/UserProfile'
 import SingleBook from './pages/SingleBook'
 import Categories from './pages/Categories'
-import { SignUp } from './pages/SignUp'
+
 import { Signin } from './pages/Signin'
 import AdminDashboard from './pages/AdminDashboard'
 import CheckRole from './components/PrivateUserRoute'
+import SignUp from './pages/SignUp'
 
 const App = () => {
   const router = createBrowserRouter([
@@ -50,6 +51,7 @@ const App = () => {
           path: 'signup',
           element: <SignUp />,
         },
+
         {
           path: 'signin',
           element: <Signin />,

@@ -14,8 +14,7 @@ const booksData: Book[] = [
     author: [
       {
         _id: '6546a7febac08f6bd30c0505',
-        firstName: 'Leo',
-        lastName: 'Tolstoy',
+        fullName: 'Leo Tolstoy',
       },
     ],
   },
@@ -32,8 +31,7 @@ const booksData: Book[] = [
     author: [
       {
         _id: '6546a7febac08f6bd30c0505',
-        firstName: 'Leo',
-        lastName: 'Tolstoy',
+        fullName: 'Leo Tolstoy',
       },
     ],
   },
@@ -50,8 +48,7 @@ const booksData: Book[] = [
     author: [
       {
         _id: '6546a7febac08f6bd30c0505',
-        firstName: 'Leo',
-        lastName: 'Tolstoy',
+        fullName: 'Leo Tolstoy',
       },
     ],
   },

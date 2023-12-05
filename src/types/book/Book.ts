@@ -6,8 +6,7 @@ export type Category = {
 
 type Author = {
   _id: string
-  firstName: string
-  lastName: string
+  fullName: string
 }
 type Book = {
   _id: string

@@ -1,27 +1,27 @@
-import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
-import CssBaseline from '@mui/material/CssBaseline'
-import TextField from '@mui/material/TextField'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
-import Link from '@mui/material/Link'
-import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import Typography from '@mui/material/Typography'
-import Container from '@mui/material/Container'
-
-import * as yup from 'yup'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import CreateUserDto from '../types/user/RegisterUserRequest'
+import toast, { Toaster } from 'react-hot-toast'
 import {
-  checkEmailIsAvailable,
-  registerUserAsync,
-} from '../redux/reducers/userReducer'
-import { Toaster } from 'react-hot-toast'
+  Avatar,
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  CssBaseline,
+  FormControlLabel,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+} from '@mui/material'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+
+import { registerUserAsync } from '../redux/reducers/userReducer'
+
 interface FormInput {
   firstName: string
   lastName: string
@@ -49,8 +49,9 @@ const signUp = yup
   })
   .required()
 
-export const SignUp = () => {
+const SignUp = () => {
   const dispatch = useAppDispatch()
+  console.log('signup page')
 
   const {
     register,
@@ -61,9 +62,7 @@ export const SignUp = () => {
     resolver: yupResolver(signUp),
   })
 
-  const onSubmit: SubmitHandler<FormInput> = (data) => {
-    console.log('Form Submitted:', data)
-    console.log(errors)
+  const onSubmit: SubmitHandler<any> = (data) => {
     const { ...newData } = Object.assign({}, data)
 
     const newUser: CreateUserDto = {
@@ -73,8 +72,6 @@ export const SignUp = () => {
     dispatch(registerUserAsync(newUser))
     reset()
   }
-
-  dispatch(checkEmailIsAvailable('thisisanavailable@mail.com'))
 
   return (
     <>
@@ -104,7 +101,7 @@ export const SignUp = () => {
               <Grid item xs={12}>
                 <TextField
                   fullWidth
-                  id="first-name"
+                  id="firstName"
                   label="First name"
                   autoComplete="first-name"
                   error={Boolean(errors.firstName?.message)}
@@ -115,7 +112,7 @@ export const SignUp = () => {
               <Grid item xs={12}>
                 <TextField
                   fullWidth
-                  id="last-name"
+                  id="lastName"
                   label="Last name"
                   autoComplete="last-name"
                   error={Boolean(errors.lastName?.message)}
@@ -157,6 +154,16 @@ export const SignUp = () => {
               <Grid item xs={12}>
                 <TextField
                   fullWidth
+                  id="phoneNumber"
+                  label="Phone"
+                  error={Boolean(errors.phoneNumber?.message)}
+                  helperText={errors.phoneNumber?.message}
+                  {...register('phoneNumber')}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
                   label="Password"
                   type="password"
                   id="password"
@@ -171,6 +178,7 @@ export const SignUp = () => {
                   fullWidth
                   label="Confirm Password"
                   type="password"
+                  id="confirmPassword"
                   error={Boolean(errors.confirmPassword?.message)}
                   helperText={errors.confirmPassword?.message}
                   autoComplete="confirm-password"
@@ -209,3 +217,5 @@ export const SignUp = () => {
     </>
   )
 }
+
+export default SignUp

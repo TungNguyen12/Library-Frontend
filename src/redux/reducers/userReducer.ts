@@ -52,12 +52,6 @@ export const registerUserAsync = createAsyncThunk<
   { rejectValue: string }
 >('registerUser', async (user: CreateUserDto, { rejectWithValue }) => {
   try {
-    // const isAvailable = await dispatch(
-    //     checkEmailIsAvailable(user.email)
-    // );
-    // if (Object.values(isAvailable)) {
-    //     throw Error("Email is already registered: This is error");
-    // } else {
     const response = await axios.post(
       `http://localhost:3001/api/v1/users/signup`,
       user
