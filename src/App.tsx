@@ -25,7 +25,7 @@ const App = () => {
         {
           path: 'cart',
           element: (
-            <CheckRole role="customer">
+            <CheckRole role="Borrower">
               <Cart />
             </CheckRole>
           ),
@@ -33,7 +33,7 @@ const App = () => {
         {
           path: 'profile',
           element: (
-            <CheckRole role="customer">
+            <CheckRole role="Borrower">
               <UserProfile />
             </CheckRole>
           ),
@@ -57,7 +57,7 @@ const App = () => {
         {
           path: 'admin',
           element: (
-            <CheckRole role="admin">
+            <CheckRole role="Admin">
               <AdminDashboard />,
             </CheckRole>
           ),

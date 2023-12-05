@@ -30,7 +30,7 @@ export const signinAsync = createAsyncThunk<
     console.log('🪙: token here:', jwtToken)
 
     const authenticatedUserProfile = await dispatch(
-      getUserProfileAsync({ jwtToken, email })
+      getUserProfileAsync(jwtToken)
     )
 
     if (
@@ -40,6 +40,7 @@ export const signinAsync = createAsyncThunk<
       throw Error(authenticatedUserProfile.payload || 'Cannot login')
     }
     toast.success(`Login successfully`)
+    console.log(authenticatedUserProfile)
     return authenticatedUserProfile.payload
   } catch (e) {
     const error = e as Error
@@ -50,12 +51,12 @@ export const signinAsync = createAsyncThunk<
 
 export const getUserProfileAsync = createAsyncThunk<
   User,
-  any,
+  string,
   { rejectValue: string }
->('getUserProfileAsync', async ({ jwtToken, email }, { rejectWithValue }) => {
+>('getUserProfileAsync', async (jwtToken, { rejectWithValue }) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/api/v1/users/:userId`,
+      `http://localhost:3000/api/v1/users/profile`,
       {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
@@ -107,13 +108,7 @@ const authSlice = createSlice({
     //LOGIN
     builder
       .addCase(signinAsync.fulfilled, (state, action) => {
-        if (action.payload.email.includes('admin')) {
-          state.currentUser = { ...action.payload, role: 'admin' }
-          // state.accessToken = action.payload.jwtToken
-        } else {
-          state.currentUser = { ...action.payload, role: 'customer' }
-          // state.accessToken = action.payload.jwtToken
-        }
+        state.currentUser = { ...action.payload }
         console.log('auth reducer 😶‍🌫️😶‍🌫️😶‍🌫️', action.payload)
         state.error = null
       })
@@ -124,11 +119,8 @@ const authSlice = createSlice({
     //GET USER PROFILE
     builder
       .addCase(getUserProfileAsync.fulfilled, (state, { payload }) => {
-        if (payload.email.includes('admin')) {
-          state.currentUser = { ...payload, role: 'admin' }
-        } else {
-          state.currentUser = { ...payload, role: 'customer' }
-        }
+        console.log('✅ user profile', payload)
+        state.currentUser = { ...payload }
       })
       .addCase(getUserProfileAsync.rejected, (state, action) => {
         state.error = action.payload

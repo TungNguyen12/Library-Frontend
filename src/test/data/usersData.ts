@@ -11,7 +11,7 @@ const usersData: User[] = [
     address: 'UK',
     phoneNumber: '69696969',
     password: '$2b$10$mXmjpRM2cN6IfOMC2m1PDOOvRfiMqpueHmh3bD2aAHrNtZPVJbPlm',
-    role: 'admin',
+    role: [{ id: '6569d985a7c5b908fba44d07', title: 'Admin' }],
   },
 
   {
@@ -24,7 +24,7 @@ const usersData: User[] = [
     address: 'UK',
     phoneNumber: '69696969',
     password: '$2b$10$vylzaSE8WlgCISWK6hGKWeK11adb/Y7VMzBobhuu.77xCaNT4gOUq',
-    role: 'admin',
+    role: [{ id: '6569d985a7c5b908fba44d07', title: 'Admin' }],
   },
 
   {
@@ -37,7 +37,7 @@ const usersData: User[] = [
     address: 'DEFAULT',
     phoneNumber: 'DEFAULT',
     password: 'DEFAULT',
-    role: 'admin',
+    role: [{ id: '6569d985a7c5b908fba44d07', title: 'Admin' }],
   },
 ]
 

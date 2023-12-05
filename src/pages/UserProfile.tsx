@@ -54,7 +54,9 @@ const UserProfile = () => {
                       </Typography>
 
                       <Typography>{validUser.email}</Typography>
-                      <Typography>You are a great {validUser.role}</Typography>
+                      <Typography>
+                        You are a great {validUser.role[0].title}
+                      </Typography>
                       <Button
                         onClick={() => navigate('/')}
                         sx={{

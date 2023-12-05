@@ -192,7 +192,7 @@ function ResponsiveAppBar() {
                 </Button>
               </Link>
             )}
-            {user?.role === 'admin' && (
+            {user?.role[0].title === 'Admin' && (
               <Link
                 to="admin"
                 key={'signin'}
@@ -246,7 +246,7 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {user?.role === 'customer' && (
+              {user?.role[0].title === 'Borrower' && (
                 <MenuItem
                   onClick={() => {
                     navigate('/profile')

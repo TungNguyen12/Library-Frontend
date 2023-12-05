@@ -1,4 +1,8 @@
-export enum Roles {}
+export type Role = {
+  id: string
+  title: string
+}
+
 export type IFormInput = {
   firstName: string
   lastName: string
@@ -7,7 +11,7 @@ export type IFormInput = {
   phoneNumber: string
   password: string
   avatar: string
-  role: 'admin' | 'customer'
+  role: Role[]
 }
 
 type User = IFormInput & {

@@ -12,6 +12,7 @@ import { Box, Button, Grid, Typography } from '@mui/material'
 import { Toaster } from 'react-hot-toast'
 
 const AllBooks = () => {
+  const validUser = useAppSelector((state) => state.authReducer.currentUser)
   const [search, setSearch] = useState<string>('')
   const { books, isLoading } = useAppSelector((state) => state.booksReducer)
 
@@ -24,6 +25,8 @@ const AllBooks = () => {
   const handleSearchBook = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value.toLocaleLowerCase())
   }
+
+  console.log('✅ current user is:', validUser)
 
   const booksToShow = useMemo(() => {
     console.log(books, '🥲🥲🥲🥲')

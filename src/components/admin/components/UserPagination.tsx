@@ -162,7 +162,7 @@ export const UserPaginationActionsTable: React.FC<any> = ({ rows }) => {
                 <TableCell>
                   <Typography>{row.email}</Typography>
                 </TableCell>
-                <TableCell>{row.role}</TableCell>
+                <TableCell>{row.role[0].title}</TableCell>
               </TableRow>
             )
           })}

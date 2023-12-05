@@ -30,7 +30,7 @@ const SingleBook = () => {
   const navigate = useNavigate()
 
   const admin = useAppSelector((state) => state.authReducer.currentUser)
-  const isAdmin = admin?.role === 'admin' ? true : false
+  const isAdmin = admin?.role[0].title === 'Admin' ? true : false
 
   const dispatch = useAppDispatch()
 
