@@ -1,5 +1,4 @@
 import Book from '../../types/book/Book'
-import categoriesData from './categoriesData'
 
 const booksData: Book[] = [
   {
@@ -7,7 +6,12 @@ const booksData: Book[] = [
     ISBN: '0756603390',
     title: 'something69',
     edition: '1',
-    category: 'something',
+    category: [
+      {
+        _id: '656ea29060a0da45f1752146',
+        name: 'Fiction',
+      },
+    ],
     description: 'something',
     publisher: 'something',
     img: 'https://upload.wikimedia.org/wikipedia/en/c/c8/Doraemon_volume_1_cover.jpg',
@@ -24,7 +28,12 @@ const booksData: Book[] = [
     ISBN: '099777035X',
     title: 'something420',
     edition: '1',
-    category: 'something',
+    category: [
+      {
+        _id: '656ea29060a0da45f1752146',
+        name: 'Fiction',
+      },
+    ],
     description: 'something',
     publisher: 'something',
     img: 'https://upload.wikimedia.org/wikipedia/en/c/c8/Doraemon_volume_1_cover.jpg',
@@ -41,7 +50,12 @@ const booksData: Book[] = [
     ISBN: '0517682397',
     title: 'something69420',
     edition: '1',
-    category: 'something',
+    category: [
+      {
+        _id: '656ea29060a0da45f1752146',
+        name: 'Fiction',
+      },
+    ],
     description: 'something',
     publisher: 'something',
     img: 'https://upload.wikimedia.org/wikipedia/en/c/c8/Doraemon_volume_1_cover.jpg',

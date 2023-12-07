@@ -55,7 +55,8 @@ const UserProfile = () => {
 
                       <Typography>{validUser.email}</Typography>
                       <Typography>
-                        You are a great {validUser.role[0].title}
+                        You are a great{' '}
+                        {validUser.role[0].title.toLocaleLowerCase()}
                       </Typography>
                       <Button
                         onClick={() => navigate('/')}
@@ -63,7 +64,7 @@ const UserProfile = () => {
                           backgroundColor: 'lightpink',
                         }}
                       >
-                        LET GO SHOPPING
+                        Back to library
                       </Button>
                     </Stack>
                   </CardContent>

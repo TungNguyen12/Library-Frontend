@@ -72,29 +72,6 @@ export const getUserProfileAsync = createAsyncThunk<
     return rejectWithValue(error.message)
   }
 })
-// export const getUserProfileAsync = createAsyncThunk<
-//   User,
-//   any,
-//   { rejectValue: string }
-// >('getUserProfileAsync', async ({ jwtToken, email }, { rejectWithValue }) => {
-//   try {
-//     const response = await axios.get(
-//       `http://localhost:3000/api/v1/users/profile/${email}`,
-//       {
-//         headers: {
-//           Authorization: `Bearer ${jwtToken}`,
-//         },
-//       }
-//     )
-
-//     const userProfile = response.data
-//     console.log(userProfile)
-//     return userProfile
-//   } catch (e) {
-//     const error = e as Error
-//     return rejectWithValue(error.message)
-//   }
-// })
 
 const authSlice = createSlice({
   name: 'auth',
@@ -105,7 +82,7 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    //LOGIN
+    //SIGNIN
     builder
       .addCase(signinAsync.fulfilled, (state, action) => {
         state.currentUser = { ...action.payload }

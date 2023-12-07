@@ -1,7 +1,8 @@
+import { StringMappingType } from 'typescript'
+
 export type Category = {
-  id: number
+  _id: string
   name: string
-  image: string
 }
 
 type Author = {
@@ -13,7 +14,7 @@ type Book = {
   ISBN: string
   title: string
   edition: string
-  category: string
+  category: Category[]
   description: string
   publisher: string
   img: string

@@ -61,7 +61,7 @@ const Cart = () => {
         {validUser && cart.length > 0 && (
           <Stack alignItems={'center'} sx={{ marginTop: '35px' }}>
             <Box borderBottom={'solid black 1px'}>
-              <Typography variant="h4"> Minun ostokorini</Typography>
+              <Typography variant="h4"> My basket </Typography>
             </Box>
 
             <Stack
@@ -78,9 +78,7 @@ const Cart = () => {
                     <CardMedia
                       component="img"
                       height="240"
-                      image={
-                        'https://upload.wikimedia.org/wikipedia/commons/b/b7/Frau_mit_Einkaufswagen_%2837939692236%29.jpg'
-                      }
+                      image={item.img}
                       alt={item.title}
                     />
                     <Box
@@ -155,10 +153,9 @@ const Cart = () => {
               <Badge badgeContent={'0'}>
                 <ShoppingCart style={{ width: '2em', height: '2em' }} />
               </Badge>
-              <Typography variant="h4">Ostoskorisi on tyhjä</Typography>
+              <Typography variant="h4">Empty</Typography>
               <Typography>
-                Ostoskorissasi ei ole mitään. Aloita selaaminen muuttaaksesi
-                sitä!
+                There is no book inside your basket, let's go to the shelves
               </Typography>
               <Link to="/">
                 <Button
@@ -168,7 +165,7 @@ const Cart = () => {
                     backgroundColor: 'black',
                   }}
                 >
-                  Osta Muotia
+                  Back to Library
                 </Button>
               </Link>
             </Stack>
