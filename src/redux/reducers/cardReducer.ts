@@ -1,40 +1,47 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import CartItem from '../../types/cart/CartItem'
 import Product from '../../types/book/Book'
+import Book from '../../types/book/Book'
+import axios from 'axios'
+import toast from 'react-hot-toast'
 
-const initialState: CartItem[] = []
+const initialState: Book[] = []
+
+export const addBookToCartDBAsync = createAsyncThunk<
+  any,
+  any,
+  { rejectValue: string }
+>('addBookToCartDBAsync', async ({ jwtToken, userId }, { rejectWithValue }) => {
+  try {
+    const response = await axios.put(
+      `http://localhost:3000/api/v1/carts/${userId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      }
+    )
+
+    const book = response.data
+    console.log('book returned after send req to cart db: 🤔✅:', book)
+    return book
+  } catch (e) {
+    const error = e as Error
+    return rejectWithValue(error.message)
+  }
+})
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<Product>) => {
+    addToCart: (state, action: PayloadAction<Book>) => {
       const itemInCart = state.find((item) => item._id === action.payload._id)
-      if (itemInCart) {
-        itemInCart.quantity++
+      if (!itemInCart) {
+        state.push(action.payload)
+        toast.success(`Add ${action.payload.title} to my cart`)
       } else {
-        state.push({ ...action.payload, quantity: 1 })
-      }
-    },
-
-    incrementQuantity: (state, action: PayloadAction<string>) => {
-      const item = state.find((item) => item._id === action.payload)
-      if (item) {
-        item.quantity++
-      }
-    },
-
-    decrementQuantity: (state, action: PayloadAction<string>) => {
-      const item = state.find((item) => item._id === action.payload)
-
-      const foundIndex = state.findIndex((item) => item._id === action.payload)
-
-      if (item) {
-        if (item.quantity > 1) {
-          item.quantity--
-        } else {
-          state.splice(foundIndex, 1)
-        }
+        toast.error('You only can borrow one of this book at a time')
       }
     },
 
@@ -54,11 +61,5 @@ const cartSlice = createSlice({
 })
 
 const cartReducer = cartSlice.reducer
-export const {
-  addToCart,
-  removeFromCart,
-  incrementQuantity,
-  decrementQuantity,
-  clearCart,
-} = cartSlice.actions
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions
 export default cartReducer

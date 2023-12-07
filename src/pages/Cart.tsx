@@ -1,178 +1,102 @@
-import React from 'react'
-import { useAppSelector } from '../hooks/useAppSelector'
-import { useAppDispatch } from '../hooks/useAppDispatch'
+import { Link, useNavigate } from 'react-router-dom'
+
 import {
-  clearCart,
-  decrementQuantity,
-  incrementQuantity,
-  removeFromCart,
-} from '../redux/reducers/cardReducer'
-import {
-  Badge,
+  Alert,
   Box,
   Button,
-  Card,
-  CardContent,
-  CardMedia,
-  Stack,
+  Container,
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   Typography,
 } from '@mui/material'
-import ShoppingCart from '@mui/icons-material/ShoppingCart'
-import { Link } from 'react-router-dom'
-import getTotalCost from '../redux/selectors/cart/getTotalCost'
-import toast, { Toaster } from 'react-hot-toast'
 
-const Cart = () => {
-  const cart = useAppSelector((state) => state.cartReducer)
-  const dispatch = useAppDispatch()
-  const validUser = useAppSelector((state) => state.authReducer.currentUser)
+import CartItem from '../components/CartItem'
+import { useAppSelector } from '../hooks/useAppSelector'
+import Book from '../types/book/Book'
 
-  const totalCost = useAppSelector((state) => getTotalCost(state))
-
-  const handleRemove = (payload: string) => {
-    dispatch(removeFromCart(payload))
-    toast.success(`Empty cart successfully`)
-  }
-
-  //   const handleIncrement = (payload: number) => {
-  //     dispatch(incrementQuantity(payload))
-  //     toast(`Add 1 item to cart`, {
-  //       icon: '✅',
-  //     })
-  //   }
-
-  //   const handleDecrement = (payload: number) => {
-  //     dispatch(decrementQuantity(payload))
-  //     toast(`Remove 1 item from cart`, {
-  //       icon: '❌',
-  //     })
-  //   }
-
-  const handleClearCart = () => {
-    if (window.confirm('Are you sure want to clear your cart?')) {
-      dispatch(clearCart())
-    }
-  }
+function Cart() {
+  const navigate = useNavigate()
+  const items = useAppSelector((state) => state.cartReducer)
 
   return (
-    <div>
-      <Toaster />
-      <div>
-        {validUser && cart.length > 0 && (
-          <Stack alignItems={'center'} sx={{ marginTop: '35px' }}>
-            <Box borderBottom={'solid black 1px'}>
-              <Typography variant="h4"> My basket </Typography>
-            </Box>
-
-            <Stack
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'flex-start',
-              }}
-            >
-              <Stack spacing={2} sx={{ marginTop: '15px' }}>
-                {cart.map((item) => (
-                  <Card key={item._id} sx={{ display: 'flex' }}>
-                    <CardMedia
-                      component="img"
-                      height="240"
-                      image={item.img}
-                      alt={item.title}
-                    />
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'flex-start',
-                        justifyContent: 'space-between',
-                      }}
-                    >
-                      <CardContent>
-                        <Stack>
-                          <Typography gutterBottom variant="h5" component="div">
-                            {item.title}
-                          </Typography>
-
-                          <Stack
-                            sx={{
-                              display: 'flex',
-                              flexDirection: 'row',
-                              marginTop: '20px',
-                            }}
-                          >
-                            {/* <Button onClick={() => handleDecrement(item._id)}>
-                              -
-                            </Button> */}
-                            <Typography>{item.quantity}</Typography>
-                            {/* <Button onClick={() => handleIncrement(item._id)}>
-                              +
-                            </Button> */}
-                          </Stack>
-                          {/* <Typography>Price: {item.price}€</Typography> */}
-                          <Button onClick={() => handleRemove(item._id)}>
-                            Remove item
-                          </Button>
-                        </Stack>
-                      </CardContent>
-                    </Box>
-                  </Card>
-                ))}
-              </Stack>
-              <Stack>
-                <CardContent>
-                  <Typography>Total: {totalCost}€</Typography>
-                  <Button
-                    variant="contained"
-                    color="error"
-                    onClick={handleClearCart}
-                  >
-                    Clear your cart
-                  </Button>
-                </CardContent>
-              </Stack>
-            </Stack>
-          </Stack>
-        )}
-        {validUser && cart.length === 0 && (
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              marginTop: '100px',
-            }}
+    <Container>
+      <Box>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Typography variant={'h4'} gutterBottom>
+            Shopping Cart
+          </Typography>
+          <Button
+            size="medium"
+            onClick={() => navigate('/checkout')}
+            variant="contained"
+            disabled={!Boolean(items.length)}
           >
-            <Stack
-              spacing={1}
-              sx={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
+            Checkout
+          </Button>
+        </Box>
+        {items.length ? (
+          <>
+            <TableContainer>
+              <Table
+                sx={{
+                  minWidth: 650,
+                }}
+                aria-label="simple table"
+              >
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Product</TableCell>
+                    <TableCell align="center" valign="middle">
+                      Category
+                    </TableCell>
+                    <TableCell align="center" valign="middle">
+                      Author
+                    </TableCell>
+                    <TableCell align="center" valign="middle">
+                      Remove
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {items.map((item: Book) => (
+                    <CartItem key={item._id} item={item} />
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <Grid
+              container
+              spacing={2}
+              justifyContent={'space-between'}
+              alignItems={'flex-start'}
+              marginTop={'1rem'}
             >
-              <Badge badgeContent={'0'}>
-                <ShoppingCart style={{ width: '2em', height: '2em' }} />
-              </Badge>
-              <Typography variant="h4">Empty</Typography>
-              <Typography>
-                There is no book inside your basket, let's go to the shelves
-              </Typography>
-              <Link to="/">
-                <Button
-                  variant="contained"
-                  sx={{
-                    width: '230px',
-                    backgroundColor: 'black',
-                  }}
-                >
-                  Back to Library
-                </Button>
-              </Link>
-            </Stack>
-          </Box>
+              <Grid
+                item
+                xs={12}
+                sm={5}
+                md={4}
+                container
+                alignItems={'flex-end'}
+              >
+                <Link to="/">
+                  <Button variant="outlined">Back to library</Button>
+                </Link>
+              </Grid>
+            </Grid>
+          </>
+        ) : (
+          <Alert severity="error" sx={{ marginTop: '2rem' }}>
+            No item added in your shopping cart!
+          </Alert>
         )}
-      </div>
-    </div>
+      </Box>
+    </Container>
   )
 }
 

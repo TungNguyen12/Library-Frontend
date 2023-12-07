@@ -26,10 +26,7 @@ const AllBooks = () => {
     setSearch(e.target.value.toLocaleLowerCase())
   }
 
-  console.log('✅ current user is:', validUser)
-
   const booksToShow = useMemo(() => {
-    console.log(books, '🥲🥲🥲🥲')
     return search
       ? books.filter((book) =>
           book.title.toLowerCase().includes(search.toLowerCase())

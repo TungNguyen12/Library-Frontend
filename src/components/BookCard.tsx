@@ -22,9 +22,6 @@ const BookCard: React.FC<any> = ({ book }) => {
 
   const handleAddToCart = (payload: Book) => {
     dispatch(addToCart(payload))
-    toast(`Add 1 ${payload.title} to cart`, {
-      icon: '✅',
-    })
   }
 
   return (

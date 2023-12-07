@@ -18,15 +18,19 @@ import getTotalQuantity from '../redux/selectors/cart/getTotalQuantity'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { logOut } from '../redux/reducers/authReducer'
 import { clearStateLogout } from '../redux/reducers/userReducer'
-const pages = [
-  { params: '', page: 'Books' },
-  { params: 'categories', page: 'Categories' },
-]
 
 function ResponsiveAppBar() {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.authReducer.currentUser)
+  let pages = [
+    { params: '', page: 'Books' },
+    { params: 'categories', page: 'Categories' },
+  ]
+
+  user?.role[0].title === 'Admin'
+    ? (pages = pages.concat({ params: 'admin', page: 'Dashboard' }))
+    : pages
 
   const handleLogout = () => {
     dispatch(logOut())
@@ -174,57 +178,23 @@ function ResponsiveAppBar() {
                 </Button>
               </Link>
             ))}
-            {!user && (
-              <Link
-                to="signin"
-                key={'signin'}
-                style={{ textDecoration: 'none' }}
-              >
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    my: 2,
-                    color: 'white',
-                    display: 'block',
-                  }}
-                >
-                  Sign in
-                </Button>
-              </Link>
-            )}
-            {user?.role[0].title === 'Admin' && (
-              <Link
-                to="admin"
-                key={'signin'}
-                style={{ textDecoration: 'none' }}
-              >
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    my: 2,
-                    color: 'white',
-                    display: 'block',
-                  }}
-                >
-                  Admin Dashboard
-                </Button>
-              </Link>
-            )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <IconButton style={{ marginRight: '15px' }}>
-              <Badge badgeContent={totalQuantity} color="error">
-                <Link to={'cart'}>
-                  <ShoppingCart
-                    style={{
-                      fill: 'white',
-                      fontSize: '1.5em',
-                    }}
-                  />
-                </Link>
-              </Badge>
-            </IconButton>
+            {user?.role[0].title !== 'Admin' && (
+              <IconButton style={{ marginRight: '15px' }}>
+                <Badge badgeContent={totalQuantity} color="error">
+                  <Link to={'cart'}>
+                    <ShoppingCart
+                      style={{
+                        fill: 'white',
+                        fontSize: '1.5em',
+                      }}
+                    />
+                  </Link>
+                </Badge>
+              </IconButton>
+            )}
 
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <Avatar alt={user?.firstName} src={user?.avatar} />

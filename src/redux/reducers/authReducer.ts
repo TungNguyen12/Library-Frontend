@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { AuthJwt } from '../../types/user/AuthJWT'
 import User from '../../types/user/User'
 import { LoginInterface } from '../../types/user/Login'
 import axios from 'axios'
