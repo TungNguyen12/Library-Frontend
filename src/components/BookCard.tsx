@@ -25,7 +25,18 @@ const BookCard: React.FC<any> = ({ book }) => {
   }
 
   return (
-    <Card sx={{ maxWidth: 194 }}>
+    <Card
+      sx={{
+        maxWidth: 194,
+        transition: 'ease-in-out 0.25s',
+        '&:hover': {
+          cursor: 'pointer',
+          marginTop: '-7px',
+          marginBottom: '7px',
+          marginLeft: '-7px',
+        },
+      }}
+    >
       <CardActions
         onClick={() => {
           navigate(`/${_id}`)
