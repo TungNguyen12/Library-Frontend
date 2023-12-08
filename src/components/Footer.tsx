@@ -1,14 +1,10 @@
-import React from 'react'
-
-// MUI
 import { Box, Grid, IconButton, Typography } from '@mui/material'
 
-// icons
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import InstagramIcon from '@mui/icons-material/Instagram'
-import TwitterIcon from '@mui/icons-material/Twitter'
 import YouTubeIcon from '@mui/icons-material/YouTube'
+import XIcon from './icons/XIcon'
 
 function Footer() {
   return (
@@ -82,10 +78,10 @@ function Footer() {
                 <InstagramIcon />
               </IconButton>
               <IconButton color="inherit">
-                <TwitterIcon />
-              </IconButton>
-              <IconButton color="inherit">
                 <YouTubeIcon />
+              </IconButton>
+              <IconButton>
+                <XIcon />
               </IconButton>
             </Box>
             <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>

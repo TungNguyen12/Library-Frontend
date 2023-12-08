@@ -11,11 +11,10 @@ import Book from '../types/book/Book'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { addToCart } from '../redux/reducers/cardReducer'
-import toast from 'react-hot-toast'
 
 const BookCard: React.FC<any> = ({ book }) => {
   const { _id, title, author, img, category } = book as Book
-  // const id = book._id
+
   const navigate = useNavigate()
 
   const dispatch = useAppDispatch()
@@ -58,11 +57,6 @@ const BookCard: React.FC<any> = ({ book }) => {
         <Typography variant="body2" color="text.secondary">
           {title}
         </Typography>
-
-        {/* <Typography variant="body2" color="text.secondary">
-          Category: {category[0].name}
-        </Typography> */}
-
         <Typography variant="body2" color="text.secondary">
           Author: {author[0].fullName}
         </Typography>
