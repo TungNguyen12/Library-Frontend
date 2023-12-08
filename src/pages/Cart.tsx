@@ -6,6 +6,7 @@ import {
   Button,
   Container,
   Grid,
+  Stack,
   Table,
   TableBody,
   TableCell,
@@ -24,11 +25,11 @@ function Cart() {
   const items = useAppSelector((state) => state.cartReducer)
 
   return (
-    <Container>
+    <Container sx={{ margin: '50px auto', padding: '25px' }}>
       <Box>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant={'h4'} gutterBottom>
-            Shopping Cart
+            Book basket
           </Typography>
           <Button
             size="medium"
@@ -91,9 +92,33 @@ function Cart() {
             </Grid>
           </>
         ) : (
-          <Alert severity="error" sx={{ marginTop: '2rem' }}>
-            No item added in your shopping cart!
-          </Alert>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}
+          >
+            <Stack>
+              <Alert severity="error" sx={{ marginTop: '2rem' }}>
+                No item added in your shopping cart!
+              </Alert>
+            </Stack>
+            <Button
+              href="/"
+              sx={{
+                margin: '25px auto',
+                bgcolor: '#1976d2',
+                color: '#fff',
+                '&.MuiButtonBase-root:hover': {
+                  bgcolor: '#1976d2',
+                  opacity: '0.9',
+                },
+              }}
+            >
+              Explore more books
+            </Button>
+          </Box>
         )}
       </Box>
     </Container>

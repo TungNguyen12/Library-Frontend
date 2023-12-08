@@ -48,9 +48,9 @@ const BookCard: React.FC<any> = ({ book }) => {
           {title}
         </Typography>
 
-        <Typography variant="body2" color="text.secondary">
+        {/* <Typography variant="body2" color="text.secondary">
           Category: {category[0].name}
-        </Typography>
+        </Typography> */}
 
         <Typography variant="body2" color="text.secondary">
           Author: {author[0].fullName}

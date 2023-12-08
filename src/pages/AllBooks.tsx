@@ -68,7 +68,7 @@ const AllBooks = () => {
           sx={{
             flexGrow: 1,
             marginTop: '50px',
-            height: '412px',
+            height: 'vh',
             margin: 'auto',
           }}
         >
