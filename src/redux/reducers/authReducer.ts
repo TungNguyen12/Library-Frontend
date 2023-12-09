@@ -1,22 +1,22 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import User from '../../types/user/User'
+import User, { UpdateUserDto } from '../../types/user/User'
 import { LoginInterface } from '../../types/user/Login'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 
 export type AuthState = {
   currentUser: User | null
-  // accessToken: string | null
+  accessToken: string | null
   error?: string | null
 }
 
 export const initialState: AuthState = {
   currentUser: null,
-  // accessToken: null,
+  accessToken: null,
 }
 
 export const signinAsync = createAsyncThunk<
-  User,
+  AuthState,
   LoginInterface,
   { rejectValue: string }
 >('signinAsync', async ({ email, password }, { rejectWithValue, dispatch }) => {
@@ -25,7 +25,7 @@ export const signinAsync = createAsyncThunk<
       `http://localhost:3000/api/v1/users/signin`,
       { email, password }
     )
-    const jwtToken = response.data.accessToken
+    const jwtToken = response.data.accessToken as string
     console.log('🪙: token here:', jwtToken)
 
     const authenticatedUserProfile = await dispatch(
@@ -40,7 +40,12 @@ export const signinAsync = createAsyncThunk<
     }
     toast.success(`Login successfully`)
     console.log(authenticatedUserProfile)
-    return authenticatedUserProfile.payload
+
+    const result = {
+      currentUser: authenticatedUserProfile.payload,
+      accessToken: jwtToken,
+    }
+    return result
   } catch (e) {
     const error = e as Error
     toast.error(`Incorrect input, please try again`)
@@ -72,6 +77,24 @@ export const getUserProfileAsync = createAsyncThunk<
   }
 })
 
+// export const updateUserAsync = createAsyncThunk<
+//   User,
+//   UpdateUserDto,
+//   { rejectValue: string }
+// >('updateUserAsync', async ({updateInfo, jwtToken}, { rejectWithValue, dispatch }) => {
+//   try{
+//     const response = await axios.put( `http://localhost:3000/api/v1/users/update`,
+//     updateInfo,
+//     headers: {
+//       Authorization: `Bearer ${jwtToken}`,
+//     }
+//     )
+//   } catch(e) {
+//     const error = e as Error
+//     return rejectWithValue(error.message)
+//   }
+// })
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -84,7 +107,8 @@ const authSlice = createSlice({
     //SIGNIN
     builder
       .addCase(signinAsync.fulfilled, (state, action) => {
-        state.currentUser = { ...action.payload }
+        state.currentUser = action.payload.currentUser
+        state.accessToken = action.payload.accessToken
         console.log('auth reducer 😶‍🌫️😶‍🌫️😶‍🌫️', action.payload)
         state.error = null
       })

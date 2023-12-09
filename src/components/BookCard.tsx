@@ -58,7 +58,7 @@ const BookCard: React.FC<any> = ({ book }) => {
           {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Author: {author[0].fullName}
+          By {author[0].fullName}
         </Typography>
 
         <Button onClick={() => handleAddToCart(book)}>Add to cart</Button>

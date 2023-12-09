@@ -14,6 +14,8 @@ export type IFormInput = {
   role: Role[]
 }
 
+export type UpdateUserDto = Partial<Omit<IFormInput, 'role' | 'email'>>
+
 type User = IFormInput & {
   id: string
 }

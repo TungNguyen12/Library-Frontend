@@ -4,6 +4,7 @@ type UpdateBookDto = Partial<Book>
 
 type UpdateBookRequest = {
   id: string
+  accessToken: string
   update: UpdateBookDto
 }
 

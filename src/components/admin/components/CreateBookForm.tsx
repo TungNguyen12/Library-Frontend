@@ -11,8 +11,10 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { useAppDispatch } from '../../../hooks/useAppDispatch'
-import CreateBookDto from '../../../types/book/CreateBookRequest'
 import { createBookAsync } from '../../../redux/services/BookServices'
+import { useAppSelector } from '../../../hooks/useAppSelector'
+import { CreateBookDto } from '../../../types/book/CreateBookRequest'
+import toast from 'react-hot-toast'
 
 const signUp = yup
   .object({
@@ -28,6 +30,7 @@ const signUp = yup
   .required()
 
 export const CreateBookForm = () => {
+  const accessToken = useAppSelector((state) => state.authReducer.accessToken)
   const dispatch = useAppDispatch()
 
   const {
@@ -41,8 +44,12 @@ export const CreateBookForm = () => {
 
   const onSubmit = async (data: CreateBookDto) => {
     const newBook: CreateBookDto = data
-    await dispatch(createBookAsync(newBook))
-    reset()
+    if (accessToken) {
+      await dispatch(createBookAsync({ newBook, accessToken }))
+      reset()
+    } else {
+      toast.error('No valid token, please signin')
+    }
   }
 
   return (

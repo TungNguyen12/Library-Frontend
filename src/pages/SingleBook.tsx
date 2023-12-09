@@ -85,9 +85,7 @@ const SingleBook = () => {
             <CardMedia
               component="img"
               height="350"
-              image={
-                'https://upload.wikimedia.org/wikipedia/en/c/c8/Doraemon_volume_1_cover.jpg'
-              }
+              image={book?.img}
               alt={book?.title}
             />
           </Card>
