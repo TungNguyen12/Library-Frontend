@@ -12,6 +12,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useAppDispatch } from '../../../hooks/useAppDispatch'
 import { updateBookAsync } from '../../../redux/services/BookServices'
 import Book from '../../../types/book/Book'
+import { useAppSelector } from '../../../hooks/useAppSelector'
+import toast from 'react-hot-toast'
 
 const modify = yup
   .object()
@@ -36,6 +38,7 @@ const modify = yup
 
 export const ModifyBookForm: React.FC<any> = ({ book }) => {
   const dispatch = useAppDispatch()
+  const accessToken = useAppSelector((state) => state.authReducer.accessToken)
 
   const {
     register,
@@ -48,11 +51,13 @@ export const ModifyBookForm: React.FC<any> = ({ book }) => {
   const onSubmit: SubmitHandler<any> = ({ title, publisher }) => {
     console.log('new publisher here 🤔', publisher)
 
-    const { _id, __v, ...original } = book
-
-    const updated = { ...original, title, publisher }
+    const updated = { title, publisher }
     console.log(updated, '🤔🤔🤔')
-    dispatch(updateBookAsync({ id: book._id, update: updated }))
+    if (accessToken) {
+      dispatch(updateBookAsync({ id: book._id, update: updated, accessToken }))
+    } else {
+      toast.error('Invalid token, please signin')
+    }
   }
 
   return (

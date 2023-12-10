@@ -42,8 +42,8 @@ export const CreateBookForm = () => {
     resolver: yupResolver(signUp),
   })
 
-  const onSubmit = async (data: CreateBookDto) => {
-    const newBook: CreateBookDto = data
+  const onSubmit = async (data: any) => {
+    const newBook: CreateBookDto = { ...data, author: [data.author] }
     if (accessToken) {
       await dispatch(createBookAsync({ newBook, accessToken }))
       reset()

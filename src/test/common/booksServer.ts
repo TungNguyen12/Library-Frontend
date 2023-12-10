@@ -66,7 +66,7 @@ export const handlers = [
     const category = true
 
     if (category) {
-      const newBook: CreateBookDto = {
+      const newBook: any = {
         ISBN: '099777035P',
         title: 'something420P',
         edition: '1',

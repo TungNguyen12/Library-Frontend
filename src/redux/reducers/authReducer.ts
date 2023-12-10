@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import User, { UpdateUserDto } from '../../types/user/User'
+import User from '../../types/user/User'
 import { LoginInterface } from '../../types/user/Login'
 import axios from 'axios'
 import toast from 'react-hot-toast'

@@ -31,6 +31,7 @@ const SingleBook = () => {
 
   const admin = useAppSelector((state) => state.authReducer.currentUser)
   const isAdmin = admin?.role[0].title === 'Admin' ? true : false
+  const accessToken = useAppSelector((state) => state.authReducer.accessToken)
 
   const dispatch = useAppDispatch()
 
@@ -56,10 +57,12 @@ const SingleBook = () => {
     dispatch(addToCart(payload))
     toast.success(`Add ${payload.title} to cart`)
   }
-  const handleDeleteBook = (payload: Book) => {
-    dispatch(deleteBookAsync(payload._id))
-    navigate('/')
-    toast.error(`${payload.title} deleted!`)
+  const handleDeleteBook = (book: Book) => {
+    if (accessToken) {
+      dispatch(deleteBookAsync({ bookId: book._id, accessToken }))
+      navigate('/')
+      toast.error(`${book.title} deleted!`)
+    }
   }
 
   return (

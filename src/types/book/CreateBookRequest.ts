@@ -1,7 +1,7 @@
 import Book from './Book'
 
 export type CreateBookDto = Omit<Book, '_id' | 'author' | 'category'> & {
-  author: string
+  author: string[]
   category: string
 }
 

@@ -68,9 +68,9 @@ const BooksSlice = createSlice({
 
     //deleteBookAsync ADMIN
     builder.addCase(deleteBookAsync.fulfilled, (state, action) => {
-      const foundIndex = state.books.findIndex(
-        (book) => book._id === action.payload.toString()
-      )
+      const foundIndex = state.books.findIndex((book) => {
+        book._id === action.payload.toString()
+      })
       if (foundIndex !== -1) {
         const newBookList = state.books.splice(foundIndex, 1)
         return {
@@ -87,14 +87,13 @@ const BooksSlice = createSlice({
       }
     })
     builder.addCase(deleteBookAsync.rejected, (state, action) => {
-      if (action.payload instanceof Error) {
-        return {
-          ...state,
-          isLoading: false,
-          error: action.payload.message,
-        }
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
       }
     })
+
     //updateBookAsync ADMIN
     builder.addCase(updateBookAsync.fulfilled, (state, action) => {
       const updatedBook = action.payload

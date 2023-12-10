@@ -32,31 +32,31 @@ export const updateBookAsync = createAsyncThunk<
   }
 })
 
+type DeleteBookRequest = {
+  bookId: string
+  accessToken: string
+}
+
 //DELETE
-export const deleteBookAsync = createAsyncThunk(
-  'deleteBook',
-  async ({ BookId, accessToken }: any, { rejectWithValue }) => {
-    try {
-      const response = await axios.delete(
-        `http://localhost:3000/api/v1/books/${BookId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
-      if (response.data) {
-        throw new Error('Cannot delete this Book1')
-      }
-      toast.success(`Book deleted!`)
-      return BookId
-    } catch (e) {
-      console.log(e, '❌')
-      const error = e as AxiosError
-      return rejectWithValue(error.message)
-    }
+export const deleteBookAsync = createAsyncThunk<
+  string,
+  DeleteBookRequest,
+  { rejectValue: string }
+>('deleteBook', async ({ bookId, accessToken }, { rejectWithValue }) => {
+  try {
+    await axios.delete(`http://localhost:3000/api/v1/books/${bookId}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    toast.success(`Book deleted!`)
+    return bookId
+  } catch (e) {
+    console.log(e, '❌')
+    const error = e as AxiosError
+    return rejectWithValue(error.message)
   }
-)
+})
 
 // CREATE
 export const createBookAsync = createAsyncThunk<
