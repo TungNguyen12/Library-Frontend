@@ -12,7 +12,7 @@ import { useAppSelector } from '../hooks/useAppSelector'
 import ProductCard from '../components/BookCard'
 import Product from '../types/book/Book'
 import axios, { AxiosError } from 'axios'
-import { fetchAllCategories } from '../redux/reducers/categoriesReducer'
+import { getAllCategories } from '../redux/reducers/categoriesReducer'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { Toaster } from 'react-hot-toast'
 // import Carousel from "react-material-ui-carousel";
@@ -21,7 +21,7 @@ const Categories = () => {
   const categories = useAppSelector(
     (state) => state.categoriesReducer.categories
   )
-  const [categoryId, setCategoryId] = useState<number>(1)
+  const [categoryId, setCategoryId] = useState<string>('1')
   const [products, setProducts] = useState<Product[]>([])
 
   const dispatch = useAppDispatch()
@@ -39,7 +39,7 @@ const Categories = () => {
   }
 
   useEffect(() => {
-    dispatch(fetchAllCategories())
+    dispatch(getAllCategories())
   }, [])
 
   useEffect(() => {
@@ -52,18 +52,20 @@ const Categories = () => {
       <Box sx={{ flexGrow: 1, marginTop: '50px' }}>
         <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
           {categories.map((category) => (
-            <Grid item xs={3} key={category.id}>
+            <Grid item xs={3} key={category._id}>
               <Card>
                 <CardActionArea
                   onClick={() => {
-                    setCategoryId(category.id)
+                    setCategoryId(category._id)
                   }}
                 >
                   <CardMedia
                     component="img"
                     height="150px"
                     width="150px"
-                    image={category.image}
+                    image={
+                      'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/614WeIHGwRL._SY466_.jpg'
+                    }
                     alt={category.name}
                     style={{
                       objectFit: 'cover',

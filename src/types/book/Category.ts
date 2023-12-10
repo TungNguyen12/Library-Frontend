@@ -1,7 +1,6 @@
-type Category = {
-  id: number
+type CategoryAPI = {
+  _id: string
   name: string
-  image: string
 }
 
-export default Category
+export default CategoryAPI

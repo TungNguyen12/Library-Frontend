@@ -4,15 +4,16 @@ import { setupServer } from 'msw/node'
 import RegisterUserRequest from '../../types/user/RegisterUserRequest'
 import usersData from '../data/usersData'
 import User from '../../types/user/User'
+import { BASE_URL } from '../../common/common'
 
 export const handlers = [
   //GET ALL USERS
-  rest.get(`https://api.escuelajs.co/api/v1/users`, (req, res, ctx) => {
+  rest.get(`${BASE_URL}/users`, (req, res, ctx) => {
     return res(ctx.json(usersData))
   }),
 
   //REGISTER NEW USER
-  rest.post(`https://api.escuelajs.co/api/v1/users/`, async (req, res, ctx) => {
+  rest.post(`${BASE_URL}/users/`, async (req, res, ctx) => {
     const input: RegisterUserRequest = await req.json()
 
     const user = usersData.find((user) => user.email === input.email)

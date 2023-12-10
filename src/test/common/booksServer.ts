@@ -6,14 +6,15 @@ import CreateBookDto from '../../types/book/CreateBookRequest'
 import categoriesData from '../data/categoriesData'
 import Book from '../../types/book/Book'
 import UpdateBookRequest from '../../types/book/UpdateBookRequest'
+import { BASE_URL } from '../../common/common'
 
 export const handlers = [
-  rest.get(`https://api.escuelajs.co/api/v1/books`, (req, res, ctx) => {
+  rest.get(`${BASE_URL}/books`, (req, res, ctx) => {
     return res(ctx.json(booksData))
   }),
 
   rest.delete(
-    'https://api.escuelajs.co/api/v1/books/:bookId',
+    '${BASE_URL}/books/:bookId',
 
     (req, res, ctx) => {
       const { id } = req.params
@@ -24,42 +25,39 @@ export const handlers = [
       }
     }
   ),
-  rest.put(
-    `https://api.escuelajs.co/api/v1/Books/:id`,
-    async (req, res, ctx) => {
-      const update: UpdateBookRequest = await req.json()
-      const { id } = req.params
+  rest.put(`${BASE_URL}/Books/:id`, async (req, res, ctx) => {
+    const update: UpdateBookRequest = await req.json()
+    const { id } = req.params
 
-      const index = booksData.findIndex((p) => p._id === id)
+    const index = booksData.findIndex((p) => p._id === id)
 
-      if (index !== -1) {
-        return res(
-          ctx.json(
-            (booksData[index] = {
-              ...booksData[index],
-              ...update,
-            })
-          )
-        )
-      } else {
-        ctx.status(400)
-        return res(
-          ctx.json({
-            message: [
-              'price must be a positive number',
-              'images must contain at least 1 elements',
-              'each value in images must be a URL address',
-              'images must be an array',
-            ],
-            error: 'Bad Request',
-            statusCode: 400,
+    if (index !== -1) {
+      return res(
+        ctx.json(
+          (booksData[index] = {
+            ...booksData[index],
+            ...update,
           })
         )
-      }
+      )
+    } else {
+      ctx.status(400)
+      return res(
+        ctx.json({
+          message: [
+            'price must be a positive number',
+            'images must contain at least 1 elements',
+            'each value in images must be a URL address',
+            'images must be an array',
+          ],
+          error: 'Bad Request',
+          statusCode: 400,
+        })
+      )
     }
-  ),
+  }),
 
-  rest.post(`https://api.escuelajs.co/api/v1/Books/`, async (req, res, ctx) => {
+  rest.post(`${BASE_URL}/Books/`, async (req, res, ctx) => {
     const input: CreateBookDto = await req.json()
 
     // const category = categoriesData.find((c) => c.id === input.categoryId)

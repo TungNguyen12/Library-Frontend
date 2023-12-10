@@ -5,6 +5,7 @@ import axios, { AxiosError } from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import Book from '../../types/book/Book'
 import toast from 'react-hot-toast'
+import { BASE_URL } from '../../common/common'
 
 // UPDATE
 export const updateBookAsync = createAsyncThunk<
@@ -14,15 +15,11 @@ export const updateBookAsync = createAsyncThunk<
 >('updateBook', async ({ id, update, accessToken }, { rejectWithValue }) => {
   console.log(id, update, '🥲')
   try {
-    const response = await axios.put<Book>(
-      `http://localhost:3000/api/v1/books/${id}`,
-      update,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    )
+    const response = await axios.put<Book>(`${BASE_URL}/books/${id}`, update, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
     toast.success(`Modified successfully, refresh to see the updated info`)
     return response.data
   } catch (e) {
@@ -44,7 +41,7 @@ export const deleteBookAsync = createAsyncThunk<
   { rejectValue: string }
 >('deleteBook', async ({ bookId, accessToken }, { rejectWithValue }) => {
   try {
-    await axios.delete(`http://localhost:3000/api/v1/books/${bookId}`, {
+    await axios.delete(`${BASE_URL}/books/${bookId}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -65,15 +62,11 @@ export const createBookAsync = createAsyncThunk<
   { rejectValue: string }
 >('createBook', async ({ newBook, accessToken }, { rejectWithValue }) => {
   try {
-    const response = await axios.post(
-      `http://localhost:3000/api/v1/books`,
-      newBook,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    )
+    const response = await axios.post(`${BASE_URL}/books`, newBook, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
     const createdBook: Book = response.data
     console.log(createdBook)
     toast.success(`Create new Book successfully: ${createdBook.title}`)
@@ -93,7 +86,7 @@ export const fetchSingleBook = createAsyncThunk<
   { rejectValue: string }
 >('fetchBookByCategories', async (id, { rejectWithValue }) => {
   try {
-    const response = await axios.get(`http://localhost:3000/api/v1/books/${id}`)
+    const response = await axios.get(`${BASE_URL}/books/${id}`)
     const category = response.data
     return category
   } catch (e) {
@@ -107,7 +100,7 @@ export const fetchAllBooksAsync = createAsyncThunk(
   'fetchAllBooksAsync',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/v1/books`)
+      const response = await axios.get(`${BASE_URL}/books`)
       const data: Book[] = response.data.data
       return data
     } catch (e) {

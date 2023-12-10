@@ -6,11 +6,20 @@ import { Toaster } from 'react-hot-toast'
 
 import { Box } from '@mui/material'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useAppDispatch } from '../hooks/useAppDispatch'
+import { getAllAuthorsAsync } from '../redux/reducers/authorReducer'
+import { getAllCategories } from '../redux/reducers/categoriesReducer'
 
 const AdminDashboard = () => {
   const [isOpenProduct, setIsOpenProduct] = useState(true)
   const [isOpenUser, setIsOpenUser] = useState(false)
+
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(getAllAuthorsAsync())
+    dispatch(getAllCategories())
+  }, [])
 
   const handleOpenProduct = () => {
     setIsOpenProduct(!isOpenProduct)

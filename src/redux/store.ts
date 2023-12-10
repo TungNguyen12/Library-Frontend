@@ -21,6 +21,7 @@ import {
   persistReducer,
   persistStore,
 } from 'redux-persist'
+import authorReducer from './reducers/authorReducer'
 
 const rootReducer = combineReducers({
   booksReducer,
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   cartReducer,
   authReducer,
   categoriesReducer,
+  authorReducer,
 })
 
 const persistConfig: PersistConfig<any> = {

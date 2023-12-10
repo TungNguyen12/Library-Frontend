@@ -1,21 +1,18 @@
-import Category from "../../types/book/Category";
+import Category from '../../types/book/Category'
 
 const categoriesData: Category[] = [
-    {
-        id: 1,
-        name: "car",
-        image: "image1",
-    },
-    {
-        id: 2,
-        name: "pant",
-        image: "image2",
-    },
-    {
-        id: 3,
-        name: "shirt",
-        image: "image3",
-    },
-];
+  {
+    _id: '1',
+    name: 'car',
+  },
+  {
+    _id: '2',
+    name: 'pant',
+  },
+  {
+    _id: '3',
+    name: 'shirt',
+  },
+]
 
-export default categoriesData;
+export default categoriesData

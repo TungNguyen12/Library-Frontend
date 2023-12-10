@@ -3,6 +3,7 @@ import User from '../../types/user/User'
 import { LoginInterface } from '../../types/user/Login'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { BASE_URL } from '../../common/common'
 
 export type AuthState = {
   currentUser: User | null
@@ -21,10 +22,10 @@ export const signinAsync = createAsyncThunk<
   { rejectValue: string }
 >('signinAsync', async ({ email, password }, { rejectWithValue, dispatch }) => {
   try {
-    const response = await axios.post(
-      `http://localhost:3000/api/v1/users/signin`,
-      { email, password }
-    )
+    const response = await axios.post(`${BASE_URL}/users/signin`, {
+      email,
+      password,
+    })
     const jwtToken = response.data.accessToken as string
     console.log('🪙: token here:', jwtToken)
 
@@ -59,14 +60,11 @@ export const getUserProfileAsync = createAsyncThunk<
   { rejectValue: string }
 >('getUserProfileAsync', async (jwtToken, { rejectWithValue }) => {
   try {
-    const response = await axios.get(
-      `http://localhost:3000/api/v1/users/profile`,
-      {
-        headers: {
-          Authorization: `Bearer ${jwtToken}`,
-        },
-      }
-    )
+    const response = await axios.get(`${BASE_URL}/users/profile`, {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    })
 
     const userProfile = response.data
     console.log(userProfile)
@@ -83,7 +81,7 @@ export const getUserProfileAsync = createAsyncThunk<
 //   { rejectValue: string }
 // >('updateUserAsync', async ({updateInfo, jwtToken}, { rejectWithValue, dispatch }) => {
 //   try{
-//     const response = await axios.put( `http://localhost:3000/api/v1/users/update`,
+//     const response = await axios.put( `${BASE_URL}/users/update`,
 //     updateInfo,
 //     headers: {
 //       Authorization: `Bearer ${jwtToken}`,

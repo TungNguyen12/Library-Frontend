@@ -4,6 +4,7 @@ import Product from '../../types/book/Book'
 import Book from '../../types/book/Book'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { BASE_URL } from '../../common/common'
 
 const initialState: Book[] = []
 
@@ -13,14 +14,11 @@ export const addBookToCartDBAsync = createAsyncThunk<
   { rejectValue: string }
 >('addBookToCartDBAsync', async ({ jwtToken, userId }, { rejectWithValue }) => {
   try {
-    const response = await axios.put(
-      `http://localhost:3000/api/v1/carts/${userId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${jwtToken}`,
-        },
-      }
-    )
+    const response = await axios.put(`${BASE_URL}/carts/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    })
 
     const book = response.data
     console.log('book returned after send req to cart db: 🤔✅:', book)

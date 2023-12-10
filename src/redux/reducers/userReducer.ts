@@ -4,6 +4,7 @@ import axios, { AxiosError } from 'axios'
 import CreateUserDto from '../../types/user/RegisterUserRequest'
 import UsersReducerState from '../../types/user/UsersReducerState'
 import toast from 'react-hot-toast'
+import { BASE_URL } from '../../common/common'
 
 const initialState: UsersReducerState = {
   users: [],
@@ -15,7 +16,7 @@ export const getAllUsersAsync = createAsyncThunk<
   { rejectValue: string }
 >('getAllUsers', async (_, { rejectWithValue }) => {
   try {
-    const response = await axios.get(`https://api.escuelajs.co/api/v1/users`)
+    const response = await axios.get(`${BASE_URL}/users`)
     return response.data
   } catch (e) {
     const error = e as Error
@@ -33,12 +34,9 @@ export const checkEmailIsAvailable = createAsyncThunk<
   { rejectValue: string }
 >('checkEmail', async (mail: string, { rejectWithValue }) => {
   try {
-    const response = await axios.post(
-      `https://api.escuelajs.co/api/v1/users/is-available`,
-      {
-        email: mail,
-      }
-    )
+    const response = await axios.post(`${BASE_URL}/users/is-available`, {
+      email: mail,
+    })
     return response.data
   } catch (e) {
     const error = e as AxiosError
