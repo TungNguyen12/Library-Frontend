@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useAppSelector } from '../hooks/useAppSelector'
 import { useAppDispatch } from '../hooks/useAppDispatch'
-import { fetchAllBooksAsync } from '../redux/services/BookServices'
+import { getAllBooksAsync } from '../redux/services/BookServices'
 import { sortBookByTitle } from '../redux/reducers/booksReducer'
 
 import BookCard from '../components/BookCard'
@@ -19,7 +19,7 @@ const AllBooks = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(fetchAllBooksAsync())
+    dispatch(getAllBooksAsync())
   }, [])
 
   const handleSearchBook = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +61,7 @@ const AllBooks = () => {
             Sort by Z-A{' '}
           </Button>
 
-          <SearchInput handleSearchBook={handleSearchBook} />
+          {/* <SearchInput handleSearchBook={handleSearchBook} /> */}
         </Box>
 
         <Box
@@ -72,7 +72,7 @@ const AllBooks = () => {
             margin: 'auto',
           }}
         >
-          {isLoading && <Typography>LOADINGGGGGGGGGGGGG</Typography>}
+          {isLoading && <Typography>LOADING</Typography>}
 
           {books && !isLoading && (
             <Grid container spacing={{ xs: 2, md: 3 }} columns={12}>

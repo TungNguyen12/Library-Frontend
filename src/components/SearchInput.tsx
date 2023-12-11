@@ -2,13 +2,15 @@ import * as React from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 
-const SearchInput: React.FC<{
-  handleSearchBook: (e: React.ChangeEvent<any>) => void
-}> = ({ handleSearchBook }) => {
+type Props = {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+const SearchInput = ({ onChange }: Props) => {
   return (
     <Box
       sx={{
-        width: 500,
+        width: '200',
         maxWidth: '100%',
       }}
     >
@@ -16,7 +18,7 @@ const SearchInput: React.FC<{
         fullWidth
         label="Search..."
         id="fullWidth"
-        onChange={(e: React.ChangeEvent<any>) => handleSearchBook(e)}
+        onChange={onChange}
       />
     </Box>
   )

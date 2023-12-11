@@ -6,6 +6,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import Book from '../../types/book/Book'
 import toast from 'react-hot-toast'
 import { BASE_URL } from '../../common/common'
+import { FetchBooksPaginatedAndFiltered } from '../../types/book/AllBooksApi'
 
 // UPDATE
 export const updateBookAsync = createAsyncThunk<
@@ -80,11 +81,11 @@ export const createBookAsync = createAsyncThunk<
 })
 
 // GET A SINGLE Book
-export const fetchSingleBook = createAsyncThunk<
+export const getSingleBook = createAsyncThunk<
   Book,
   string,
   { rejectValue: string }
->('fetchBookByCategories', async (id, { rejectWithValue }) => {
+>('getBookByCategories', async (id, { rejectWithValue }) => {
   try {
     const response = await axios.get(`${BASE_URL}/books/${id}`)
     const category = response.data
@@ -96,12 +97,51 @@ export const fetchSingleBook = createAsyncThunk<
 })
 
 // GET ALL
-export const fetchAllBooksAsync = createAsyncThunk(
-  'fetchAllBooksAsync',
+export const getAllBooksAsync = createAsyncThunk(
+  'getAllBooksAsync',
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(`${BASE_URL}/books`)
       const data: Book[] = response.data.data
+      return data
+    } catch (e) {
+      const error = e as AxiosError
+      return rejectWithValue(error.message)
+    }
+  }
+)
+
+// GET ALL WITH PAGINATED
+export const getAllBooksPaginatedAsync = createAsyncThunk(
+  'getAllBooksPaginatedAsync',
+  async (
+    {
+      page,
+      perPage,
+      searchQuery,
+      authorName,
+      categoryName,
+      edition,
+      publisher,
+      sortBy,
+      sortOrder,
+    }: FetchBooksPaginatedAndFiltered,
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/books/?filter=1&page=${page}` +
+          `&perPage=${perPage}` +
+          `&sortBy=${sortBy}` +
+          `&sortOrder=${sortOrder}` +
+          `&search=${searchQuery}` +
+          `&publisher=${publisher}` +
+          `&authorName=${authorName}` +
+          `&categoryName=${categoryName}` +
+          `&edition=${edition}`
+      )
+      //PaginatedData<Book>
+      const data: any = response.data.data
       return data
     } catch (e) {
       const error = e as AxiosError

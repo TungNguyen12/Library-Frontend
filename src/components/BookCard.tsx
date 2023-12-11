@@ -53,13 +53,15 @@ const BookCard: React.FC<any> = ({ book }) => {
           }}
         />
       </CardActions>
-      <CardContent>
+      <CardContent
+        sx={{ padding: '0 auto', '&:last-child': { paddingBottom: '0' } }}
+      >
         <Typography variant="body2" color="text.secondary">
           {title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        {/* <Typography variant="body2" color="text.secondary">
           By {author[0].fullName}
-        </Typography>
+        </Typography> */}
 
         <Button onClick={() => handleAddToCart(book)}>Add to cart</Button>
       </CardContent>

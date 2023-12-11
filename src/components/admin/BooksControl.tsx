@@ -6,7 +6,7 @@ import { Box, Button, Stack } from '@mui/material'
 import SearchInput from '../SearchInput'
 import { BookPaginationActionsTable } from './components/BookPagination'
 import { CreateBookForm } from './components/CreateBookForm'
-import { fetchAllBooksAsync } from '../../redux/services/BookServices'
+import { getAllBooksAsync } from '../../redux/services/BookServices'
 
 const BookControl = () => {
   const [search, setSearch] = useState<string>('')
@@ -15,7 +15,7 @@ const BookControl = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(fetchAllBooksAsync())
+    dispatch(getAllBooksAsync())
   }, [])
 
   const handleSearchBook = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +64,7 @@ const BookControl = () => {
           marginTop: '10px',
         }}
       >
-        <SearchInput handleSearchBook={handleSearchBook} />
+        {/* <SearchInput handleSearchBook={handleSearchBook} /> */}
         <BookPaginationActionsTable rows={booksToShow} />
       </Box>
     </Box>

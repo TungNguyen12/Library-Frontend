@@ -5,12 +5,13 @@ import ErrorPage from './pages/ErrorPage'
 import Cart from './pages/Cart'
 import UserProfile from './pages/UserProfile'
 import SingleBook from './pages/SingleBook'
-import Categories from './pages/Categories'
 
 import { Signin } from './pages/Signin'
 import AdminDashboard from './pages/AdminDashboard'
 import CheckRole from './components/PrivateUserRoute'
 import SignUp from './pages/SignUp'
+
+import HomePage from './pages/HomePage'
 
 const App = () => {
   const router = createBrowserRouter([
@@ -21,7 +22,7 @@ const App = () => {
       children: [
         {
           path: '',
-          element: <AllBooks />,
+          element: <HomePage />,
         },
         {
           path: 'cart',
@@ -45,7 +46,7 @@ const App = () => {
         },
         {
           path: 'categories',
-          element: <Categories />,
+          element: <AllBooks />,
         },
         {
           path: 'signup',

@@ -40,7 +40,7 @@ const UserControl = () => {
         marginTop: '10px',
       }}
     >
-      <SearchInput handleSearchBook={handleSearchUser} />
+      {/* <SearchInput handleSearchBook={handleSearchUser} /> */}
       <UserPaginationActionsTable rows={usersToShow} />
     </Box>
   )

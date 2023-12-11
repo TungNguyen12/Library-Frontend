@@ -3,7 +3,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import {
   createBookAsync,
   deleteBookAsync,
-  fetchAllBooksAsync,
+  getAllBooksAsync,
   updateBookAsync,
 } from '../services/BookServices'
 import BookReducerState from '../../types/book/BookReducerState'
@@ -26,8 +26,8 @@ const BooksSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // fetchAllBooksAsync
-    builder.addCase(fetchAllBooksAsync.fulfilled, (state, action) => {
+    // getAllBooksAsync
+    builder.addCase(getAllBooksAsync.fulfilled, (state, action) => {
       if (!(action.payload instanceof Error)) {
         return {
           ...state,
@@ -36,13 +36,13 @@ const BooksSlice = createSlice({
         }
       }
     })
-    builder.addCase(fetchAllBooksAsync.pending, (state, action) => {
+    builder.addCase(getAllBooksAsync.pending, (state, action) => {
       return {
         ...state,
         isLoading: true,
       }
     })
-    builder.addCase(fetchAllBooksAsync.rejected, (state, action) => {
+    builder.addCase(getAllBooksAsync.rejected, (state, action) => {
       if (action.payload instanceof Error) {
         return {
           ...state,

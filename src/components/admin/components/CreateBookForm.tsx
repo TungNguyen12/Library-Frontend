@@ -171,11 +171,6 @@ export const CreateBookForm = () => {
                 </Select>
               </FormControl>
             </Grid>
-            {/* {(errors.author || errors.category) && (
-              <Typography color="error">
-                Have you selected the author and category?
-              </Typography>
-            )} */}
           </Grid>
           <Button
             type="submit"
