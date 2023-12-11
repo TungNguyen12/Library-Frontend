@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import User from '../../types/user/User'
+import User, { UpdateUserDto, UpdateUserRequest } from '../../types/user/User'
 import { LoginInterface } from '../../types/user/Login'
 import axios from 'axios'
 import toast from 'react-hot-toast'
@@ -75,23 +75,40 @@ export const getUserProfileAsync = createAsyncThunk<
   }
 })
 
-// export const updateUserAsync = createAsyncThunk<
-//   User,
-//   UpdateUserDto,
-//   { rejectValue: string }
-// >('updateUserAsync', async ({updateInfo, jwtToken}, { rejectWithValue, dispatch }) => {
-//   try{
-//     const response = await axios.put( `${BASE_URL}/users/update`,
-//     updateInfo,
-//     headers: {
-//       Authorization: `Bearer ${jwtToken}`,
-//     }
-//     )
-//   } catch(e) {
-//     const error = e as Error
-//     return rejectWithValue(error.message)
-//   }
-// })
+export const updateUserAsync = createAsyncThunk<
+  AuthState,
+  UpdateUserRequest,
+  { rejectValue: string }
+>(
+  'updateUserAsync',
+  async ({ update, accessToken }, { rejectWithValue, dispatch }) => {
+    try {
+      await axios.put(`${BASE_URL}/users/update`, update, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+
+      const newProfile = await dispatch(getUserProfileAsync(accessToken))
+
+      if (typeof newProfile.payload === 'string' || !newProfile.payload) {
+        throw Error(newProfile.payload || 'Cannot update')
+      }
+      toast.success(`Update successfully`)
+      console.log(newProfile)
+
+      const result = {
+        currentUser: newProfile.payload,
+        accessToken: accessToken,
+      }
+
+      return result
+    } catch (e) {
+      const error = e as Error
+      return rejectWithValue(error.message)
+    }
+  }
+)
 
 const authSlice = createSlice({
   name: 'auth',
@@ -114,6 +131,16 @@ const authSlice = createSlice({
         state.error = action.payload as string
       })
 
+    //UPDATE PROFILE
+    builder
+      .addCase(updateUserAsync.fulfilled, (state, action) => {
+        state.currentUser = action.payload.currentUser
+        console.log('update user at auth 😶‍🌫️😶‍🌫️😶‍🌫️', action.payload)
+        state.error = null
+      })
+      .addCase(updateUserAsync.rejected, (state, action) => {
+        state.error = action.payload as string
+      })
     //GET USER PROFILE
     builder
       .addCase(getUserProfileAsync.fulfilled, (state, { payload }) => {

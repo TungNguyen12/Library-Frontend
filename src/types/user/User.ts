@@ -14,7 +14,14 @@ export type IFormInput = {
   role: Role[]
 }
 
-export type UpdateUserDto = Partial<Omit<IFormInput, 'role' | 'email'>>
+export type UpdateUserDto = Partial<
+  Omit<IFormInput, 'role' | 'email' | 'password'>
+>
+
+export type UpdateUserRequest = {
+  update: UpdateUserDto
+  accessToken: string
+}
 
 type User = IFormInput & {
   id: string

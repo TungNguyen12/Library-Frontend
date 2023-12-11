@@ -15,7 +15,6 @@ import { createBookAsync } from '../../../redux/services/BookServices'
 import { useAppSelector } from '../../../hooks/useAppSelector'
 import { CreateBookDto } from '../../../types/book/CreateBookRequest'
 import toast from 'react-hot-toast'
-import { useEffect, useState } from 'react'
 import { AuthorAPI } from '../../../redux/reducers/authorReducer'
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import Category from '../../../types/book/Category'
@@ -26,7 +25,7 @@ const signUp = yup
     ISBN: yup.string().required('ISBN is required'),
     category: yup.string().required('Please select a category'),
     publisher: yup.string().required('Publisher is required'),
-    img: yup.string().required('Image is required and has to be an URL'),
+    img: yup.string().url().required('Image is required and has to be an URL'),
     author: yup.string().required('Please select an author'),
   })
   .required()
@@ -137,8 +136,7 @@ export const CreateBookForm = () => {
                 <Select
                   labelId="selectAuthor"
                   id="selectAuthor"
-                  value={''}
-                  // {...register('author')}
+                  {...register('author')}
                   label="Author(s)"
                   error={Boolean(errors.author)}
                 >
