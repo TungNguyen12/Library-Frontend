@@ -19,7 +19,7 @@ import { AuthorAPI } from '../../../redux/reducers/authorReducer'
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import Category from '../../../types/book/Category'
 
-const signUp = yup
+const createBook = yup
   .object({
     title: yup.string().required('Title is required'),
     ISBN: yup.string().required('ISBN is required'),
@@ -46,7 +46,7 @@ export const CreateBookForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(signUp),
+    resolver: yupResolver(createBook),
   })
 
   const onSubmit = async (data: any) => {

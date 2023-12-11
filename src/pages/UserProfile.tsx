@@ -2,16 +2,29 @@ import Signin from './Signin'
 import {
   Avatar,
   Box,
+  Button,
   Card,
   CardContent,
+  Dialog,
   Divider,
   Typography,
 } from '@mui/material'
 import UpdateUserForm from '../components/UpdateUserForm'
 import { useAppSelector } from '../hooks/useAppSelector'
+import { useState } from 'react'
+import EditIcon from '../components/icons/EditIcon'
 
 const UserProfile = () => {
   const validUser = useAppSelector((state) => state.authReducer.currentUser)
+  const [openModal, setOpenModal] = useState(false)
+
+  const handleOpenModal = () => {
+    setOpenModal(true)
+  }
+
+  const handleCloseModal = () => {
+    setOpenModal(false)
+  }
 
   return (
     <div>
@@ -25,7 +38,7 @@ const UserProfile = () => {
           <>
             <CardContent>
               <Avatar
-                sx={{ width: 60, height: 60, margin: 'auto' }}
+                sx={{ width: 80, height: 80, margin: 'auto' }}
                 src={validUser?.avatar}
               />
               <h3
@@ -40,12 +53,25 @@ const UserProfile = () => {
                 {validUser?.firstName} {validUser?.lastName}
               </h3>
             </CardContent>
-            <Typography
-              variant="h6"
-              sx={{ textAlign: 'left', padding: '0rem 3rem' }}
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}
             >
-              Personal Details
-            </Typography>
+              <Typography
+                variant="h6"
+                sx={{ textAlign: 'left', padding: '0rem 3rem' }}
+              >
+                Personal Details
+              </Typography>
+              <Button
+                sx={{ padding: '8px' }}
+                onClick={handleOpenModal}
+                startIcon={<EditIcon />}
+              ></Button>
+            </Box>
             <Divider light sx={{ margin: '0.5rem 0rem' }} />
             <Box
               sx={{
@@ -147,8 +173,9 @@ const UserProfile = () => {
           <Signin />
         )}
       </Card>
-
-      <UpdateUserForm />
+      <Dialog open={openModal} onClose={handleCloseModal}>
+        <UpdateUserForm onClose={handleCloseModal} />
+      </Dialog>
     </div>
   )
 }

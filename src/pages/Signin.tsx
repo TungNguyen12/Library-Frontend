@@ -1,27 +1,34 @@
-import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
-import CssBaseline from '@mui/material/CssBaseline'
-import TextField from '@mui/material/TextField'
-import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
+// MUI
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  CssBaseline,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+} from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import Typography from '@mui/material/Typography'
-import Container from '@mui/material/Container'
+import { Toaster } from 'react-hot-toast'
 
+// YUP
 import * as yup from 'yup'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
+// HOOKS
 import { useAppDispatch } from '../hooks/useAppDispatch'
-import { LoginInterface } from '../types/user/Login'
-import { signinAsync } from '../redux/reducers/authReducer'
 import { useAppSelector } from '../hooks/useAppSelector'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { Link } from '@mui/material'
-import { Toaster } from 'react-hot-toast'
 
-const signUp = yup
+// REACT/REDUX
+import { LoginInterface } from '../types/user/Login'
+import { signinAsync } from '../redux/reducers/authReducer'
+
+const signIn = yup
   .object({
     email: yup.string().required(),
     password: yup.string().min(1).max(20).required(),
@@ -37,7 +44,7 @@ export const Signin = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(signUp),
+    resolver: yupResolver(signIn),
   })
 
   const navigate = useNavigate()
@@ -46,11 +53,6 @@ export const Signin = () => {
   const [success, setSuccess] = useState(false)
   const onSubmit: SubmitHandler<LoginInterface> = (data) => {
     dispatch(signinAsync(data))
-
-    // console.log(currentUser)
-    // if (currentUser !== null) {
-    //   navigate('/')
-    // }
     reset()
     setSuccess(true)
     setTimeout(() => setSuccess(false), 4000)
@@ -136,7 +138,7 @@ export const Signin = () => {
             </Grid>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="signup" variant="body2">
+                <Link href="signIn" variant="body2">
                   You don't have an account? Sign up
                 </Link>
               </Grid>
