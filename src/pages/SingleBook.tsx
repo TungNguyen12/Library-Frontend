@@ -35,7 +35,7 @@ const SingleBook = () => {
 
   const dispatch = useAppDispatch()
 
-  const fetchSingleBook = async () => {
+  const getSingleBook = async () => {
     try {
       const response = await axios.get<any, AxiosResponse<Book>>(
         `http://localhost:3000/api/v1/books/${bookId}`
@@ -50,7 +50,7 @@ const SingleBook = () => {
   }
 
   useEffect(() => {
-    fetchSingleBook()
+    getSingleBook()
   }, [bookId])
 
   const handleAddToCart = (payload: Book) => {

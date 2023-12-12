@@ -29,6 +29,32 @@ export const addBookToCartDBAsync = createAsyncThunk<
   }
 })
 
+export type BorrowRequest = {
+  id: string[] //array of selected book ID
+  accessToken: string
+}
+
+export const borrowBooksAsync = createAsyncThunk<
+  boolean,
+  BorrowRequest,
+  { rejectValue: string }
+>('borrowBooksAsync', async ({ id, accessToken }, { rejectWithValue }) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/books/borrow`, id, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    const isBorrowed = response.data
+    console.log(isBorrowed, 'borrow books successfully')
+    return isBorrowed
+  } catch (e) {
+    const error = e as Error
+    console.log('something went wrong, check the error')
+    return rejectWithValue(error.message)
+  }
+})
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
@@ -48,7 +74,7 @@ const cartSlice = createSlice({
       if (foundIndex !== -1) {
         state.splice(foundIndex, 1)
       } else {
-        alert('You dont have this in your cart')
+        alert('You do not have this in your cart')
       }
     },
 

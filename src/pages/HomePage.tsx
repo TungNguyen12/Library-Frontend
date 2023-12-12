@@ -46,8 +46,6 @@ const HomePage: React.FC = () => {
           `&categoryName=${filterOptions.categoryName}`
       )
       const responseData: PaginatedData<Book> = response.data
-      console.log(filterOptions, 'filter option')
-      console.log(responseData, 'data here')
       setData(responseData)
       setIsLoading(false)
     } catch (e) {
@@ -111,6 +109,11 @@ const HomePage: React.FC = () => {
           <Skeleton variant="rectangular" width="100%" height={400} />
         )}
         {error && <Typography variant="h4">Items not found.</Typography>}
+        {data && data.data.length < 1 && (
+          <Box sx={{ margin: 'auto' }}>
+            <Typography>Book not found</Typography>
+          </Box>
+        )}
         {data && (
           <Box
             sx={{

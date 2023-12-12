@@ -13,9 +13,46 @@ import UpdateUserForm from '../components/UpdateUserForm'
 import { useAppSelector } from '../hooks/useAppSelector'
 import { useState } from 'react'
 import EditIcon from '../components/icons/EditIcon'
+import { BASE_URL } from '../common/common'
+import axios from 'axios'
+import Book from '../types/book/Book'
 
 const UserProfile = () => {
-  const validUser = useAppSelector((state) => state.authReducer.currentUser)
+  const { currentUser, accessToken } = useAppSelector(
+    (state) => state.authReducer
+  )
+
+  type BookInfo = {
+    _id: string
+    title: string
+    img: string
+  }
+
+  type LoanInfo = {
+    borrowed_Date: string
+    returned_Date: string
+    book: BookInfo
+    return: boolean
+  }
+
+  type History = LoanInfo[]
+
+  const handleGetHistory = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/books/history`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      const result = response.data
+      console.log('you borrow books ✅✅')
+      return result
+    } catch (e) {
+      console.log('fail to borrow ❌')
+      return e as Error
+    }
+  }
+
   const [openModal, setOpenModal] = useState(false)
 
   const handleOpenModal = () => {
@@ -34,12 +71,12 @@ const UserProfile = () => {
           textAlign: 'center',
         }}
       >
-        {validUser ? (
+        {currentUser ? (
           <>
             <CardContent>
               <Avatar
                 sx={{ width: 80, height: 80, margin: 'auto' }}
-                src={validUser?.avatar}
+                src={currentUser?.avatar}
               />
               <h3
                 style={{
@@ -50,9 +87,18 @@ const UserProfile = () => {
                   marginBottom: 0,
                 }}
               >
-                {validUser?.firstName} {validUser?.lastName}
+                {currentUser?.firstName} {currentUser?.lastName}
               </h3>
             </CardContent>
+            <Button
+              size="medium"
+              // onClick={() => navigate('/checkout')}
+              onClick={handleGetHistory}
+              variant="contained"
+              // disabled={!Boolean(books.length)}
+            >
+              Get history
+            </Button>
             <Box
               sx={{
                 display: 'flex',
@@ -104,7 +150,7 @@ const UserProfile = () => {
                     fontWeight: '500',
                   }}
                 >
-                  {validUser?.firstName} {validUser?.lastName}
+                  {currentUser?.firstName} {currentUser?.lastName}
                 </Typography>
               </Box>
               <Box>
@@ -124,7 +170,7 @@ const UserProfile = () => {
                     fontWeight: '500',
                   }}
                 >
-                  {validUser?.email}
+                  {currentUser?.email}
                 </Typography>
               </Box>
               <Box>
@@ -144,7 +190,7 @@ const UserProfile = () => {
                     fontWeight: '500',
                   }}
                 >
-                  {validUser?.phoneNumber}
+                  {currentUser?.phoneNumber}
                 </Typography>
               </Box>
               <Box>
@@ -164,7 +210,7 @@ const UserProfile = () => {
                     fontWeight: '500',
                   }}
                 >
-                  {validUser?.address}
+                  {currentUser?.address}
                 </Typography>
               </Box>
             </Box>

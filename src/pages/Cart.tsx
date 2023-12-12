@@ -19,10 +19,39 @@ import {
 import CartItem from '../components/CartItem'
 import { useAppSelector } from '../hooks/useAppSelector'
 import Book from '../types/book/Book'
+import { useAppDispatch } from '../hooks/useAppDispatch'
+import { useEffect } from 'react'
+import { borrowBooksAsync } from '../redux/reducers/cardReducer'
+import { BASE_URL } from '../common/common'
+import axios from 'axios'
 
 function Cart() {
   const navigate = useNavigate()
-  const items = useAppSelector((state) => state.cartReducer)
+  const dispatch = useAppDispatch()
+  const books = useAppSelector((state) => state.cartReducer)
+  const accessToken = useAppSelector((state) => state.authReducer.accessToken)
+
+  const bookIds: string[] = books.map((book) => book._id)
+
+  const handleBorrowBook = async () => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/books/borrow`,
+        { id: bookIds },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      const result = response.data
+      console.log('you borrow books ✅✅')
+      return result
+    } catch (e) {
+      console.log('fail to borrow ❌')
+      return e as Error
+    }
+  }
 
   return (
     <Container sx={{ margin: '50px auto', padding: '25px' }}>
@@ -33,14 +62,15 @@ function Cart() {
           </Typography>
           <Button
             size="medium"
-            onClick={() => navigate('/checkout')}
+            // onClick={() => navigate('/checkout')}
+            onClick={handleBorrowBook}
             variant="contained"
-            disabled={!Boolean(items.length)}
+            disabled={!Boolean(books.length)}
           >
-            Checkout
+            Borrow books
           </Button>
         </Box>
-        {items.length ? (
+        {books.length ? (
           <>
             <TableContainer>
               <Table
@@ -64,8 +94,8 @@ function Cart() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {items.map((item: Book) => (
-                    <CartItem key={item._id} item={item} />
+                  {books.map((book: Book) => (
+                    <CartItem key={book._id} item={book} />
                   ))}
                 </TableBody>
               </Table>

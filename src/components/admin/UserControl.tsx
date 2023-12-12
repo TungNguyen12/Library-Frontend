@@ -9,11 +9,14 @@ import { UserPaginationActionsTable } from './components/UserPagination'
 
 const UserControl = () => {
   const allUsers = useAppSelector((state) => state.usersReducer.users)
+  const accessToken = useAppSelector(
+    (state) => state.authReducer.accessToken
+  ) as string
   const dispatch = useAppDispatch()
   const [search, setSearch] = useState<string>('')
 
   const handleGetAllUsers = () => {
-    dispatch(getAllUsersAsync())
+    dispatch(getAllUsersAsync(accessToken))
   }
 
   useEffect(() => {
@@ -40,8 +43,9 @@ const UserControl = () => {
         marginTop: '10px',
       }}
     >
+      all users here
       {/* <SearchInput handleSearchBook={handleSearchUser} /> */}
-      <UserPaginationActionsTable rows={usersToShow} />
+      {/* <UserPaginationActionsTable rows={usersToShow} /> */}
     </Box>
   )
 }

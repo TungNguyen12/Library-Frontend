@@ -12,11 +12,15 @@ const initialState: UsersReducerState = {
 
 export const getAllUsersAsync = createAsyncThunk<
   User[],
-  void,
+  string,
   { rejectValue: string }
->('getAllUsers', async (_, { rejectWithValue }) => {
+>('getAllUsers', async (accessToken, { rejectWithValue }) => {
   try {
-    const response = await axios.get(`${BASE_URL}/users`)
+    const response = await axios.get(`${BASE_URL}/users`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
     return response.data
   } catch (e) {
     const error = e as Error
@@ -60,8 +64,8 @@ export const registerUserAsync = createAsyncThunk<
     console.log(newUser, 'new user created 🧠')
     return newUser
   } catch (e) {
-    console.log(e, 'register error 😶‍🌫️')
     const error = e as Error
+    toast.error('Email is taken, try new one!')
     return rejectWithValue(error.message)
   }
 })
@@ -81,8 +85,6 @@ const usersSlice = createSlice({
         const newUser = action.payload
         if (!state.users.find((user) => user.email === newUser.email)) {
           state.users.push(newUser)
-        } else {
-          console.log('Email is not available')
         }
       })
       .addCase(registerUserAsync.rejected, (state, action) => {
