@@ -9,6 +9,8 @@ import usersReducer from './reducers/userReducer'
 import cartReducer from './reducers/cardReducer'
 import authReducer from './reducers/authReducer'
 import categoriesReducer from './reducers/categoriesReducer'
+import authorReducer from './reducers/authorReducer'
+import loansReducer from './reducers/loanReducer'
 import { PersistConfig } from 'redux-persist/lib/types'
 import storage from 'redux-persist/lib/storage'
 import {
@@ -21,7 +23,6 @@ import {
   persistReducer,
   persistStore,
 } from 'redux-persist'
-import authorReducer from './reducers/authorReducer'
 
 const rootReducer = combineReducers({
   booksReducer,
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   authReducer,
   categoriesReducer,
   authorReducer,
+  loansReducer,
 })
 
 const persistConfig: PersistConfig<any> = {

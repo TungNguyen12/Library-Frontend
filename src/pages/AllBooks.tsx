@@ -10,6 +10,8 @@ import SearchInput from '../components/SearchInput'
 import { Box, Button, Grid, Typography } from '@mui/material'
 
 import { Toaster } from 'react-hot-toast'
+import { addToCart } from '../redux/reducers/cardReducer'
+import Book from '../types/book/Book'
 
 const AllBooks = () => {
   const validUser = useAppSelector((state) => state.authReducer.currentUser)
@@ -33,6 +35,10 @@ const AllBooks = () => {
         )
       : books
   }, [search, books])
+
+  const handleAddToCart = (payload: Book) => {
+    dispatch(addToCart(payload))
+  }
 
   const handleSortByAZ = () => {
     dispatch(sortBookByTitle('asc'))

@@ -19,6 +19,7 @@ import CategoryFormControl from '../components/CategoryFormControl'
 import SearchInput from '../components/SearchInput'
 import { getAllBooksAsync } from '../redux/services/BookServices'
 import { useAppDispatch } from '../hooks/useAppDispatch'
+import { Toaster } from 'react-hot-toast'
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -65,6 +66,7 @@ const HomePage: React.FC = () => {
 
   return (
     <Box sx={{ width: '70%', margin: 'auto' }}>
+      <Toaster />
       <Box>
         <Stack
           marginTop="50px"

@@ -13,7 +13,7 @@ import { useAppDispatch } from '../hooks/useAppDispatch'
 import { addToCart } from '../redux/reducers/cardReducer'
 
 const BookCard: React.FC<any> = ({ book }) => {
-  const { _id, title, author, img, category } = book as Book
+  const { _id, title, img } = book as Book
 
   const navigate = useNavigate()
 

@@ -15,41 +15,65 @@ import { useState } from 'react'
 import EditIcon from '../components/icons/EditIcon'
 import { BASE_URL } from '../common/common'
 import axios from 'axios'
-import Book from '../types/book/Book'
+import { useAppDispatch } from '../hooks/useAppDispatch'
+import { getLoanHistoryAsync } from '../redux/reducers/loanReducer'
 
 const UserProfile = () => {
+  const dispatch = useAppDispatch()
   const { currentUser, accessToken } = useAppSelector(
     (state) => state.authReducer
   )
+  const history = useAppSelector((state) => state.loansReducer.history)
 
-  type BookInfo = {
-    _id: string
-    title: string
-    img: string
+  const handleGetHistory = () => {
+    if (accessToken) {
+      dispatch(getLoanHistoryAsync(accessToken))
+    }
   }
 
-  type LoanInfo = {
-    borrowed_Date: string
-    returned_Date: string
-    book: BookInfo
-    return: boolean
-  }
+  const nonReturnedBookIds: string[] = history
+    .filter((loanInfo) => !loanInfo.return)
+    .map((loanInfo) => loanInfo.book._id)
 
-  type History = LoanInfo[]
-
-  const handleGetHistory = async () => {
+  const handleReturnAll = async (bookIds: string[]) => {
     try {
-      const response = await axios.get(`${BASE_URL}/books/history`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      const result = response.data
-      console.log('you borrow books ✅✅')
-      return result
+      const response = await axios.post(
+        `${BASE_URL}/books/return`,
+        { id: bookIds },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      const isReturned = response.data
+      console.log(isReturned, 'return books successfully')
+      return isReturned
     } catch (e) {
-      console.log('fail to borrow ❌')
-      return e as Error
+      const error = e as Error
+      console.log('something went wrong, check the error')
+      return error
+    }
+  }
+
+  const handleReturnBook = async (bookId: string) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/books/return`,
+        { id: [bookId] },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      const isReturned = response.data
+      console.log(isReturned, 'return books successfully')
+      return isReturned
+    } catch (e) {
+      const error = e as Error
+      console.log('something went wrong, check the error')
+      return error
     }
   }
 
@@ -99,6 +123,21 @@ const UserProfile = () => {
             >
               Get history
             </Button>
+            <Button
+              size="medium"
+              onClick={() => handleReturnBook('655d13daf50dd1ceca878b43')}
+              variant="contained"
+            >
+              Return
+            </Button>
+            <Button
+              size="medium"
+              onClick={() => handleReturnAll(nonReturnedBookIds)}
+              variant="contained"
+            >
+              Return all
+            </Button>
+
             <Box
               sx={{
                 display: 'flex',
@@ -222,6 +261,7 @@ const UserProfile = () => {
       <Dialog open={openModal} onClose={handleCloseModal}>
         <UpdateUserForm onClose={handleCloseModal} />
       </Dialog>
+      <Box></Box>
     </div>
   )
 }

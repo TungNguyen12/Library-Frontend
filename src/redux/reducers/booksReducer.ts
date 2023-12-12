@@ -13,7 +13,7 @@ export const initialState: BookReducerState = {
   isLoading: false,
 }
 
-const BooksSlice = createSlice({
+const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
@@ -113,6 +113,6 @@ const BooksSlice = createSlice({
   },
 })
 
-const BooksReducer = BooksSlice.reducer
-export const { sortBookByTitle } = BooksSlice.actions
+const BooksReducer = booksSlice.reducer
+export const { sortBookByTitle } = booksSlice.actions
 export default BooksReducer
