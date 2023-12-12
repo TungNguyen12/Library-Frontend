@@ -12,6 +12,7 @@ import CheckRole from './components/PrivateUserRoute'
 import SignUp from './pages/SignUp'
 
 import HomePage from './pages/HomePage'
+import MyLoanPage from './pages/MyLoanPage'
 
 const App = () => {
   const router = createBrowserRouter([
@@ -37,6 +38,14 @@ const App = () => {
           element: (
             <CheckRole role="Borrower">
               <UserProfile />
+            </CheckRole>
+          ),
+        },
+        {
+          path: 'myloans',
+          element: (
+            <CheckRole role="Borrower">
+              <MyLoanPage />
             </CheckRole>
           ),
         },

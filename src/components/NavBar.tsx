@@ -27,6 +27,7 @@ function ResponsiveAppBar() {
   let pages = [
     { params: '', page: 'Books' },
     { params: 'categories', page: 'Categories' },
+    { params: 'myloans', page: 'My loans' },
   ]
 
   user?.role[0].title === 'Admin'

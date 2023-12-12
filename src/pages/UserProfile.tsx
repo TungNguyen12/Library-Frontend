@@ -23,59 +23,6 @@ const UserProfile = () => {
   const { currentUser, accessToken } = useAppSelector(
     (state) => state.authReducer
   )
-  const history = useAppSelector((state) => state.loansReducer.history)
-
-  const handleGetHistory = () => {
-    if (accessToken) {
-      dispatch(getLoanHistoryAsync(accessToken))
-    }
-  }
-
-  const nonReturnedBookIds: string[] = history
-    .filter((loanInfo) => !loanInfo.return)
-    .map((loanInfo) => loanInfo.book._id)
-
-  const handleReturnAll = async (bookIds: string[]) => {
-    try {
-      const response = await axios.post(
-        `${BASE_URL}/books/return`,
-        { id: bookIds },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
-      const isReturned = response.data
-      console.log(isReturned, 'return books successfully')
-      return isReturned
-    } catch (e) {
-      const error = e as Error
-      console.log('something went wrong, check the error')
-      return error
-    }
-  }
-
-  const handleReturnBook = async (bookId: string) => {
-    try {
-      const response = await axios.post(
-        `${BASE_URL}/books/return`,
-        { id: [bookId] },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
-      const isReturned = response.data
-      console.log(isReturned, 'return books successfully')
-      return isReturned
-    } catch (e) {
-      const error = e as Error
-      console.log('something went wrong, check the error')
-      return error
-    }
-  }
 
   const [openModal, setOpenModal] = useState(false)
 
@@ -114,29 +61,6 @@ const UserProfile = () => {
                 {currentUser?.firstName} {currentUser?.lastName}
               </h3>
             </CardContent>
-            <Button
-              size="medium"
-              // onClick={() => navigate('/checkout')}
-              onClick={handleGetHistory}
-              variant="contained"
-              // disabled={!Boolean(books.length)}
-            >
-              Get history
-            </Button>
-            <Button
-              size="medium"
-              onClick={() => handleReturnBook('655d13daf50dd1ceca878b43')}
-              variant="contained"
-            >
-              Return
-            </Button>
-            <Button
-              size="medium"
-              onClick={() => handleReturnAll(nonReturnedBookIds)}
-              variant="contained"
-            >
-              Return all
-            </Button>
 
             <Box
               sx={{

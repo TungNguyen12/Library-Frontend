@@ -1,4 +1,6 @@
 import React from 'react'
+import { BookInfo } from '../redux/reducers/loanReducer'
+import { useNavigate } from 'react-router-dom'
 import {
   Button,
   Card,
@@ -7,20 +9,32 @@ import {
   CardMedia,
   Typography,
 } from '@mui/material'
-import Book from '../types/book/Book'
-import { useNavigate } from 'react-router-dom'
-import { useAppDispatch } from '../hooks/useAppDispatch'
-import { addToCart } from '../redux/reducers/cardReducer'
+import axios from 'axios'
+import { BASE_URL } from '../common/common'
 
-const BookCard: React.FC<any> = ({ book }) => {
-  const { _id, title, img } = book as Book
-
+const LoanBookCard: React.FC<any> = ({ book, accessToken }) => {
+  const { _id, title, img } = book as BookInfo
   const navigate = useNavigate()
 
-  const dispatch = useAppDispatch()
-
-  const handleAddToCart = (payload: Book) => {
-    dispatch(addToCart(payload))
+  const handleReturnBook = async (bookId: string) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/books/return`,
+        { id: [bookId] },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      const isReturned = response.data
+      console.log(isReturned, 'return books successfully')
+      return isReturned
+    } catch (e) {
+      const error = e as Error
+      console.log('something went wrong, check the error')
+      return error
+    }
   }
 
   return (
@@ -59,10 +73,17 @@ const BookCard: React.FC<any> = ({ book }) => {
         <Typography variant="body2" color="text.secondary">
           {title}
         </Typography>
-        <Button onClick={() => handleAddToCart(book)}>Add to cart</Button>
+
+        <Button
+          size="medium"
+          onClick={() => handleReturnBook(_id)}
+          variant="contained"
+        >
+          Return
+        </Button>
       </CardContent>
     </Card>
   )
 }
 
-export default BookCard
+export default LoanBookCard
