@@ -45,10 +45,10 @@ function Cart() {
         }
       )
       const result = response.data
-      console.log('you borrow books ✅✅')
+      toast.success('Borrowed')
+      dispatch(clearCart())
       return result
     } catch (e) {
-      console.log('fail to borrow ❌')
       toast.error('Books are not available to borrow')
       return e as Error
     }
@@ -142,7 +142,7 @@ function Cart() {
             >
               <Stack>
                 <Alert severity="error" sx={{ marginTop: '2rem' }}>
-                  No item added in your shopping cart!
+                  Empty basket, let's explore the library 🧠!
                 </Alert>
               </Stack>
               <Button

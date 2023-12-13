@@ -27,7 +27,7 @@ export const getAllAuthorsAsync = createAsyncThunk<
 type AuthorReducerState = {
   authors: AuthorAPI[]
   isLoading: boolean
-  error?: string | undefined
+  error?: string
 }
 
 export const initialState: AuthorReducerState = {

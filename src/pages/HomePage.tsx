@@ -85,6 +85,7 @@ const HomePage: React.FC = () => {
                 }}
               />
             </Stack>
+
             <Stack>
               <AuthorsFormControl
                 onChange={(e: SelectChangeEvent) =>

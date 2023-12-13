@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useAppSelector } from '../../hooks/useAppSelector'
 import { useAppDispatch } from '../../hooks/useAppDispatch'
-import { Box, Button, Stack } from '@mui/material'
+import { Box, Button, Dialog, Stack } from '@mui/material'
 import SearchInput from '../SearchInput'
 import { BookPaginationActionsTable } from './components/BookPagination'
 import { CreateBookForm } from './components/CreateBookForm'
@@ -10,7 +10,7 @@ import { getAllBooksAsync } from '../../redux/services/BookServices'
 
 const BookControl = () => {
   const [search, setSearch] = useState<string>('')
-  const [isOpen, setIsOpen] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
   const allBooks = useAppSelector((state) => state.booksReducer.books)
   const dispatch = useAppDispatch()
 
@@ -22,8 +22,12 @@ const BookControl = () => {
     setSearch(e.target.value.toLocaleLowerCase())
   }
 
-  const handleOpenCreateForm = () => {
-    setIsOpen(!isOpen)
+  const handleOpenModal = () => {
+    setOpenModal(true)
+  }
+
+  const handleCloseModal = () => {
+    setOpenModal(false)
   }
 
   const booksToShow = search
@@ -37,7 +41,7 @@ const BookControl = () => {
       <Stack direction="row" justifyContent={'center'}>
         <Box
           sx={{
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             display: ' flex',
             marginTop: '10px',
             width: '80%',
@@ -45,8 +49,8 @@ const BookControl = () => {
         >
           <Button
             variant="contained"
-            color="success"
-            onClick={handleOpenCreateForm}
+            // onClick={handleOpenCreateForm}
+            onClick={handleOpenModal}
             sx={{ width: '200px' }}
           >
             Create book
@@ -54,7 +58,10 @@ const BookControl = () => {
         </Box>
       </Stack>
 
-      {isOpen && <CreateBookForm />}
+      <Dialog open={openModal} onClose={handleCloseModal}>
+        <CreateBookForm onClose={handleCloseModal} />
+      </Dialog>
+      {/* {isOpen && <CreateBookForm />} */}
       <Box
         sx={{
           alignContent: 'center',

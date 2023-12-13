@@ -1,5 +1,5 @@
 import React from 'react'
-import { BookInfo } from '../redux/reducers/loanReducer'
+import { LoanInfo, getLoanHistoryAsync } from '../redux/reducers/loanReducer'
 import { useNavigate } from 'react-router-dom'
 import {
   Button,
@@ -7,20 +7,24 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  Stack,
   Typography,
 } from '@mui/material'
 import axios from 'axios'
 import { BASE_URL } from '../common/common'
+import { useAppDispatch } from '../hooks/useAppDispatch'
+import toast from 'react-hot-toast'
 
-const LoanBookCard: React.FC<any> = ({ book, accessToken }) => {
-  const { _id, title, img } = book as BookInfo
+const LoanBookCard: React.FC<any> = ({ loanInfo, accessToken }) => {
+  const loan = loanInfo as LoanInfo
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
-  const handleReturnBook = async (bookId: string) => {
+  const handleReturnBook = async (id: string) => {
     try {
       const response = await axios.post(
         `${BASE_URL}/books/return`,
-        { id: [bookId] },
+        { id: [id] },
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -28,11 +32,12 @@ const LoanBookCard: React.FC<any> = ({ book, accessToken }) => {
         }
       )
       const isReturned = response.data
-      console.log(isReturned, 'return books successfully')
+      toast.success('Returned! ✅')
+      dispatch(getLoanHistoryAsync(accessToken))
       return isReturned
     } catch (e) {
       const error = e as Error
-      console.log('something went wrong, check the error')
+      toast.error(error.message + ' ❌')
       return error
     }
   }
@@ -41,25 +46,23 @@ const LoanBookCard: React.FC<any> = ({ book, accessToken }) => {
     <Card
       sx={{
         maxWidth: 194,
-        transition: 'ease-in-out 0.25s',
         '&:hover': {
           cursor: 'pointer',
-          marginTop: '-7px',
-          marginBottom: '7px',
-          marginLeft: '-7px',
         },
       }}
     >
       <CardActions
         onClick={() => {
-          navigate(`/${_id}`)
+          if (loan.book._id) {
+            navigate(`/${loan.book._id}`)
+          }
         }}
       >
         <CardMedia
           component="img"
           height="250"
-          image={img}
-          alt={title}
+          image={loan.book.img}
+          alt={loan.book.title}
           style={{
             objectFit: 'cover',
             width: '100%',
@@ -68,19 +71,30 @@ const LoanBookCard: React.FC<any> = ({ book, accessToken }) => {
         />
       </CardActions>
       <CardContent
-        sx={{ padding: '0 auto', '&:last-child': { paddingBottom: '0' } }}
+        sx={{
+          padding: '0 auto 15px',
+          '&:last-child': { paddingBottom: '0' },
+          display: 'flex',
+          flexDirection: 'column',
+          alignContent: 'center',
+        }}
       >
-        <Typography variant="body2" color="text.secondary">
-          {title}
-        </Typography>
+        <Stack>
+          <Typography variant="body2" color="text.secondary" textAlign="center">
+            {loan?.book?.title}
+          </Typography>
+        </Stack>
 
-        <Button
-          size="medium"
-          onClick={() => handleReturnBook(_id)}
-          variant="contained"
-        >
-          Return
-        </Button>
+        <Stack>
+          <Button
+            size="medium"
+            onClick={() => handleReturnBook(loan.book._id)}
+            variant="contained"
+            disabled={loan.returned}
+          >
+            {loan.returned ? 'Returned' : 'Return'}
+          </Button>
+        </Stack>
       </CardContent>
     </Card>
   )

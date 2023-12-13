@@ -13,10 +13,7 @@ import UpdateUserForm from '../components/UpdateUserForm'
 import { useAppSelector } from '../hooks/useAppSelector'
 import { useState } from 'react'
 import EditIcon from '../components/icons/EditIcon'
-import { BASE_URL } from '../common/common'
-import axios from 'axios'
 import { useAppDispatch } from '../hooks/useAppDispatch'
-import { getLoanHistoryAsync } from '../redux/reducers/loanReducer'
 
 const UserProfile = () => {
   const dispatch = useAppDispatch()

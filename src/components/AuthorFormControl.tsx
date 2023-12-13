@@ -27,6 +27,7 @@ const AuthorFormControl = ({ onChange }: Props) => {
         id="selectAuthors"
         onChange={onChange}
         label="Author"
+        defaultValue=""
       >
         <MenuItem key={0} value={''}>
           None

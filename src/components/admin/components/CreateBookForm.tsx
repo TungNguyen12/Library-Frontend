@@ -30,7 +30,7 @@ const createBook = yup
   })
   .required()
 
-export const CreateBookForm = () => {
+export const CreateBookForm: React.FC<any> = () => {
   const accessToken = useAppSelector((state) => state.authReducer.accessToken)
   const dispatch = useAppDispatch()
 
@@ -124,21 +124,25 @@ export const CreateBookForm = () => {
             <Grid
               item
               xs={12}
-              sx={{ flexDirection: 'row', justifyContent: 'space-between' }}
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+              }}
             >
               <FormControl
                 sx={{
-                  minWidth: 150,
-                  marginRight: '10px',
+                  minWidth: '45%',
                 }}
               >
-                <InputLabel id="selectAuthor">Author</InputLabel>
+                <InputLabel id="author">Author</InputLabel>
                 <Select
-                  labelId="selectAuthor"
-                  id="selectAuthor"
+                  labelId="author"
+                  id="author"
                   {...register('author')}
                   label="Author(s)"
-                  error={Boolean(errors.author)}
+                  error={Boolean(errors.author?.message)}
+                  defaultValue=""
                 >
                   {authors &&
                     authors.map((author: AuthorAPI) => (
@@ -150,17 +154,17 @@ export const CreateBookForm = () => {
               </FormControl>
               <FormControl
                 sx={{
-                  minWidth: 150,
-                  marginRight: '10px',
+                  minWidth: ' 45%',
                 }}
               >
-                <InputLabel id="selectCategories">Category</InputLabel>
+                <InputLabel id="category">Category</InputLabel>
                 <Select
-                  labelId="selectCategories"
-                  id="selectCategories"
+                  labelId="category"
+                  id="category"
                   error={Boolean(errors.category?.message)}
                   {...register('category')}
                   label="Category"
+                  defaultValue=""
                 >
                   {categories &&
                     categories.map(({ _id, name }: Category) => (

@@ -5,6 +5,7 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  Stack,
   Typography,
 } from '@mui/material'
 import Book from '../types/book/Book'
@@ -54,12 +55,22 @@ const BookCard: React.FC<any> = ({ book }) => {
         />
       </CardActions>
       <CardContent
-        sx={{ padding: '0 auto', '&:last-child': { paddingBottom: '0' } }}
+        sx={{
+          padding: '0 auto',
+          '&:last-child': { paddingBottom: '0' },
+          display: 'flex',
+          flexDirection: 'column',
+          alignContent: 'center',
+        }}
       >
-        <Typography variant="body2" color="text.secondary">
-          {title}
-        </Typography>
-        <Button onClick={() => handleAddToCart(book)}>Add to cart</Button>
+        <Stack>
+          <Typography variant="body2" color="text.secondary" textAlign="center">
+            {title}
+          </Typography>
+        </Stack>
+        <Stack>
+          <Button onClick={() => handleAddToCart(book)}>Add to cart</Button>
+        </Stack>
       </CardContent>
     </Card>
   )

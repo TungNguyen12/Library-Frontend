@@ -124,7 +124,7 @@ const authSlice = createSlice({
       .addCase(signinAsync.fulfilled, (state, action) => {
         state.currentUser = action.payload.currentUser
         state.accessToken = action.payload.accessToken
-        console.log('auth reducer 😶‍🌫️😶‍🌫️😶‍🌫️', action.payload)
+
         state.error = null
       })
       .addCase(signinAsync.rejected, (state, action) => {
@@ -135,17 +135,17 @@ const authSlice = createSlice({
     builder
       .addCase(updateUserAsync.fulfilled, (state, action) => {
         state.currentUser = action.payload.currentUser
-        console.log('update user at auth 😶‍🌫️😶‍🌫️😶‍🌫️', action.payload)
         state.error = null
       })
       .addCase(updateUserAsync.rejected, (state, action) => {
         state.error = action.payload as string
       })
+
     //GET USER PROFILE
     builder
       .addCase(getUserProfileAsync.fulfilled, (state, { payload }) => {
-        console.log('✅ user profile', payload)
         state.currentUser = { ...payload }
+        state.error = null
       })
       .addCase(getUserProfileAsync.rejected, (state, action) => {
         state.error = action.payload

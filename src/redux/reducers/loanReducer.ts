@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { BASE_URL } from '../../common/common'
+import toast from 'react-hot-toast'
 
 export type BookInfo = {
   _id: string
@@ -9,10 +10,10 @@ export type BookInfo = {
 }
 
 export type LoanInfo = {
-  borrowed_Date?: string
-  returned_Date?: string
+  borrowed_Date: string
+  returned_Date: string | null
   book: BookInfo
-  return: boolean
+  returned: boolean
 }
 
 export type BorrowBookRequest = {
@@ -37,17 +38,21 @@ export const returnBooksAsync = createAsyncThunk<
       },
     })
     const isReturned = response.data
-    console.log(isReturned, 'return books successfully')
+    toast.success('Borrowed')
     return isReturned
   } catch (e) {
     const error = e as Error
-    console.log('something went wrong, check the error')
+    toast.error(error.message)
     return rejectWithValue(error.message)
   }
 })
 
+type ReturnedHistory = {
+  history: LoanInfo[]
+}
+
 export const getLoanHistoryAsync = createAsyncThunk<
-  LoanInfo[],
+  ReturnedHistory,
   string,
   { rejectValue: string }
 >('getLoanHistoryAsync', async (accessToken, { rejectWithValue }) => {
@@ -58,8 +63,7 @@ export const getLoanHistoryAsync = createAsyncThunk<
       },
     })
     const history = response.data
-    console.log(history)
-    return history
+    return history as ReturnedHistory
   } catch (e) {
     const error = e as Error
     return rejectWithValue(error.message)
@@ -88,7 +92,7 @@ const loansSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getLoanHistoryAsync.fulfilled, (state, action) => {
-        state = { ...state, history: action.payload, isLoading: false }
+        state.history = action.payload.history
       })
       .addCase(getLoanHistoryAsync.rejected, (state, action) => {
         state.error = action.payload

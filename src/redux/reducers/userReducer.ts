@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import User from '../../types/user/User'
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 import CreateUserDto from '../../types/user/RegisterUserRequest'
 import UsersReducerState from '../../types/user/UsersReducerState'
 import toast from 'react-hot-toast'
@@ -8,6 +8,8 @@ import { BASE_URL } from '../../common/common'
 
 const initialState: UsersReducerState = {
   users: [],
+  error: null,
+  isLoading: false,
 }
 
 export const getAllUsersAsync = createAsyncThunk<
@@ -28,36 +30,13 @@ export const getAllUsersAsync = createAsyncThunk<
   }
 })
 
-export type EmailAvailability = {
-  isAvailable: boolean
-}
-
-export const checkEmailIsAvailable = createAsyncThunk<
-  EmailAvailability,
-  string,
-  { rejectValue: string }
->('checkEmail', async (mail: string, { rejectWithValue }) => {
-  try {
-    const response = await axios.post(`${BASE_URL}/users/is-available`, {
-      email: mail,
-    })
-    return response.data
-  } catch (e) {
-    const error = e as AxiosError
-    return rejectWithValue(error.message)
-  }
-})
-
 export const registerUserAsync = createAsyncThunk<
   User,
   CreateUserDto,
   { rejectValue: string }
 >('registerUser', async (user: CreateUserDto, { rejectWithValue }) => {
   try {
-    const response = await axios.post(
-      `http://localhost:3001/api/v1/users/signup`,
-      user
-    )
+    const response = await axios.post(`${BASE_URL}/users/signup`, user)
 
     const newUser: User = response.data
     toast.success(`Create new account successfully`)
@@ -65,7 +44,7 @@ export const registerUserAsync = createAsyncThunk<
     return newUser
   } catch (e) {
     const error = e as Error
-    toast.error('Email is taken, try new one!')
+    toast.error('❌ Email is taken')
     return rejectWithValue(error.message)
   }
 })

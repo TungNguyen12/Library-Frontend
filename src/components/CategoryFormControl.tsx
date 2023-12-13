@@ -29,6 +29,7 @@ const CategoryFormControl = ({ onChange }: Props) => {
         id="selectCategories"
         onChange={onChange}
         label="Category"
+        defaultValue=""
       >
         <MenuItem key={0} value={''}>
           None
