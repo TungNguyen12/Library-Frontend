@@ -16,8 +16,33 @@ import { useAppSelector } from '../../../hooks/useAppSelector'
 import { CreateBookDto } from '../../../types/book/CreateBookRequest'
 import toast from 'react-hot-toast'
 import { AuthorAPI } from '../../../redux/reducers/authorReducer'
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
+import {
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  MenuItem,
+  OutlinedInput,
+  Select,
+} from '@mui/material'
 import Category from '../../../types/book/Category'
+import { AutoMode } from '@mui/icons-material'
+import { useState } from 'react'
+
+export function generateISBN(): string {
+  const prefix = '978'
+  let isbn = prefix
+  for (let i = prefix.length; i < 12; i++) {
+    isbn += Math.floor(Math.random() * 10).toString()
+  }
+  let sum = 0
+  for (let i = 0; i < 12; i++) {
+    const weight = i % 2 === 0 ? 1 : 3
+    sum += parseInt(isbn[i]) * weight
+  }
+  const checkDigit = (10 - (sum % 10)) % 10
+  return isbn + checkDigit.toString()
+}
 
 const createBook = yup
   .object({
@@ -31,14 +56,15 @@ const createBook = yup
   .required()
 
 export const CreateBookForm: React.FC<any> = () => {
+  const [newISBN, setNewISBN] = useState<string>()
   const accessToken = useAppSelector((state) => state.authReducer.accessToken)
-  const dispatch = useAppDispatch()
-
   const authors = useAppSelector((state) => state.authorReducer.authors)
   const categories = useAppSelector(
     (state) => state.categoriesReducer.categories
   )
   console.log(authors, categories, 'authors and categories are here 🧠')
+
+  const dispatch = useAppDispatch()
 
   const {
     register,
@@ -93,7 +119,7 @@ export const CreateBookForm: React.FC<any> = () => {
                 {...register('title')}
               />
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <TextField
                 fullWidth
                 label="Book ISBN"
@@ -102,6 +128,40 @@ export const CreateBookForm: React.FC<any> = () => {
                 helperText={errors.ISBN?.message}
                 {...register('ISBN')}
               />
+            </Grid> */}
+            <Grid item xs={12}>
+              <FormControl
+                variant="outlined"
+                fullWidth
+                required
+                margin="normal"
+              >
+                <InputLabel id="isbn">ISBN</InputLabel>
+                <OutlinedInput
+                  id="ISBN"
+                  autoComplete="off"
+                  autoFocus
+                  {...register('ISBN')}
+                  // value={newISBN}
+                  // onChange={handleChange}
+                  label="ISBN"
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="generate ISBN"
+                        onClick={() => {
+                          const generatedISBN = generateISBN()
+                          setNewISBN(generateISBN)
+                          reset({ ISBN: generatedISBN })
+                        }}
+                        edge="end"
+                      >
+                        <AutoMode />
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
             </Grid>
             <Grid item xs={12}>
               <TextField

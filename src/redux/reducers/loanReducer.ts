@@ -73,12 +73,13 @@ export const getLoanHistoryAsync = createAsyncThunk<
 export type LoanReducerState = {
   history: LoanInfo[]
   isLoading: boolean
-  error?: string
+  error?: string | null
 }
 
 const initialState: LoanReducerState = {
   history: [],
   isLoading: false,
+  error: null,
 }
 
 const loansSlice = createSlice({
@@ -93,9 +94,14 @@ const loansSlice = createSlice({
     builder
       .addCase(getLoanHistoryAsync.fulfilled, (state, action) => {
         state.history = action.payload.history
+        state.isLoading = false
+      })
+      .addCase(getLoanHistoryAsync.pending, (state, action) => {
+        state.isLoading = true
       })
       .addCase(getLoanHistoryAsync.rejected, (state, action) => {
         state.error = action.payload
+        state.isLoading = false
       })
   },
 })

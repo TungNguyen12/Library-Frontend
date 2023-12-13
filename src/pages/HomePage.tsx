@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import {
   Box,
+  CircularProgress,
   Grid,
   Pagination,
   SelectChangeEvent,
@@ -109,7 +110,8 @@ const HomePage: React.FC = () => {
           </Stack>
         </Stack>
         {isLoading && (
-          <Skeleton variant="rectangular" width="100%" height={400} />
+          // <Skeleton variant="rectangular" width="100%" height={400} />
+          <CircularProgress sx={{ margin: '100px auto' }} />
         )}
         {error && <Typography variant="h4">Items not found.</Typography>}
         {data && data.data.length < 1 && (
