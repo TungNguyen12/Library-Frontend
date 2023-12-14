@@ -37,7 +37,7 @@ const signUp = yup
   .object({
     firstName: yup.string().required(),
     lastName: yup.string().required(),
-    email: yup.string().required(),
+    email: yup.string().email().required(),
     address: yup.string().required(),
     avatar: yup.string().required(),
     phoneNumber: yup.string().required(),

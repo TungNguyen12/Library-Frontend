@@ -6,7 +6,6 @@ import {
   Grid,
   Pagination,
   SelectChangeEvent,
-  Skeleton,
   Stack,
   Typography,
 } from '@mui/material'

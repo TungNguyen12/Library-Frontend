@@ -30,7 +30,7 @@ import { signinAsync } from '../redux/reducers/authReducer'
 
 const signIn = yup
   .object({
-    email: yup.string().required(),
+    email: yup.string().email().required(),
     password: yup.string().min(1).max(20).required(),
   })
   .required()
@@ -138,7 +138,7 @@ export const Signin = () => {
             </Grid>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="signIn" variant="body2">
+                <Link href="signup" variant="body2">
                   You don't have an account? Sign up
                 </Link>
               </Grid>
