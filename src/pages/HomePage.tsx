@@ -3,8 +3,12 @@ import axios from 'axios'
 import {
   Box,
   CircularProgress,
+  FormControl,
   Grid,
+  InputLabel,
+  MenuItem,
   Pagination,
+  Select,
   SelectChangeEvent,
   Stack,
   Typography,
@@ -27,7 +31,7 @@ const HomePage: React.FC = () => {
     page: 1,
     perPage: 8,
     search: '',
-    sortOrder: '',
+    sortOrder: 'desc',
     authorName: '',
     categoryName: '',
   })
@@ -42,11 +46,12 @@ const HomePage: React.FC = () => {
         `${BASE_URL}/books/?filter=1&page=${filterOptions.page}` +
           `&perPage=${filterOptions.perPage}` +
           `&search=${filterOptions.search}` +
-          `&sortOrder=asc` +
+          `&sortOrder=${filterOptions.sortOrder}` +
           `&authorName=${filterOptions.authorName}` +
           `&categoryName=${filterOptions.categoryName}`
       )
       const responseData: PaginatedData<Book> = response.data
+      console.log(responseData)
       setData(responseData)
       setIsLoading(false)
     } catch (e) {
@@ -87,6 +92,33 @@ const HomePage: React.FC = () => {
             </Stack>
 
             <Stack>
+              <FormControl
+                sx={{
+                  minWidth: 150,
+                  marginRight: '10px',
+                }}
+              >
+                <InputLabel id="selectSortOrder">Sort order</InputLabel>
+                <Select
+                  labelId="selectSortOrder"
+                  id="selectSortOrder"
+                  onChange={(e: SelectChangeEvent) =>
+                    setFilterOptions({
+                      ...filterOptions,
+                      sortOrder: e.target.value,
+                    })
+                  }
+                  value={filterOptions.sortOrder}
+                  label="Sort order"
+                  defaultValue="asc"
+                >
+                  <MenuItem value={'asc'}>Oldest </MenuItem>
+                  <MenuItem value={'desc'}>Newest </MenuItem>
+                </Select>
+              </FormControl>
+            </Stack>
+
+            <Stack>
               <AuthorsFormControl
                 onChange={(e: SelectChangeEvent) =>
                   setFilterOptions({
@@ -108,16 +140,24 @@ const HomePage: React.FC = () => {
             </Stack>
           </Stack>
         </Stack>
-        {isLoading && (
-          // <Skeleton variant="rectangular" width="100%" height={400} />
-          <CircularProgress sx={{ margin: '100px auto' }} />
-        )}
-        {error && <Typography variant="h4">Items not found.</Typography>}
-        {data && data.data.length < 1 && (
-          <Box sx={{ margin: 'auto' }}>
-            <Typography>Book not found</Typography>
-          </Box>
-        )}
+        <Box
+          sx={{
+            flexGrow: 1,
+            marginTop: '50px',
+            height: 'vh',
+            margin: 'auto',
+            alignItems: 'center',
+            alignContent: 'center',
+          }}
+        >
+          {isLoading && <CircularProgress sx={{ margin: '100px auto' }} />}
+          {error && <Typography variant="h4">Items not found.</Typography>}
+          {data && data.data.length < 1 && (
+            <Box sx={{ margin: 'auto' }}>
+              <Typography>Book not found</Typography>
+            </Box>
+          )}
+        </Box>
         {data && (
           <Box
             sx={{
