@@ -14,3 +14,5 @@ export const handlers = [
 const authorsServer = setupServer(...handlers)
 
 export default authorsServer
+
+// export {}

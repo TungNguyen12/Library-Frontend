@@ -37,7 +37,7 @@ const LoanBookCard: React.FC<any> = ({ loanInfo, accessToken }) => {
       return isReturned
     } catch (e) {
       const error = e as Error
-      toast.error(error.message + ' ❌')
+      toast.error(error.message)
       return error
     }
   }

@@ -23,6 +23,7 @@ export const getAllUsersAsync = createAsyncThunk<
         Authorization: `Bearer ${accessToken}`,
       },
     })
+    console.log(response.data)
     return response.data
   } catch (e) {
     const error = e as Error

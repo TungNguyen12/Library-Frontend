@@ -7,7 +7,7 @@ export const getAllAuthorsAsync = createAsyncThunk<
   AuthorAPI[],
   void,
   { rejectValue: any }
->('getAllUsers', async (_, { rejectWithValue }) => {
+>('getAllAuthors', async (_, { rejectWithValue }) => {
   try {
     const response = await axios.get(`${BASE_URL}/authors`)
     return response.data

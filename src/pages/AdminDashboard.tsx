@@ -10,15 +10,22 @@ import { useEffect, useState } from 'react'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { getAllAuthorsAsync } from '../redux/reducers/authorsReducer'
 import { getAllCategories } from '../redux/reducers/categoriesReducer'
+import { getAllUsersAsync } from '../redux/reducers/userReducer'
+import { useAppSelector } from '../hooks/useAppSelector'
 
 const AdminDashboard = () => {
   const [isOpenProduct, setIsOpenProduct] = useState(true)
   const [isOpenUser, setIsOpenUser] = useState(false)
+  const accessToken = useAppSelector((state) => state.authReducer.accessToken)
 
   const dispatch = useAppDispatch()
+
   useEffect(() => {
     dispatch(getAllAuthorsAsync())
     dispatch(getAllCategories())
+    if (accessToken) {
+      dispatch(getAllUsersAsync(accessToken))
+    }
   }, [])
 
   const handleOpenProduct = () => {

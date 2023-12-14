@@ -68,7 +68,7 @@ const MyLoanPage = () => {
             <Box sx={{ marginTop: '50px' }}>
               <Typography>Returned books</Typography>
               <Grid container spacing={{ xs: 2, md: 3 }} columns={12}>
-                {returnedBooks.length > 0 &&
+                {returnedBooks &&
                   returnedBooks.map((loan) => (
                     <>
                       <Grid

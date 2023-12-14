@@ -21,3 +21,5 @@ describe('Test async actions in authorsReducer', () => {
     expect(store.getState().authorsReducer.authors.length).toEqual(3)
   })
 })
+
+// export {}

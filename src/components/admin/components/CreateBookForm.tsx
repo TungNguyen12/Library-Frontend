@@ -58,11 +58,13 @@ const createBook = yup
 
 export const CreateBookForm: React.FC<any> = () => {
   const [newISBN, setNewISBN] = useState<string>()
+
   const accessToken = useAppSelector((state) => state.authReducer.accessToken)
   const authors = useAppSelector((state) => state.authorsReducer.authors)
   const categories = useAppSelector(
     (state) => state.categoriesReducer.categories
   )
+
   console.log(authors, categories, 'authors and categories are here 🧠')
 
   const dispatch = useAppDispatch()

@@ -11,7 +11,7 @@ export type BookInfo = {
 
 export type LoanInfo = {
   borrowed_Date: string
-  returned_Date: string | null
+  returned_Date?: string | null
   book: BookInfo
   returned: boolean
 }
@@ -47,7 +47,7 @@ export const returnBooksAsync = createAsyncThunk<
   }
 })
 
-type ReturnedHistory = {
+export type ReturnedHistory = {
   history: LoanInfo[]
 }
 
@@ -63,6 +63,7 @@ export const getLoanHistoryAsync = createAsyncThunk<
       },
     })
     const history = response.data
+    console.log(history)
     return history as ReturnedHistory
   } catch (e) {
     const error = e as Error
