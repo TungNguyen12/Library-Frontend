@@ -67,7 +67,6 @@ export const getUserProfileAsync = createAsyncThunk<
     })
 
     const userProfile = response.data
-    console.log(userProfile)
     return userProfile
   } catch (e) {
     const error = e as Error
@@ -116,6 +115,8 @@ const authSlice = createSlice({
   reducers: {
     logOut: (state: AuthState) => {
       state.currentUser = null
+      state.accessToken = null
+      state.error = null
     },
   },
   extraReducers: (builder) => {
@@ -124,7 +125,6 @@ const authSlice = createSlice({
       .addCase(signinAsync.fulfilled, (state, action) => {
         state.currentUser = action.payload.currentUser
         state.accessToken = action.payload.accessToken
-
         state.error = null
       })
       .addCase(signinAsync.rejected, (state, action) => {
@@ -148,7 +148,7 @@ const authSlice = createSlice({
         state.error = null
       })
       .addCase(getUserProfileAsync.rejected, (state, action) => {
-        state.error = action.payload
+        state.error = action.payload as string
       })
   },
 })
