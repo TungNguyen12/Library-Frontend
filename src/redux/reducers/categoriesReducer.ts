@@ -12,6 +12,7 @@ export const getAllCategories = createAsyncThunk<
   try {
     const response = await axios.get(`${BASE_URL}/categories`)
     const category = response.data
+    console.log(category)
     return category
   } catch (e) {
     const error = e as AxiosError

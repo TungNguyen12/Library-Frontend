@@ -10,7 +10,6 @@ export const getAllAuthorsAsync = createAsyncThunk<
 >('getAllUsers', async (_, { rejectWithValue }) => {
   try {
     const response = await axios.get(`${BASE_URL}/authors`)
-    console.log(response.data)
     return response.data
   } catch (e) {
     const error = e as Error
