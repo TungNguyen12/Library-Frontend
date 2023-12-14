@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit'
 import booksReducer from './reducers/booksReducer'
 import usersReducer from './reducers/userReducer'
-import cartReducer from './reducers/cardReducer'
+import cartReducer from './reducers/cartReducer'
 import authReducer from './reducers/authReducer'
 import categoriesReducer from './reducers/categoriesReducer'
 import authorReducer from './reducers/authorReducer'

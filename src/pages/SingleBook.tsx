@@ -18,7 +18,7 @@ import {
 import Book from '../types/book/Book'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { useAppSelector } from '../hooks/useAppSelector'
-import { addToCart } from '../redux/reducers/cardReducer'
+import { addToCart } from '../redux/reducers/cartReducer'
 import ModifyBookForm from '../components/admin/components/ModifyBookForm'
 import { deleteBookAsync } from '../redux/services/BookServices'
 import toast, { Toaster } from 'react-hot-toast'

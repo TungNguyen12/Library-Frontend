@@ -11,7 +11,7 @@ import {
 import Book from '../types/book/Book'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../hooks/useAppDispatch'
-import { addToCart } from '../redux/reducers/cardReducer'
+import { addToCart } from '../redux/reducers/cartReducer'
 
 const BookCard: React.FC<any> = ({ book }) => {
   const { _id, title, img } = book as Book

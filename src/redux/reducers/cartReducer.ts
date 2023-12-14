@@ -18,8 +18,10 @@ const cartSlice = createSlice({
       }
     },
 
-    removeFromCart: (state, action: PayloadAction<string>) => {
-      const foundIndex = state.findIndex((item) => item._id === action.payload)
+    removeFromCart: (state, action: PayloadAction<Book>) => {
+      const foundIndex = state.findIndex(
+        (item) => item._id === action.payload._id
+      )
       if (foundIndex !== -1) {
         state.splice(foundIndex, 1)
       } else {

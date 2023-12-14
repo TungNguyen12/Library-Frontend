@@ -10,7 +10,7 @@ import SearchInput from '../components/SearchInput'
 import { Box, Button, Grid, Typography } from '@mui/material'
 
 import { Toaster } from 'react-hot-toast'
-import { addToCart } from '../redux/reducers/cardReducer'
+import { addToCart } from '../redux/reducers/cartReducer'
 import Book from '../types/book/Book'
 
 const AllBooks = () => {

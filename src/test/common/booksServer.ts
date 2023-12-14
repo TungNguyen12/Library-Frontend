@@ -3,8 +3,6 @@ import { setupServer } from 'msw/node'
 
 import booksData from '../data/booksData'
 import CreateBookDto from '../../types/book/CreateBookRequest'
-import categoriesData from '../data/categoriesData'
-import Book from '../../types/book/Book'
 import UpdateBookRequest from '../../types/book/UpdateBookRequest'
 import { BASE_URL } from '../../common/common'
 

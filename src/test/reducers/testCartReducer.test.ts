@@ -1,57 +1,31 @@
-// import cartReducer, {
-//     addToCart,
-//     decrementQuantity,
-//     incrementQuantity,
-//     removeFromCart,
-// } from "../../redux/reducers/cardReducer";
-// import cartData from "../data/cartData";
-// import categoriesData from "../data/categoriesData";
+import cartReducer, {
+  addToCart,
+  removeFromCart,
+  clearCart,
+} from '../../redux/reducers/cartReducer'
+import Book from '../../types/book/Book'
+import booksData from '../data/booksData'
+import cartData from '../data/cartData'
 
-// describe("Test sync actions in cartReducer", () => {
-//     test("Should add an item to card", () => {
-//         const testState = cartData;
+describe('Test sync actions in cartReducer', () => {
+  test('Should add an item to cart', () => {
+    const testState: Book[] = []
+    const result = cartReducer(testState, addToCart(booksData[0]))
 
-//         const cartProducts = cartReducer(
-//             testState,
-//             addToCart({
-//                 id: 2,
-//                 title: "Refined Frozen Salad",
-//                 price: 946,
-//                 description:
-//                     "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-//                 images: [
-//                     "https://picsum.photos/640/640?r=3258",
-//                     "https://picsum.photos/640/640?r=8943",
-//                     "https://picsum.photos/640/640?r=3475",
-//                 ],
-//                 category: categoriesData[0],
-//             })
-//         );
-//         expect(cartProducts[1].quantity).toBe(2);
-//     });
+    expect(result).toHaveLength(1)
+  })
 
-//     test("Should remove an item from card", () => {
-//         const testState = cartData;
+  test('Should remove an item from cart', () => {
+    const testState = cartData
+    const cartBooks = cartReducer(testState, removeFromCart(cartData[0]))
 
-//         const cartProducts = cartReducer(testState, removeFromCart(1));
-//         expect(cartProducts.length).toBe(2);
-//     });
+    expect(cartBooks.length).toBe(2)
+    expect(cartBooks[0]).toMatchObject(booksData[1])
+  })
 
-//     test("Should increase quantity of an item in cart", () => {
-//         const testState = cartData;
-//         const cartProducts = cartReducer(testState, incrementQuantity(1));
-//         expect(cartProducts[0].quantity).toBe(2);
-//     });
-
-//     test("Should decrease quantity of an item in cart", () => {
-//         const testState = cartData;
-//         const cartProducts = cartReducer(testState, decrementQuantity(1));
-//         expect(cartProducts.length).toBe(2);
-//     });
-// });
-describe('true to be true', () => {
-  test('true to be true', () => {
-    expect(true).toBe(true)
+  test('Should clear cart', () => {
+    const testState = cartData
+    const cartBooks = cartReducer(testState, clearCart())
+    expect(cartBooks).toHaveLength(0)
   })
 })
-export {}
