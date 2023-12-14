@@ -15,7 +15,7 @@ import { createBookAsync } from '../../../redux/services/BookServices'
 import { useAppSelector } from '../../../hooks/useAppSelector'
 import { CreateBookDto } from '../../../types/book/CreateBookRequest'
 import toast from 'react-hot-toast'
-import { AuthorAPI } from '../../../redux/reducers/authorReducer'
+
 import {
   FormControl,
   IconButton,
@@ -25,9 +25,10 @@ import {
   OutlinedInput,
   Select,
 } from '@mui/material'
-import Category from '../../../types/book/Category'
+import Category from '../../../types/category/CategoryAPI'
 import { AutoMode } from '@mui/icons-material'
 import { useState } from 'react'
+import { AuthorAPI } from '../../../types/author/AuthorAPI'
 
 export function generateISBN(): string {
   const prefix = '978'

@@ -1,14 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { BASE_URL } from '../../common/common'
-
-export type AuthorAPI = {
-  _id: string
-  firstName: string
-  lastName: string
-  book: string[]
-  image: string
-}
+import { AuthorAPI } from '../../types/author/AuthorAPI'
 
 export const getAllAuthorsAsync = createAsyncThunk<
   AuthorAPI[],
@@ -17,6 +10,7 @@ export const getAllAuthorsAsync = createAsyncThunk<
 >('getAllUsers', async (_, { rejectWithValue }) => {
   try {
     const response = await axios.get(`${BASE_URL}/authors`)
+    console.log(response.data)
     return response.data
   } catch (e) {
     const error = e as Error
@@ -35,7 +29,7 @@ export const initialState: AuthorReducerState = {
   isLoading: false,
 }
 
-const AuthorsSlice = createSlice({
+const authorsSlice = createSlice({
   name: 'authors',
   initialState,
   reducers: {},
@@ -67,5 +61,5 @@ const AuthorsSlice = createSlice({
   },
 })
 
-const AuthorReducer = AuthorsSlice.reducer
-export default AuthorReducer
+const authorsReducer = authorsSlice.reducer
+export default authorsReducer

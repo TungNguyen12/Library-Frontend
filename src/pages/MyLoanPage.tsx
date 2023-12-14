@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useAppSelector } from '../hooks/useAppSelector'
 import { useAppDispatch } from '../hooks/useAppDispatch'
-import { getLoanHistoryAsync } from '../redux/reducers/loanReducer'
+import { getLoanHistoryAsync } from '../redux/reducers/loansReducer'
 import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material'
 import LoanBookCard from '../components/LoanBookCard'
 import { Toaster } from 'react-hot-toast'

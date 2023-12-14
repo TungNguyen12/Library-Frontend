@@ -1,7 +1,4 @@
-export type Category = {
-  _id: string
-  name: string
-}
+import CategoryAPI from '../category/CategoryAPI'
 
 type Author = {
   _id: string
@@ -12,7 +9,7 @@ type Book = {
   ISBN: string
   title: string
   edition: string
-  category: Category[]
+  category: CategoryAPI[]
   description: string
   publisher: string
   img: string

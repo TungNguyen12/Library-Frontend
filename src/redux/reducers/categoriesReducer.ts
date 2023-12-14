@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import Category from '../../types/book/Category'
+import CategoryAPI from '../../types/category/CategoryAPI'
 import axios, { AxiosError } from 'axios'
 import { BASE_URL } from '../../common/common'
 
 // GET CATEGORY
 export const getAllCategories = createAsyncThunk<
-  Category[],
+  CategoryAPI[],
   void,
   { rejectValue: string }
 >('getAllCategories', async (_, { rejectWithValue }) => {
@@ -20,7 +20,7 @@ export const getAllCategories = createAsyncThunk<
 })
 
 export interface CategoriesReducerState {
-  categories: Category[]
+  categories: CategoryAPI[]
   error?: string
 }
 

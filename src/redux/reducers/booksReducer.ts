@@ -113,6 +113,6 @@ const booksSlice = createSlice({
   },
 })
 
-const BooksReducer = booksSlice.reducer
+const booksReducer = booksSlice.reducer
 export const { sortBookByTitle } = booksSlice.actions
-export default BooksReducer
+export default booksReducer

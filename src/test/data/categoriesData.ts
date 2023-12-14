@@ -1,4 +1,4 @@
-import Category from '../../types/book/Category'
+import Category from '../../types/category/CategoryAPI'
 
 const categoriesData: Category[] = [
   {

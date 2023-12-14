@@ -9,8 +9,8 @@ import usersReducer from './reducers/userReducer'
 import cartReducer from './reducers/cartReducer'
 import authReducer from './reducers/authReducer'
 import categoriesReducer from './reducers/categoriesReducer'
-import authorReducer from './reducers/authorReducer'
-import loansReducer from './reducers/loanReducer'
+import authorsReducer from './reducers/authorsReducer'
+import loansReducer from './reducers/loansReducer'
 import { PersistConfig } from 'redux-persist/lib/types'
 import storage from 'redux-persist/lib/storage'
 import {
@@ -30,7 +30,7 @@ const rootReducer = combineReducers({
   cartReducer,
   authReducer,
   categoriesReducer,
-  authorReducer,
+  authorsReducer,
   loansReducer,
 })
 

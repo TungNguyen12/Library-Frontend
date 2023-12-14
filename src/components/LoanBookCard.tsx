@@ -1,5 +1,5 @@
 import React from 'react'
-import { LoanInfo, getLoanHistoryAsync } from '../redux/reducers/loanReducer'
+import { LoanInfo, getLoanHistoryAsync } from '../redux/reducers/loansReducer'
 import { useNavigate } from 'react-router-dom'
 import {
   Button,

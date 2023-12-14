@@ -8,7 +8,7 @@ import { Box } from '@mui/material'
 
 import { useEffect, useState } from 'react'
 import { useAppDispatch } from '../hooks/useAppDispatch'
-import { getAllAuthorsAsync } from '../redux/reducers/authorReducer'
+import { getAllAuthorsAsync } from '../redux/reducers/authorsReducer'
 import { getAllCategories } from '../redux/reducers/categoriesReducer'
 
 const AdminDashboard = () => {

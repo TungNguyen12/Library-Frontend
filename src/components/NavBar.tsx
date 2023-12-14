@@ -18,7 +18,7 @@ import getTotalQuantity from '../redux/selectors/cart/getTotalQuantity'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { logOut } from '../redux/reducers/authReducer'
 import { clearStateLogout } from '../redux/reducers/userReducer'
-import { clearHistoryLogout } from '../redux/reducers/loanReducer'
+import { clearHistoryLogout } from '../redux/reducers/loansReducer'
 import { clearCart } from '../redux/reducers/cartReducer'
 
 function ResponsiveAppBar() {

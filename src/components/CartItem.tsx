@@ -26,7 +26,7 @@ function CartItem({ item }: CartItemProps) {
   const handleRemoveCart = async () => {
     setIsItemRemoving(true)
     setTimeout(async () => {
-      await dispatch(removeFromCart(item._id))
+      await dispatch(removeFromCart(item))
       setIsItemRendered(false)
     }, 300)
   }
