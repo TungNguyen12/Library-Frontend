@@ -1,6 +1,6 @@
-import Category from '../../types/category/CategoryAPI'
+import CategoryAPI from '../../types/category/CategoryAPI'
 
-const categoriesData: Category[] = [
+const categoriesData: CategoryAPI[] = [
   {
     _id: '1',
     name: 'car',
