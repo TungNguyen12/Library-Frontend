@@ -62,7 +62,7 @@ const SignUp = () => {
     resolver: yupResolver(signUp),
   })
 
-  const onSubmit: SubmitHandler<any> = (data) => {
+  const onSubmit: SubmitHandler<FormInput> = (data) => {
     const { ...newData } = Object.assign({}, data)
 
     const newUser: CreateUserDto = {

@@ -22,4 +22,3 @@ describe('Test async actions in authorsReducer', () => {
   })
 })
 
-// export {}
