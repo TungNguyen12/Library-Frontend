@@ -7,6 +7,8 @@ import Book from '../../types/book/Book'
 import toast from 'react-hot-toast'
 import { BASE_URL } from '../../common/common'
 import { FetchBooksPaginatedAndFiltered } from '../../types/book/AllBooksApi'
+import DeleteBookRequest from '../../types/book/DeleteBookRequest'
+
 
 // UPDATE
 export const updateBookAsync = createAsyncThunk<
@@ -28,11 +30,6 @@ export const updateBookAsync = createAsyncThunk<
     return rejectWithValue(error.message)
   }
 })
-
-type DeleteBookRequest = {
-  bookId: string
-  accessToken: string
-}
 
 //DELETE
 export const deleteBookAsync = createAsyncThunk<
