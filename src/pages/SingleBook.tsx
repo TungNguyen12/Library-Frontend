@@ -53,7 +53,6 @@ const SingleBook = () => {
         `${BASE_URL}/books/${bookId}`
       )
       const data = response.data
-      console.log(data)
       setBook(data)
     } catch (e) {
       const error = e as AxiosError
@@ -67,7 +66,6 @@ const SingleBook = () => {
 
   const handleAddToCart = (payload: Book) => {
     dispatch(addToCart(payload))
-    toast.success(`Add ${payload.title} to cart`)
   }
   const handleDeleteBook = (book: Book) => {
     if (accessToken) {

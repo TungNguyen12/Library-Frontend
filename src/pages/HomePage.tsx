@@ -64,7 +64,6 @@ const HomePage: React.FC = () => {
           `&categoryName=${filterOptions.categoryName}`
       )
       const responseData: PaginatedData<Book> = response.data
-      console.log(responseData)
       setData(responseData)
       setIsLoading(false)
     } catch (e) {

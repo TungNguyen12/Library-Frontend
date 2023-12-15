@@ -14,7 +14,6 @@ export const updateBookAsync = createAsyncThunk<
   UpdateBookRequest,
   { rejectValue: string }
 >('updateBook', async ({ id, update, accessToken }, { rejectWithValue }) => {
-  console.log(id, update, '🥲')
   try {
     const response = await axios.put<Book>(`${BASE_URL}/books/${id}`, update, {
       headers: {
@@ -24,8 +23,8 @@ export const updateBookAsync = createAsyncThunk<
     toast.success(`Modified successfully, refresh to see the updated info`)
     return response.data
   } catch (e) {
-    console.log('error here: ❌❌❌❌', e)
     const error = e as AxiosError
+    toast.error(`Error, can't modify`)
     return rejectWithValue(error.message)
   }
 })
@@ -50,8 +49,8 @@ export const deleteBookAsync = createAsyncThunk<
     toast.success(`Book deleted!`)
     return bookId
   } catch (e) {
-    console.log(e, '❌')
     const error = e as AxiosError
+    toast.error(`Can't delete!`)
     return rejectWithValue(error.message)
   }
 })
@@ -69,12 +68,10 @@ export const createBookAsync = createAsyncThunk<
       },
     })
     const createdBook: Book = response.data
-    console.log(createdBook)
     toast.success(`Create new Book successfully: ${createdBook.title}`)
     return createdBook
   } catch (e) {
     const error = e as AxiosError
-    console.log(error)
     toast.error('Failed to create new Book, try again!')
     return rejectWithValue(error.message)
   }

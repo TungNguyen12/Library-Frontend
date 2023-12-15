@@ -14,7 +14,6 @@ type Props = {
 
 const AuthorFormControl = ({ onChange }: Props) => {
   const authors = useAppSelector((state) => state.authorsReducer.authors)
-  console.log(authors)
   return (
     <FormControl
       sx={{

@@ -60,9 +60,7 @@ export const Signin = () => {
 
   useEffect(() => {
     if (currentUser !== null) {
-      console.log('currentUser changed 🤔:', currentUser)
       const timeoutId = setTimeout(() => {
-        console.log("Redirecting to '/'")
         navigate('/')
       }, 3000)
 

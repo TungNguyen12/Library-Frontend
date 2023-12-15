@@ -60,7 +60,6 @@ const signUp = yup
 
 const SignUp = () => {
   const dispatch = useAppDispatch()
-  console.log('signup page')
 
   const {
     register,
@@ -77,7 +76,6 @@ const SignUp = () => {
     const newUser: CreateUserDto = {
       ...newData,
     }
-    console.log(newUser)
     dispatch(registerUserAsync(newUser))
     reset()
   }
