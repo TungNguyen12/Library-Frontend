@@ -6,12 +6,7 @@ import UsersReducerState from '../../types/user/UsersReducerState'
 import toast from 'react-hot-toast'
 import { BASE_URL } from '../../common/common'
 
-const initialState: UsersReducerState = {
-  users: [],
-  error: null,
-  isLoading: false,
-}
-
+// Async Thunks
 export const getAllUsersAsync = createAsyncThunk<
   User[],
   string,
@@ -23,7 +18,6 @@ export const getAllUsersAsync = createAsyncThunk<
         Authorization: `Bearer ${accessToken}`,
       },
     })
-    console.log(response.data)
     return response.data
   } catch (e) {
     const error = e as Error
@@ -41,7 +35,6 @@ export const registerUserAsync = createAsyncThunk<
 
     const newUser: User = response.data
     toast.success(`Create new account successfully`)
-    console.log(newUser, 'new user created 🧠')
     return newUser
   } catch (e) {
     const error = e as Error
@@ -50,7 +43,14 @@ export const registerUserAsync = createAsyncThunk<
   }
 })
 
-// Should be for ADMIN
+// Reducer State
+const initialState: UsersReducerState = {
+  users: [],
+  error: null,
+  isLoading: false,
+}
+
+// Slice
 const usersSlice = createSlice({
   name: 'users',
   initialState,
@@ -80,6 +80,9 @@ const usersSlice = createSlice({
   },
 })
 
-const usersReducer = usersSlice.reducer
+// Actions
 export const { clearStateLogout } = usersSlice.actions
+
+// Reducer
+const usersReducer = usersSlice.reducer
 export default usersReducer

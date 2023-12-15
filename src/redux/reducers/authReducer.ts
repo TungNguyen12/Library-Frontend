@@ -1,21 +1,24 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import User, { UpdateUserDto, UpdateUserRequest } from '../../types/user/User'
-import { LoginInterface } from '../../types/user/Login'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { BASE_URL } from '../../common/common'
+import User, { UpdateUserDto, UpdateUserRequest } from '../../types/user/User'
+import { LoginInterface } from '../../types/user/Login'
 
+// Types
 export type AuthState = {
   currentUser: User | null
   accessToken: string | null
   error?: string | null
 }
 
+// Initial State
 export const initialState: AuthState = {
   currentUser: null,
   accessToken: null,
 }
 
+// Async Thunks
 export const signinAsync = createAsyncThunk<
   AuthState,
   LoginInterface,
@@ -27,7 +30,6 @@ export const signinAsync = createAsyncThunk<
       password,
     })
     const jwtToken = response.data.accessToken as string
-    console.log('🪙: token here:', jwtToken)
 
     const authenticatedUserProfile = await dispatch(
       getUserProfileAsync(jwtToken)
@@ -39,8 +41,8 @@ export const signinAsync = createAsyncThunk<
     ) {
       throw Error(authenticatedUserProfile.payload || 'Cannot login')
     }
+
     toast.success(`Login successfully`)
-    console.log(authenticatedUserProfile)
 
     const result = {
       currentUser: authenticatedUserProfile.payload,
@@ -61,11 +63,8 @@ export const getUserProfileAsync = createAsyncThunk<
 >('getUserProfileAsync', async (jwtToken, { rejectWithValue }) => {
   try {
     const response = await axios.get(`${BASE_URL}/users/profile`, {
-      headers: {
-        Authorization: `Bearer ${jwtToken}`,
-      },
+      headers: { Authorization: `Bearer ${jwtToken}` },
     })
-
     const userProfile = response.data
     return userProfile
   } catch (e) {
@@ -83,9 +82,7 @@ export const updateUserAsync = createAsyncThunk<
   async ({ update, accessToken }, { rejectWithValue, dispatch }) => {
     try {
       await axios.put(`${BASE_URL}/users/update`, update, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+        headers: { Authorization: `Bearer ${accessToken}` },
       })
 
       const newProfile = await dispatch(getUserProfileAsync(accessToken))
@@ -93,14 +90,13 @@ export const updateUserAsync = createAsyncThunk<
       if (typeof newProfile.payload === 'string' || !newProfile.payload) {
         throw Error(newProfile.payload || 'Cannot update')
       }
+
       toast.success(`Update successfully`)
-      console.log(newProfile)
 
       const result = {
         currentUser: newProfile.payload,
         accessToken: accessToken,
       }
-
       return result
     } catch (e) {
       const error = e as Error
@@ -109,6 +105,7 @@ export const updateUserAsync = createAsyncThunk<
   }
 )
 
+// Slice
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -120,7 +117,7 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    //SIGNIN
+    // SIGNIN
     builder
       .addCase(signinAsync.fulfilled, (state, action) => {
         state.currentUser = action.payload.currentUser
@@ -131,7 +128,7 @@ const authSlice = createSlice({
         state.error = action.payload as string
       })
 
-    //UPDATE PROFILE
+    // UPDATE PROFILE
     builder
       .addCase(updateUserAsync.fulfilled, (state, action) => {
         state.currentUser = action.payload.currentUser
@@ -141,7 +138,7 @@ const authSlice = createSlice({
         state.error = action.payload as string
       })
 
-    //GET USER PROFILE
+    // GET USER PROFILE
     builder
       .addCase(getUserProfileAsync.fulfilled, (state, { payload }) => {
         state.currentUser = { ...payload }
@@ -153,9 +150,12 @@ const authSlice = createSlice({
   },
 })
 
+// Actions
 export const { logOut } = authSlice.actions
 
+// Selector
 export const getUserProfile = (state: AuthState) => state.currentUser
 
+// Reducer
 const authReducer = authSlice.reducer
 export default authReducer

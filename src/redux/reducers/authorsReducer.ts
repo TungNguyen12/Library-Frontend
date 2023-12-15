@@ -3,6 +3,7 @@ import axios from 'axios'
 import { BASE_URL } from '../../common/common'
 import { AuthorAPI } from '../../types/author/AuthorAPI'
 
+// Async Thunk
 export const getAllAuthorsAsync = createAsyncThunk<
   AuthorAPI[],
   void,
@@ -17,6 +18,7 @@ export const getAllAuthorsAsync = createAsyncThunk<
   }
 })
 
+// Reducer State
 type AuthorReducerState = {
   authors: AuthorAPI[]
   isLoading: boolean
@@ -28,6 +30,7 @@ export const initialState: AuthorReducerState = {
   isLoading: false,
 }
 
+// Slice
 const authorsSlice = createSlice({
   name: 'authors',
   initialState,
@@ -42,12 +45,14 @@ const authorsSlice = createSlice({
         }
       }
     })
+
     builder.addCase(getAllAuthorsAsync.pending, (state, action) => {
       return {
         ...state,
         isLoading: true,
       }
     })
+
     builder.addCase(getAllAuthorsAsync.rejected, (state, action) => {
       if (action.payload instanceof Error) {
         return {
@@ -60,5 +65,6 @@ const authorsSlice = createSlice({
   },
 })
 
+// Reducer
 const authorsReducer = authorsSlice.reducer
 export default authorsReducer

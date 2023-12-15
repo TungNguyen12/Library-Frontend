@@ -3,7 +3,7 @@ import CategoryAPI from '../../types/category/CategoryAPI'
 import axios, { AxiosError } from 'axios'
 import { BASE_URL } from '../../common/common'
 
-// GET ALL CATEGORIES
+// Async Thunk
 export const getAllCategoriesAsync = createAsyncThunk<
   CategoryAPI[],
   void,
@@ -11,14 +11,15 @@ export const getAllCategoriesAsync = createAsyncThunk<
 >('getAllCategoriesAsync', async (_, { rejectWithValue }) => {
   try {
     const response = await axios.get(`${BASE_URL}/categories`)
-    const category = response.data
-    return category
+    const categories = response.data
+    return categories
   } catch (e) {
     const error = e as AxiosError
     return rejectWithValue(error.message)
   }
 })
 
+// Reducer State
 export interface CategoriesReducerState {
   categories: CategoryAPI[]
   error?: string
@@ -28,6 +29,7 @@ export const initialState: CategoriesReducerState = {
   categories: [],
 }
 
+// Slice
 export const categoriesSlice = createSlice({
   name: 'categories',
   initialState,
@@ -43,5 +45,6 @@ export const categoriesSlice = createSlice({
   },
 })
 
+// Reducer
 export const categoriesReducer = categoriesSlice.reducer
 export default categoriesReducer

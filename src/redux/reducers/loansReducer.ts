@@ -3,6 +3,7 @@ import axios from 'axios'
 import { BASE_URL } from '../../common/common'
 import toast from 'react-hot-toast'
 
+// Types
 export type BookInfo = {
   _id: string
   title: string
@@ -17,7 +18,7 @@ export type LoanInfo = {
 }
 
 export type BorrowBookRequest = {
-  id: string[] //array of selected book ID
+  id: string[] // array of selected book ID
   accessToken: string
 }
 
@@ -26,6 +27,11 @@ export type ReturnBookRequest = {
   accessToken: string
 }
 
+export type ReturnedHistory = {
+  history: LoanInfo[]
+}
+
+// Async Thunks
 export const returnBooksAsync = createAsyncThunk<
   boolean,
   BorrowBookRequest,
@@ -47,10 +53,6 @@ export const returnBooksAsync = createAsyncThunk<
   }
 })
 
-export type ReturnedHistory = {
-  history: LoanInfo[]
-}
-
 export const getLoanHistoryAsync = createAsyncThunk<
   ReturnedHistory,
   string,
@@ -71,18 +73,21 @@ export const getLoanHistoryAsync = createAsyncThunk<
   }
 })
 
+// Reducer State
 export type LoanReducerState = {
   history: LoanInfo[]
   isLoading: boolean
   error?: string | null
 }
 
+// Initial State
 const initialState: LoanReducerState = {
   history: [],
   isLoading: false,
   error: null,
 }
 
+// Slice
 const loansSlice = createSlice({
   name: 'loans',
   initialState,
@@ -107,6 +112,9 @@ const loansSlice = createSlice({
   },
 })
 
-const loansReducer = loansSlice.reducer
+// Actions
 export const { clearHistoryLogout } = loansSlice.actions
+
+// Reducer
+const loansReducer = loansSlice.reducer
 export default loansReducer
