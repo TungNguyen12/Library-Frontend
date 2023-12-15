@@ -1,7 +1,15 @@
+// React Hook Form
 import { SubmitHandler, useForm } from 'react-hook-form'
+
+// Redux
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import CreateUserDto from '../types/user/RegisterUserRequest'
-import toast, { Toaster } from 'react-hot-toast'
+import { registerUserAsync } from '../redux/reducers/userReducer'
+
+// Toast
+import { Toaster } from 'react-hot-toast'
+
+// MUI Components
 import {
   Avatar,
   Box,
@@ -15,12 +23,13 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
+
+// MUI Icons
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 
+// Yup and React Hook Form Resolvers
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-
-import { registerUserAsync } from '../redux/reducers/userReducer'
 
 interface FormInput {
   firstName: string

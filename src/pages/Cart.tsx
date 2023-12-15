@@ -1,5 +1,7 @@
+// React Router
 import { Link, useNavigate } from 'react-router-dom'
 
+// MUI Components
 import {
   Alert,
   Box,
@@ -16,11 +18,16 @@ import {
   Typography,
 } from '@mui/material'
 
+// Custom Components
 import CartItem from '../components/CartItem'
+
+// Redux
 import { useAppSelector } from '../hooks/useAppSelector'
 import Book from '../types/book/Book'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { clearCart } from '../redux/reducers/cartReducer'
+
+// API and Toast
 import { BASE_URL } from '../common/common'
 import axios from 'axios'
 import toast, { Toaster } from 'react-hot-toast'

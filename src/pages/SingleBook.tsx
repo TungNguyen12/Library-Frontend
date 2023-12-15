@@ -1,8 +1,11 @@
+// React
 import { useEffect, useState } from 'react'
-
-import axios, { AxiosError, AxiosResponse } from 'axios'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
+// Axios
+import axios, { AxiosError, AxiosResponse } from 'axios'
+
+// MUI Components
 import {
   Box,
   Button,
@@ -14,13 +17,23 @@ import {
   Typography,
 } from '@mui/material'
 
+// Types
 import Book from '../types/book/Book'
+
+// Redux
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { useAppSelector } from '../hooks/useAppSelector'
 import { addToCart } from '../redux/reducers/cartReducer'
+
+// Components
 import ModifyBookForm from '../components/admin/components/ModifyBookForm'
+
+// Redux Services
 import { deleteBookAsync } from '../redux/services/BookServices'
+
+// Toast
 import toast, { Toaster } from 'react-hot-toast'
+import { BASE_URL } from '../common/common'
 
 const SingleBook = () => {
   const [book, setBook] = useState<Book>()
@@ -37,7 +50,7 @@ const SingleBook = () => {
   const getSingleBook = async () => {
     try {
       const response = await axios.get<any, AxiosResponse<Book>>(
-        `http://localhost:3000/api/v1/books/${bookId}`
+        `${BASE_URL}/books/${bookId}`
       )
       const data = response.data
       console.log(data)

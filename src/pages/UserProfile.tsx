@@ -1,4 +1,8 @@
+// React Components
 import Signin from './Signin'
+import UpdateUserForm from '../components/UpdateUserForm'
+
+// MUI Components
 import {
   Avatar,
   Box,
@@ -9,17 +13,16 @@ import {
   Divider,
   Typography,
 } from '@mui/material'
-import UpdateUserForm from '../components/UpdateUserForm'
+
+// MUI Icons
+import EditIcon from '../components/icons/EditIcon'
+
+// Redux
 import { useAppSelector } from '../hooks/useAppSelector'
 import { useState } from 'react'
-import EditIcon from '../components/icons/EditIcon'
-import { useAppDispatch } from '../hooks/useAppDispatch'
 
 const UserProfile = () => {
-  const dispatch = useAppDispatch()
-  const { currentUser, accessToken } = useAppSelector(
-    (state) => state.authReducer
-  )
+  const { currentUser } = useAppSelector((state) => state.authReducer)
 
   const [openModal, setOpenModal] = useState(false)
 

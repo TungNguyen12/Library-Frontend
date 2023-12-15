@@ -3,12 +3,12 @@ import CategoryAPI from '../../types/category/CategoryAPI'
 import axios, { AxiosError } from 'axios'
 import { BASE_URL } from '../../common/common'
 
-// GET CATEGORY
-export const getAllCategories = createAsyncThunk<
+// GET ALL CATEGORIES
+export const getAllCategoriesAsync = createAsyncThunk<
   CategoryAPI[],
   void,
   { rejectValue: string }
->('getAllCategories', async (_, { rejectWithValue }) => {
+>('getAllCategoriesAsync', async (_, { rejectWithValue }) => {
   try {
     const response = await axios.get(`${BASE_URL}/categories`)
     const category = response.data
@@ -34,10 +34,10 @@ export const categoriesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getAllCategories.fulfilled, (state, action) => {
+      .addCase(getAllCategoriesAsync.fulfilled, (state, action) => {
         state.categories = action.payload
       })
-      .addCase(getAllCategories.rejected, (state, action) => {
+      .addCase(getAllCategoriesAsync.rejected, (state, action) => {
         state.error = action.payload
       })
   },

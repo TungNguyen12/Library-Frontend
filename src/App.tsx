@@ -1,4 +1,3 @@
-import AllBooks from './pages/AllBooks'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Layout from './pages/Layout'
 import ErrorPage from './pages/ErrorPage'
@@ -53,10 +52,6 @@ const App = () => {
           path: ':bookId',
           element: <SingleBook />,
         },
-        // {
-        //   path: 'categories',
-        //   element: <AllBooks />,
-        // },
         {
           path: 'signup',
           element: <SignUp />,

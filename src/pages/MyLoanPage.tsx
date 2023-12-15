@@ -1,9 +1,18 @@
+// React
 import { useEffect } from 'react'
+
+// Redux
 import { useAppSelector } from '../hooks/useAppSelector'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { getLoanHistoryAsync } from '../redux/reducers/loansReducer'
+
+// MUI Components
 import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material'
+
+// Custom Components
 import LoanBookCard from '../components/LoanBookCard'
+
+// Toast
 import { Toaster } from 'react-hot-toast'
 
 const MyLoanPage = () => {

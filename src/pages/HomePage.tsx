@@ -14,16 +14,29 @@ import {
   Typography,
 } from '@mui/material'
 
+// Common
 import { BASE_URL } from '../common/common'
+
+// Types
 import { FilterBooksOptions, PaginatedData } from '../types/book/AllBooksApi'
-import BookCard from '../components/BookCard'
 import Book from '../types/book/Book'
+
+// Components
+import BookCard from '../components/BookCard'
 import AuthorsFormControl from '../components/AuthorFormControl'
 import CategoryFormControl from '../components/CategoryFormControl'
 import SearchInput from '../components/SearchInput'
+
+// Redux Services
 import { getAllBooksAsync } from '../redux/services/BookServices'
 import { useAppDispatch } from '../hooks/useAppDispatch'
+
+// React Hot Toast
 import { Toaster } from 'react-hot-toast'
+
+// Redux Reducers
+import { getAllAuthorsAsync } from '../redux/reducers/authorsReducer'
+import { getAllCategoriesAsync } from '../redux/reducers/categoriesReducer'
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -67,6 +80,8 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     dispatch(getAllBooksAsync())
+    dispatch(getAllAuthorsAsync())
+    dispatch(getAllCategoriesAsync())
   }, [])
 
   return (
