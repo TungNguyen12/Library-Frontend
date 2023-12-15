@@ -1,9 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { useAppSelector } from '../../hooks/useAppSelector'
 import { useAppDispatch } from '../../hooks/useAppDispatch'
 import { Box, Button, Dialog, Stack } from '@mui/material'
-import SearchInput from '../SearchInput'
 import { BookPaginationActionsTable } from './components/BookPagination'
 import { CreateBookForm } from './components/CreateBookForm'
 import { getAllBooksAsync } from '../../redux/services/BookServices'
@@ -49,7 +47,6 @@ const BookControl = () => {
         >
           <Button
             variant="contained"
-            // onClick={handleOpenCreateForm}
             onClick={handleOpenModal}
             sx={{ width: '200px' }}
           >
@@ -61,7 +58,6 @@ const BookControl = () => {
       <Dialog open={openModal} onClose={handleCloseModal}>
         <CreateBookForm onClose={handleCloseModal} />
       </Dialog>
-      {/* {isOpen && <CreateBookForm />} */}
       <Box
         sx={{
           alignContent: 'center',
@@ -71,7 +67,6 @@ const BookControl = () => {
           marginTop: '10px',
         }}
       >
-        {/* <SearchInput handleSearchBook={handleSearchBook} /> */}
         <BookPaginationActionsTable rows={booksToShow} />
       </Box>
     </Box>
