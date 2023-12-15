@@ -77,7 +77,7 @@ export const createBookAsync = createAsyncThunk<
   }
 })
 
-// GET A SINGLE Book
+// GET A SINGLE BOOK
 export const getSingleBook = createAsyncThunk<
   Book,
   string,
