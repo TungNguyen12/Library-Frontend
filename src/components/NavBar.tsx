@@ -27,7 +27,6 @@ function ResponsiveAppBar() {
   const user = useAppSelector((state) => state.authReducer.currentUser)
   let pages = [
     { params: '', page: 'Books' },
-    { params: 'categories', page: 'Categories' },
     { params: 'myloans', page: 'My loans' },
   ]
 

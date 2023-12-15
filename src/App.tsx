@@ -53,10 +53,10 @@ const App = () => {
           path: ':bookId',
           element: <SingleBook />,
         },
-        {
-          path: 'categories',
-          element: <AllBooks />,
-        },
+        // {
+        //   path: 'categories',
+        //   element: <AllBooks />,
+        // },
         {
           path: 'signup',
           element: <SignUp />,
