@@ -77,10 +77,7 @@ export const UpdateUserForm: React.FC<any> = () => {
   }
 
   const onSubmit: SubmitHandler<any> = ({ firstName, lastName, avatar }) => {
-    console.log('new lastName here 🤔', lastName, avatar)
-
     const updated = { firstName, lastName, avatar }
-    console.log(updated, '🤔🤔🤔')
     if (accessToken) {
       dispatch(updateUserAsync({ update: updated, accessToken }))
     } else {

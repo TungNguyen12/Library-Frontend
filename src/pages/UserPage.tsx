@@ -1,5 +1,5 @@
 // React Components
-import Signin from './Signin'
+import Signin from './SigninPage'
 import UpdateUserForm from '../components/UpdateUserForm'
 
 // MUI Components
