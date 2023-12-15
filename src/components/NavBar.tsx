@@ -14,12 +14,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import ShoppingCart from '@mui/icons-material/ShoppingCart'
 import { Badge } from '@mui/material'
 import { useAppSelector } from '../hooks/useAppSelector'
-import getTotalQuantity from '../redux/selectors/cart/getTotalQuantity'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { logOut } from '../redux/reducers/authReducer'
 import { clearStateLogout } from '../redux/reducers/userReducer'
 import { clearHistoryLogout } from '../redux/reducers/loansReducer'
 import { clearCart } from '../redux/reducers/cartReducer'
+import getTotalQuantity from '../redux/selector/cart/getTotalQuantity'
 
 function ResponsiveAppBar() {
   const navigate = useNavigate()
