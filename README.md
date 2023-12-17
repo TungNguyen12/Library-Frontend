@@ -1,24 +1,24 @@
-# Front-end E-Commerce Website Project
+# Frontend Library Website Project
 
 ![React](https://img.shields.io/badge/React-v.18-blue)
 ![Redux toolkit](https://img.shields.io/badge/Redux-v.1-purple)
 ![TypeScript](https://img.shields.io/badge/TypeScript-v.4-green)
 ![Material UI](https://img.shields.io/badge/MUI-v.1-hotpink)
 
-This project was built in purpose of studying at Frontend Module of Integrify's Fullstack program. The duty was to create an e-commerce website using API endpoints from [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/).
+This project was built in purpose of creating a Fullstack web application at Integrify's Fullstack program. The duty was to create an library website and connect with our backend (group work) using our own API endpoints from [this endpoint](https://library-management-system-api-172j.onrender.com/api/v1/api-docs/).
 
 ## Deployment
 
-You can visit my e-commerce website [HERE](https://main--e-commerce-by-pete.netlify.app/)
+You can visit my fullstack library website [HERE](https://lahtilibrary.netlify.app/)
 
 ## Table of content
 
--   [Technologies](#technologies)
--   [Features](#features)
--   [Project overview](#project-overview)
--   [Project structure](#project-structure)
--   [Run the project](#running-the-project)
--   [Deployment](#deployment)
+- [Technologies](#technologies)
+- [Features](#features)
+- [Project overview](#project-overview)
+- [Project structure](#project-structure)
+- [Run the project](#running-the-project)
+- [Deployment](#deployment)
 
 ## Technologies
 
@@ -30,73 +30,60 @@ You can visit my e-commerce website [HERE](https://main--e-commerce-by-pete.netl
 
 ## Features
 
-### Visitor (not login)
+### Visitor (not sign in)
 
--   Able to view all products, products by categories, find product, view product detail page
--   Able to register/login
+- Able to view all books, find book with filter options, view books' detail page
+- Able to sign up/sign in
 
-### Customer (login as customer)
+### Borrower (sign in as Borrower)
 
--   Able to access Profile page / Cart page
--   Able to Logout
--   Able to manage their products in cart with increase/decrease/remove the product or empty their cart
+- Able to access User page / Cart page
+- Able to sign out
+- Able to add book to their cart
+- Able to manage their books in cart by empty/remove actions the book
 
-### Admin (login as admin)
+### Admin (sign in as admin)
 
--   Able to modify/delete product in Product detail page
--   Able to access AdminDashboard page with all users information and all products information and create new product
+- Able to update/delete book in book detail page
+- Able to access AdminDashboard page with all users' information and all books information and create new book
 
 ## Project overview
 
-This project requires student to use mentioned [Technologies](#technologies)
-
-Here is a list of specific requirements divided into Basic requirements and Bonus Requirements
-
-**Basic requirements**
-
--   [x] Fetch and display all and single products.
--   [x] Create at least 4 pages (products, profile, user, cart)
--   [x] Product reducer
--   [x] User reducer
--   [x] Cart reducer
--   [x] Adding and removing from the cart
--   [x] Login and authorization (admins can delete and update products)
--   [x] Routing and private pages
--   [x] Testing the reducers
--   [x] Rewrite the README, deploy the project, add the deployment link here and to the README.md
-
-**Bonus requirements**
-
--   [] Context API
--   [x] Pagination when fetching and displaying.
--   [x] Any performance optimization, remember to mention it ie useMemo, debounce, etc (in this project I use useMemo hook)
+This project DOESN'T require student to use any specific Frontend technologies but the author use those mentioned [Technologies](#technologies)
 
 ## Project structure
 
 ```
 .
-├───package.json
-├───README.md
-├───tsconfig.json
-└───src
-    ├───admin
-    │   └───components
-    ├───components
-    ├───hooks
-    ├───pages
-    ├───redux
-    │   ├───reducers
-    │   ├───selectors
-    │   │   └───cart
-    │   └───services
-    ├───test
-    │   ├───common
-    │   ├───data
-    │   └───reducers
-    └───types
-        ├───cart
-        ├───product
-        └───user
+.
+├── .prettierrc
+├── package.json
+├── README.md
+├── tsconfig.json
+└── src
+    ├── common
+    ├── components
+    │   ├── admin
+    │   │   └── components
+    │   └── icons
+    ├── hooks
+    ├── pages
+    ├── redux
+    │   ├── reducers
+    │   ├── selector
+    │   │   └── cart
+    │   └── services
+    ├── test
+    │   ├── common
+    │   ├── data
+    │   └── reducers
+    └── types
+        ├── author
+        ├── book
+        ├── cart
+        ├── category
+        └── user
+
 ```
 
 ## Run the project
@@ -110,4 +97,4 @@ Here is a list of specific requirements divided into Basic requirements and Bonu
 
 ## Deployment
 
-Visit my work [HERE](https://main--e-commerce-by-pete.netlify.app/)
+Visit my work [HERE](https://lahtilibrary.netlify.app/)
