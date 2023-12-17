@@ -142,7 +142,7 @@ export const BookPaginationActionsTable: React.FC<any> = ({ rows }) => {
         <TableHead>
           <TableRow>
             <TableCell>Book title</TableCell>
-            <TableCell>Price</TableCell>
+            <TableCell>Publisher</TableCell>
             <TableCell>Description</TableCell>
             <TableCell>Category</TableCell>
           </TableRow>

@@ -1,17 +1,17 @@
-import { Stack, ListItem, Button } from "@mui/material";
-import React from "react";
+import { Stack, ListItem, Button } from '@mui/material'
+import React from 'react'
 
-const SwitchPanel: React.FC<any> = ({ handleOpenProduct, handleOpenUser }) => {
-    return (
-        <Stack>
-            <ListItem>
-                <Button onClick={handleOpenProduct}>Product control</Button>
-            </ListItem>
-            <ListItem>
-                <Button onClick={handleOpenUser}>User control</Button>
-            </ListItem>
-        </Stack>
-    );
-};
+const SwitchPanel: React.FC<any> = ({ handleOpenBook, handleOpenUser }) => {
+  return (
+    <Stack>
+      <ListItem>
+        <Button onClick={handleOpenBook}>Books control</Button>
+      </ListItem>
+      <ListItem>
+        <Button onClick={handleOpenUser}>Users control</Button>
+      </ListItem>
+    </Stack>
+  )
+}
 
-export default SwitchPanel;
+export default SwitchPanel

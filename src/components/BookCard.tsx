@@ -12,8 +12,10 @@ import Book from '../types/book/Book'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { addToCart } from '../redux/reducers/cartReducer'
+import { useAppSelector } from '../hooks/useAppSelector'
 
 const BookCard: React.FC<any> = ({ book }) => {
+  const currentUser = useAppSelector((state) => state.authReducer.currentUser)
   const { _id, title, img } = book as Book
 
   const navigate = useNavigate()
@@ -69,7 +71,11 @@ const BookCard: React.FC<any> = ({ book }) => {
           </Typography>
         </Stack>
         <Stack>
-          <Button onClick={() => handleAddToCart(book)}>Add to cart</Button>
+          {currentUser?.role[0].title === 'Borrower' ? (
+            <Button onClick={() => handleAddToCart(book)}>Add to cart</Button>
+          ) : (
+            <Button>Edit book</Button>
+          )}
         </Stack>
       </CardContent>
     </Card>

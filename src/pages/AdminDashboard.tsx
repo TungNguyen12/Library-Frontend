@@ -14,7 +14,7 @@ import { useAppSelector } from '../hooks/useAppSelector'
 import { getAllUsersAsync } from '../redux/reducers/userReducer'
 
 const AdminDashboard = () => {
-  const [isOpenProduct, setIsOpenProduct] = useState(true)
+  const [isOpenBook, setIsOpenBook] = useState(true)
   const [isOpenUser, setIsOpenUser] = useState(false)
   const accessToken = useAppSelector((state) => state.authReducer.accessToken)
 
@@ -26,13 +26,13 @@ const AdminDashboard = () => {
     }
   }, [])
 
-  const handleOpenProduct = () => {
-    setIsOpenProduct(!isOpenProduct)
+  const handleOpenBook = () => {
+    setIsOpenBook(!isOpenBook)
     setIsOpenUser(!isOpenUser)
   }
   const handleOpenUser = () => {
     setIsOpenUser(!isOpenUser)
-    setIsOpenProduct(!isOpenProduct)
+    setIsOpenBook(!isOpenBook)
   }
 
   return (
@@ -41,7 +41,7 @@ const AdminDashboard = () => {
       <Box sx={{ width: '90%', display: 'flex', margin: '50px auto' }}>
         <Box>
           <SwitchPanel
-            handleOpenProduct={handleOpenProduct}
+            handleOpenBook={handleOpenBook}
             handleOpenUser={handleOpenUser}
           />
         </Box>
@@ -52,7 +52,7 @@ const AdminDashboard = () => {
             width: '100%',
           }}
         >
-          {isOpenProduct && <BooksControl />}
+          {isOpenBook && <BooksControl />}
           {isOpenUser && <UserControl />}
         </Box>
       </Box>
