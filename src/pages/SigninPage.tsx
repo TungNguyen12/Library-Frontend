@@ -59,9 +59,18 @@ export const Signin = () => {
   }
 
   useEffect(() => {
-    if (currentUser !== null) {
+    if (currentUser?.role[0].title === 'Borrower') {
       const timeoutId = setTimeout(() => {
         navigate('/')
+      }, 3000)
+
+      // Cleanup the timeout in case the component unmounts
+      return () => clearTimeout(timeoutId)
+    }
+
+    if (currentUser?.role[0].title === 'Admin') {
+      const timeoutId = setTimeout(() => {
+        navigate('/admin')
       }, 3000)
 
       // Cleanup the timeout in case the component unmounts

@@ -40,9 +40,11 @@ function ResponsiveAppBar() {
     { params: 'myloans', page: 'My loans' },
   ]
 
-  user?.role[0].title === 'Admin'
-    ? (pages = pages.concat({ params: 'admin', page: 'Dashboard' }))
-    : pages
+  if (user?.role[0].title === 'Admin') {
+    pages = pages.concat({ params: 'admin', page: 'Dashboard' })
+    // Remove 'My loans' from the pages array
+    pages = pages.filter((page) => page.params !== 'myloans')
+  }
 
   const handleLogout = () => {
     dispatch(logOut())
