@@ -164,7 +164,15 @@ const HomePage: React.FC = () => {
             alignContent: 'center',
           }}
         >
-          {isLoading && <CircularProgress sx={{ margin: '100px auto' }} />}
+          {isLoading && (
+            <>
+              <CircularProgress sx={{ margin: '100px auto' }} />
+              <Typography>
+                It takes a while to render data due to FREE deployment for our
+                BACKEND
+              </Typography>
+            </>
+          )}
           {error && <Typography variant="h4">Items not found.</Typography>}
           {data && data.data.length < 1 && (
             <Box sx={{ margin: 'auto' }}>
