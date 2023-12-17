@@ -71,10 +71,10 @@ const BookCard: React.FC<any> = ({ book }) => {
           </Typography>
         </Stack>
         <Stack>
-          {currentUser?.role[0].title === 'Borrower' ? (
-            <Button onClick={() => handleAddToCart(book)}>Add to cart</Button>
-          ) : (
+          {currentUser?.role[0].title === 'Admin' ? (
             <Button>Edit book</Button>
+          ) : (
+            <Button onClick={() => handleAddToCart(book)}>Add to cart</Button>
           )}
         </Stack>
       </CardContent>

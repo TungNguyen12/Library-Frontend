@@ -103,14 +103,15 @@ const SingleBook = () => {
             />
           </Card>
 
-          <Card sx={{ maxWidth: 300 }}>
+          <Card sx={{ maxWidth: '55%' }}>
             <CardContent>
-              <Typography variant="h5" gutterBottom>
+              <Typography variant="h4" gutterBottom>
                 {book?.title}
               </Typography>
-              <Typography variant="h6" component="div">
+              <Typography variant="h5" component="div">
                 {book?.author[0].fullName}
               </Typography>
+              <Typography>Description: {book?.description}</Typography>
             </CardContent>
 
             <CardActions sx={{ display: 'flex' }}>
