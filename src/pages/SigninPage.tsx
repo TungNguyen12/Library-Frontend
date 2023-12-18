@@ -62,7 +62,7 @@ export const Signin = () => {
     if (currentUser?.role[0].title === 'Borrower') {
       const timeoutId = setTimeout(() => {
         navigate('/')
-      }, 3000)
+      }, 4500)
 
       // Cleanup the timeout in case the component unmounts
       return () => clearTimeout(timeoutId)
@@ -71,7 +71,7 @@ export const Signin = () => {
     if (currentUser?.role[0].title === 'Admin') {
       const timeoutId = setTimeout(() => {
         navigate('/admin')
-      }, 3000)
+      }, 4500)
 
       // Cleanup the timeout in case the component unmounts
       return () => clearTimeout(timeoutId)

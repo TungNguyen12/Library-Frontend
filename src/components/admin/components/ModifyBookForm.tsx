@@ -19,17 +19,17 @@ const modify = yup
   .object()
   .shape({
     title: yup.string(),
-    publisher: yup.string(),
+    description: yup.string(),
   })
   .test(
     'at-least-one-required',
-    'At least one of title or publisher is required',
+    'At least one of title or description is required',
     function (values) {
-      const { title, publisher } = values
-      if (!title && !publisher) {
+      const { title, description } = values
+      if (!title && !description) {
         return this.createError({
           path: 'modify',
-          message: 'At least one of title or publisher is required',
+          message: 'At least one of title or description is required',
         })
       }
       return true
@@ -48,11 +48,8 @@ export const ModifyBookForm: React.FC<any> = ({ book }) => {
     resolver: yupResolver(modify),
   })
 
-  const onSubmit: SubmitHandler<any> = ({ title, publisher }) => {
-    console.log('new publisher here 🤔', publisher)
-
-    const updated = { title, publisher }
-    console.log(updated, '🤔🤔🤔')
+  const onSubmit: SubmitHandler<any> = ({ title, description }) => {
+    const updated = { title, description }
     if (accessToken) {
       dispatch(updateBookAsync({ id: book._id, update: updated, accessToken }))
     } else {
@@ -86,11 +83,11 @@ export const ModifyBookForm: React.FC<any> = ({ book }) => {
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label="Publisher"
-                id="publisher"
-                error={Boolean(errors.publisher?.message)}
-                helperText={errors.publisher?.message}
-                {...register('publisher')}
+                label="Description"
+                id="description"
+                error={Boolean(errors.description?.message)}
+                helperText={errors.description?.message}
+                {...register('description')}
               />
             </Grid>
           </Grid>
