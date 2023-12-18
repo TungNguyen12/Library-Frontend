@@ -8,7 +8,7 @@ import {
   Grid,
   TextField,
 } from '@mui/material'
-import toast from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast'
 
 // YUP
 import * as yup from 'yup'
@@ -86,76 +86,83 @@ export const UpdateUserForm: React.FC<any> = () => {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Avatar
+    <>
+      <Toaster />
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
           sx={{
-            m: 1,
-            bgcolor: 'secondary.main',
-            height: '75px',
-            width: '75px',
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
-          alt={user?.firstName}
-          src={user?.avatar}
-        ></Avatar>
-        <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                id="firstName"
-                label="First name"
-                value={user.firstName}
-                error={Boolean(errors.firstName?.message)}
-                helperText={errors.firstName?.message}
-                {...register('firstName')}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Last name"
-                id="lastName"
-                value={user.lastName}
-                error={Boolean(errors.lastName?.message)}
-                helperText={errors.lastName?.message}
-                {...register('lastName')}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Avatar"
-                id="avatar"
-                value={user.avatar}
-                error={Boolean(errors.avatar?.message)}
-                helperText={errors.avatar?.message}
-                {...register('avatar')}
-                onChange={handleChange}
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+        >
+          <Avatar
+            sx={{
+              m: 1,
+              bgcolor: 'secondary.main',
+              height: '75px',
+              width: '75px',
+            }}
+            alt={user?.firstName}
+            src={user?.avatar}
+          ></Avatar>
+          <Box
+            component="form"
+            onSubmit={handleSubmit(onSubmit)}
+            sx={{ mt: 3 }}
           >
-            Update profile
-          </Button>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  id="firstName"
+                  label="First name"
+                  value={user.firstName}
+                  error={Boolean(errors.firstName?.message)}
+                  helperText={errors.firstName?.message}
+                  {...register('firstName')}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Last name"
+                  id="lastName"
+                  value={user.lastName}
+                  error={Boolean(errors.lastName?.message)}
+                  helperText={errors.lastName?.message}
+                  {...register('lastName')}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Avatar"
+                  id="avatar"
+                  value={user.avatar}
+                  error={Boolean(errors.avatar?.message)}
+                  helperText={errors.avatar?.message}
+                  {...register('avatar')}
+                  onChange={handleChange}
+                />
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Update profile
+            </Button>
+          </Box>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </>
   )
 }
 
