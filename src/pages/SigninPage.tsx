@@ -97,11 +97,6 @@ export const Signin = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          {success && currentUser && (
-            <Typography>
-              Log in successfully, redirecting to Product page
-            </Typography>
-          )}
           <Box
             component="form"
             onSubmit={handleSubmit(onSubmit)}

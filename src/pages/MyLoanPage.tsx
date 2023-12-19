@@ -7,7 +7,17 @@ import { useAppDispatch } from '../hooks/useAppDispatch'
 import { getLoanHistoryAsync } from '../redux/reducers/loansReducer'
 
 // MUI Components
-import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material'
+import {
+  Alert,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CircularProgress,
+  Grid,
+  Stack,
+  Typography,
+} from '@mui/material'
 
 // Custom Components
 import LoanBookCard from '../components/LoanBookCard'
@@ -23,22 +33,14 @@ const MyLoanPage = () => {
 
   const dispatch = useAppDispatch()
 
-  const handleGetHistory = () => {
-    if (accessToken) {
-      dispatch(getLoanHistoryAsync(accessToken))
-    }
-  }
   useEffect(() => {
     if (accessToken) {
       dispatch(getLoanHistoryAsync(accessToken))
     }
   }, [])
   return (
-    <Box>
+    <Box sx={{ width: '70%', margin: 'auto' }}>
       <Toaster />
-      <Button size="medium" onClick={handleGetHistory} variant="contained">
-        Get history
-      </Button>
       <Box
         sx={{
           flexGrow: 1,
@@ -52,9 +54,11 @@ const MyLoanPage = () => {
         {history && !isLoading && (
           <>
             <Box>
-              <Typography>Active books</Typography>
+              <Card sx={{ marginBottom: '30px' }}>
+                <CardContent>Active books</CardContent>
+              </Card>
               <Grid container spacing={{ xs: 2, md: 3 }} columns={12}>
-                {borrowedBooks.length > 0 &&
+                {borrowedBooks.length > 0 ? (
                   borrowedBooks.map((loan) => (
                     <Grid
                       key={loan.borrowed_Date}
@@ -70,12 +74,44 @@ const MyLoanPage = () => {
                     >
                       <LoanBookCard loanInfo={loan} accessToken={accessToken} />
                     </Grid>
-                  ))}
+                  ))
+                ) : (
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Stack>
+                      <Alert severity="error" sx={{ marginTop: '2rem' }}>
+                        You have not borrowed any books yet, let find one 🧠!
+                      </Alert>
+                    </Stack>
+                    <Button
+                      href="/"
+                      sx={{
+                        margin: '25px auto',
+                        bgcolor: '#1976d2',
+                        color: '#fff',
+                        '&.MuiButtonBase-root:hover': {
+                          bgcolor: '#1976d2',
+                          opacity: '0.9',
+                        },
+                      }}
+                    >
+                      Explore more books
+                    </Button>
+                  </Box>
+                )}
               </Grid>
             </Box>
 
             <Box sx={{ marginTop: '50px' }}>
-              <Typography>Returned books</Typography>
+              <Card sx={{ marginBottom: '30px' }}>
+                <CardContent>Returned books</CardContent>
+              </Card>
               <Grid container spacing={{ xs: 2, md: 3 }} columns={12}>
                 {returnedBooks &&
                   returnedBooks.map((loan) => (

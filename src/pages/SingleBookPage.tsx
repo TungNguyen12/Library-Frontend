@@ -71,7 +71,6 @@ const SingleBook = () => {
     if (accessToken) {
       dispatch(deleteBookAsync({ bookId: book._id, accessToken }))
       navigate('/')
-      toast.error(`${book.title} deleted!`)
     }
   }
 
