@@ -9,7 +9,7 @@ This project was built in purpose of creating a Fullstack web application at Int
 
 ## Deployment
 
-You can visit my fullstack library website [HERE](https://lahtilibrary.netlify.app/)
+You can visit my fullstack library website [HERE](https://main--lahtilibrary.netlify.app/)
 
 ## Table of content
 
