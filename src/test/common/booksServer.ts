@@ -4,7 +4,7 @@ import { setupServer } from 'msw/node'
 import booksData from '../data/booksData'
 import CreateBookDto from '../../types/book/CreateBookRequest'
 import UpdateBookRequest from '../../types/book/UpdateBookRequest'
-import { BASE_URL } from '../../common/common'
+import { BASE_URL } from '../../common'
 
 export const handlers = [
   rest.get(`${BASE_URL}/books`, (req, res, ctx) => {

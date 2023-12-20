@@ -33,7 +33,7 @@ import { deleteBookAsync } from '../redux/services/BookServices'
 
 // Toast
 import toast, { Toaster } from 'react-hot-toast'
-import { BASE_URL } from '../common/common'
+import { BASE_URL } from '../common'
 
 const SingleBook = () => {
   const [book, setBook] = useState<Book>()

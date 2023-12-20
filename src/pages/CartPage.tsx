@@ -28,7 +28,7 @@ import { useAppDispatch } from '../hooks/useAppDispatch'
 import { clearCart } from '../redux/reducers/cartReducer'
 
 // API and Toast
-import { BASE_URL } from '../common/common'
+import { BASE_URL } from '../common'
 import axios from 'axios'
 import toast, { Toaster } from 'react-hot-toast'
 

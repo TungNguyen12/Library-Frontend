@@ -5,10 +5,9 @@ import axios, { AxiosError } from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import Book from '../../types/book/Book'
 import toast from 'react-hot-toast'
-import { BASE_URL } from '../../common/common'
+import { BASE_URL } from '../../common'
 import { FetchBooksPaginatedAndFiltered } from '../../types/book/AllBooksApi'
 import DeleteBookRequest from '../../types/book/DeleteBookRequest'
-
 
 // UPDATE
 export const updateBookAsync = createAsyncThunk<
