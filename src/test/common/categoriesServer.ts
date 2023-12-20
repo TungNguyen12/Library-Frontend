@@ -2,7 +2,7 @@ import { rest } from 'msw'
 import { setupServer } from 'msw/lib/node'
 
 import categoriesData from '../data/categoriesData'
-import { BASE_URL } from '../../common/common'
+import { BASE_URL } from '../../common'
 
 export const handlers = [
   //Get All Categories

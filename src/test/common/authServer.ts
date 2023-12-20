@@ -3,7 +3,7 @@ import { setupServer } from 'msw/node'
 
 import { LoginInterface } from '../../types/user/Login'
 import usersData from '../data/usersData'
-import { BASE_URL } from '../../common/common'
+import { BASE_URL } from '../../common'
 
 export const accessToken = 'user-access-token'
 

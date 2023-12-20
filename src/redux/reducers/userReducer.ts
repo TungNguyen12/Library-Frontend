@@ -4,7 +4,7 @@ import axios from 'axios'
 import CreateUserDto from '../../types/user/RegisterUserRequest'
 import UsersReducerState from '../../types/user/UsersReducerState'
 import toast from 'react-hot-toast'
-import { BASE_URL } from '../../common/common'
+import { BASE_URL } from '../../common'
 
 // Async Thunks
 export const getAllUsersAsync = createAsyncThunk<

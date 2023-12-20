@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@mui/material'
 import axios from 'axios'
-import { BASE_URL } from '../common/common'
+import { BASE_URL } from '../common'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import toast from 'react-hot-toast'
 

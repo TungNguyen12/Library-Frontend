@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import { BASE_URL } from '../../common/common'
+import { BASE_URL } from '../../common'
 import User, { UpdateUserDto } from '../../types/user/User'
 import { LoginInterface } from '../../types/user/Login'
 import UpdateUserRequest from '../../types/user/UpdateUserRequest'

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { BASE_URL } from '../../common/common'
+import { BASE_URL } from '../../common'
 import toast from 'react-hot-toast'
 
 // Types
@@ -18,7 +18,7 @@ export type LoanInfo = {
 }
 
 export type BorrowBookRequest = {
-  id: string[] // array of selected book ID
+  id: string[]
   accessToken: string
 }
 

@@ -15,7 +15,7 @@ import {
 } from '@mui/material'
 
 // Common
-import { BASE_URL } from '../common/common'
+import { BASE_URL } from '../common'
 
 // Types
 import { FilterBooksOptions, PaginatedData } from '../types/book/AllBooksApi'

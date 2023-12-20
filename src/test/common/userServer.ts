@@ -4,7 +4,7 @@ import { setupServer } from 'msw/node'
 import RegisterUserRequest from '../../types/user/RegisterUserRequest'
 import usersData from '../data/usersData'
 import User from '../../types/user/User'
-import { BASE_URL } from '../../common/common'
+import { BASE_URL } from '../../common'
 
 export const handlers = [
   //GET ALL USERS
@@ -18,7 +18,6 @@ export const handlers = [
 
     const user = usersData.find((user) => user.email === input.email)
     if (user) {
-      //if this user is not exist -> available
       const newUser = {
         ...input,
         role: 'customer',
