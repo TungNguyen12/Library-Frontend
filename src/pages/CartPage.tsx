@@ -23,7 +23,7 @@ import CartItem from '../components/CartItem'
 
 // Redux
 import { useAppSelector } from '../hooks/useAppSelector'
-import Book from '../types/book/Book'
+
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { clearCart } from '../redux/reducers/cartReducer'
 
@@ -31,6 +31,7 @@ import { clearCart } from '../redux/reducers/cartReducer'
 import { BASE_URL } from '../common'
 import axios from 'axios'
 import toast, { Toaster } from 'react-hot-toast'
+import { Book } from '../types/books'
 
 function Cart() {
   const navigate = useNavigate()

@@ -2,9 +2,9 @@ import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 
 import booksData from '../data/booksData'
-import CreateBookDto from '../../types/book/CreateBookRequest'
-import UpdateBookRequest from '../../types/book/UpdateBookRequest'
+
 import { BASE_URL } from '../../common'
+import { CreateBookRequest, UpdateBookRequest } from '../../types/books'
 
 export const handlers = [
   rest.get(`${BASE_URL}/books`, (req, res, ctx) => {
@@ -56,7 +56,7 @@ export const handlers = [
   }),
 
   rest.post(`${BASE_URL}/Books/`, async (req, res, ctx) => {
-    const input: CreateBookDto = await req.json()
+    const input: CreateBookRequest = await req.json()
 
     // const category = categoriesData.find((c) => c.id === input.categoryId)
     const category = true

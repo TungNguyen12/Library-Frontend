@@ -2,9 +2,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { BASE_URL } from '../../common'
-import User, { UpdateUserDto } from '../../types/user/User'
-import { LoginInterface } from '../../types/user/Login'
-import UpdateUserRequest from '../../types/user/UpdateUserRequest'
+import User, { Credentials, UpdateUserRequest } from '../../types/users'
+
 
 // Types
 export type AuthState = {
@@ -22,7 +21,7 @@ export const initialState: AuthState = {
 // Async Thunks
 export const signinAsync = createAsyncThunk<
   AuthState,
-  LoginInterface,
+  Credentials,
   { rejectValue: string }
 >('signinAsync', async ({ email, password }, { rejectWithValue, dispatch }) => {
   try {

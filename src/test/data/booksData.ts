@@ -1,4 +1,4 @@
-import Book from '../../types/book/Book'
+import { Book } from '../../types/books'
 
 const booksData: Book[] = [
   {

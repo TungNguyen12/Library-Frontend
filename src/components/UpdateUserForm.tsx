@@ -15,7 +15,7 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 //TYPES
-import User from '../types/user/User'
+import User from '../types/users'
 
 // REACT/REDUX
 import { useForm, SubmitHandler } from 'react-hook-form'

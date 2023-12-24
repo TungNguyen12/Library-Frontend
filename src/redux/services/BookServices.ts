@@ -1,13 +1,16 @@
-import UpdateBookRequest from '../../types/book/UpdateBookRequest'
-import CreateBookDto from '../../types/book/CreateBookRequest'
 import axios, { AxiosError } from 'axios'
 
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import Book from '../../types/book/Book'
+
 import toast from 'react-hot-toast'
 import { BASE_URL } from '../../common'
-import { FetchBooksPaginatedAndFiltered } from '../../types/book/AllBooksApi'
-import DeleteBookRequest from '../../types/book/DeleteBookRequest'
+import {
+  Book,
+  CreateBookRequest,
+  DeleteBookRequest,
+  FetchBooksPaginatedAndFiltered,
+  UpdateBookRequest,
+} from '../../types/books'
 
 // UPDATE
 export const updateBookAsync = createAsyncThunk<
@@ -54,7 +57,7 @@ export const deleteBookAsync = createAsyncThunk<
 // CREATE
 export const createBookAsync = createAsyncThunk<
   Book,
-  CreateBookDto,
+  CreateBookRequest,
   { rejectValue: string }
 >('createBook', async ({ newBook, accessToken }, { rejectWithValue }) => {
   try {

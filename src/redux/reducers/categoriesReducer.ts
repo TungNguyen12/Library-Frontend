@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import CategoryAPI from '../../types/category/CategoryAPI'
+
 import axios, { AxiosError } from 'axios'
 import { BASE_URL } from '../../common'
+import { CategoryAPI } from '../../types/categories'
 
 // Async Thunk
 export const getAllCategoriesAsync = createAsyncThunk<

@@ -1,10 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import User from '../../types/user/User'
+import User, { CreateUserRequest } from '../../types/users'
 import axios from 'axios'
-import CreateUserDto from '../../types/user/RegisterUserRequest'
-import UsersReducerState from '../../types/user/UsersReducerState'
 import toast from 'react-hot-toast'
 import { BASE_URL } from '../../common'
+
+export type UsersReducerState = {
+  users: User[]
+  error?: string | null
+  isLoading: boolean
+}
 
 // Async Thunks
 export const getAllUsersAsync = createAsyncThunk<
@@ -27,9 +31,9 @@ export const getAllUsersAsync = createAsyncThunk<
 
 export const registerUserAsync = createAsyncThunk<
   User,
-  CreateUserDto,
+  CreateUserRequest,
   { rejectValue: string }
->('registerUser', async (user: CreateUserDto, { rejectWithValue }) => {
+>('registerUser', async (user: CreateUserRequest, { rejectWithValue }) => {
   try {
     const response = await axios.post(`${BASE_URL}/users/signup`, user)
 

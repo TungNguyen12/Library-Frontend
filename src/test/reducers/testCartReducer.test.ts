@@ -3,7 +3,8 @@ import cartReducer, {
   removeFromCart,
   clearCart,
 } from '../../redux/reducers/cartReducer'
-import Book from '../../types/book/Book'
+import { Book } from '../../types/books'
+
 import booksData from '../data/booksData'
 import cartData from '../data/cartData'
 

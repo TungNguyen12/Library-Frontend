@@ -18,7 +18,7 @@ import {
 } from '@mui/material'
 
 // Types
-import Book from '../types/book/Book'
+import { Book } from '../types/books'
 
 // Redux
 import { useAppDispatch } from '../hooks/useAppDispatch'
@@ -26,7 +26,7 @@ import { useAppSelector } from '../hooks/useAppSelector'
 import { addToCart } from '../redux/reducers/cartReducer'
 
 // Components
-import ModifyBookForm from '../components/admin/components/ModifyBookForm'
+import ModifyBookForm from '../components/admin/components/UpdateBookForm'
 
 // Redux Services
 import { deleteBookAsync } from '../redux/services/BookServices'

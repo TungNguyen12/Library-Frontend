@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { BASE_URL } from '../../common'
-import { AuthorAPI } from '../../types/author/AuthorAPI'
+import { AuthorAPI } from '../../types/authors'
 
 // Async Thunk
 export const getAllAuthorsAsync = createAsyncThunk<

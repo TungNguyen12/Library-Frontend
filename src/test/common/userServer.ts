@@ -1,10 +1,10 @@
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 
-import RegisterUserRequest from '../../types/user/RegisterUserRequest'
 import usersData from '../data/usersData'
-import User from '../../types/user/User'
+
 import { BASE_URL } from '../../common'
+import { CreateUserRequest } from '../../types/users'
 
 export const handlers = [
   //GET ALL USERS
@@ -14,7 +14,7 @@ export const handlers = [
 
   //REGISTER NEW USER
   rest.post(`${BASE_URL}/users/`, async (req, res, ctx) => {
-    const input: RegisterUserRequest = await req.json()
+    const input: CreateUserRequest = await req.json()
 
     const user = usersData.find((user) => user.email === input.email)
     if (user) {

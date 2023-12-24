@@ -21,9 +21,9 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
+import { Book } from '../../../types/books'
 
 // Type
-import Book from '../../../types/book/Book'
 
 interface TablePaginationActionsProps {
   count: number

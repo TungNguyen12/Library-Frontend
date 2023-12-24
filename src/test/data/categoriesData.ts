@@ -1,4 +1,4 @@
-import CategoryAPI from '../../types/category/CategoryAPI'
+import { CategoryAPI } from '../../types/categories'
 
 const categoriesData: CategoryAPI[] = [
   {

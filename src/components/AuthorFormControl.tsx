@@ -6,7 +6,7 @@ import {
   SelectChangeEvent,
 } from '@mui/material'
 import { useAppSelector } from '../hooks/useAppSelector'
-import { AuthorAPI } from '../types/author/AuthorAPI'
+import { AuthorAPI } from '../types/authors'
 
 type Props = {
   onChange: (e: SelectChangeEvent<string>) => void
