@@ -1,4 +1,4 @@
-import { ReturnedHistory } from '../../redux/reducers/loansReducer'
+import { ReturnedHistory } from '../../types/loans'
 
 const loansData: ReturnedHistory = {
   history: [

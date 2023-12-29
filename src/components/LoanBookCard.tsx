@@ -1,5 +1,5 @@
 import React from 'react'
-import { LoanInfo, getLoanHistoryAsync } from '../redux/reducers/loansReducer'
+import { getLoanHistoryAsync } from '../redux/reducers/loansReducer'
 import { useNavigate } from 'react-router-dom'
 import {
   Button,
@@ -14,6 +14,7 @@ import axios from 'axios'
 import { BASE_URL } from '../common'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import toast from 'react-hot-toast'
+import { LoanInfo } from '../types/loans'
 
 const LoanBookCard: React.FC<any> = ({ loanInfo, accessToken }) => {
   const loan = loanInfo as LoanInfo
