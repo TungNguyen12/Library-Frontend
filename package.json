@@ -1,6 +1,7 @@
 {
   "name": "frontend-project",
   "version": "0.1.0",
+  "homepage": "http://lahtilibrary",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -16,6 +17,7 @@
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
     "axios": "^1.5.0",
+    "gh-pages": "^6.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.47.0",
@@ -35,7 +37,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sass": "sass --watch ./src/styles/index.scss:./src/styles/index.css"
+    "sass": "sass --watch ./src/styles/index.scss:./src/styles/index.css",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": {
     "production": [
