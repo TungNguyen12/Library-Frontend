@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 // Redux
 import { useAppDispatch } from '../hooks/useAppDispatch'
-import CreateUserDto from '../types/user/RegisterUserRequest'
+
 import { registerUserAsync } from '../redux/reducers/userReducer'
 
 // Toast
@@ -30,6 +30,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 // Yup and React Hook Form Resolvers
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { CreateUserRequest } from '../types/users'
 
 interface FormInput {
   firstName: string
@@ -73,7 +74,7 @@ const SignUp = () => {
   const onSubmit: SubmitHandler<FormInput> = (data) => {
     const { ...newData } = Object.assign({}, data)
 
-    const newUser: CreateUserDto = {
+    const newUser: CreateUserRequest = {
       ...newData,
     }
     dispatch(registerUserAsync(newUser))

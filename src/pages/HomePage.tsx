@@ -18,8 +18,6 @@ import {
 import { BASE_URL } from '../common'
 
 // Types
-import { FilterBooksOptions, PaginatedData } from '../types/book/AllBooksApi'
-import Book from '../types/book/Book'
 
 // Components
 import BookCard from '../components/BookCard'
@@ -37,6 +35,7 @@ import { Toaster } from 'react-hot-toast'
 // Redux Reducers
 import { getAllAuthorsAsync } from '../redux/reducers/authorsReducer'
 import { getAllCategoriesAsync } from '../redux/reducers/categoriesReducer'
+import { Book, FilterBooksOptions, PaginatedData } from '../types/books'
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch()

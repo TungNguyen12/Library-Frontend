@@ -25,8 +25,9 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 // REACT/REDUX
-import { LoginInterface } from '../types/user/Login'
+
 import { signinAsync } from '../redux/reducers/authReducer'
+import { Credentials } from '../types/users'
 
 const signIn = yup
   .object({
@@ -51,7 +52,7 @@ export const Signin = () => {
 
   const currentUser = useAppSelector((state) => state.authReducer.currentUser)
   const [success, setSuccess] = useState(false)
-  const onSubmit: SubmitHandler<LoginInterface> = (data) => {
+  const onSubmit: SubmitHandler<Credentials> = (data) => {
     dispatch(signinAsync(data))
     reset()
     setSuccess(true)

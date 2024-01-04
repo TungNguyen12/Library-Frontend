@@ -13,7 +13,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useAppDispatch } from '../../../hooks/useAppDispatch'
 import { createBookAsync } from '../../../redux/services/BookServices'
 import { useAppSelector } from '../../../hooks/useAppSelector'
-import { CreateBookDto } from '../../../types/book/CreateBookRequest'
+
 import toast from 'react-hot-toast'
 
 import {
@@ -25,10 +25,12 @@ import {
   OutlinedInput,
   Select,
 } from '@mui/material'
-import Category from '../../../types/category/CategoryAPI'
+
 import { AutoMode } from '@mui/icons-material'
 import { useState } from 'react'
-import { AuthorAPI } from '../../../types/author/AuthorAPI'
+import { AuthorAPI } from '../../../types/authors'
+import { CreateBookDto } from '../../../types/books'
+import { CategoryAPI } from '../../../types/categories'
 
 export function generateISBN(): string {
   const prefix = '978'
@@ -230,7 +232,7 @@ export const CreateBookForm: React.FC<any> = () => {
                   defaultValue=""
                 >
                   {categories &&
-                    categories.map(({ _id, name }: Category) => (
+                    categories.map(({ _id, name }: CategoryAPI) => (
                       <MenuItem key={_id} value={_id}>
                         {name}
                       </MenuItem>

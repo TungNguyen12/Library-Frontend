@@ -6,7 +6,14 @@ import {
   getAllBooksAsync,
   updateBookAsync,
 } from '../services/BookServices'
-import BookReducerState from '../../types/book/BookReducerState'
+
+import { Book } from '../../types/books'
+
+export type BookReducerState = {
+  books: Book[]
+  isLoading: boolean
+  error?: string
+}
 
 export const initialState: BookReducerState = {
   books: [],

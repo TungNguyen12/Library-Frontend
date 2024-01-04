@@ -1,4 +1,3 @@
-import Book from '../../types/book/Book'
 import productsData from './booksData'
 
 const cartData = [

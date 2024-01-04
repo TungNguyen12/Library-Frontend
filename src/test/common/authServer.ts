@@ -1,15 +1,15 @@
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 
-import { LoginInterface } from '../../types/user/Login'
 import usersData from '../data/usersData'
 import { BASE_URL } from '../../common'
+import { Credentials } from '../../types/users'
 
 export const accessToken = 'user-access-token'
 
 export const handlers = [
   rest.post(`${BASE_URL}/users/signin`, async (req, res, ctx) => {
-    const { email, password }: LoginInterface = await req.json<LoginInterface>()
+    const { email, password }: Credentials = await req.json<Credentials>()
     const foundUser = usersData.find(
       (u) => u.email === email && u.password === password
     )

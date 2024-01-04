@@ -13,7 +13,7 @@ import Close from '@mui/icons-material/Close'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { removeFromCart } from '../redux/reducers/cartReducer'
 import { useState } from 'react'
-import Book from '../types/book/Book'
+import { Book } from '../types/books'
 
 type CartItemProps = { item: Book }
 

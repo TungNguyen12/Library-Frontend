@@ -11,7 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import { useAppDispatch } from '../../../hooks/useAppDispatch'
 import { updateBookAsync } from '../../../redux/services/BookServices'
-import Book from '../../../types/book/Book'
+
 import { useAppSelector } from '../../../hooks/useAppSelector'
 import toast from 'react-hot-toast'
 

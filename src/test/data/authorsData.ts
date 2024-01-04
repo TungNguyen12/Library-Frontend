@@ -1,4 +1,4 @@
-import { AuthorAPI } from '../../types/author/AuthorAPI'
+import { AuthorAPI } from '../../types/authors'
 
 const authorsData: AuthorAPI[] = [
   {

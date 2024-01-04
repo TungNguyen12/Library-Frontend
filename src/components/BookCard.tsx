@@ -8,11 +8,12 @@ import {
   Stack,
   Typography,
 } from '@mui/material'
-import Book from '../types/book/Book'
+
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { addToCart } from '../redux/reducers/cartReducer'
 import { useAppSelector } from '../hooks/useAppSelector'
+import { Book } from '../types/books'
 
 const BookCard: React.FC<any> = ({ book }) => {
   const currentUser = useAppSelector((state) => state.authReducer.currentUser)
