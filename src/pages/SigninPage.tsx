@@ -28,6 +28,7 @@ import { useEffect, useState } from 'react'
 
 import { signinAsync } from '../redux/reducers/authReducer'
 import { Credentials } from '../types/users'
+import { LANDING } from '../common'
 
 const signIn = yup
   .object({
@@ -62,7 +63,7 @@ export const Signin = () => {
   useEffect(() => {
     if (currentUser?.role[0].title === 'Borrower') {
       const timeoutId = setTimeout(() => {
-        navigate('')
+        navigate(`${LANDING}`)
       }, 4500)
 
       // Cleanup the timeout in case the component unmounts
@@ -71,7 +72,7 @@ export const Signin = () => {
 
     if (currentUser?.role[0].title === 'Admin') {
       const timeoutId = setTimeout(() => {
-        navigate('admin')
+        navigate(`${LANDING}admin`)
       }, 4500)
 
       // Cleanup the timeout in case the component unmounts
