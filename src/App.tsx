@@ -43,18 +43,18 @@ const App = () => {
   // Router Configuration
   const router = createBrowserRouter([
     {
-      path: '/',
+      path: '/Frontend-Library/',
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [
-        { path: '/', element: <HomePage /> },
-        { path: '/cart', element: <CartWithRoleCheck /> },
-        { path: '/profile', element: <UserPageWithRoleCheck /> },
-        { path: '/myloans', element: <MyLoanPageWithRoleCheck /> },
-        { path: '/:bookId', element: <SingleBookPage /> },
-        { path: '/signup', element: <SignUpPage /> },
-        { path: '/signin', element: <SigninPage /> },
-        { path: '/admin', element: <AdminDashboardWithRoleCheck /> },
+        { path: '', element: <HomePage /> },
+        { path: 'cart', element: <CartWithRoleCheck /> },
+        { path: 'profile', element: <UserPageWithRoleCheck /> },
+        { path: 'myloans', element: <MyLoanPageWithRoleCheck /> },
+        { path: ':bookId', element: <SingleBookPage /> },
+        { path: 'signup', element: <SignUpPage /> },
+        { path: 'signin', element: <SigninPage /> },
+        { path: 'admin', element: <AdminDashboardWithRoleCheck /> },
       ],
     },
   ])
