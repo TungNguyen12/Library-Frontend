@@ -32,6 +32,7 @@ import { BASE_URL, LANDING } from '../common'
 import axios from 'axios'
 import toast, { Toaster } from 'react-hot-toast'
 import { Book } from '../types/books'
+import BackHomeButton from '../components/BackHomeButton'
 
 function Cart() {
   const navigate = useNavigate()
@@ -158,20 +159,7 @@ function Cart() {
                 </Alert>
               </Stack>
                    
-              <Button
-              onClick={handleToHome}
-                sx={{
-                  margin: '25px auto',
-                  bgcolor: '#1976d2',
-                  color: '#fff',
-                  '&.MuiButtonBase-root:hover': {
-                    bgcolor: '#1976d2',
-                    opacity: '0.9',
-                  },
-                }}
-              >
-                Explore more books
-              </Button>
+              <BackHomeButton />
               
             </Box>
           )}

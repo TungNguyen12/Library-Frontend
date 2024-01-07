@@ -24,6 +24,7 @@ import LoanBookCard from '../components/LoanBookCard'
 
 // Toast
 import { Toaster } from 'react-hot-toast'
+import BackHomeButton from '../components/BackHomeButton'
 
 const MyLoanPage = () => {
   const { accessToken } = useAppSelector((state) => state.authReducer)
@@ -89,20 +90,7 @@ const MyLoanPage = () => {
                         You have not borrowed any books yet, let find one 🧠!
                       </Alert>
                     </Stack>
-                    <Button
-                      href="/"
-                      sx={{
-                        margin: '25px auto',
-                        bgcolor: '#1976d2',
-                        color: '#fff',
-                        '&.MuiButtonBase-root:hover': {
-                          bgcolor: '#1976d2',
-                          opacity: '0.9',
-                        },
-                      }}
-                    >
-                      Explore more books
-                    </Button>
+                    <BackHomeButton />
                   </Box>
                 )}
               </Grid>
