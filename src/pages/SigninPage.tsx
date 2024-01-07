@@ -142,7 +142,7 @@ export const Signin = () => {
             </Grid>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="signup" variant="body2">
+                <Link href="/Library-Frontend/signup" variant="body2">
                   You don't have an account? Sign up
                 </Link>
               </Grid>
