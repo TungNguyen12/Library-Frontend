@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@mui/material'
 import axios from 'axios'
-import { BASE_URL } from '../common'
+import { BASE_URL, LANDING } from '../common'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import toast from 'react-hot-toast'
 import { LoanInfo } from '../types/loans'
@@ -55,7 +55,7 @@ const LoanBookCard: React.FC<any> = ({ loanInfo, accessToken }) => {
       <CardActions
         onClick={() => {
           if (loan.book._id) {
-            navigate(`/${loan.book._id}`)
+            navigate(`${LANDING}${loan.book._id}`)
           }
         }}
       >

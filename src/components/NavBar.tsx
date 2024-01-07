@@ -30,6 +30,7 @@ import { logOut } from '../redux/reducers/authReducer'
 import { clearStateLogout } from '../redux/reducers/userReducer'
 import { clearHistoryLogout } from '../redux/reducers/loansReducer'
 import { clearCart } from '../redux/reducers/cartReducer'
+import { LANDING } from '../common'
 
 function ResponsiveAppBar() {
   const navigate = useNavigate()
@@ -235,7 +236,7 @@ function ResponsiveAppBar() {
               {user?.role[0].title === 'Borrower' && (
                 <MenuItem
                   onClick={() => {
-                    navigate('/profile')
+                    navigate(`${LANDING}profile`)
                   }}
                 >
                   <Typography>Profile</Typography>
@@ -245,7 +246,7 @@ function ResponsiveAppBar() {
               {!user ? (
                 <MenuItem
                   onClick={() => {
-                    navigate('signin')
+                    navigate(`${LANDING}signin`)
                   }}
                 >
                   <Typography>Sign in</Typography>
@@ -258,7 +259,7 @@ function ResponsiveAppBar() {
               {!user && (
                 <MenuItem
                   onClick={() => {
-                    navigate('signup')
+                    navigate(`${LANDING}signup`)
                   }}
                 >
                   <Typography>Signup</Typography>

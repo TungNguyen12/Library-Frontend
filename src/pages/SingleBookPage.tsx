@@ -33,7 +33,7 @@ import { deleteBookAsync } from '../redux/services/BookServices'
 
 // Toast
 import toast, { Toaster } from 'react-hot-toast'
-import { BASE_URL } from '../common'
+import { BASE_URL, LANDING } from '../common'
 
 const SingleBook = () => {
   const [book, setBook] = useState<Book>()
@@ -70,7 +70,7 @@ const SingleBook = () => {
   const handleDeleteBook = (book: Book) => {
     if (accessToken) {
       dispatch(deleteBookAsync({ bookId: book._id, accessToken }))
-      navigate('/')
+      navigate(`${LANDING}`)
     }
   }
 

@@ -14,6 +14,7 @@ import { useAppDispatch } from '../hooks/useAppDispatch'
 import { addToCart } from '../redux/reducers/cartReducer'
 import { useAppSelector } from '../hooks/useAppSelector'
 import { Book } from '../types/books'
+import { LANDING } from '../common'
 
 const BookCard: React.FC<any> = ({ book }) => {
   const currentUser = useAppSelector((state) => state.authReducer.currentUser)
@@ -42,7 +43,7 @@ const BookCard: React.FC<any> = ({ book }) => {
     >
       <CardActions
         onClick={() => {
-          navigate(`/${_id}`)
+          navigate(`${LANDING}${_id}`)
         }}
       >
         <CardMedia
