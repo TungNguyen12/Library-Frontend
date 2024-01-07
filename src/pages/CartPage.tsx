@@ -28,7 +28,7 @@ import { useAppDispatch } from '../hooks/useAppDispatch'
 import { clearCart } from '../redux/reducers/cartReducer'
 
 // API and Toast
-import { BASE_URL } from '../common'
+import { BASE_URL, LANDING } from '../common'
 import axios from 'axios'
 import toast, { Toaster } from 'react-hot-toast'
 import { Book } from '../types/books'
@@ -66,6 +66,10 @@ function Cart() {
     if (window.confirm('Clear my cart?')) {
       dispatch(clearCart())
     }
+  }
+
+  const handleToHome = () => {
+    navigate(`${LANDING}`)
   }
 
   return (
@@ -127,9 +131,9 @@ function Cart() {
                 spacing={2}
                 marginTop={'1rem'}
               >
-                <Link to="/">
-                  <Button variant="outlined">Back to library</Button>
-                </Link>
+                
+                  <Button variant="outlined" onClick={handleToHome}>Back to library</Button>
+              
 
                 <Button
                   variant="outlined"
@@ -153,8 +157,9 @@ function Cart() {
                   Empty basket, let's explore the library 🧠!
                 </Alert>
               </Stack>
+                   
               <Button
-                href="/"
+              onClick={handleToHome}
                 sx={{
                   margin: '25px auto',
                   bgcolor: '#1976d2',
@@ -167,6 +172,7 @@ function Cart() {
               >
                 Explore more books
               </Button>
+              
             </Box>
           )}
         </Box>
