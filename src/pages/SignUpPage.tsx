@@ -31,6 +31,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { CreateUserRequest } from '../types/users'
+import { useNavigate } from 'react-router-dom'
+import { LANDING } from '../common'
 
 interface FormInput {
   firstName: string
@@ -61,6 +63,7 @@ const signUp = yup
 
 const SignUp = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const {
     register,
@@ -214,8 +217,10 @@ const SignUp = () => {
             </Grid>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/Library-Frontend/signin" variant="body2">
+                <Link onClick={() => navigate(`${LANDING}signin`)}>
+                
                   Already have an account? Sign in
+                
                 </Link>
               </Grid>
             </Grid>
