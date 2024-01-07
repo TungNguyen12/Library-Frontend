@@ -43,7 +43,7 @@ const App = () => {
   // Router Configuration
   const router = createBrowserRouter([
     {
-      path: '/',
+      path: './',
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [
