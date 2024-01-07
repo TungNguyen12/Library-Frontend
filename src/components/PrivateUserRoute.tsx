@@ -7,7 +7,7 @@ const CheckRole = ({ children, role }: any) => {
   return validUser?.role[0].title === role ? (
     children
   ) : (
-    <Navigate to="/signin" />
+    <Navigate to="/Library-Frontend/signin" />
   )
 }
 

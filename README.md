@@ -97,4 +97,4 @@ This project DOESN'T require student to use any specific Frontend technologies b
 
 ## Deployment
 
-Visit my work [HERE](https://lahtilibrary.netlify.app/)
+Visit my work [HERE](https://tungnguyen12.github.io/Library-Frontend/)
