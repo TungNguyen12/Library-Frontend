@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+# .pem
+instance2.pem
+instance3.pem
+
 # testing
 /coverage
 
