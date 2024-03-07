@@ -10,13 +10,11 @@ import { getLoanHistoryAsync } from '../redux/reducers/loansReducer'
 import {
   Alert,
   Box,
-  Button,
   Card,
   CardContent,
   CircularProgress,
   Grid,
   Stack,
-  Typography,
 } from '@mui/material'
 
 // Custom Components
