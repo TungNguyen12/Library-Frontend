@@ -9,7 +9,9 @@ This project was built in purpose of creating a Fullstack web application at Int
 
 ## Deployment
 
-You can visit my fullstack library website [HERE](https://main--lahtilibrary.netlify.app/)
+[In GitHub Page](https://tungnguyen12.github.io/Library-Frontend/)
+
+[In AWS EC2](http://ec2-52-205-228-243.compute-1.amazonaws.com/)
 
 ## Table of content
 
@@ -97,4 +99,4 @@ This project DOESN'T require student to use any specific Frontend technologies b
 
 ## Deployment
 
-Visit my work [HERE](https://tungnguyen12.github.io/Library-Frontend/)
+Visit my work [in GitHub Page](https://tungnguyen12.github.io/Library-Frontend/) or [in AWS EC2](http://ec2-52-71-57-136.compute-1.amazonaws.com/)

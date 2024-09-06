@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { LANDING } from '../common'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@mui/material'
